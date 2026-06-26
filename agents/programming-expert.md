@@ -115,28 +115,45 @@ Use these MCP servers when they provide richer context than a skill alone:
 ## Self-Learning Memory
 
 At the **start** of every task, recall your accumulated learnings for the relevant domain.
-At the **end** of every task, record what worked and what to avoid.
+At the **end** of every task, use `scribe()` to record learnings to both memory layers.
 
 ```python
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/agent-memory"))
-from agent_memory import recall, learn, summarise_learnings
+from agent_memory import recall, summarise_learnings
 ```
 
 **Task start — recall (run before loading skills):**
 ```python
-# Use the primary tech/domain as the filter, e.g. "Angular signals", "Python", "blackboard"
 tips = recall("programming-expert", domain="<primary_domain>", limit=5)
 if tips:
     print(summarise_learnings("programming-expert", limit=5))
 ```
 
-**Task end — record (run after completing work, before handing back):**
+**Task end — record with scribe (mandatory):**
 ```python
-# Record concrete, actionable learnings — not vague notes
-learn("programming-expert", "WORKED",  "<domain>", "<specific technique that worked>")
-learn("programming-expert", "AVOID",   "<domain>", "<specific pitfall encountered>")
-learn("programming-expert", "PATTERN", "<domain>", "<reusable pattern for next time>")
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_bug_fix, scribe_design_decision
+
+# General completion — writes to agent_memory AND optionally updates a graph entity
+scribe(
+    agent    = "programming-expert",
+    domain   = "<primary_domain>",
+    worked   = ["<specific technique that worked>"],
+    avoided  = ["<specific pitfall>"],
+    patterns = ["<reusable pattern for next time>"],
+    # entity_name = "<EntityName>",  # set this to also update a named graph entity
+)
+
+# Bug fix shorthand
+scribe_bug_fix(
+    agent   = "programming-expert",
+    domain  = "<domain>",
+    bug     = "<what broke>",
+    fix     = "<what fixed it>",
+    entity_name = "<EntityName if applicable>",
+)
 ```
 
 **Session-clearing safety:** Your learnings persist across session resets in `memory.jsonl`.

@@ -1,7 +1,7 @@
 ---
 name: uipath-rpa-expert
 description: "UiPath RPA bot expert. Reads UiPath Studio projects (XAML workflows, project.json) and produces structured documentation and flow diagrams showing how a bot runs. Handles Dispatcher/Worker bot pairs delivered as zip files: extracts them, organizes into a named project folder, then generates Markdown docs and HTML flowcharts. USE FOR: uipath bot, rpa documentation, dispatcher worker, xaml workflow, uipath zip, bot flow diagram, orchestrator queue, uipath project.json, explain rpa bot, document rpa, rpa architecture, uipath studio, analyze bot, bot documentation."
-model: llm-api/claude-sonnet-4-6
+model: llm-api/claude-sonnet-4-5
 mode: subagent
 ---
 

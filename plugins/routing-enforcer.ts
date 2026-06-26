@@ -18,6 +18,13 @@
  *     Payload confirmed from OpenCode v1.17.5 source:
  *       input:  { sessionID: string, model: { id: string, ... } }
  *       output: { system: string[] }  (mutate in place)
+ *
+ *     ⚠ SINGLE-ELEMENT CONSTRAINT: BMW LLM API Anthropic backend rejects any request
+ *     where the system array has more than 1 element ("does not support multiple system
+ *     prompts"). OpenCode's internal guard only collapses when n.length > 2, so a
+ *     push() leaving exactly 2 elements bypasses it. We therefore APPEND to system[0]
+ *     (inline merge) instead of push()ing a second element. This keeps the array at
+ *     exactly 1 element regardless of what other plugins do.
  *   - `tool.execute.before` on `task`      → write JSONL delegation log entry
  *     Payload confirmed from OpenCode v1.17.5 source:
  *       input:  { tool: string, sessionID: string, callID: string }
@@ -107,8 +114,20 @@ export const server: Plugin = async () => {
 
       if (!modelId.includes(ORCHESTRATOR_MODEL_ID)) return
 
-      // Append enforcement block — placed last so it anchors the end of the system prompt
-      output.system.push(ROUTING_ENFORCEMENT_BLOCK)
+      // INLINE MERGE — append to element 0 rather than push() a second element.
+      //
+      // Root cause of haiku "multiple system prompts" error:
+      //   output.system starts as [joinedAgentPrompt]  (1 element)
+      //   push() → [joinedAgentPrompt, ROUTING_ENFORCEMENT_BLOCK]  (2 elements)
+      //   OpenCode's internal guard collapses only when length > 2, so 2 slips through.
+      //   BMW LLM API Anthropic backend rejects any system array with >1 element.
+      //
+      // Fix: append to [0] → always exactly 1 element, works for all Claude models.
+      if (output.system.length === 0) {
+        output.system.push(ROUTING_ENFORCEMENT_BLOCK)
+      } else {
+        output.system[0] = output.system[0] + "\n\n" + ROUTING_ENFORCEMENT_BLOCK
+      }
     },
 
     /**

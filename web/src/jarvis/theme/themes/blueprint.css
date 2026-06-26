@@ -1,0 +1,30 @@
+/* Blueprint — wireframe, technical */
+[data-jarvis-theme="blueprint"] {
+  --jarvis-bg: #020b18;
+  --jarvis-surface: #041526;
+  --jarvis-surface-alt: #071e36;
+  --jarvis-border: rgba(54, 214, 231, 0.2);
+  --jarvis-border-glow: rgba(54, 214, 231, 0.45);
+  --jarvis-idle-particle: rgba(54, 214, 231, 0.75);
+  --jarvis-listen-particle: rgba(255, 255, 255, 0.9);
+  --jarvis-speak-particle: rgba(54, 214, 231, 1);
+  --jarvis-orb-glow: rgba(54, 214, 231, 0.35);
+  --jarvis-orb-ring: #36d6e7;
+  --jarvis-text-primary: rgba(210, 245, 250, 0.95);
+  --jarvis-text-secondary: rgba(54, 214, 231, 0.6);
+  --jarvis-text-code: #67e8f9;
+  --jarvis-text-accent: #36d6e7;
+  --jarvis-notify-bg: rgba(2, 11, 24, 0.95);
+  --jarvis-notify-border: rgba(54, 214, 231, 0.35);
+  --jarvis-notify-success: #36d6e7;
+  --jarvis-notify-warning: #fbbf24;
+  --jarvis-notify-error: #f87171;
+  --jarvis-activity-bg: rgba(2, 11, 24, 0.9);
+  --jarvis-activity-step-done: #36d6e7;
+  --jarvis-activity-step-active: #67e8f9;
+  --jarvis-activity-step-pending: rgba(54, 214, 231, 0.2);
+  --jarvis-ptt-idle: #36d6e7;
+  --jarvis-ptt-idle-rgb: 54, 214, 231;
+  --jarvis-ptt-active: rgba(255, 255, 255, 0.9);
+  --jarvis-ptt-active-rgb: 255, 255, 255;
+}

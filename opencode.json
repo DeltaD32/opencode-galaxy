@@ -40,7 +40,6 @@
         "claude-haiku-4-5": {
           "name": "claude-haiku-4-5",
           "options": {
-            "reasoningEffort": "medium",
             "integrations": {
               "anthropic-auto-cache": {
                 "enabled": true,
@@ -77,6 +76,9 @@
                 }
               }
             }
+          },
+          "headers": {
+            "anthropic-beta": "context-1m-2025-08-07"
           },
           "cost": {
             "input": 3.3,
@@ -133,30 +135,7 @@
             "output": 100000
           }
         },
-        "gemini-3.5-flash": {
-          "name": "gemini-3.5-flash",
-          "cost": {
-            "input": 0.15,
-            "cache_read": 0.0375,
-            "output": 0.6
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 8192
-          }
-        },
-        "gemini-3.1-flash-lite": {
-          "name": "gemini-3.1-flash-lite",
-          "cost": {
-            "input": 0.075,
-            "cache_read": 0.01875,
-            "output": 0.3
-          },
-          "limit": {
-            "context": 1000000,
-            "output": 8192
-          }
-        },
+
         "gpt-4o-mini": {
           "name": "gpt-4o-mini",
           "cost": {
@@ -169,8 +148,8 @@
             "output": 16384
           }
         },
-        "gpt-5.2": {
-          "name": "gpt-5.2",
+        "gpt-5.2:global": {
+          "name": "gpt-5.2:global",
           "options": {
             "reasoningEffort": "medium"
           },
@@ -224,18 +203,7 @@
             "output": 100000
           }
         },
-        "gemini-3.1-pro": {
-          "name": "gemini-3.1-pro:global",
-          "cost": {
-            "input": 1.25,
-            "cache_read": 0.3125,
-            "output": 5.0
-          },
-          "limit": {
-            "context": 2000000,
-            "output": 8192
-          }
-        },
+
         "gpt-4o": {
           "name": "gpt-4o",
           "cost": {
@@ -245,6 +213,58 @@
           },
           "limit": {
             "context": 128000,
+            "output": 16384
+          }
+        },
+
+        "gpt-5-mini": {
+          "name": "gpt-5-mini",
+          "cost": {
+            "input": 0.55,
+            "cache_read": 0.055,
+            "output": 2.2
+          },
+          "limit": {
+            "context": 200000,
+            "output": 16384
+          }
+        },
+
+        "gpt-5-mini:global": {
+          "name": "gpt-5-mini:global",
+          "cost": {
+            "input": 0.55,
+            "cache_read": 0.055,
+            "output": 2.2
+          },
+          "limit": {
+            "context": 200000,
+            "output": 16384
+          }
+        },
+
+        "gpt-5.4-mini:global": {
+          "name": "gpt-5.4-mini:global",
+          "cost": {
+            "input": 0.55,
+            "cache_read": 0.055,
+            "output": 2.2
+          },
+          "limit": {
+            "context": 400000,
+            "output": 16384
+          }
+        },
+
+        "gpt-5-nano": {
+          "name": "gpt-5-nano",
+          "cost": {
+            "input": 0.11,
+            "cache_read": 0.011,
+            "output": 0.44
+          },
+          "limit": {
+            "context": 200000,
             "output": 16384
           }
         }
@@ -284,6 +304,7 @@
     },
     "memory": {
       "type": "local",
+      "enabled": true,
       "command": [
         "/usr/local/bin/node",
         "/Users/QTE2362/.npm/_npx/15b07286cbcc3329/node_modules/@modelcontextprotocol/server-memory/dist/index.js"
@@ -321,7 +342,7 @@
     "wiz": {
       "type": "remote",
       "url": "https://mcp.app.wiz.io/",
-      "enabled": false
+      "enabled": true
     },
     "skills-mcp": {
       "type": "remote",
@@ -335,7 +356,7 @@
         "--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/",
         "@playwright/mcp@latest"
       ],
-      "enabled": false
+      "enabled": true
     }
   }
 }

@@ -1,0 +1,30 @@
+/* Cel-Shade — cartoon daytime */
+[data-jarvis-theme="cel-shade"] {
+  --jarvis-bg: #0d1b2a;
+  --jarvis-surface: #1a2f4a;
+  --jarvis-surface-alt: #24405f;
+  --jarvis-border: rgba(56, 189, 248, 0.25);
+  --jarvis-border-glow: rgba(56, 189, 248, 0.5);
+  --jarvis-idle-particle: rgba(56, 189, 248, 0.85);
+  --jarvis-listen-particle: rgba(163, 230, 53, 0.9);
+  --jarvis-speak-particle: rgba(250, 204, 21, 0.9);
+  --jarvis-orb-glow: rgba(56, 189, 248, 0.5);
+  --jarvis-orb-ring: #38bdf8;
+  --jarvis-text-primary: rgba(255, 255, 255, 0.95);
+  --jarvis-text-secondary: rgba(255, 255, 255, 0.6);
+  --jarvis-text-code: #bae6fd;
+  --jarvis-text-accent: #38bdf8;
+  --jarvis-notify-bg: rgba(13, 27, 42, 0.94);
+  --jarvis-notify-border: rgba(56, 189, 248, 0.35);
+  --jarvis-notify-success: #a3e635;
+  --jarvis-notify-warning: #facc15;
+  --jarvis-notify-error: #fb7185;
+  --jarvis-activity-bg: rgba(13, 27, 42, 0.9);
+  --jarvis-activity-step-done: #a3e635;
+  --jarvis-activity-step-active: #38bdf8;
+  --jarvis-activity-step-pending: rgba(255, 255, 255, 0.25);
+  --jarvis-ptt-idle: #38bdf8;
+  --jarvis-ptt-idle-rgb: 56, 189, 248;
+  --jarvis-ptt-active: #a3e635;
+  --jarvis-ptt-active-rgb: 163, 230, 53;
+}

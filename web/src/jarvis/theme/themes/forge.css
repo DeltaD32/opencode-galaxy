@@ -1,0 +1,30 @@
+/* Forge — ember and fire */
+[data-jarvis-theme="forge"] {
+  --jarvis-bg: #100500;
+  --jarvis-surface: #1c0a00;
+  --jarvis-surface-alt: #2a1000;
+  --jarvis-border: rgba(255, 100, 32, 0.2);
+  --jarvis-border-glow: rgba(255, 100, 32, 0.45);
+  --jarvis-idle-particle: rgba(255, 100, 32, 0.8);
+  --jarvis-listen-particle: rgba(255, 200, 50, 0.9);
+  --jarvis-speak-particle: rgba(255, 140, 40, 0.9);
+  --jarvis-orb-glow: rgba(255, 100, 32, 0.4);
+  --jarvis-orb-ring: #ff6420;
+  --jarvis-text-primary: rgba(255, 240, 220, 0.93);
+  --jarvis-text-secondary: rgba(255, 140, 60, 0.65);
+  --jarvis-text-code: #fed7aa;
+  --jarvis-text-accent: #ff6420;
+  --jarvis-notify-bg: rgba(16, 5, 0, 0.95);
+  --jarvis-notify-border: rgba(255, 100, 32, 0.35);
+  --jarvis-notify-success: #fcd34d;
+  --jarvis-notify-warning: #f97316;
+  --jarvis-notify-error: #ef4444;
+  --jarvis-activity-bg: rgba(16, 5, 0, 0.9);
+  --jarvis-activity-step-done: #fcd34d;
+  --jarvis-activity-step-active: #ff6420;
+  --jarvis-activity-step-pending: rgba(255, 100, 32, 0.2);
+  --jarvis-ptt-idle: #ff6420;
+  --jarvis-ptt-idle-rgb: 255, 100, 32;
+  --jarvis-ptt-active: #fcd34d;
+  --jarvis-ptt-active-rgb: 252, 211, 77;
+}

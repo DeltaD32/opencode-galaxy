@@ -165,12 +165,12 @@ Always prefer Density tokens over hardcoded values in any deliverable.
 ## Self-Learning Memory
 
 At the **start** of every task, recall your accumulated learnings for the relevant domain.
-At the **end** of every task, record what worked and what to avoid.
+At the **end** of every task, use `scribe()` to record learnings to both memory layers.
 
 ```python
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/agent-memory"))
-from agent_memory import recall, learn, summarise_learnings
+from agent_memory import recall, summarise_learnings
 ```
 
 **Task start — recall:**
@@ -180,11 +180,29 @@ if tips:
     print(summarise_learnings("design-expert", limit=5))
 ```
 
-**Task end — record:**
+**Task end — record with scribe (mandatory):**
 ```python
-learn("design-expert", "WORKED",  "<domain>", "<what worked>")
-learn("design-expert", "AVOID",   "<domain>", "<what to avoid>")
-learn("design-expert", "PATTERN", "<domain>", "<reusable pattern>")
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_session_summary
+
+scribe(
+    agent    = "design-expert",
+    domain   = "<primary_domain>",
+    worked   = ["<what worked>"],
+    avoided  = ["<what to avoid>"],
+    patterns = ["<reusable pattern>"],
+    # entity_name = "<EntityName>",  # e.g. "JARVIS Galaxy Design System — Color Tokens"
+)
+
+# For UX/design decisions that should persist in the knowledge graph
+scribe_design_decision(
+    agent       = "design-expert",
+    domain      = "<domain>",
+    decision    = "<the decision>",
+    rationale   = "<why>",
+    entity_name = "<EntityName if applicable>",
+)
 ```
 
 **Session-clearing safety:** Learnings persist across session resets in `memory.jsonl`.

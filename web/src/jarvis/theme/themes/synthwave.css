@@ -1,0 +1,30 @@
+/* Synthwave — 80s neon grid */
+[data-jarvis-theme="synthwave"] {
+  --jarvis-bg: #0d0015;
+  --jarvis-surface: #160024;
+  --jarvis-surface-alt: #1f0033;
+  --jarvis-border: rgba(196, 74, 240, 0.2);
+  --jarvis-border-glow: rgba(196, 74, 240, 0.5);
+  --jarvis-idle-particle: rgba(196, 74, 240, 0.8);
+  --jarvis-listen-particle: rgba(245, 100, 196, 0.9);
+  --jarvis-speak-particle: rgba(255, 100, 230, 0.9);
+  --jarvis-orb-glow: rgba(196, 74, 240, 0.45);
+  --jarvis-orb-ring: #c44af0;
+  --jarvis-text-primary: rgba(255, 220, 255, 0.93);
+  --jarvis-text-secondary: rgba(196, 74, 240, 0.65);
+  --jarvis-text-code: #f0abfc;
+  --jarvis-text-accent: #c44af0;
+  --jarvis-notify-bg: rgba(13, 0, 21, 0.95);
+  --jarvis-notify-border: rgba(196, 74, 240, 0.4);
+  --jarvis-notify-success: #a78bfa;
+  --jarvis-notify-warning: #fbbf24;
+  --jarvis-notify-error: #f87171;
+  --jarvis-activity-bg: rgba(13, 0, 21, 0.9);
+  --jarvis-activity-step-done: #a78bfa;
+  --jarvis-activity-step-active: #c44af0;
+  --jarvis-activity-step-pending: rgba(196, 74, 240, 0.2);
+  --jarvis-ptt-idle: #c44af0;
+  --jarvis-ptt-idle-rgb: 196, 74, 240;
+  --jarvis-ptt-active: #f564c4;
+  --jarvis-ptt-active-rgb: 245, 100, 196;
+}

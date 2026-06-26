@@ -1,7 +1,7 @@
 ---
 name: jirri-data-analyst
 description: "Data analysis, calculation-audit, and BMW management reporting expert for the JIRRI RPA cost-savings project. Deep Python proficiency for data analysis. Audits calculation logic, verifies financial figures against raw source files, ensures all three output formats (Markdown, HTML, PPTX) stay in sync, and builds BMW-branded management presentations and reports from analysis results. USE FOR: JIRRI cost savings analysis, MB1B/LT01 calculation audit, labor cost verification, MATDOC analysis, financial figure review, jirri_cost_savings.py changes, data quality checks, formula verification, material value calculations, ROI validation, build slides, create presentation, make a deck, executive summary, management report, cost savings deck, BMW slides, leadership briefing, 5th grade summary, plain english results, JIRRI report, ROI presentation, JIRRI dashboard."
-model: llm-api/o3-mini
+model: llm-api/gpt-5.1
 mode: subagent
 ---
 

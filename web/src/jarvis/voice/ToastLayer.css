@@ -1,0 +1,125 @@
+/* ─── Toast Layer ──────────────────────────────────────────────────────────── */
+
+.jarvis-toast-layer {
+  position: fixed;
+  top: 56px;          /* just below the top bar */
+  right: 20px;
+  z-index: 900;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  pointer-events: none;
+  width: 320px;
+}
+
+/* ─── Individual Toast ─────────────────────────────────────────────────────── */
+
+.jarvis-toast {
+  position: relative;
+  background: var(--jarvis-surface, rgba(255 255 255 / 0.06));
+  border: 1px solid var(--jarvis-border, rgba(255 255 255 / 0.10));
+  border-radius: 8px;
+  padding: 10px 14px 10px 12px;
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  pointer-events: all;
+  overflow: hidden;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 12.5px;
+  line-height: 1.45;
+  color: var(--jarvis-text-primary, #e8edf4);
+  letter-spacing: 0.02em;
+
+  /* Enter animation */
+  animation: toast-in 200ms var(--ease-out-expo, cubic-bezier(0.16,1,0.3,1)) both;
+}
+
+.jarvis-toast.leaving {
+  animation: toast-out 180ms var(--ease-in-cubic, cubic-bezier(0.32,0,0.67,0)) forwards;
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateX(28px) scale(0.96); }
+  to   { opacity: 1; transform: translateX(0)    scale(1); }
+}
+
+@keyframes toast-out {
+  from { opacity: 1; transform: translateX(0)    scale(1); max-height: 80px; }
+  to   { opacity: 0; transform: translateX(28px) scale(0.96); max-height: 0; padding: 0; margin: 0; }
+}
+
+/* ─── Level accent bar (left edge) ────────────────────────────────────────── */
+
+.jarvis-toast::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  border-radius: 8px 0 0 8px;
+  background: var(--jarvis-toast-accent, var(--jarvis-orb-glow, #4d8df6));
+}
+
+.jarvis-toast[data-level="success"]::before { background: #34d399; }
+.jarvis-toast[data-level="warning"]::before { background: #fbbf24; }
+.jarvis-toast[data-level="error"]::before   { background: #f87171; }
+.jarvis-toast[data-level="info"]::before    { background: var(--jarvis-orb-glow, #4d8df6); }
+
+/* ─── Icon ─────────────────────────────────────────────────────────────────── */
+
+.jarvis-toast-icon {
+  flex-shrink: 0;
+  margin-top: 1px;
+  opacity: 0.9;
+}
+
+.jarvis-toast[data-level="success"] .jarvis-toast-icon { color: #34d399; }
+.jarvis-toast[data-level="warning"] .jarvis-toast-icon { color: #fbbf24; }
+.jarvis-toast[data-level="error"]   .jarvis-toast-icon { color: #f87171; }
+.jarvis-toast[data-level="info"]    .jarvis-toast-icon { color: var(--jarvis-orb-glow, #4d8df6); }
+
+/* ─── Message ──────────────────────────────────────────────────────────────── */
+
+.jarvis-toast-message {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ─── Dismiss button ───────────────────────────────────────────────────────── */
+
+.jarvis-toast-dismiss {
+  flex-shrink: 0;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--jarvis-text-secondary, rgba(232,237,244,0.5));
+  line-height: 1;
+  font-size: 14px;
+  opacity: 0.6;
+  transition: opacity 150ms;
+  margin-left: 4px;
+  margin-top: 0;
+  align-self: flex-start;
+}
+.jarvis-toast-dismiss:hover { opacity: 1; }
+
+/* ─── Progress bar (bottom edge, depletes left→right) ─────────────────────── */
+
+.jarvis-toast-progress {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 2px;
+  background: var(--jarvis-toast-accent, var(--jarvis-orb-glow, #4d8df6));
+  border-radius: 0 0 0 8px;
+  transition: width 100ms linear;
+  opacity: 0.6;
+}
+
+.jarvis-toast[data-level="success"] .jarvis-toast-progress { background: #34d399; }
+.jarvis-toast[data-level="warning"] .jarvis-toast-progress { background: #fbbf24; }
+.jarvis-toast[data-level="error"]   .jarvis-toast-progress { background: #f87171; }

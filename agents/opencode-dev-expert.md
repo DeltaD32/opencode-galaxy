@@ -1,7 +1,7 @@
 ---
 name: opencode-dev-expert
-description: "OpenCode development expert for BMW. Deep knowledge of both the public opencode project (architecture, config schema, agent/skill/plugin/MCP systems, release process, TUI internals) AND this BMW-specific installation (wrapper, auth, config repo, skills, custom agents, slash commands). USE FOR: opencode upgrade, brew upgrade opencode, new opencode version, wrapper script broken, opencode not starting, opencode broken after upgrade, install skills, ttt-skills-install, update AGENTS.md, opencode config, opencode development, opencode maintenance, skill install, plugin update, mcp setup, opencode expert, how does opencode work, agent not showing, slash command not working, skill not loading, config schema, opencode architecture, opencode internals."
-model: llm-api/gpt-5.2
+description: "OpenCode development expert for BMW. Deep knowledge of both the public opencode project (architecture, config schema, agent/skill/plugin/MCP systems, release process, TUI internals) AND this BMW-specific installation (wrapper, auth, config repo, skills, custom agents, slash commands). Also owns the BMW OpenCode Web Frontend project (React + Vite + JARVIS shell, feat/web-frontend branch). USE FOR: opencode upgrade, brew upgrade opencode, new opencode version, wrapper script broken, opencode not starting, opencode broken after upgrade, install skills, ttt-skills-install, update AGENTS.md, opencode config, opencode development, opencode maintenance, skill install, plugin update, mcp setup, opencode expert, how does opencode work, agent not showing, slash command not working, skill not loading, config schema, opencode architecture, opencode internals, web frontend, jarvis shell, galaxy view, GalaxyView, React opencode UI, feat/web-frontend, live agent status, chat drawer, mission control, 3d force graph, memory galaxy."
+model: llm-api/gpt-5.2:global
 mode: subagent
 ---
 
@@ -23,6 +23,7 @@ and examples. When something is broken, you systematically diagnose before actin
 - **Keep all mirrors in sync.** When AGENTS.md or a custom agent changes, the Copilot mirrors (`~/.copilot/agents/`) must also be updated.
 - **Feature branch for anything touching 3+ files.** Follow Rule 12: ask once before branching, never branch autonomously.
 - **All Python runs from the clipjoint venv.** `~/.opencode/plugins/clipjoint/.venv/bin/python3` — never system Python.
+- **Update this file after every web frontend feature.** After completing any task in `web/`, run the Web Frontend Feature Protocol (see Part 4). This is non-optional — do not mark a web feature complete until the self-update commit is made.
 
 ---
 
@@ -404,6 +405,299 @@ Copilot versions use `web/fetch` instead of fetch MCP, and `model: [list]` array
 | `/opt/homebrew/bin/opencode` → wrong target | `brew upgrade` overwrote our symlink | `ln -sf ~/bin/opencode-bmw /opt/homebrew/bin/opencode` |
 | MCP not connecting | `"enabled": false` in opencode.json | Set `"enabled": true`, restart |
 | skills-mcp auth failing | Access token expired, no refresh token | Run `opencode-skills-auth` for browser consent |
+
+---
+
+## Part 4 — BMW OpenCode Web Frontend (`feat/web-frontend`)
+
+A full React web UI for OpenCode is under active development in this config repo.
+This is a **major active project** — delegate frontend tasks here when routed to `opencode-dev-expert`.
+
+### Location & Stack
+
+| Item | Value |
+|---|---|
+| Repo path | `~/.config/opencode/web/` |
+| Branch | `feat/web-frontend` on `atc-github.azure.cloud.bmw/qte2362/opencode-config` |
+| Stack | React 18 + TypeScript + Vite 5 + TailwindCSS + `3d-force-graph` + Three.js + Zustand |
+| Dev server | `cd ~/.config/opencode/web && npm run dev` → `http://localhost:3000` |
+| OpenCode API | `http://127.0.0.1:4096` (proxied via Vite `/api` → port 4096) |
+| Target | Tauri `.app` desktop wrapper (Phase J4) |
+
+### Architecture
+
+The UI entry point is `JarvisShell` — NOT `App.tsx`. App.tsx now only wraps
+`SessionProvider` + `JarvisShell`. The JARVIS shell is a full-screen orb-centred
+conversational UI; Galaxy and Settings are slide-in panels.
+
+```
+web/src/
+  App.tsx                      # Root: SessionProvider + JarvisShell wrapper only
+  main.tsx                     # StrictMode entry point
+  components/
+    GalaxyView.tsx              # 3D force-directed knowledge galaxy (~967 lines) — DO NOT MODIFY casually
+    ChatThread.tsx              # Message rendering + tool call cards
+    PermissionDialog.tsx        # Responds to permission.v2.asked SSE event
+    ToolCallCard.tsx            # Tool call display (bash, read, etc.)
+    ModelPicker.tsx             # Dropdown from GET /api/provider
+    AgentPicker.tsx             # Dropdown from GET /api/agent
+    SessionSidebar.tsx          # Collapsible session list (legacy, may not be visible in JARVIS)
+  hooks/
+    useSSE.ts                   # EventSource with auto-reconnect + session filtering
+    useSession.ts               # Session CRUD
+    useMessages.ts              # Message list + streaming assembly from SSE deltas
+    usePermissions.ts           # Permission request handling
+    useTodos.ts                 # Todo list state
+    useProviders.ts             # GET /api/provider → typed provider list
+  lib/
+    opencode-client.ts          # Thin fetch wrapper around OpenCode REST API
+    memory-reader.ts            # Parses memory.jsonl → ForceGraphData
+    agent-reader.ts             # Parses /__agents proxy → agent+skill ForceGraphData
+    db-reader.ts                # Reads opencode.db via /__db proxy → AgentStatus[]
+  jarvis/                       # JARVIS shell — all Phase J1–J3 components
+    JarvisShell.tsx             # Root shell: orb + chat + input + panels + topbar
+    JarvisShell.css             # Shell layout + topbar + agent popover styles
+    session/
+      SessionContext.tsx        # All session/orb/agent/message state via React context
+      sseClient.ts              # SSE subscription helper used by SessionContext
+    orb/
+      OrbContainer.tsx          # Composes Canvas2DOrb + VoxCorona + waveform + label
+      Canvas2DOrb.tsx           # SVG gyroscope rings + Canvas 2D particle field
+      VoxCorona.tsx             # Three.js toroidal particle corona (state-reactive)
+      particleState.ts          # OrbState type + state param tables
+      ActivityModal.tsx         # Tool-call step display, 15s auto-dismiss
+      ActivityModal.css
+      activityStore.ts          # Zustand store for tool-call steps
+    input/
+      InputBar.tsx              # Textarea + PTT mic + send/abort; Space-PTT, ⌘⇧Space
+      InputBar.css
+      SttBridge.ts              # mlx-whisper WebSocket client (sidecar at :5001)
+      SttContext.tsx            # React context providing liveTranscript to children
+    voice/
+      VoiceController.tsx       # Wraps shell; owns SttProvider; wires STT→orb + TTS trigger
+      TtsPipeline.ts            # Routes text to TtsLocal (<120 chars) or TtsBmw (longer)
+      TtsBmw.ts                 # BMW Audio TTS API via /api/audio/speech proxy
+      TtsLocal.ts               # macOS `say` command via sidecar or Web Speech fallback
+      audioUnlock.ts            # One-shot silent AudioContext on first user gesture (autoplay unlock)
+      ToastLayer.tsx            # Top-right toast notification stack
+      ToastLayer.css
+      toastStore.ts             # Zustand store for toasts
+    panel/
+      PanelLayer.tsx            # Slide-in drawer base component (interact.js drag/resize)
+      PanelLayer.css
+      panelStore.ts             # Zustand: openPanel (string|null), togglePanel, closePanel
+      GalaxyPanel.tsx           # Panel #1: GalaxyView inside PanelLayer; only mounts when open
+      SettingsPanel.tsx         # Panel #2: TTS toggle + STT model selector + theme info
+      settingsStore.ts          # Zustand: ttsEnabled, sttModel (persisted to localStorage)
+    theme/
+      themeStore.ts             # Zustand: theme (JarvisTheme), setTheme, blinking flag
+      jarvisThemeTokens.css     # CSS custom property tokens for all 7 themes
+      themes/                   # Per-theme CSS overrides
+vite.config.ts                  # Proxies: /api → :4096, /__memory, /__agents, /__db
+```
+
+### JARVIS Shell Layout
+
+```
+┌─────────────────────────────────────────────────────┐
+│  topbar: [AgentStatusBadge]    [theme dots] [⬡] [⚙] │
+│                                                     │
+│              [ OrbContainer 320×320 ]               │
+│            Canvas2DOrb + VoxCorona overlay          │
+│              waveform bars (LISTENING)              │
+│              live transcript (LISTENING)            │
+│              status label (IDLE/THINKING/SPEAKING)  │
+│                                                     │
+│              [ ChatThread — scroll ]                │
+│                                                     │
+│  ──────────────────────────────────────────────── │
+│  [ InputBar: textarea + mic PTT + send/abort ]      │
+│                                                     │
+│  ActivityModal (bottom-right, tool steps)           │
+│  ToastLayer (top-right, STT/TTS toasts)             │
+│  PermissionDialog (blocking modal when needed)      │
+│                                                     │
+│  GalaxyPanel   (slides in from right, 540px wide)  │
+│  SettingsPanel (slides in from right, 360px wide)  │
+└─────────────────────────────────────────────────────┘
+```
+
+- Only **one panel open at a time** — toggling one closes the other (accordion)
+- GalaxyView **only mounts while the Galaxy panel is open** — prevents background render loop
+- `VoiceController` wraps the entire shell to ensure single `SttProvider` instance
+
+### Galaxy View — Current State
+
+`GalaxyView.tsx` (~967 lines) is stable and working. **Do not modify** without strong reason.
+
+Shows:
+- **Agents** — large glowing spheres (BMW blue = primary, purple = subagents) with rotating rings
+- **Skills** — small green spheres, linked to agents that reference them
+- **Memory** — knowledge graph entities from `memory.jsonl`, colour-coded by `entityType`
+
+Key implementation details:
+- `3d-force-graph ^1.80.0` — kapsule pattern: `ForceGraph3D()` returns configurator, call with `(el)` to mount
+- `filteredData` is `useMemo([graphData, layers])` — **must stay memoized** or re-render loop occurs
+- `dimensions` is stored in `dimensionsRef` (not state) — ResizeObserver writes to ref directly
+- `initTick` counter: increments once when ResizeObserver gets first real measurement → kicks init effect
+- Unmount-only cleanup effect (`[]`) handles StrictMode double-mount: calls `_destructor()`, clears canvas children, nulls `graphRef`
+- **No d3Force tuning** — calling `.d3Force()` post-`.graphData()` crashes the simulation tick
+
+### OrbState Machine
+
+`OrbState = 'IDLE' | 'LISTENING' | 'THINKING' | 'SPEAKING'`
+
+Transitions driven by `SessionContext`:
+- `isBusy` → `THINKING` (from IDLE or LISTENING)
+- `isBusy` clears → `IDLE` (from THINKING only — SPEAKING not interrupted)
+- `VoiceController` drives `LISTENING` and `SPEAKING` directly
+
+### Vite Proxy Endpoints
+
+| Endpoint | What it serves |
+|---|---|
+| `/api/*` | Proxied to OpenCode HTTP server at `:4096` |
+| `/__memory` | Reads `memory.jsonl` from npx cache, returns raw JSONL |
+| `/__agents` | Reads `~/.config/opencode/agents/*.md` + `~/.opencode/skills/` at request time, returns JSON graph |
+| `/__db` | Reads `~/.local/share/opencode/opencode.db` via `better-sqlite3`; returns `sections` rows for agent status |
+
+`/__memory` path is hardcoded: `/Users/QTE2362/.npm/_npx/15b07286cbcc3329/node_modules/@modelcontextprotocol/server-memory/dist/memory.jsonl`
+
+### ROADMAP — Phase Status
+
+| Phase | Name | Status |
+|---|---|---|
+| J1 | JARVIS Shell MVP (orb, themes, chat, InputBar, PTT) | ✅ Complete (8818d3f) |
+| J2 | Voice pipeline (TTS BMW + STT mlx-whisper sidecar) | ✅ Complete (6e9ed7d) |
+| J3 | Panel system + Galaxy Panel #1 + Settings + VoxCorona | ✅ Complete (c5e2b2e) |
+| J3 fix | TTS autoplay unblock + STT probe logging + ttsEnabled gate | ✅ Complete (6533e98) |
+| J4 | Tauri desktop `.app` wrapper | 🔲 **Next** |
+| J5 | Local SQLite project tracker (projects/tasks in galaxy) | 🔲 Pending |
+
+### Next Feature: Phase J4 — Tauri Desktop App
+
+- Tauri wrapper — macOS `.app` bundle
+- Auto-start `opencode serve` on app launch (Tauri sidecar command)
+- **Auto-start whisper sidecar** — `scripts/whisper-sidecar.py` must init before frontend loads; use `tauri-plugin-shell` `sidecar()` API; probe `localhost:5001/health` with retry (max ~10s)
+- Native mic option via `tauri-plugin-microphone` (evaluate vs keeping the sidecar WebSocket approach)
+- Bundle the `.venv-whisper/` env or use a compiled Rust binary to avoid Python startup latency
+
+### Key Technical Decisions
+
+- **No d3Force post-init** — crashes `tick`. If clustering needed, set forces BEFORE `.graphData()`
+- **`filteredData` must be `useMemo`** — inline object = new reference every render = infinite loop
+- **`dimensions` must be a `ref`** — state causes re-render → new filteredData → effect re-fires
+- **StrictMode cleanup** — unmount effect with `[]` must call `_destructor()` + clear DOM children + null ref
+- **`/__agents` is fully dynamic** — reads filesystem at request time, no restart needed for new agent files
+- **Single `SttBridge` instance** — `VoiceController` wraps the shell and provides `SttContext`; do not instantiate `SttBridge` anywhere else
+- **`audioUnlock` is required before any `audio.play()`** — browsers block async autoplay; `waitForAudioUnlock()` waits for a user gesture before resolving
+- **GalaxyPanel only mounts when open** — `{isOpen && <GalaxyView />}` pattern prevents background Three.js render loop consuming GPU while panel is closed
+- **Panel accordion** — `panelStore` allows only one open panel at a time; `togglePanel(id)` closes any open panel before opening the new one
+
+### Known Issues / Warnings
+
+- `/__memory` path is hardcoded to npx cache — breaks if npx cache is cleared
+- **Haiku multiple system prompts (ACTIVE BUG):** `anthropic/claude-haiku-4-5` returns `Bad Request: does not support multiple system prompts` when used as the orchestrator model in Jarvis. Root cause: OpenCode sends the AGENTS.md system instructions AND the session system prompt as separate messages. Fix: same pattern as `bmw_advisor.py` — collapse both system prompts into one before sending to Claude models. Needs investigation at the OpenCode server layer (Go backend) or the model config layer, not the React frontend.
+
+---
+
+### Web Frontend Feature Protocol
+
+**Run this checklist at the end of every web frontend feature, bug fix, or architectural change. Do not mark the task complete until step 5 is committed.**
+
+#### Step 1 — Summarise what changed
+
+Identify which of these categories changed and what the new state is:
+
+| Category | Check if changed |
+|---|---|
+| New component added | Note name, purpose, props |
+| Existing component significantly changed | Note what changed and why |
+| New hook added | Note name and what it manages |
+| Architecture decision made | Note the decision and the reason |
+| Bug fixed | Note root cause and fix pattern |
+| New Vite proxy endpoint | Note path and what it serves |
+| ROADMAP phase status changed | Update phase table |
+| New known issue discovered | Add to Known Issues |
+| Known issue resolved | Remove from Known Issues |
+
+#### Step 2 — Update Part 4 of this file
+
+Edit `~/.config/opencode/agents/opencode-dev-expert.md` — update whichever sections are stale:
+
+- **Architecture** table — add new files, remove deleted ones
+- **Galaxy View — Current State** — update if GalaxyView behaviour changed
+- **ROADMAP — Phase Status** table — tick completed steps, mark new "Next"
+- **Next Feature** description — replace with the actual next step
+- **Key Technical Decisions** — add any new hard-won lessons
+- **Known Issues** — add/remove as appropriate
+
+Keep entries **concise and factual** — future agents need to understand state, not prose.
+
+#### Step 2.5 — Write to memory via scribe (mandatory)
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe_jarvis_feature, scribe_design_decision, scribe_bug_fix
+
+# For phase completions:
+scribe_jarvis_feature(
+    feature_name = "<phase or feature name>",
+    phase        = "JARVIS Phase J<N>",
+    what_built   = ["<file or capability 1>", "<file or capability 2>"],
+    decisions    = ["<architecture decision made>"],
+    known_issues = ["<new gotcha if any>"],
+    commit_hash  = "<git commit hash>",
+)
+
+# For individual decisions (outside phase completions):
+scribe_design_decision(
+    agent       = "opencode-dev-expert",
+    domain      = "<domain>",
+    decision    = "<the decision>",
+    rationale   = "<why>",
+    entity_name = "<EntityName>",  # e.g. "JARVIS Known Gotchas", "JARVIS Phase J4"
+)
+
+# For bug fixes:
+scribe_bug_fix(
+    agent       = "opencode-dev-expert",
+    domain      = "<domain>",
+    bug         = "<what broke>",
+    fix         = "<what fixed it>",
+    entity_name = "JARVIS Galaxy Design System — Galaxy Bug Fixes",
+)
+```
+
+#### Step 3 — Update ROADMAP.md
+
+```bash
+# Mark completed items with [x], update phase status headings
+# Add any new decisions to "Key Decisions Made" section
+vi ~/.config/opencode/web/ROADMAP.md
+```
+
+#### Step 4 — TypeScript check
+
+```bash
+cd ~/.config/opencode/web && npx tsc --noEmit
+# Must be clean (zero errors) before committing
+```
+
+#### Step 5 — Commit both together
+
+```bash
+cd ~/.config/opencode
+git add web/ agents/opencode-dev-expert.md
+git commit -m "<type>(<scope>): <feature summary>
+
+- <what was built / changed>
+- docs(opencode-dev-expert): updated Part 4 — <what sections changed>"
+git push origin feat/web-frontend
+```
+
+The agent self-update and the feature code **must be in the same commit**. This keeps the agent's knowledge exactly in sync with the codebase state at every commit boundary.
 
 ---
 

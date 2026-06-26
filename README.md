@@ -334,7 +334,11 @@ All models are accessed via the `llm-api/*` provider (BMW internal LLM API gatew
 | `llm-api/gpt-5.2` | OpenAI | 922K | Large context |
 | `llm-api/gpt-5.1` | OpenAI | 272K | Standard GPT-5 |
 | `llm-api/gpt-4o` | OpenAI | 128K | GPT-4 Optimized |
-| `llm-api/gpt-4o-mini` | OpenAI | 128K | Cheap + fast |
+| `llm-api/gpt-4o-mini` | OpenAI | 128K | Cheap + fast (GPT-4 generation) |
+| `llm-api/gpt-5-mini` | OpenAI | 200K | **Fast + cheap (GPT-5 quality)** — good for routing |
+| `llm-api/gpt-5-mini:global` | OpenAI | 200K | GPT-5 mini, global deployment |
+| `llm-api/gpt-5.4-mini:global` | OpenAI | 400K | GPT-5.4 mini — larger context |
+| `llm-api/gpt-5-nano` | OpenAI | 200K | Ultra-cheap, simple tasks only |
 | `llm-api/o4-mini` | OpenAI | 200K | Complex reasoning |
 | `llm-api/o3-mini` | OpenAI | 200K | Reasoning tasks |
 | `llm-api/gemini-3.5-flash` | Google | 1M | Blazing fast |
@@ -359,7 +363,7 @@ MCP servers extend OpenCode with tools for external systems. Only `memory` is en
 
 | MCP | Purpose | Type |
 |-----|---------|------|
-| **memory** | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`, invoked via direct node path for reliability). **Do not use `read_graph`** — prefer `memory-semantic-search` → `memory_open_nodes()` for targeted reads. | Local |
+| **memory** | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`, invoked via direct node path for reliability) | Local |
 
 ### Available (Disabled by Default)
 
@@ -490,7 +494,6 @@ ls ~/.opencode/skills/<skill-name>/
 | Skill | When to Use |
 |-------|-------------|
 | `rag` | Embed docs + cosine search + rerank + answer (no external DB) |
-| `memory-semantic-search` | Semantic overlay for the memory MCP: ANN-search entity text → returns entity names for targeted `memory_open_nodes` lookups (use instead of `read_graph`) |
 | `pdf-chat` | Chat with a local PDF via Claude (base64, max 10 MB) |
 
 ### Web Research
@@ -747,9 +750,9 @@ To explore GAIA apps yourself:
 
 The orchestrator includes a **semantic routing cache** that learns which skill handles each type of request. After a few sessions, common requests are routed instantly without any catalog lookup.
 
-- **Technology:** `text-embedding-3-small` + `hnswlib` (HNSW ANN, cosine space) with numpy fallback
+- **Technology:** `text-embedding-3-small` + numpy cosine similarity
 - **Threshold:** ≥ 0.82 cosine similarity = cache hit (skip routing pipeline)
-- **Storage:** `~/.opencode/skills/routing-cache/cache/` (`routing.bin` HNSW index + `index.npy` fallback)
+- **Storage:** `~/.opencode/skills/routing-cache/cache/` (persistent numpy index)
 - **Learning:** Every routing decision is recorded and synced from `opencode.db`
 - **Module:** `~/.opencode/skills/routing-cache/routing_cache.py` — imported directly, no bash generation
 
@@ -1061,9 +1064,6 @@ This configuration enforces BMW security policies defined in `AGENTS.md`:
 | Manual token updates | Every 2 hours | Never | **Fully automated** |
 | Available models | 3 | 14 | **367% more choice** |
 | Available skills | 0 | 58+ | **Full specialist library** |
-
-Additional infra optimisations:
-- Routing cache now uses `hnswlib` (HNSW ANN) for sub-linear lookup and avoids cold-loading the full numpy matrix on every query.
 
 ### Skill Invocation Architecture
 

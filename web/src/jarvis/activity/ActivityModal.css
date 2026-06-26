@@ -1,0 +1,167 @@
+/* ActivityModal.css */
+
+.jarvis-activity-modal {
+  position: fixed;
+  bottom: 72px;
+  right: 24px;
+  width: 320px;
+  z-index: 200;
+
+  background: var(--jarvis-activity-bg, rgba(10, 22, 40, 0.88));
+  border: 1px solid var(--jarvis-border-glow, rgba(77, 141, 246, 0.35));
+  border-radius: 12px;
+  overflow: hidden;
+
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.4),
+    0 0 0 1px rgba(255, 255, 255, 0.05) inset,
+    0 0 24px var(--jarvis-orb-glow, rgba(77, 141, 246, 0.1));
+}
+
+/* Entrance animation */
+.jarvis-activity-modal-enter {
+  animation: jarvis-activity-enter 280ms var(--ease-spring, cubic-bezier(0.34, 1.56, 0.64, 1)) forwards;
+}
+
+.jarvis-activity-modal-exit {
+  animation: jarvis-activity-exit 200ms var(--ease-in-cubic, cubic-bezier(0.32, 0, 0.67, 0)) forwards;
+}
+
+@keyframes jarvis-activity-enter {
+  from {
+    opacity: 0;
+    transform: translateY(12px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+@keyframes jarvis-activity-exit {
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(8px) scale(0.97);
+  }
+}
+
+/* Countdown bar on top edge */
+.jarvis-activity-countdown {
+  height: 1px;
+  background: var(--jarvis-border-glow, rgba(77, 141, 246, 0.35));
+  transform-origin: left;
+  transition: transform linear;
+}
+
+/* Header */
+.jarvis-activity-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 12px 8px;
+  border-bottom: 1px solid var(--jarvis-border, rgba(77, 141, 246, 0.15));
+}
+
+.jarvis-activity-title {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--jarvis-text-secondary, rgba(255, 255, 255, 0.55));
+}
+
+.jarvis-activity-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--jarvis-text-secondary, rgba(255, 255, 255, 0.55));
+  transition: color 150ms ease, background 150ms ease;
+}
+
+.jarvis-activity-close:hover {
+  color: var(--jarvis-text-primary, rgba(255, 255, 255, 0.92));
+  background: var(--jarvis-border, rgba(77, 141, 246, 0.15));
+}
+
+/* Steps list */
+.jarvis-activity-steps {
+  padding: 8px 0;
+  max-height: 240px;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: var(--jarvis-border) transparent;
+}
+
+/* Single step */
+.jarvis-activity-step {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 6px 12px;
+}
+
+.jarvis-activity-step-icon {
+  flex-shrink: 0;
+  width: 14px;
+  height: 14px;
+  margin-top: 1px;
+  border-radius: 50%;
+}
+
+.jarvis-activity-step-icon[data-status="completed"] {
+  background: var(--jarvis-activity-step-done, #34d399);
+}
+
+.jarvis-activity-step-icon[data-status="running"] {
+  background: var(--jarvis-activity-step-active, #4d8df6);
+  animation: jarvis-step-pulse 1s ease-in-out infinite;
+}
+
+.jarvis-activity-step-icon[data-status="pending"] {
+  background: var(--jarvis-activity-step-pending, rgba(255, 255, 255, 0.25));
+}
+
+.jarvis-activity-step-icon[data-status="error"] {
+  background: var(--jarvis-notify-error, #f87171);
+}
+
+@keyframes jarvis-step-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.8); }
+}
+
+.jarvis-activity-step-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.jarvis-activity-step-tool {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--jarvis-text-primary, rgba(255, 255, 255, 0.92));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.jarvis-activity-step-title {
+  font-size: 11px;
+  color: var(--jarvis-text-secondary, rgba(255, 255, 255, 0.55));
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  margin-top: 1px;
+}

@@ -1,0 +1,30 @@
+/* Chrome — gunmetal silver (JARVIS exclusive) */
+[data-jarvis-theme="chrome"] {
+  --jarvis-bg: #080a0c;
+  --jarvis-surface: #12161c;
+  --jarvis-surface-alt: #1c2228;
+  --jarvis-border: rgba(128, 144, 168, 0.18);
+  --jarvis-border-glow: rgba(128, 144, 168, 0.38);
+  --jarvis-idle-particle: rgba(160, 176, 192, 0.7);
+  --jarvis-listen-particle: rgba(200, 210, 224, 0.9);
+  --jarvis-speak-particle: rgba(192, 204, 220, 0.85);
+  --jarvis-orb-glow: rgba(128, 144, 168, 0.32);
+  --jarvis-orb-ring: #8090a8;
+  --jarvis-text-primary: rgba(220, 226, 234, 0.93);
+  --jarvis-text-secondary: rgba(128, 144, 168, 0.65);
+  --jarvis-text-code: #a8b8c8;
+  --jarvis-text-accent: #8090a8;
+  --jarvis-notify-bg: rgba(8, 10, 12, 0.95);
+  --jarvis-notify-border: rgba(128, 144, 168, 0.28);
+  --jarvis-notify-success: #6aaa80;
+  --jarvis-notify-warning: #b8a050;
+  --jarvis-notify-error: #b85858;
+  --jarvis-activity-bg: rgba(8, 10, 12, 0.9);
+  --jarvis-activity-step-done: #6aaa80;
+  --jarvis-activity-step-active: #8090a8;
+  --jarvis-activity-step-pending: rgba(128, 144, 168, 0.2);
+  --jarvis-ptt-idle: #8090a8;
+  --jarvis-ptt-idle-rgb: 128, 144, 168;
+  --jarvis-ptt-active: #c0ccd8;
+  --jarvis-ptt-active-rgb: 192, 204, 216;
+}

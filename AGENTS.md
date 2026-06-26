@@ -89,6 +89,10 @@ Custom agents MUST only use `llm-api` or `ollama` as the model provider.
 - `llm-api/gpt-5.1`
 - `llm-api/gpt-5.2`
 - `llm-api/gpt-5.4`
+- `llm-api/gpt-5-mini`
+- `llm-api/gpt-5-mini:global`
+- `llm-api/gpt-5.4-mini:global`
+- `llm-api/gpt-5-nano`
 - `llm-api/gpt-4o`
 - `llm-api/gpt-4o-mini`
 - `llm-api/o3-mini`
@@ -162,6 +166,7 @@ Key skills from TTT catalog include:
 - **Agentic**: `bmw-tool-agent` — ReAct loop + **advisor-enhanced mode** (`bmw_advisor.py`); 7 named profiles (`speed`/`economy`/`balanced`/`claude`/`gpt`/`quality`/`deep`); 16-model catalogue with tier ratings; `recommend()` heuristic; `pick_profile()` interactive CLI; `RunStats` cost tracking. Basic mode for simple workflows; advisor mode for complex/high-stakes tasks.
 - **Routing Cache**: `routing-cache` — self-learning semantic routing cache at Priority 0.5; `text-embedding-3-small` + numpy cosine ≥ 0.82; syncs from `opencode.db`; records every live routing decision.
 - **Coordination**: `blackboard` — shared working file for multi-agent task coordination (Phase 4: hard gate check, dependency tracking, approval gates; Phase 4.6: `auto_archive_if_done()` moves done files to archive); `projects` — persistent project/blackboard/queue/decision/approval/dependency tracking in opencode.db (secretary only); Phase 4.6: `compress_sections()` soft-deletes raw analysis on done blackboards (keeps Execution Plan + Result); `mark_distillation_ready()` auto-fires on project completion; `distil_project()` calls BMW LLM API sonnet, writes PATTERN obs to agent-memory; `get_projects_pending_distillation()` for session-start prompts; `agent-memory` — per-agent self-learning knowledge graph; Phase 4.6: decay scoring (`0.5^(days/half_life)`; PATTERN half-life 2×); `reinforce()` resets decay clock; `get_decay_stats()` for galaxy; `recall()` sorted by decay score; each agent records `WORKED`/`AVOID`/`PATTERN` observations to `memory.jsonl` and recalls them at task start; survives session resets
+- **Scribe**: `scribe` — **mandatory dual-layer memory writer** used by all agents at task-end; single `scribe()` call writes to both `agent_memory` (WORKED/AVOID/PATTERN) and the MCP knowledge graph (typed entities + relations) atomically; specialised helpers: `scribe_design_decision()`, `scribe_bug_fix()`, `scribe_jarvis_feature()`, `scribe_session_summary()`; `prune_report()` surfaces stale orphaned entities for quarterly review; replaces ad-hoc `learn()` calls scattered across agent files; schema conventions in `memory-schema.md`
 - **Utilities**: `ttt`, `mcp-setup`, `dor-jira-updater`, `bmw-wisdom`, `file-handoff`
 
 Before referencing any skill in an agent, verify it is in this list or confirm it
@@ -524,12 +529,12 @@ cp ~/.config/opencode/opencode.json.hardcoded-backup-* ~/.config/opencode/openco
 | Agent file | Model | Purpose | Key trigger phrases |
 |---|---|---|---|
 | `request-orchestrator.md` | `claude-haiku-4-5` | Default router; mandatory delegation; P2.5 secretary escalation; session-start distillation prompt check — surfaces pending projects, handles `distil <name>` / `skip` / `never <name>` replies | All requests |
-| `secretary.md` | `claude-sonnet-4-6` | Routing oracle + stateful project coordinator; bash tool (restricted: python3/sqlite3 + blackboard reads only); uses `projects` skill for opencode.db access; 6 output modes: routing/project-lookup/bb-register/queue-advance/progress-report/conflict-resolution | Invoked internally by orchestrator only |
+| `secretary.md` | `claude-sonnet-4-5` | Routing oracle + stateful project coordinator; bash tool (restricted: python3/sqlite3 + blackboard reads only); uses `projects` skill for opencode.db access; 6 output modes: routing/project-lookup/bb-register/queue-advance/progress-report/conflict-resolution | Invoked internally by orchestrator only |
 | `programming-expert.md` | `gpt-5.1` | Full-stack software dev: Angular, React, Python, embedded C/C++, code review, testing, BMW LLM API agents | write code, fix bug, implement, refactor, angular, react, python, typescript, unit test, code review, debug, api integration, agentic workflow |
 | `design-expert.md` | `claude-sonnet-4-6` | UI/UX design: BMW Density system, Figma, accessibility (WCAG 2.1 AA), UX review, presentations, visual design | ux review, figma, design system, density, wireframe, prototype, accessibility, wcag, a11y, bmw branding, component design, poster, infographic |
-| `project-manager.md` | `o4-mini` | Agile PM: Jira, Confluence, sprint health, PI planning, PR triage, release notes, backlog, DoR compliance | sprint planning, backlog, jira, jira story, acceptance criteria, dor, pr overview, release notes, roadmap, retrospective, capacity planning |
-| `jirri-data-analyst.md` | `o3-mini` | JIRRI RPA cost-savings calculation auditor; Python/stdlib script expert | JIRRI, cost savings, MB1B, LT01, jirri_cost_savings.py |
-| `uipath-rpa-expert.md` | `claude-sonnet-4-6` | UiPath Dispatcher/Worker documentation generator; XAML analyzer | uipath, rpa, dispatcher, worker, xaml, bot |
+| `project-manager.md` | `gpt-5.1` | Agile PM: Jira, Confluence, sprint health, PI planning, PR triage, release notes, backlog, DoR compliance | sprint planning, backlog, jira, jira story, acceptance criteria, dor, pr overview, release notes, roadmap, retrospective, capacity planning |
+| `jirri-data-analyst.md` | `gpt-5.1` | JIRRI RPA cost-savings calculation auditor; Python/stdlib script expert | JIRRI, cost savings, MB1B, LT01, jirri_cost_savings.py |
+| `uipath-rpa-expert.md` | `claude-sonnet-4-5` | UiPath Dispatcher/Worker documentation generator; XAML analyzer | uipath, rpa, dispatcher, worker, xaml, bot |
 | `oracle-apex-expert.md` | `gpt-5.1` | Oracle APEX development + maintenance; Oracle SQL/PL/SQL expert; fetches live docs from docs.oracle.com | apex, oracle apex, plsql, oracle sql, ora- error, apex page, apex plugin |
 | `opencode-dev-expert.md` | `gpt-5.2` | OpenCode version upgrades, wrapper maintenance, skill/plugin lifecycle, MCP setup, auth changes, config repo work | opencode upgrade, new opencode version, brew upgrade opencode, wrapper script, opencode broken, skill install, plugin update, mcp setup, opencode config, opencode development |
 | `worker.md` | `claude-haiku-4-5` | Mechanical executor — only agent with unrestricted bash/edit/write; reads blackboard Execution Plan and applies changes exactly as specified; writes Execution Result; Step 7 calls `auto_archive_if_done()`; Step 8 records execution learnings to agent-memory | read blackboard, execute plan, apply changes, worker agent |

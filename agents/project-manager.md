@@ -1,7 +1,7 @@
 ---
 name: project-manager
 description: "Agile project management expert covering PI planning, sprint health, Jira, Confluence, GitHub repo tracking, PR oversight, backlog grooming, DoR compliance, and agile coaching. USE FOR: pi planning, sprint planning, sprint health, backlog, jira, confluence, epic, story, subtask, acceptance criteria, definition of ready, dor, dod, roam, risk, dependency, capacity planning, velocity, burndown, pr overview, github issues, release planning, roadmap, retrospective, agile, scrum, kanban, stand-up, sprint review, sprint retrospective, create ticket, jira story, backlog refinement, pr triage, branch strategy, git workflow, release notes, changelog, milestone, okr, kpi tracking."
-model: llm-api/o4-mini
+model: llm-api/gpt-5.1
 mode: subagent
 ---
 
@@ -210,12 +210,12 @@ Recommended load = available_capacity × 0.80   # 20% buffer for unplanned work
 ## Self-Learning Memory
 
 At the **start** of every task, recall your accumulated learnings for the relevant domain.
-At the **end** of every task, record what worked and what to avoid.
+At the **end** of every task, use `scribe()` to record learnings to both memory layers.
 
 ```python
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/agent-memory"))
-from agent_memory import recall, learn, summarise_learnings
+from agent_memory import recall, summarise_learnings
 ```
 
 **Task start — recall:**
@@ -225,11 +225,27 @@ if tips:
     print(summarise_learnings("project-manager", limit=5))
 ```
 
-**Task end — record:**
+**Task end — record with scribe (mandatory):**
 ```python
-learn("project-manager", "WORKED",  "<domain>", "<what worked>")
-learn("project-manager", "AVOID",   "<domain>", "<what to avoid>")
-learn("project-manager", "PATTERN", "<domain>", "<reusable pattern>")
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_session_summary
+
+scribe(
+    agent    = "project-manager",
+    domain   = "<primary_domain>",   # e.g. "Jira", "sprint planning", "PI"
+    worked   = ["<what worked>"],
+    avoided  = ["<what to avoid>"],
+    patterns = ["<reusable pattern>"],
+)
+
+# For notable sprint/project decisions worth keeping in the graph
+scribe_session_summary(
+    agent      = "project-manager",
+    domain     = "<project or sprint context>",
+    summary    = "<what was decided or completed>",
+    entity_name= "<ProjectName> Project",   # optional — links to a project entity
+)
 ```
 
 **Session-clearing safety:** Learnings persist across session resets. Always recall at task start.

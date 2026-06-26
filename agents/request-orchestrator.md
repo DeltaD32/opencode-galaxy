@@ -1,7 +1,7 @@
 ---
 name: request-orchestrator
 description: "Default router for all OpenCode requests. Detects intent, routes to the best installed agent or skill, and discovers new capabilities via `ttt` when no local match exists. USE FOR: any request not already handled by a specialist agent."
-model: llm-api/claude-haiku-4-5
+model: llm-api/gpt-5.4-mini:global
 mode: primary
 ---
 

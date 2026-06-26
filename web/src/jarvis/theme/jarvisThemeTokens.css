@@ -1,0 +1,55 @@
+/* JARVIS Theme Tokens — base layer, always loaded */
+/* Defaults = observatory theme */
+
+:root {
+  /* Backgrounds */
+  --jarvis-bg: #050a14;
+  --jarvis-surface: #0a1628;
+  --jarvis-surface-alt: #0f1f3a;
+
+  /* Borders */
+  --jarvis-border: rgba(77, 141, 246, 0.15);
+  --jarvis-border-glow: rgba(77, 141, 246, 0.35);
+
+  /* Particles */
+  --jarvis-idle-particle: rgba(77, 141, 246, 0.7);
+  --jarvis-listen-particle: rgba(255, 182, 39, 0.9);
+  --jarvis-speak-particle: rgba(77, 246, 200, 0.85);
+
+  /* Orb */
+  --jarvis-orb-glow: rgba(77, 141, 246, 0.4);
+  --jarvis-orb-ring: #4d8df6;
+
+  /* Typography */
+  --jarvis-text-primary: rgba(255, 255, 255, 0.92);
+  --jarvis-text-secondary: rgba(255, 255, 255, 0.55);
+  --jarvis-text-code: #7dd3fc;
+  --jarvis-text-accent: #4d8df6;
+
+  /* Notifications */
+  --jarvis-notify-bg: rgba(10, 22, 40, 0.92);
+  --jarvis-notify-border: rgba(77, 141, 246, 0.3);
+  --jarvis-notify-success: #34d399;
+  --jarvis-notify-warning: #fbbf24;
+  --jarvis-notify-error: #f87171;
+
+  /* Activity modal */
+  --jarvis-activity-bg: rgba(10, 22, 40, 0.88);
+  --jarvis-activity-step-done: #34d399;
+  --jarvis-activity-step-active: #4d8df6;
+  --jarvis-activity-step-pending: rgba(255, 255, 255, 0.25);
+
+  /* PTT button */
+  --jarvis-ptt-idle: #4d8df6;
+  --jarvis-ptt-idle-rgb: 77, 141, 246;
+  --jarvis-ptt-active: #ffb627;
+  --jarvis-ptt-active-rgb: 255, 182, 39;
+}
+
+/* ── Shared Animation Easings ────────────────────────────────────────────── */
+:root {
+  --ease-spring:    cubic-bezier(0.34, 1.56, 0.64, 1);
+  --ease-out-expo:  cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-cubic: cubic-bezier(0.33, 1, 0.68, 1);
+  --ease-in-cubic:  cubic-bezier(0.32, 0, 0.67, 0);
+}

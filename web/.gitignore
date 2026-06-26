@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.env.local
+.env.*.local
+*.log
+.DS_Store
+
+# Local build/test artifacts
+tsconfig.tsbuildinfo
+test-results/
+
+# Public assets in this repo are tracked under web/public/ in git.

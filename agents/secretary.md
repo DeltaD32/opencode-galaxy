@@ -10,7 +10,7 @@ description: >
   Dual-role: stateless oracle for routing, stateful coordinator for project lifecycle.
   Never executes domain work, never calls the task tool.
   USE FOR: invoked internally by request-orchestrator only — never called directly by users.
-model: llm-api/claude-sonnet-4-6
+model: llm-api/claude-sonnet-4-5
 mode: subagent
 ---
 

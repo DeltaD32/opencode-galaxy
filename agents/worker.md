@@ -170,28 +170,34 @@ archive_path = auto_archive_if_done(file_path)
 `auto_archive_if_done()` moves the file out of `/tmp/opencode/` only when status is
 `done`. On failure the file stays in place so the orchestrator and user can inspect it.
 
-### Step 8 — Record execution learnings
+### Step 8 — Record execution learnings (MANDATORY — same weight as gate check)
 
-After updating status, record what worked and what caused failures (if any) to the
-agent-memory skill. This enables future executions to avoid the same pitfalls.
+**This step is not optional.** Every execution writes at least one scribe call.
+Skipping it is the same class of violation as skipping the gate check.
 
 ```python
 import sys, pathlib
-sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/agent-memory"))
-from agent_memory import learn
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe
 
-# Always record — even on PASS — if anything notable happened
-if all_passed:
-    # Record a PATTERN if the execution revealed a reusable technique
-    if notable_technique:
-        learn("worker", "PATTERN", "<task_domain>", "<what made this execution clean>")
-else:
-    # Record what caused the failure so future plans avoid it
-    learn("worker", "AVOID", "<task_domain>", f"Step N failed: <root cause in one line>")
+# ALWAYS call scribe() — even clean executions record a session note
+scribe(
+    agent   = "worker",
+    domain  = "<task_domain>",           # e.g. "Angular component", "blackboard execution"
+    worked  = ["<what made this clean>"] if all_passed else [],
+    avoided = [f"Step N failed: <root cause>"] if not all_passed else [],
+    patterns= ["<reusable technique>"] if notable_technique else [],
+    # entity_name is optional — set it if a named graph entity should be updated
+    # entity_name = "<EntityName>",
+)
 ```
 
-Only record learnings that are **genuinely reusable** — not every execution needs a note.
-Good candidates: unexpected tool errors, env var gotchas, path issues, test framework quirks.
+**What counts as notable:**
+- Unexpected tool errors, env var gotchas, path issues, test framework quirks → `avoided`
+- A clean multi-step execution with a reusable pattern → `patterns`
+- A failure with a clear root cause → `avoided` (always)
+- A trivial 1-step execution with nothing unusual → still call `scribe()` with empty lists
+  (the call itself records the domain was touched, costs ~1ms)
 
 ---
 

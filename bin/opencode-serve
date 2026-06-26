@@ -1,0 +1,90 @@
+#!/usr/bin/env zsh
+# opencode-serve — starts the OpenCode HTTP server for the web frontend.
+# Refreshes BMW OAuth token first, then launches `opencode serve`.
+#
+# Usage:
+#   opencode-serve              # default port 4096
+#   opencode-serve --port 4097  # custom port
+#   opencode-serve --stop       # kill running server
+
+set -euo pipefail
+
+PORT="${OPENCODE_WEB_PORT:-4096}"
+HOST="127.0.0.1"
+PIDFILE="/tmp/opencode-serve.pid"
+LOGFILE="/tmp/opencode-serve.log"
+
+# Parse args
+STOP=false
+while [[ $# -gt 0 ]]; do
+  case "$1" in
+    --port)   PORT="$2"; shift 2 ;;
+    --stop)   STOP=true; shift ;;
+    *)        shift ;;
+  esac
+done
+
+if $STOP; then
+  if [[ -f "$PIDFILE" ]]; then
+    PID=$(cat "$PIDFILE")
+    if kill -0 "$PID" 2>/dev/null; then
+      kill "$PID"
+      rm -f "$PIDFILE"
+      echo "Stopped opencode-serve (PID $PID)"
+    else
+      echo "No running server found at PID $PID"
+      rm -f "$PIDFILE"
+    fi
+  else
+    echo "No PID file found — server may not be running"
+  fi
+  exit 0
+fi
+
+# Check if already running
+if [[ -f "$PIDFILE" ]]; then
+  PID=$(cat "$PIDFILE")
+  if kill -0 "$PID" 2>/dev/null; then
+    echo "opencode-serve already running on port $PORT (PID $PID)"
+    echo "Run: opencode-serve --stop  to stop it"
+    exit 0
+  fi
+  rm -f "$PIDFILE"
+fi
+
+# Load BMW credentials
+set -a
+source ~/.config/opencode/.env 2>/dev/null || true
+source ~/.config/opencode/load-secrets.sh 2>/dev/null || true
+set +a
+
+echo "Starting OpenCode server on http://${HOST}:${PORT} ..."
+echo "Log: $LOGFILE"
+echo ""
+
+# Launch in background
+/opt/homebrew/bin/opencode serve \
+  --port "$PORT" \
+  --hostname "$HOST" \
+  > "$LOGFILE" 2>&1 &
+
+SERVER_PID=$!
+echo "$SERVER_PID" > "$PIDFILE"
+
+# Wait for server to be ready (up to 10s)
+for i in $(seq 1 20); do
+  if curl -s --max-time 1 "http://${HOST}:${PORT}/session" > /dev/null 2>&1; then
+    echo "Server ready — PID $SERVER_PID"
+    echo ""
+    echo "  API:  http://${HOST}:${PORT}"
+    echo "  SSE:  http://${HOST}:${PORT}/event"
+    echo "  Web:  cd ~/.config/opencode/web && npm run dev"
+    echo ""
+    echo "Run 'opencode-serve --stop' to shut down"
+    exit 0
+  fi
+  sleep 0.5
+done
+
+echo "Warning: server started (PID $SERVER_PID) but health check timed out"
+echo "Check $LOGFILE for errors"
