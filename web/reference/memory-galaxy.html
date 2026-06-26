@@ -1,0 +1,1583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>opencode · agent memory galaxy</title>
+<!--
+  REFERENCE EXAMPLE — agent memory galaxy for opencode.
+  Single self-contained file. Three.js r128 (UMD global) from cdnjs. Custom camera controls
+  (no OrbitControls dependency). All data is MOCK but shaped like the opencode server/SDK so it
+  is swap-ready:
+
+    sessions   ~ client.session.list()         -> { id, title, time, cost, agent }
+    agents     ~ client.agent.list()           -> { name, mode, model, permissions, ... }
+    mcp        ~ opencode config `mcp` block    -> server definitions become orbiting nodes
+    memory     ~ AGENTS.md project memory       -> entries summarised on the orchestrator
+    messages   ~ client.session.messages(id)    -> chat thread + tool-call parts
+
+  STRUCTURE (the orbital metaphor):
+    tier 0  orchestrator        -> the sun (centre)
+    tier 1  subagents           -> planets, line-linked to the sun, slowly orbiting
+    tier 2  skills / mcps / prompts -> higher band, CO-ROTATING with their owning subagent
+            and tethered to it by a colour-matched line ("ties into the sub agents")
+    tier 3  artifact station    -> highest orbit, holds session artifacts
+
+  Why the original went blank: nodes that are tiny + non-emissive on a bright background
+  disappear. Here every body is emissive and carries an additive radial-glow sprite, the
+  background is true deep space, and the camera is framed on the sun. Layout is deterministic
+  (no force sim to "settle"), so first paint is always populated.
+-->
+<style>
+  :root{
+    /* space */
+    --void:        #05070d;
+    --void-lift:   #0a1020;
+    /* surfaces */
+    --panel:       rgba(11,14,22,0.86);
+    --panel-solid: #0b0e16;
+    --rail:        #0c1018;
+    --hair:        rgba(126,148,184,0.14);
+    --hair-bright: rgba(126,148,184,0.30);
+    /* type */
+    --text:  #e7ebf3;
+    --dim:   #8b95ad;
+    --faint: #535d73;
+    /* accents */
+    --accent:    #4d8df6;   /* opencode blue: links, send, active */
+    --accent-dim:#2a4a82;
+    --sun:       #ffb627;
+    --sun-core:  #ffe7a8;
+    /* node-type legend */
+    --c-orch:    #ffb627;
+    --c-sub:     #9a7bff;
+    --c-skill:   #5be08a;
+    --c-mcp:     #36d6e7;
+    --c-prompt:  #5b8cff;
+    --c-memory:  #f564c4;
+    --c-artifact:#ff7ab0;
+
+    --mono: ui-monospace, "SF Mono", "JetBrains Mono", "Cascadia Code", Menlo, Consolas, monospace;
+  }
+
+  *{ box-sizing:border-box; }
+  html,body{ height:100%; margin:0; }
+  body{
+    background:var(--void);
+    color:var(--text);
+    font-family:var(--mono);
+    font-size:13px;
+    line-height:1.45;
+    overflow:hidden;
+    -webkit-font-smoothing:antialiased;
+  }
+  .eyebrow{
+    font-size:10px; letter-spacing:.18em; text-transform:uppercase; color:var(--faint);
+  }
+
+  /* ---------- shell grid ---------- */
+  #app{
+    display:grid;
+    grid-template-columns: var(--left,308px) 1fr var(--right,0px);
+    height:100vh; width:100vw;
+    transition:grid-template-columns .28s cubic-bezier(.4,0,.2,1);
+  }
+  body.left-collapsed  #app{ --left:0px; }
+  body.right-open      #app{ --right:392px; }
+
+  /* ---------- left rail: sessions ---------- */
+  #left{
+    background:var(--rail);
+    border-right:1px solid var(--hair);
+    display:flex; flex-direction:column; min-width:0;
+    overflow:hidden;
+  }
+  .lhead{
+    display:flex; align-items:center; gap:10px;
+    padding:14px 14px 12px; border-bottom:1px solid var(--hair);
+  }
+  .logo{
+    width:26px; height:26px; border-radius:7px; flex:none;
+    background:linear-gradient(150deg,var(--accent),#7db0ff);
+    display:grid; place-items:center; color:#06101f; font-weight:700; font-size:14px;
+  }
+  .lhead .name{ font-weight:600; letter-spacing:.02em; }
+  .lhead .spacer{ flex:1; }
+  .iconbtn{
+    width:26px; height:26px; flex:none; border:1px solid var(--hair); border-radius:7px;
+    background:transparent; color:var(--dim); cursor:pointer; display:grid; place-items:center;
+    font-size:15px; line-height:1; transition:.15s;
+  }
+  .iconbtn:hover{ color:var(--text); border-color:var(--hair-bright); background:rgba(126,148,184,.06); }
+  .sessions{ overflow-y:auto; flex:1; padding:6px; }
+  .session{
+    padding:9px 10px; border-radius:9px; cursor:pointer; border:1px solid transparent;
+    transition:.12s;
+  }
+  .session:hover{ background:rgba(126,148,184,.06); }
+  .session.active{ background:rgba(77,141,246,.12); border-color:rgba(77,141,246,.35); }
+  .session .title{ font-size:12.5px; color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .session .meta{ margin-top:3px; font-size:10.5px; color:var(--faint); display:flex; gap:8px; }
+  .session .meta .cost{ color:var(--c-skill); }
+  .session .meta .agent{ color:var(--dim); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .lfoot{
+    padding:9px 14px; border-top:1px solid var(--hair); font-size:11px; color:var(--faint);
+    display:flex; justify-content:space-between; align-items:center;
+  }
+
+  /* ---------- centre: galaxy ---------- */
+  #center{ position:relative; min-width:0; background:
+      radial-gradient(120% 90% at 50% 42%, var(--void-lift) 0%, var(--void) 60%); }
+  #scene{ position:absolute; inset:0; display:block; }
+  .overlay{ position:absolute; z-index:5; }
+
+  /* top-left: agent count + reopen-left button */
+  .topleft{ top:14px; left:14px; display:flex; gap:8px; align-items:center; }
+  .pill{
+    background:var(--panel); border:1px solid var(--hair); border-radius:999px;
+    padding:6px 13px; font-size:12px; display:flex; align-items:center; gap:8px;
+    backdrop-filter:blur(8px);
+  }
+  .pill .dot{ width:7px; height:7px; border-radius:50%; background:var(--c-skill); box-shadow:0 0 8px var(--c-skill); }
+
+  /* inspector card (under the pill) */
+  #inspector{
+    top:58px; left:14px; width:268px; background:var(--panel); border:1px solid var(--hair);
+    border-radius:13px; padding:14px; backdrop-filter:blur(10px); display:none;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  #inspector.show{ display:block; }
+  #inspector .itype{ display:flex; align-items:center; gap:7px; }
+  #inspector .swatch{ width:9px; height:9px; border-radius:50%; }
+  #inspector h2{ margin:8px 0 2px; font-size:16px; font-weight:600; letter-spacing:.01em; }
+  #inspector .sub{ font-size:11px; color:var(--dim); }
+  #inspector .rows{ margin-top:11px; display:grid; grid-template-columns:auto 1fr; gap:5px 12px; font-size:11.5px; }
+  #inspector .rows .k{ color:var(--faint); }
+  #inspector .rows .v{ color:var(--text); text-align:right; word-break:break-word; }
+  #inspector .arts{ margin-top:10px; border-top:1px solid var(--hair); padding-top:9px; max-height:150px; overflow:auto; }
+  #inspector .art{ display:flex; align-items:center; gap:8px; font-size:11.5px; padding:3px 0; color:var(--dim); }
+  #inspector .art .d{ width:7px; height:7px; border-radius:2px; flex:none; }
+  #inspector .art .nm{ color:var(--text); white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+
+  /* top-right: layers + open chat */
+  .topright{ top:14px; right:14px; display:flex; gap:8px; align-items:center; }
+  .layers{
+    background:var(--panel); border:1px solid var(--hair); border-radius:999px;
+    padding:5px 6px 5px 12px; display:flex; align-items:center; gap:6px; backdrop-filter:blur(8px);
+  }
+  .layers .lbl{ font-size:11px; color:var(--faint); margin-right:2px; }
+  .layer-btn{
+    font-family:var(--mono); font-size:11.5px; border:1px solid transparent; border-radius:999px;
+    padding:4px 11px; cursor:pointer; color:var(--dim); background:transparent; transition:.15s;
+  }
+  .layer-btn.on{ color:#06101f; font-weight:600; }
+  .layer-btn[data-layer="agents"].on{ background:#bcd0ff; }
+  .layer-btn[data-layer="skills"].on{ background:#a9efc5; }
+  .layer-btn[data-layer="memory"].on{ background:#f7b6e2; }
+  .theme-sel{
+    background:var(--panel); border:1px solid var(--hair); border-radius:999px;
+    padding:5px 7px 5px 12px; display:flex; align-items:center; gap:7px; backdrop-filter:blur(8px);
+  }
+  .theme-sel .lbl{ font-size:11px; color:var(--faint); }
+  .theme-sel select{
+    font-family:var(--mono); font-size:12px; background:#10141d; color:var(--text);
+    border:1px solid var(--hair); border-radius:8px; padding:4px 9px; cursor:pointer; outline:none;
+  }
+  .btn-accent{
+    font-family:var(--mono); font-size:12px; border:none; border-radius:999px; cursor:pointer;
+    padding:7px 14px; color:#fff; background:var(--accent); display:flex; align-items:center; gap:7px;
+    transition:.15s;
+  }
+  .btn-accent:hover{ filter:brightness(1.08); }
+  .btn-accent.ghost{ background:transparent; color:var(--dim); border:1px solid var(--hair); }
+  .btn-accent.ghost:hover{ color:var(--text); border-color:var(--hair-bright); }
+
+  /* bottom-left: legend */
+  #legend{
+    bottom:16px; left:16px; background:var(--panel); border:1px solid var(--hair);
+    border-radius:13px; padding:13px 15px; backdrop-filter:blur(10px); min-width:166px;
+  }
+  #legend .eyebrow{ margin-bottom:9px; }
+  #legend .row{ display:flex; align-items:center; gap:10px; padding:2.5px 0; font-size:12px; }
+  #legend .row .m{ width:11px; height:11px; border-radius:50%; flex:none; }
+  #legend .row .ring{ background:transparent; border:2px solid; }
+  #legend .row .sq{ border-radius:3px; }
+  #legend .row .tier{ margin-left:auto; font-size:9.5px; color:var(--faint); letter-spacing:.05em; }
+
+  /* bottom-right: counts + settings */
+  .botright{ bottom:16px; right:16px; display:flex; align-items:center; gap:10px; }
+  .counts{ font-size:11px; color:var(--faint); }
+  #settingsPop{
+    position:absolute; bottom:44px; right:0; width:208px; background:var(--panel-solid);
+    border:1px solid var(--hair); border-radius:12px; padding:10px; display:none;
+    box-shadow:0 18px 50px rgba(0,0,0,.5);
+  }
+  #settingsPop.show{ display:block; }
+  .toggle{ display:flex; align-items:center; justify-content:space-between; padding:6px 6px; font-size:12px; cursor:pointer; border-radius:8px; }
+  .toggle:hover{ background:rgba(126,148,184,.06); }
+  .switch{ width:34px; height:19px; border-radius:999px; background:#222a38; position:relative; transition:.15s; flex:none; }
+  .switch::after{ content:""; position:absolute; top:2px; left:2px; width:15px; height:15px; border-radius:50%; background:#6b7689; transition:.15s; }
+  .toggle.on .switch{ background:var(--accent-dim); }
+  .toggle.on .switch::after{ left:17px; background:var(--accent); }
+
+  /* hover tooltip */
+  #tip{
+    position:absolute; z-index:8; pointer-events:none; display:none; transform:translate(-50%,-140%);
+    background:var(--panel-solid); border:1px solid var(--hair-bright); border-radius:8px;
+    padding:5px 9px; font-size:11.5px; white-space:nowrap; box-shadow:0 8px 24px rgba(0,0,0,.5);
+  }
+  #tip .t{ font-size:9.5px; letter-spacing:.12em; text-transform:uppercase; color:var(--faint); }
+
+  /* demo spawn bar (bottom-center) */
+  .spawnbar{
+    left:50%; bottom:18px; transform:translateX(-50%); display:flex; align-items:center; gap:8px;
+    background:var(--panel); border:1px solid var(--hair); border-radius:999px; padding:5px 7px 5px 13px;
+    backdrop-filter:blur(8px);
+  }
+  .spawnbar .lbl{ font-size:11px; color:var(--faint); margin-right:2px; }
+  .spawnbar button{
+    font-family:var(--mono); font-size:12px; color:var(--text); cursor:pointer;
+    background:#10141d; border:1px solid var(--hair); border-radius:999px; padding:5px 12px; transition:.15s;
+  }
+  .spawnbar button:hover{ border-color:var(--accent); color:#fff; background:rgba(77,141,246,.16); }
+
+  /* creation toast (top-center) */
+  #toast{
+    top:14px; left:50%; transform:translate(-50%,-16px); opacity:0; pointer-events:none;
+    background:var(--panel-solid); border:1px solid var(--hair-bright); border-radius:11px;
+    padding:9px 16px; text-align:center; box-shadow:0 14px 40px rgba(0,0,0,.55);
+    transition:opacity .25s, transform .25s;
+  }
+  #toast.show{ opacity:1; transform:translate(-50%,0); }
+  #toast .tt{ font-size:13px; color:var(--text); font-weight:600; }
+  #toast .ts{ font-size:10.5px; color:var(--faint); margin-top:2px; }
+
+  /* orchestrator question modal */
+  .askwrap{ position:fixed; inset:0; z-index:50; display:none; align-items:center; justify-content:center;
+    background:rgba(3,5,10,0.6); backdrop-filter:blur(3px); padding:18px; }
+  .askwrap.show{ display:flex; }
+  .askcard{ width:100%; max-width:440px; background:var(--panel-solid); border:1px solid var(--hair-bright);
+    border-radius:16px; padding:18px; box-shadow:0 30px 80px rgba(0,0,0,.6); }
+  .askhead{ display:flex; align-items:center; justify-content:space-between; margin-bottom:10px; }
+  .askhead .who{ display:flex; align-items:center; gap:8px; }
+  .askhead .who .dot{ width:8px; height:8px; border-radius:50%; background:var(--sun); box-shadow:0 0 9px var(--sun); }
+  .askx{ width:26px; height:26px; border:1px solid var(--hair); border-radius:7px; background:transparent; color:var(--dim); cursor:pointer; }
+  .askx:hover{ color:var(--text); border-color:var(--hair-bright); }
+  .askq{ font-size:15px; line-height:1.5; color:var(--text); margin:4px 0 14px; }
+  .askopts{ display:flex; flex-direction:column; gap:8px; }
+  .askopt{ display:flex; align-items:center; gap:11px; padding:10px 12px; border:1px solid var(--hair);
+    border-radius:10px; cursor:pointer; font-size:13px; transition:.12s; }
+  .askopt:hover{ border-color:var(--hair-bright); background:rgba(126,148,184,.05); }
+  .askopt.on{ border-color:var(--accent); background:rgba(77,141,246,.12); }
+  .askopt .cb{ width:18px; height:18px; border-radius:6px; border:1.5px solid var(--faint); flex:none; display:grid; place-items:center; }
+  .askopt.on .cb{ border-color:var(--accent); background:var(--accent); }
+  .askopt.on .cb::after{ content:"✓"; font-size:12px; color:#fff; }
+  .askcustom{ margin-top:14px; }
+  .askcustom label{ display:block; margin-bottom:6px; }
+  .askcustom textarea{ width:100%; min-height:62px; resize:vertical; background:#10141d; color:var(--text);
+    border:1px solid var(--hair); border-radius:10px; padding:10px; font-family:var(--mono); font-size:13px; outline:none; }
+  .askcustom textarea:focus{ border-color:var(--accent); }
+  .askfoot{ display:flex; gap:10px; justify-content:flex-end; margin-top:16px; }
+  .askbtn{ font-family:var(--mono); font-size:13px; border-radius:9px; padding:9px 16px; cursor:pointer; border:1px solid var(--hair); }
+  .askbtn.ghost{ background:transparent; color:var(--dim); }
+  .askbtn.ghost:hover{ color:var(--text); border-color:var(--hair-bright); }
+  .askbtn.primary{ background:var(--accent); color:#fff; border-color:var(--accent); }
+  .askbtn.primary:hover{ filter:brightness(1.08); }
+
+  /* ---------- right rail: chat ---------- */
+  #right{
+    background:var(--rail); border-left:1px solid var(--hair);
+    display:flex; flex-direction:column; min-width:0; overflow:hidden;
+  }
+  .chead{ padding:12px 14px; border-bottom:1px solid var(--hair); }
+  .chead .row1{ display:flex; align-items:center; gap:8px; }
+  .selctl{
+    display:flex; align-items:center; gap:6px; font-size:12px; color:var(--text);
+    border:1px solid var(--hair); border-radius:8px; padding:5px 9px; cursor:pointer; background:transparent;
+    font-family:var(--mono);
+  }
+  .selctl .dot{ width:7px; height:7px; border-radius:50%; background:var(--c-sub); }
+  .selctl .car{ color:var(--faint); font-size:10px; }
+  .selctl.model{ color:var(--dim); }
+  .chead .spacer{ flex:1; }
+  .chead .cost{ margin-top:9px; font-size:11px; color:var(--faint); }
+  .chead .cost b{ color:var(--c-skill); font-weight:600; }
+  .thread{ flex:1; overflow-y:auto; padding:16px 14px; display:flex; flex-direction:column; gap:14px; }
+  .turn{ text-align:center; font-size:10px; color:var(--faint); letter-spacing:.06em; }
+  .msg{ display:flex; gap:10px; max-width:100%; }
+  .msg .av{ width:24px; height:24px; border-radius:7px; flex:none; display:grid; place-items:center; font-size:9px; font-weight:700; }
+  .msg.ai .av{ background:rgba(77,141,246,.16); color:#9cc1ff; }
+  .msg.you{ flex-direction:row-reverse; }
+  .msg.you .av{ background:#1b2433; color:var(--dim); }
+  .bubble{ border-radius:11px; padding:9px 12px; font-size:12.5px; line-height:1.5; }
+  .msg.ai .bubble{ background:#10141d; border:1px solid var(--hair); color:#d6dcea; }
+  .msg.you .bubble{ background:var(--accent); color:#fff; }
+  .bubble code{ background:rgba(126,148,184,.16); padding:1px 5px; border-radius:4px; font-size:11.5px; }
+  .msg.you .bubble code{ background:rgba(255,255,255,.18); }
+  .toolcall{
+    display:flex; align-items:center; gap:8px; background:#10141d; border:1px solid var(--hair);
+    border-radius:9px; padding:7px 10px; font-size:11.5px; color:#cdd5e6; margin:4px 0;
+  }
+  .toolcall .dot{ width:7px; height:7px; border-radius:50%; background:var(--c-skill); flex:none; box-shadow:0 0 7px var(--c-skill); }
+  .toolcall .path{ color:#9cc1ff; word-break:break-all; }
+  .toolcall .done{ margin-left:auto; color:var(--faint); font-size:10px; }
+  .composer{ border-top:1px solid var(--hair); padding:11px; }
+  .composer .box{ background:#10141d; border:1px solid var(--hair); border-radius:12px; padding:9px 10px; display:flex; align-items:flex-end; gap:8px; }
+  .composer textarea{
+    flex:1; background:transparent; border:none; resize:none; color:var(--text); font-family:var(--mono);
+    font-size:12.5px; line-height:1.5; max-height:120px; outline:none;
+  }
+  .composer textarea::placeholder{ color:var(--faint); }
+  .composer .rnd{ width:30px; height:30px; border-radius:50%; flex:none; border:none; cursor:pointer; display:grid; place-items:center; }
+  .composer .mic{ background:#1b2433; color:var(--dim); }
+  .composer .send{ background:var(--accent); color:#fff; }
+  .composer .hint{ margin-top:7px; font-size:10px; color:var(--faint); text-align:right; }
+
+  /* mobile / narrow: panels become overlays */
+  .scrim{ position:fixed; inset:0; background:rgba(0,0,0,.5); z-index:9; display:none; }
+  @media (max-width:900px){
+    #app{ grid-template-columns:1fr; }
+    #left, #right{
+      position:fixed; top:0; bottom:0; z-index:10; width:300px; box-shadow:0 0 60px rgba(0,0,0,.6);
+      transition:transform .28s cubic-bezier(.4,0,.2,1);
+    }
+    #left{ left:0; transform:translateX(-101%); }
+    #right{ right:0; width:340px; transform:translateX(101%); }
+    body:not(.left-collapsed) #left{ transform:translateX(0); }
+    body.right-open #right{ transform:translateX(0); }
+    body:not(.left-collapsed) .scrim,
+    body.right-open .scrim{ display:block; }
+    #inspector{ width:240px; }
+  }
+
+  /* scrollbars */
+  ::-webkit-scrollbar{ width:9px; height:9px; }
+  ::-webkit-scrollbar-thumb{ background:#1d2532; border-radius:9px; border:2px solid var(--rail); }
+  ::-webkit-scrollbar-thumb:hover{ background:#28323f; }
+</style>
+</head>
+<body class="right-open">
+<div id="app">
+
+  <!-- ================= LEFT: SESSIONS ================= -->
+  <aside id="left">
+    <div class="lhead">
+      <div class="logo">o</div>
+      <div class="name">opencode</div>
+      <div class="spacer"></div>
+      <button class="iconbtn" id="newSession" title="New session">+</button>
+      <button class="iconbtn" id="collapseLeft" title="Collapse sidebar">‹</button>
+    </div>
+    <div class="sessions" id="sessionList"></div>
+    <div class="lfoot"><span id="sessionCount">— sessions</span><span class="eyebrow">history</span></div>
+  </aside>
+
+  <!-- ================= CENTER: GALAXY ================= -->
+  <main id="center">
+    <canvas id="scene"></canvas>
+
+    <div class="overlay topleft">
+      <button class="iconbtn" id="openLeft" title="Sessions" style="display:none">☰</button>
+      <div class="pill"><span class="dot"></span><span id="agentCount">— agents</span></div>
+    </div>
+
+    <div class="overlay" id="inspector">
+      <div class="itype"><span class="swatch" id="iSwatch"></span><span class="eyebrow" id="iType">node</span></div>
+      <h2 id="iName">—</h2>
+      <div class="sub" id="iDesc">—</div>
+      <div class="rows" id="iRows"></div>
+      <div class="arts" id="iArts" style="display:none"></div>
+    </div>
+
+    <div class="overlay topright">
+      <div class="theme-sel">
+        <span class="lbl">style</span>
+        <select id="themeSelect">
+          <option value="observatory">Observatory</option>
+          <option value="celshade">Cel Shade</option>
+          <option value="blueprint">Blueprint</option>
+          <option value="synthwave">Synthwave</option>
+          <option value="forge">Forge</option>
+          <option value="blackice">Black Ice</option>
+          <option value="chrome">Chrome</option>
+        </select>
+      </div>
+      <div class="layers">
+        <span class="lbl">layers</span>
+        <button class="layer-btn on" data-layer="agents">agents</button>
+        <button class="layer-btn on" data-layer="skills">skills</button>
+        <button class="layer-btn on" data-layer="memory">memory</button>
+      </div>
+      <button class="btn-accent" id="toggleChat">◧ chat</button>
+    </div>
+
+    <div class="overlay" id="legend">
+      <div class="eyebrow">legend</div>
+      <div class="row"><span class="m ring" style="border-color:var(--c-orch)"></span>orchestrator<span class="tier">sun</span></div>
+      <div class="row"><span class="m ring" style="border-color:var(--c-sub)"></span>subagent<span class="tier">tier 1</span></div>
+      <div class="row"><span class="m" style="background:var(--c-skill)"></span>skill<span class="tier">tier 2</span></div>
+      <div class="row"><span class="m" style="background:var(--c-mcp)"></span>mcp server<span class="tier">tier 2</span></div>
+      <div class="row"><span class="m" style="background:var(--c-prompt)"></span>prompt<span class="tier">tier 2</span></div>
+      <div class="row"><span class="m sq" style="background:var(--c-artifact)"></span>artifact<span class="tier">station</span></div>
+    </div>
+
+    <div class="overlay botright">
+      <span class="counts" id="counts">— nodes · — links</span>
+      <button class="iconbtn" id="settingsBtn" title="View settings">⚙</button>
+      <div id="settingsPop">
+        <div class="eyebrow" style="padding:2px 6px 6px">view</div>
+        <div class="toggle on" data-opt="motion"><span>orbital motion</span><span class="switch"></span></div>
+        <div class="toggle on" data-opt="rings"><span>orbit rings</span><span class="switch"></span></div>
+        <div class="toggle on" data-opt="labels"><span>agent labels</span><span class="switch"></span></div>
+        <div class="toggle on" data-opt="pulses"><span>dispatch pulses</span><span class="switch"></span></div>
+      </div>
+    </div>
+
+    <div id="tip"></div>
+
+    <div class="overlay spawnbar">
+      <span class="lbl">demo spawn</span>
+      <button id="spawnAgent">＋ subagent</button>
+      <button id="spawnTool">＋ tool</button>
+      <button id="askBtn">orchestrator ⟶ you</button>
+    </div>
+    <div class="overlay" id="toast"></div>
+  </main>
+
+  <!-- ================= RIGHT: CHAT ================= -->
+  <aside id="right">
+    <div class="chead">
+      <div class="row1">
+        <button class="selctl" id="agentSel"><span class="dot" id="agentSelDot"></span><span id="agentSelName">orchestrator</span><span class="car">▾</span></button>
+        <div class="spacer"></div>
+        <button class="selctl model" id="modelSel"><span id="modelSelName">select model</span><span class="car">▾</span></button>
+        <button class="iconbtn" id="collapseRight" title="Close chat">›</button>
+      </div>
+      <div class="cost">session <b id="chatCost">$0.00</b></div>
+    </div>
+    <div class="thread" id="thread"></div>
+    <div class="composer">
+      <div class="box">
+        <textarea id="composerInput" rows="1" placeholder="Message opencode…  (⌘↵ to send)"></textarea>
+        <button class="rnd mic" title="Voice">🎙</button>
+        <button class="rnd send" id="sendBtn" title="Send">↑</button>
+      </div>
+      <div class="hint">⌘↵ to send · / for commands</div>
+    </div>
+  </aside>
+
+  <div class="scrim" id="scrim"></div>
+
+  <div class="askwrap" id="askModal">
+    <div class="askcard">
+      <div class="askhead">
+        <span class="who"><span class="dot"></span><span class="eyebrow">orchestrator needs your input</span></span>
+        <button class="askx" id="askClose">✕</button>
+      </div>
+      <div class="askq" id="askQuestion">—</div>
+      <div class="askopts" id="askOptions"></div>
+      <div class="askcustom">
+        <label class="eyebrow">or write a custom instruction</label>
+        <textarea id="askText" placeholder="e.g. focus on the auth module first, skip the UI changes…"></textarea>
+      </div>
+      <div class="askfoot">
+        <button class="askbtn ghost" id="askDismiss">Not now</button>
+        <button class="askbtn primary" id="askSend">Hand off →</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+/* ============================================================================
+   MOCK DATA — shaped like the opencode server/SDK (see header comment)
+   ============================================================================ */
+
+const ACCENT = {
+  orch:'#ffb627', sub:'#9a7bff', skill:'#5be08a', mcp:'#36d6e7',
+  prompt:'#5b8cff', memory:'#f564c4', artifact:'#ff7ab0'
+};
+
+// agents ~ client.agent.list()
+const ORCHESTRATOR = {
+  id:'orchestrator', name:'orchestrator', mode:'primary',
+  model:'anthropic/claude-opus-4-8', temperature:0.2,
+  desc:'Plans work and delegates to subagents. Holds project memory.',
+  memoryFile:'AGENTS.md', memoryEntries:9, activeSessions:6, color:'#9bbcff'
+};
+
+// each subagent owns tier-2 capabilities (skills / mcps / prompts)
+const SUBAGENTS = [
+  { id:'plan', name:'plan', mode:'primary', model:'anthropic/claude-haiku-4-5',
+    desc:'Read-only analysis and planning. No file edits.', color:'#9a7bff',
+    perms:{edit:'deny', bash:'ask'}, sessions:14,
+    caps:[ {type:'prompt', name:'plan.md', detail:'system prompt'},
+           {type:'skill',  name:'read-review', detail:'tool: read,glob'} ] },
+
+  { id:'explore', name:'explore', mode:'subagent', model:'opencode-zen/grok-code',
+    desc:'Fast read-only codebase exploration.', color:'#36d6e7',
+    perms:{edit:'deny', bash:'deny'}, sessions:22,
+    caps:[ {type:'skill', name:'glob', detail:'tool: glob'},
+           {type:'skill', name:'grep', detail:'tool: grep'},
+           {type:'prompt', name:'explore.md', detail:'system prompt'} ] },
+
+  { id:'scout', name:'scout', mode:'subagent', model:'anthropic/claude-haiku-4-5',
+    desc:'External docs & dependency research into a managed cache.', color:'#5be08a',
+    perms:{edit:'deny', bash:'ask'}, sessions:8,
+    caps:[ {type:'mcp', name:'deepwiki', detail:'mcp: remote/http'},
+           {type:'mcp', name:'context7', detail:'mcp: remote/http'},
+           {type:'skill', name:'dep-cache', detail:'tool: clone,read'} ] },
+
+  { id:'general', name:'general', mode:'subagent', model:'anthropic/claude-sonnet-4-6',
+    desc:'Multi-step worker with full tool access for parallel tasks.', color:'#ff8a4c',
+    perms:{edit:'allow', bash:'allow'}, sessions:31,
+    caps:[ {type:'skill', name:'multi-step', detail:'tool: *'},
+           {type:'mcp', name:'filesystem', detail:'mcp: local/stdio'} ] },
+
+  { id:'review', name:'review', mode:'subagent', model:'anthropic/claude-sonnet-4-6',
+    desc:'Code review with read access + diagnostics. Suggests, never edits.', color:'#5b8cff',
+    perms:{edit:'deny', bash:'deny'}, sessions:11,
+    caps:[ {type:'prompt', name:'review.md', detail:'system prompt'},
+           {type:'skill', name:'lint', detail:'tool: diagnostics'},
+           {type:'mcp', name:'github', detail:'mcp: remote/http'} ] },
+
+  { id:'debug', name:'debug', mode:'subagent', model:'anthropic/claude-sonnet-4-6',
+    desc:'Investigation: bash + read + LSP diagnostics, no broad edits.', color:'#f564c4',
+    perms:{edit:'ask', bash:'allow'}, sessions:17,
+    caps:[ {type:'skill', name:'bash', detail:'tool: bash'},
+           {type:'skill', name:'diagnostics', detail:'tool: lsp'},
+           {type:'prompt', name:'debug.md', detail:'system prompt'} ] },
+];
+
+// artifacts live in the station (tier 3) ~ /export, /share, session outputs
+const STATION = {
+  name:'artifact-station', orbit:'tier 3',
+  artifacts:[
+    { name:'auth-refactor.plan.md',     kind:'plan',  color:'#9a7bff' },
+    { name:'schema-migration.diff',     kind:'diff',  color:'#5be08a' },
+    { name:'e2e-report.html',           kind:'export',color:'#36d6e7' },
+    { name:'share-3f9a2c.link',         kind:'share', color:'#5b8cff' },
+    { name:'galaxy-layout.notes.md',    kind:'memory',color:'#f564c4' },
+    { name:'api-types.d.ts',            kind:'file',  color:'#ff8a4c' },
+  ]
+};
+
+// sessions ~ client.session.list()
+const SESSIONS = [
+  { title:'Galaxy renders blank on load',          ago:'4m',  cost:'$0.91', agent:'debug' },
+  { title:'Co-rotate capabilities with owner',     ago:'12m', cost:'$1.44', agent:'general' },
+  { title:'Tether lines tie skills to subagents',  ago:'26m', cost:'$0.62', agent:'general' },
+  { title:'Wire layer toggles to scene groups',    ago:'38m', cost:'$0.88', agent:'general' },
+  { title:'Additive glow so nodes stay visible',   ago:'44m', cost:'$0.31', agent:'debug' },
+  { title:'Add right-side chat popout',            ago:'52m', cost:'$1.07', agent:'general' },
+  { title:'Session list + cost tracking',          ago:'1h',  cost:'$0.49', agent:'orchestrator' },
+  { title:'Plan: orbital tiers + station',         ago:'1h',  cost:'$0.28', agent:'plan' },
+  { title:'Research three.js sprite bloom',        ago:'1h',  cost:'$0.74', agent:'scout' },
+  { title:'Review: camera framing + near/far',     ago:'2h',  cost:'$0.33', agent:'review' },
+  { title:'Build specialized subagents',           ago:'2h',  cost:'$2.10', agent:'orchestrator' },
+  { title:'opencode serve + SDK wiring spike',     ago:'3h',  cost:'$1.86', agent:'general' },
+  { title:'AGENTS.md memory summary node',         ago:'3h',  cost:'$0.52', agent:'orchestrator' },
+  { title:'New session — 2026-06-25T13:02',        ago:'4h',  cost:'$0.00', agent:'orchestrator' },
+];
+const TOTAL_SESSIONS = 100;
+
+// messages ~ client.session.messages(id)
+const THREAD = [
+  { role:'ai', html:'The blank galaxy was three things stacking up: nodes were sub-pixel, the material wasn\'t emissive, and additive blending was washing out against the light background. I\'ve set the clear colour to true space and given every body a glow sprite. First paint is populated now.' },
+  { turn:'$0.041' },
+  { role:'you', html:'Nice. The skills were floating free though — they need to read as belonging to a subagent.' },
+  { role:'ai', html:'Done. Capabilities now <b>co-rotate</b> with their owner and draw a colour-matched tether back to it. Select any planet to focus its cluster.' },
+  { tool:'Place capability nodes at tier-2 radius', path:'galaxy/layout.js' },
+  { tool:'Draw tether lines owner → capability', path:'galaxy/links.js' },
+  { turn:'$0.038' },
+  { role:'you', html:'Good — let\'s shelve the layout. Can the chat header switch which agent I\'m talking to when I click a planet?' },
+  { role:'ai', html:'Wired up: clicking a subagent sets the header agent. Try clicking <code>review</code> or <code>debug</code> in the galaxy.' },
+  { turn:'$0.012' },
+];
+
+/* ============================================================================
+   SCENE
+   ============================================================================ */
+const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+const opts = { motion:!reduceMotion, rings:true, labels:true, pulses:!reduceMotion };
+let THEME = null;
+
+const canvas = document.getElementById('scene');
+const renderer = new THREE.WebGLRenderer({ canvas, antialias:true, alpha:false });
+renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+renderer.setClearColor(0x05070d, 1);
+
+const scene = new THREE.Scene();
+scene.fog = new THREE.FogExp2(0x05070d, 0.0016);
+
+const camera = new THREE.PerspectiveCamera(52, 1, 0.1, 6000);
+
+// layer groups (toggled by the layer buttons)
+const G = {
+  agents: new THREE.Group(),   // sun, subagents, sun-links, rings, agent labels
+  skills: new THREE.Group(),   // capability nodes + tethers
+  memory: new THREE.Group(),   // artifact station + memory links
+  stars:  new THREE.Group(),
+};
+Object.values(G).forEach(g=>scene.add(g));
+
+scene.add(new THREE.AmbientLight(0x223044, 0.6));
+const sunLight = new THREE.PointLight(0xffcf80, 2.4, 0, 2);
+G.agents.add(sunLight);
+
+/* ---- shared additive glow sprite ---- */
+function glowTexture(){
+  const s=128, c=document.createElement('canvas'); c.width=c.height=s;
+  const x=c.getContext('2d'); const g=x.createRadialGradient(s/2,s/2,0,s/2,s/2,s/2);
+  g.addColorStop(0,'rgba(255,255,255,1)'); g.addColorStop(0.25,'rgba(255,255,255,0.55)');
+  g.addColorStop(0.55,'rgba(255,255,255,0.12)'); g.addColorStop(1,'rgba(255,255,255,0)');
+  x.fillStyle=g; x.fillRect(0,0,s,s); const t=new THREE.Texture(c); t.needsUpdate=true; return t;
+}
+const GLOW = glowTexture();
+function makeGlow(color, size){
+  const m=new THREE.SpriteMaterial({ map:GLOW, color:new THREE.Color(color), transparent:true,
+    blending:THREE.AdditiveBlending, depthWrite:false });
+  const s=new THREE.Sprite(m); s.scale.set(size,size,1); s.userData.base=size; return s;
+}
+
+/* ---- text label sprite ---- */
+function makeLabel(text, color){
+  const pad=12, fs=44, c=document.createElement('canvas'), x=c.getContext('2d');
+  x.font=`600 ${fs}px ui-monospace, Menlo, monospace`;
+  const w=Math.ceil(x.measureText(text).width)+pad*2, h=fs+pad*2;
+  c.width=w; c.height=h; x.font=`600 ${fs}px ui-monospace, Menlo, monospace`;
+  x.fillStyle=color; x.textBaseline='middle'; x.fillText(text, pad, h/2);
+  const t=new THREE.Texture(c); t.needsUpdate=true;
+  const sp=new THREE.Sprite(new THREE.SpriteMaterial({ map:t, transparent:true, depthWrite:false }));
+  sp.scale.set(w/h*7, 7, 1); return sp;
+}
+
+/* ---- a small comms satellite (used for query probes + orbiting "transmitting" marker) ---- */
+function makeSatellite(color, s){
+  s=s||1; const g=new THREE.Group();
+  const body=new THREE.Mesh(new THREE.BoxGeometry(2.4,2.4,3.2),
+    new THREE.MeshStandardMaterial({ color:0xb8c0d0, emissive:0x1a2030, emissiveIntensity:0.5, roughness:0.4, metalness:0.6, flatShading:true })); g.add(body);
+  const panelMat=new THREE.MeshStandardMaterial({ color:0x223a6a, emissive:new THREE.Color(color), emissiveIntensity:0.7, roughness:0.4, flatShading:true });
+  [-1,1].forEach(side=>{ const p=new THREE.Mesh(new THREE.BoxGeometry(4.2,0.16,1.9), panelMat); p.position.x=side*3.6; g.add(p);
+    const arm=new THREE.Mesh(new THREE.BoxGeometry(1.4,0.16,0.16), panelMat); arm.position.x=side*1.7; g.add(arm); });
+  const dish=new THREE.Mesh(new THREE.SphereGeometry(1.0,12,8,0,Math.PI*2,0,Math.PI/2),
+    new THREE.MeshStandardMaterial({ color:0xdde3ee, roughness:0.5, flatShading:true })); dish.rotation.x=Math.PI; dish.position.z=2.0; g.add(dish);
+  g.add(makeGlow(color, 10));
+  g.scale.setScalar(s); return g;
+}
+// keep probe/orbit satellites cohesive with the active style (e.g. wireframe in Blueprint)
+function styleSatellite(sat, color){
+  const wire = THEME && THEME.planet && THEME.planet.material==='wire';
+  const accent = (THEME && THEME.planet && THEME.planet.colorOverride) ? THEME.planet.colorOverride : color;
+  sat.traverse(o=>{ if(o.isMesh && o.material){ o.material.wireframe=!!wire;
+    if(wire){ o.material.color.set(accent); if(o.material.emissive) o.material.emissive.set(accent); } } });
+  sat.children.forEach(c=>{ if(c.isSprite && c.material) c.material.color.set(accent); });
+}
+
+/* ---- starfield + sky furniture (all themeable) ---- */
+let starPoints, nebA, nebB, skydome, gridHelper=null, embers=null;
+(function stars(){
+  const N=2600, pos=new Float32Array(N*3), col=new Float32Array(N*3);
+  for(let i=0;i<N;i++){
+    const r=380+Math.random()*1600, th=Math.random()*Math.PI*2, ph=Math.acos(2*Math.random()-1);
+    pos[i*3]=r*Math.sin(ph)*Math.cos(th); pos[i*3+1]=r*Math.cos(ph)*0.6; pos[i*3+2]=r*Math.sin(ph)*Math.sin(th);
+    const t=Math.random(); const c=new THREE.Color().setHSL(0.6-0.05*t, 0.3, 0.5+0.4*t);
+    col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+  const mat=new THREE.PointsMaterial({ size:2.1, sizeAttenuation:true, vertexColors:true,
+    transparent:true, opacity:0.9, depthWrite:false });
+  starPoints=new THREE.Points(geo,mat); G.stars.add(starPoints);
+  nebA=makeGlow('#1b3a6b', 900); nebA.position.set(120,-40,-200); nebA.material.opacity=0.5; G.stars.add(nebA);
+  nebB=makeGlow('#3a1b5b', 760); nebB.position.set(-260,60,-120); nebB.material.opacity=0.4; G.stars.add(nebB);
+})();
+
+// skydome: vertical gradient that ignores fog (gives each theme a sky)
+(function dome(){
+  skydome=new THREE.Mesh(new THREE.SphereGeometry(3200,32,16),
+    new THREE.MeshBasicMaterial({ side:THREE.BackSide, depthWrite:false }));
+  skydome.material.fog=false; scene.add(skydome);
+})();
+function setSky(top, bottom){
+  const c=document.createElement('canvas'); c.width=4; c.height=256; const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,256); g.addColorStop(0,top); g.addColorStop(1,bottom);
+  x.fillStyle=g; x.fillRect(0,0,4,256);
+  const t=new THREE.Texture(c); t.needsUpdate=true; t.minFilter=THREE.LinearFilter;
+  if(skydome.material.map) skydome.material.map.dispose();
+  skydome.material.map=t; skydome.material.color.set(0xffffff); skydome.material.needsUpdate=true;
+}
+function setGrid(color, y){
+  if(gridHelper){ scene.remove(gridHelper); gridHelper.geometry.dispose(); gridHelper.material.dispose(); gridHelper=null; }
+  if(!color) return;
+  gridHelper=new THREE.GridHelper(900, 60, new THREE.Color(color), new THREE.Color(color));
+  gridHelper.material.transparent=true; gridHelper.material.opacity=0.16;
+  gridHelper.position.y=y; scene.add(gridHelper);
+}
+function setEmbers(on){
+  if(embers){ embers.visible=on; return; }
+  if(!on) return;
+  const N=320, pos=new Float32Array(N*3), col=new Float32Array(N*3), spd=new Float32Array(N);
+  for(let i=0;i<N;i++){
+    pos[i*3]=(Math.random()-0.5)*440; pos[i*3+1]=(Math.random()-0.5)*320; pos[i*3+2]=(Math.random()-0.5)*440;
+    spd[i]=0.2+Math.random()*0.7;
+    const c=new THREE.Color().setHSL(0.06+Math.random()*0.05, 0.95, 0.5+Math.random()*0.3);
+    col[i*3]=c.r; col[i*3+1]=c.g; col[i*3+2]=c.b;
+  }
+  const geo=new THREE.BufferGeometry();
+  geo.setAttribute('position', new THREE.BufferAttribute(pos,3));
+  geo.setAttribute('color', new THREE.BufferAttribute(col,3));
+  embers=new THREE.Points(geo, new THREE.PointsMaterial({ size:3.4, vertexColors:true,
+    transparent:true, opacity:0.85, blending:THREE.AdditiveBlending, depthWrite:false }));
+  embers.userData.spd=spd; scene.add(embers);
+}
+
+/* ---- registry of pickable bodies ---- */
+const bodies = []; // {mesh, hit, glow, data, kind}
+const spawning = []; // active pop-in animations
+function registerHit(mesh, radius, data){
+  const hit=new THREE.Mesh(new THREE.SphereGeometry(radius,8,8),
+    new THREE.MeshBasicMaterial({ visible:false }));
+  hit.position.copy(mesh.position); hit.userData.body=data; mesh.parent.add(hit);
+  return hit;
+}
+
+/* ---- SUN: orchestrator ---- */
+const R1=54, R2=92, R3=146, SUN_R=15;
+let sunBody;
+(function sun(){
+  const mesh=new THREE.Mesh(new THREE.SphereGeometry(SUN_R,48,48),
+    new THREE.MeshBasicMaterial({ color:0xffcf73 }));
+  G.agents.add(mesh);
+  const corona=makeGlow('#ffb627', SUN_R*7.5); mesh.add(corona);
+  const corona2=makeGlow('#ffe7a8', SUN_R*3.4); mesh.add(corona2);
+  const data={ kind:'orchestrator', ...ORCHESTRATOR };
+  sunBody={ mesh, glow:[corona,corona2], data, kind:'orchestrator', base:SUN_R*7.5 };
+  bodies.push(sunBody);
+  const hit=registerHit(mesh, SUN_R*1.6, data); sunBody.hit=hit;
+  const lab=makeLabel('orchestrator', '#ffe7a8'); lab.position.set(0, SUN_R+9, 0);
+  mesh.add(lab); sunBody.label=lab;
+})();
+
+/* ---- per-subagent orbital plane basis (slight 3D inclination) ---- */
+function planeBasis(seed){
+  const incl=(seed*0.9-0.4)*0.55;            // tilt
+  const node=seed*2.399;                      // ascending node spread
+  const u=new THREE.Vector3(Math.cos(node), 0, Math.sin(node));
+  const tilt=new THREE.Vector3(0,1,0).applyAxisAngle(u, incl);
+  const v=new THREE.Vector3().crossVectors(tilt,u).normalize();
+  return {u, v};
+}
+function onPlane(basis, r, ang){
+  return new THREE.Vector3()
+    .addScaledVector(basis.u, Math.cos(ang)*r)
+    .addScaledVector(basis.v, Math.sin(ang)*r);
+}
+
+/* ---- reusable builders (used by initial render AND live spawns) ---- */
+const agents=[]; // animated subagent entries
+
+function capGeometry(type){
+  if(type==='skill') return new THREE.OctahedronGeometry(2.3);
+  if(type==='mcp')   return new THREE.BoxGeometry(3.2,3.2,3.2);
+  return new THREE.TetrahedronGeometry(2.6); // prompt
+}
+function refanCaps(ag){
+  const span=0.5, n=ag.caps.length;
+  ag.caps.forEach((c,j)=>{ c.angOff=(n===1)?0:(j/(n-1)-0.5)*span; });
+}
+function buildCapability(cap, ag){
+  const sa=ag.sa, col=ag.planetBody.color, ccol=ACCENT[cap.type]||col;
+  const node=new THREE.Mesh(capGeometry(cap.type), new THREE.MeshStandardMaterial({ color:ccol,
+    emissive:new THREE.Color(ccol), emissiveIntensity:0.9, roughness:0.4 }));
+  G.skills.add(node);
+  const ng=makeGlow(ccol, 12); node.add(ng);
+  const tether=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),
+    new THREE.LineBasicMaterial({ color:new THREE.Color(ccol), transparent:true, opacity:0.22 }));
+  G.skills.add(tether);
+  const cdata={ kind:cap.type, name:cap.name, detail:cap.detail, owner:sa.name, ownerColor:col };
+  const cb={ mesh:node, glow:[ng], data:cdata, kind:cap.type, base:12, tether, angOff:0, color:ccol };
+  bodies.push(cb); cb.hit=registerHit(node, 5, cdata); ag.caps.push(cb);
+  refanCaps(ag);
+  return cb;
+}
+function buildSubagent(sa, i, total){
+  const basis=planeBasis(i/total + 0.07*i);
+  const ang0=i*2.39996; // golden angle — spreads any number of agents evenly
+  const speed=0.05 + (i%3)*0.012;
+  const col=sa.color;
+  const planet=new THREE.Mesh(new THREE.SphereGeometry(4.4,28,28),
+    new THREE.MeshStandardMaterial({ color:col, emissive:new THREE.Color(col),
+      emissiveIntensity:0.85, roughness:0.5, metalness:0.1 }));
+  G.agents.add(planet);
+  const pg=makeGlow(col, 26); planet.add(pg);
+  const link=new THREE.Line(new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]),
+    new THREE.LineBasicMaterial({ color:new THREE.Color(col), transparent:true, opacity:0.32 }));
+  G.agents.add(link);
+  const pulses=[]; for(let k=0;k<2;k++){ const p=makeGlow(col,7); p.userData.t=k*0.5; G.agents.add(p); pulses.push(p); }
+  const ringPts=[]; for(let a=0;a<=64;a++){ ringPts.push(onPlane(basis,R1,a/64*Math.PI*2)); }
+  const ring=new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts),
+    new THREE.LineBasicMaterial({ color:new THREE.Color(col), transparent:true, opacity:0.12 }));
+  G.agents.add(ring);
+  const lab=makeLabel(sa.name, col); planet.add(lab); lab.position.set(0,8,0);
+  const data={ kind:'subagent', ...sa };
+  const planetBody={ mesh:planet, glow:[pg], data, kind:'subagent', base:26, label:lab, ring, color:col };
+  bodies.push(planetBody); planetBody.hit=registerHit(planet, 8, data);
+  // comms FX (positioned at the planet each frame; live at scene level so they don't inherit spin)
+  const signal=new THREE.Group(); signal.visible=false; G.agents.add(signal);
+  const sigRings=[];
+  for(let r=0;r<3;r++){ const rm=new THREE.Mesh(new THREE.RingGeometry(1.5,1.9,36),
+    new THREE.MeshBasicMaterial({ color:new THREE.Color(col), transparent:true, opacity:0, side:THREE.DoubleSide, blending:THREE.AdditiveBlending, depthWrite:false }));
+    rm.userData.t=r/3; signal.add(rm); sigRings.push(rm); }
+  const satPivot=new THREE.Group(); satPivot.visible=false; G.agents.add(satPivot);
+  const commSat=makeSatellite(col, 0.32); commSat.position.set(11,0,0); satPivot.add(commSat); styleSatellite(commSat, col);
+  const ag={ sa, basis, ang:ang0, speed, planetBody, link, pulses, caps:[],
+             signal, sigRings, satPivot, commSat, ringing:false, onCall:false, glowBoost:0 };
+  agents.push(ag);
+  (sa.caps||[]).forEach(cap=>buildCapability(cap, ag));
+  return ag;
+}
+
+SUBAGENTS.forEach((sa,i)=>buildSubagent(sa, i, SUBAGENTS.length));
+
+/* ---- artifact station (tier 3) ---- */
+let stationEntry;
+(function station(){
+  const basis=planeBasis(0.33);
+  const grp=new THREE.Group(); G.memory.add(grp);
+  const bodyMat=new THREE.MeshStandardMaterial({ color:0x8893a8, emissive:0x2a3550, emissiveIntensity:0.5, roughness:0.4, metalness:0.6 });
+  const core=new THREE.Mesh(new THREE.CylinderGeometry(2.6,2.6,9,16), bodyMat); grp.add(core);
+  const ringMat=new THREE.MeshStandardMaterial({ color:0x9aa6bd, emissive:0x33405e, emissiveIntensity:0.5, roughness:0.3, metalness:0.7 });
+  const ring=new THREE.Mesh(new THREE.TorusGeometry(7,0.7,10,40), ringMat); ring.rotation.x=Math.PI/2; grp.add(ring);
+  const panelMat=new THREE.MeshStandardMaterial({ color:0x244, emissive:0x1b3a4a, emissiveIntensity:0.7, roughness:0.5 });
+  [-1,1].forEach(s=>{ const p=new THREE.Mesh(new THREE.BoxGeometry(0.4,3,9), panelMat); p.position.x=s*5.4; grp.add(p); });
+  // blinking beacons
+  const beacons=[]; for(let i=0;i<3;i++){ const b=makeGlow('#ff7ab0', 7); b.position.set(0, (i-1)*4, 0); grp.add(b); beacons.push(b); }
+  const sg=makeGlow('#ff7ab0', 30); grp.add(sg);
+
+  // ring orbit (faint)
+  const ringPts=[]; for(let a=0;a<=72;a++){ ringPts.push(onPlane(basis,R3,a/72*Math.PI*2)); }
+  const orbit=new THREE.Line(new THREE.BufferGeometry().setFromPoints(ringPts),
+    new THREE.LineBasicMaterial({ color:new THREE.Color(ACCENT.artifact), transparent:true, opacity:0.12 }));
+  G.memory.add(orbit);
+
+  // memory link station → sun
+  const mlinkGeo=new THREE.BufferGeometry().setFromPoints([new THREE.Vector3(),new THREE.Vector3()]);
+  const mlink=new THREE.Line(mlinkGeo, new THREE.LineBasicMaterial({ color:new THREE.Color(ACCENT.memory),
+    transparent:true, opacity:0.18 }));
+  G.memory.add(mlink);
+
+  const lab=makeLabel('artifact-station', ACCENT.artifact); grp.add(lab); lab.position.set(0,11,0);
+
+  const data={ kind:'station', ...STATION };
+  const sb={ mesh:grp, glow:[sg], data, kind:'station', base:30, label:lab };
+  bodies.push(sb);
+  sb.hit=registerHit(grp, 12, data);
+  stationEntry={ basis, ang:0.6, speed:0.022, grp, orbit, mlink, beacons, body:sb };
+})();
+
+/* ============================================================================
+   CAMERA CONTROLS (custom spherical orbit; mouse + touch)
+   ============================================================================ */
+const cam = { radius:265, minR:50, maxR:700, theta:0.7, phi:1.15, target:new THREE.Vector3(0,0,0) };
+const camTo = { radius:cam.radius, theta:cam.theta, phi:cam.phi, target:cam.target.clone() };
+let dragging=false, lastX=0, lastY=0, idle=0, pinchD=0;
+
+function applyCam(){
+  cam.radius += (camTo.radius-cam.radius)*0.12;
+  cam.theta  += (camTo.theta -cam.theta )*0.12;
+  cam.phi    += (camTo.phi   -cam.phi   )*0.12;
+  cam.target.lerp(camTo.target, 0.12);
+  const p=cam.phi;
+  camera.position.set(
+    cam.target.x + cam.radius*Math.sin(p)*Math.cos(cam.theta),
+    cam.target.y + cam.radius*Math.cos(p),
+    cam.target.z + cam.radius*Math.sin(p)*Math.sin(cam.theta)
+  );
+  camera.lookAt(cam.target);
+}
+canvas.addEventListener('pointerdown', e=>{ dragging=true; lastX=e.clientX; lastY=e.clientY; idle=0; canvas.setPointerCapture(e.pointerId); });
+canvas.addEventListener('pointermove', e=>{
+  updateHover(e);
+  if(!dragging) return;
+  const dx=e.clientX-lastX, dy=e.clientY-lastY; lastX=e.clientX; lastY=e.clientY; idle=0;
+  camTo.theta -= dx*0.005;
+  camTo.phi = Math.max(0.18, Math.min(Math.PI-0.18, camTo.phi - dy*0.005));
+});
+canvas.addEventListener('pointerup', e=>{ dragging=false; });
+canvas.addEventListener('wheel', e=>{ e.preventDefault(); idle=0;
+  camTo.radius=Math.max(cam.minR,Math.min(cam.maxR, camTo.radius*(1+Math.sign(e.deltaY)*0.08))); }, {passive:false});
+// touch pinch
+canvas.addEventListener('touchmove', e=>{
+  if(e.touches.length===2){ e.preventDefault();
+    const d=Math.hypot(e.touches[0].clientX-e.touches[1].clientX, e.touches[0].clientY-e.touches[1].clientY);
+    if(pinchD) camTo.radius=Math.max(cam.minR,Math.min(cam.maxR, camTo.radius*(pinchD/d)));
+    pinchD=d; idle=0; }
+}, {passive:false});
+canvas.addEventListener('touchend', ()=>{ pinchD=0; });
+
+/* ============================================================================
+   PICKING + SELECTION
+   ============================================================================ */
+const ray=new THREE.Raycaster(); const mouse=new THREE.Vector2();
+let hovered=null, selected=null;
+const tip=document.getElementById('tip');
+
+function hitList(){ return bodies.map(b=>b.hit).filter(Boolean); }
+function bodyFromHit(obj){ return bodies.find(b=>b.hit===obj); }
+
+function updateHover(e){
+  const r=canvas.getBoundingClientRect();
+  mouse.x=((e.clientX-r.left)/r.width)*2-1; mouse.y=-((e.clientY-r.top)/r.height)*2+1;
+  ray.setFromCamera(mouse, camera);
+  const hits=ray.intersectObjects(hitList(), false);
+  if(hits.length){
+    const b=bodyFromHit(hits[0].object); hovered=b; canvas.style.cursor='pointer';
+    const d=b.data;
+    tip.innerHTML=`<div class="t">${d.kind}</div>${d.name}${d.owner?` · ${d.owner}`:''}`;
+    tip.style.display='block'; tip.style.left=(e.clientX-r.left)+'px'; tip.style.top=(e.clientY-r.top)+'px';
+  } else { hovered=null; canvas.style.cursor='grab'; tip.style.display='none'; }
+}
+canvas.addEventListener('pointerleave', ()=>{ tip.style.display='none'; hovered=null; });
+
+canvas.addEventListener('click', e=>{
+  if(hovered){ select(hovered); }
+  else { select(null); }
+});
+
+function select(b){
+  selected=b;
+  // focus dimming
+  const focusId = b ? (b.kind==='subagent'? b.data.name : (b.data.owner||null)) : null;
+  agents.forEach(a=>{
+    const related = !focusId || a.sa.name===focusId;
+    a.link.material.opacity = related?0.45:0.06;
+    a.planetBody.glow.forEach(g=>g.material.opacity = related?1:0.25);
+    a.caps.forEach(c=>{
+      c.tether.material.opacity = related?0.5:0.05;
+      c.glow.forEach(g=>g.material.opacity = related?1:0.18);
+    });
+  });
+  if(!b){ inspectorEl.classList.remove('show'); return; }
+  // if a subagent selected, drive the chat header
+  if(b.kind==='subagent') setChatAgent(b.data.name, b.data.color, b.data.model);
+  if(b.kind==='orchestrator') setChatAgent('orchestrator', '#9bbcff', b.data.model);
+  showInspector(b.data);
+}
+
+/* ---------- inspector ---------- */
+const inspectorEl=document.getElementById('inspector');
+function showInspector(d){
+  const swatch=document.getElementById('iSwatch');
+  const colorFor={orchestrator:ACCENT.orch,subagent:d.color,skill:ACCENT.skill,mcp:ACCENT.mcp,prompt:ACCENT.prompt,station:ACCENT.artifact}[d.kind]||'#fff';
+  swatch.style.background=colorFor;
+  document.getElementById('iType').textContent=d.kind;
+  document.getElementById('iName').textContent=d.name;
+  document.getElementById('iDesc').textContent=d.desc||d.detail||(d.kind==='station'?'Holds session artifacts and exports.':'');
+  const rows=document.getElementById('iRows'); rows.innerHTML='';
+  const arts=document.getElementById('iArts'); arts.style.display='none'; arts.innerHTML='';
+  const add=(k,v)=>{ rows.innerHTML+=`<span class="k">${k}</span><span class="v">${v}</span>`; };
+
+  if(d.kind==='orchestrator'){
+    add('mode', d.mode); add('model', d.model.split('/').pop());
+    add('memory', d.memoryFile); add('entries', d.memoryEntries);
+    add('active', d.activeSessions+' sessions');
+  } else if(d.kind==='subagent'){
+    add('mode', d.mode); add('model', d.model.split('/').pop());
+    add('edit', d.perms.edit); add('bash', d.perms.bash);
+    add('capabilities', d.caps.length); add('sessions', d.sessions);
+  } else if(d.kind==='station'){
+    add('orbit', d.orbit); add('artifacts', d.artifacts.length);
+    arts.style.display='block';
+    d.artifacts.forEach(a=>{ arts.innerHTML+=`<div class="art"><span class="d" style="background:${a.color}"></span><span class="nm">${a.name}</span><span style="color:var(--faint)">${a.kind}</span></div>`; });
+  } else { // capability
+    add('type', d.kind); add('owner', d.owner); add('config', d.detail);
+  }
+  inspectorEl.classList.add('show');
+}
+
+/* ============================================================================
+   ANIMATION
+   ============================================================================ */
+const v3=new THREE.Vector3();
+/* ---- space work loop: the sun queries a planet (probe out → it transmits → probe back) ---- */
+const probes=[], meteors=[]; let convo=null, convoTimer=2.5, meteorTimer=2;
+function planetPos(ag){ return ag.planetBody.mesh.position.clone(); }
+function launchProbe(from, to, dur, color, onDone){
+  const sat=makeSatellite(color, 0.42); scene.add(sat); styleSatellite(sat, color);
+  const mid=from.clone().add(to).multiplyScalar(0.5), dir=to.clone().sub(from);
+  const perp=new THREE.Vector3(0,1,0).cross(dir); if(perp.lengthSq()<0.01) perp.set(1,0,0); perp.normalize();
+  const d=from.distanceTo(to);
+  const ctrl=mid.add(perp.multiplyScalar(d*0.26)).add(new THREE.Vector3(0,d*0.12,0));
+  probes.push({ sat, from:from.clone(), ctrl, to:to.clone(), t:0, dur, onDone, prev:from.clone() });
+}
+function startConvo(){
+  if(!agents.length){ convoTimer=3; return; }
+  const ag=agents[Math.floor(Math.random()*agents.length)];
+  convo={ ag, phase:'dispatch', t:0 }; sunBody.flare=1;
+  launchProbe(new THREE.Vector3(0,0,0), planetPos(ag), 1.4, ag.planetBody.color, ()=>{ if(convo){ convo.phase='ring'; convo.t=0; ag.ringing=true; } });
+}
+function updateConvo(dt){
+  if(!opts.motion || reduceMotion || askActive) return;
+  if(!convo){ convoTimer-=dt; if(convoTimer<=0 && agents.length){
+      if(Math.random()<0.22){ openAsk(); convoTimer=8+Math.random()*5; } else startConvo(); }
+    return; }
+  convo.t+=dt;
+  if(convo.phase==='ring' && convo.t>0.9){ convo.phase='talk'; convo.t=0; convo.ag.ringing=false; convo.ag.onCall=true; }
+  else if(convo.phase==='talk' && convo.t>2.8){ convo.phase='respond'; convo.t=0; convo.ag.onCall=false; sunBody.flare=1;
+    launchProbe(planetPos(convo.ag), new THREE.Vector3(0,0,0), 1.4, '#bfe0ff', ()=>{ convo=null; convoTimer=3+Math.random()*4; }); }
+}
+function spawnMeteor(){
+  const grp=new THREE.Group();
+  const head=new THREE.Mesh(new THREE.SphereGeometry(0.8,8,8), new THREE.MeshBasicMaterial({ color:0xfff4d6, transparent:true })); grp.add(head);
+  const tail=new THREE.Mesh(new THREE.ConeGeometry(0.9,14,8), new THREE.MeshBasicMaterial({ color:0xffd9a0, transparent:true, opacity:0.55, blending:THREE.AdditiveBlending, depthWrite:false }));
+  tail.geometry.rotateX(Math.PI/2); tail.position.z=-7; grp.add(tail);
+  grp.add(makeGlow('#ffe7b0', 22));
+  const side=Math.random()<0.5?-1:1;
+  const from=new THREE.Vector3(side*280, 90+Math.random()*120, -260-Math.random()*200);
+  const to=new THREE.Vector3(-side*200, -60+Math.random()*80, -120-Math.random()*160);
+  grp.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1), to.clone().sub(from).normalize());
+  grp.position.copy(from); scene.add(grp);
+  meteors.push({ grp, from, to, t:0, dur:1.3+Math.random()*0.7 });
+}
+
+let beaconT=0;
+function animate(){
+  requestAnimationFrame(animate);
+  const dt=opts.motion?0.016:0;
+  idle+=0.016;
+
+  // idle auto-rotate
+  if(!dragging && idle>2.5 && opts.motion && !reduceMotion) camTo.theta+=0.0009;
+
+  updateConvo(dt);
+
+  // subagents + capabilities
+  agents.forEach(a=>{
+    a.ang += a.speed*dt;
+    const pp=onPlane(a.basis, R1, a.ang);
+    a.planetBody.mesh.position.copy(pp); a.planetBody.hit.position.copy(pp);
+    a.planetBody.mesh.rotation.y+=0.01;
+    if(a.planetBody.ring) a.planetBody.ring.visible=opts.rings && G.agents.visible && (!THEME||THEME.ring.style!=='hidden');
+    if(a.planetBody.label) a.planetBody.label.visible=opts.labels;
+    // sun link
+    a.link.geometry.setFromPoints([new THREE.Vector3(0,0,0), pp]);
+    // pulses sun→planet
+    a.pulses.forEach(p=>{
+      p.visible=opts.pulses && G.agents.visible;
+      if(opts.pulses){ p.userData.t=(p.userData.t+dt*0.5)%1; v3.copy(pp).multiplyScalar(p.userData.t); p.position.copy(v3);
+        p.material.opacity=Math.sin(p.userData.t*Math.PI); }
+    });
+    // capabilities co-rotate with owner angle
+    a.caps.forEach(c=>{
+      const cp=onPlane(a.basis, R2, a.ang + c.angOff);
+      c.mesh.position.copy(cp); c.hit.position.copy(cp); c.mesh.rotation.x+=0.02; c.mesh.rotation.y+=0.018;
+      c.tether.geometry.setFromPoints([pp, cp]);
+    });
+    // comms FX: signal rings while ringing, orbiting satellite + brighter glow while transmitting
+    if(a.signal){
+      a.signal.position.copy(pp); a.satPivot.position.copy(pp);
+      a.signal.visible=a.ringing;
+      if(a.ringing){ a.signal.quaternion.copy(camera.quaternion);
+        a.sigRings.forEach(rm=>{ rm.userData.t=(rm.userData.t+dt*1.1)%1; const k=rm.userData.t;
+          rm.scale.setScalar(0.5+k*3.4); rm.material.opacity=(1-k)*0.7; }); }
+      a.satPivot.visible=a.onCall;
+      if(a.onCall) a.satPivot.rotation.y+=0.06;
+      const target=a.onCall?1:0; a.glowBoost+=(target-a.glowBoost)*0.12;
+      if(a.glowBoost>0.001){ const gm=THEME?THEME.glow:1;
+        a.planetBody.glow.forEach(g=>g.scale.setScalar(a.planetBody.base*gm*(1+a.glowBoost*0.9))); }
+    }
+  });
+  G.agents.children.forEach(()=>{}); // (no-op; groups handle visibility)
+
+  // sun label/visibility
+  if(sunBody.label) sunBody.label.visible=opts.labels;
+  // sun flare pulse when it dispatches/receives a probe
+  if(sunBody.flare>0){ sunBody.flare=Math.max(0,sunBody.flare-dt*1.4); const gm=THEME?THEME.glow:1;
+    sunBody.glow[0].scale.setScalar(sunBody.base*gm*(1+sunBody.flare*0.5)); }
+
+  // station
+  if(stationEntry){
+    const se=stationEntry; se.ang+=se.speed*dt;
+    const sp=onPlane(se.basis, R3, se.ang);
+    se.grp.position.copy(sp); se.body.hit.position.copy(sp);
+    se.grp.rotation.y+=0.006;
+    se.mlink.geometry.setFromPoints([sp, new THREE.Vector3(0,0,0)]);
+    if(se.body.label) se.body.label.visible=opts.labels;
+    beaconT+=0.05; se.beacons.forEach((b,i)=> b.material.opacity=0.4+0.6*Math.abs(Math.sin(beaconT+i)) );
+  }
+
+  if(embers && embers.visible){
+    const p=embers.geometry.attributes.position, s=embers.userData.spd;
+    for(let i=0;i<s.length;i++){ p.array[i*3+1]+=s[i]*(opts.motion?0.7:0); if(p.array[i*3+1]>170) p.array[i*3+1]=-170; }
+    p.needsUpdate=true;
+  }
+
+  // pop-in animations for newly created agents/tools
+  if(spawning.length){
+    const c1=1.70158, c3=c1+1;
+    for(let i=spawning.length-1;i>=0;i--){
+      const s=spawning[i]; s.t+=0.016/s.dur; const p=Math.max(0,Math.min(s.t,1));
+      const sc = p>=1 ? 1 : (1 + c3*Math.pow(p-1,3) + c1*Math.pow(p-1,2)); // easeOutBack
+      s.body.mesh.scale.setScalar(Math.max(sc,0.0001));
+      if(s.shock){
+        s.shock.position.copy(s.body.mesh.position);
+        const k=Math.min(s.t*1.5,1);
+        s.shock.scale.setScalar(8 + k*64);
+        s.shock.material.opacity=(1-k)*0.9;
+        if(k>=1){ scene.remove(s.shock); s.shock.material.dispose(); s.shock=null; }
+      }
+      if(s.kind==='subagent'){
+        s.ag.link.material.opacity=0.32*p;
+        if(s.ag.planetBody.ring) s.ag.planetBody.ring.material.opacity=0.12*p;
+      } else {
+        s.body.tether.material.opacity=0.22*p;
+      }
+      if(p>=1){ s.body.mesh.scale.setScalar(1); spawning.splice(i,1); }
+    }
+  }
+
+  // query probes travel a curved path between sun and planet
+  for(let i=probes.length-1;i>=0;i--){ const pr=probes[i]; pr.t+=dt/pr.dur; const u=Math.min(pr.t,1);
+    const a=pr.from.clone().lerp(pr.ctrl,u), b=pr.ctrl.clone().lerp(pr.to,u); const pos=a.lerp(b,u);
+    pr.sat.position.copy(pos);
+    const d=pos.clone().sub(pr.prev); if(d.lengthSq()>1e-4) pr.sat.quaternion.setFromUnitVectors(new THREE.Vector3(0,0,1), d.normalize());
+    pr.prev.copy(pos);
+    if(u>=1){ scene.remove(pr.sat); const cb=pr.onDone; probes.splice(i,1); if(cb) cb(); }
+  }
+  // ambient meteors
+  if(opts.motion && !reduceMotion){ meteorTimer-=dt; if(meteorTimer<=0){ spawnMeteor(); meteorTimer=2.5+Math.random()*4.5; } }
+  for(let i=meteors.length-1;i>=0;i--){ const m=meteors[i]; m.t+=dt/m.dur; const u=Math.min(m.t,1);
+    m.grp.position.lerpVectors(m.from,m.to,u); const o=Math.sin(u*Math.PI);
+    m.grp.children.forEach(ch=>{ if(ch.material && ch.material.opacity!==undefined) ch.material.opacity=o*(ch.type==='Sprite'?0.9:(ch.geometry&&ch.geometry.type==='ConeGeometry'?0.55:1)); });
+    if(u>=1){ scene.remove(m.grp); meteors.splice(i,1); }
+  }
+
+  applyCam();
+  renderer.render(scene, camera);
+}
+
+/* ============================================================================
+   RESIZE
+   ============================================================================ */
+function resize(){
+  const r=document.getElementById('center').getBoundingClientRect();
+  if(r.width<2 || r.height<2) return;            // ignore pre-layout / zero sizes
+  renderer.setSize(r.width, r.height, false);
+  camera.aspect=r.width/r.height; camera.updateProjectionMatrix();
+}
+window.addEventListener('resize', resize);
+window.addEventListener('orientationchange', ()=>setTimeout(resize,300));
+if(window.visualViewport) window.visualViewport.addEventListener('resize', resize);
+// keep the buffer matched to the canvas through panel toggles, address-bar changes, etc.
+try{ new ResizeObserver(()=>resize()).observe(document.getElementById('center')); }catch(e){}
+
+/* ============================================================================
+   UI WIRING
+   ============================================================================ */
+// sessions
+const list=document.getElementById('sessionList');
+SESSIONS.forEach((s,i)=>{
+  const el=document.createElement('div'); el.className='session'+(i===0?' active':'');
+  el.innerHTML=`<div class="title">${s.title}</div><div class="meta"><span>${s.ago} ago</span><span class="cost">${s.cost}</span><span class="agent">${s.agent}</span></div>`;
+  el.addEventListener('click', ()=>{ document.querySelectorAll('.session').forEach(x=>x.classList.remove('active')); el.classList.add('active'); });
+  list.appendChild(el);
+});
+document.getElementById('sessionCount').textContent=`${TOTAL_SESSIONS} sessions`;
+
+// counts + agent pill (reusable so spawns can refresh)
+function updateCounts(){
+  let nLinks=agents.length; // sun-links
+  agents.forEach(a=>nLinks+=a.caps.length); // tethers
+  nLinks+=1; // station memory link
+  document.getElementById('counts').textContent=`${bodies.length} nodes · ${nLinks} links`;
+  document.getElementById('agentCount').textContent=`${1+agents.length} agents`;
+}
+updateCounts();
+
+/* ============================================================================
+   LIVE SPAWN — animate a new subagent/tool popping into the galaxy.
+
+   Integration with opencode (no runtime hot-reload required):
+     const client = createOpencodeClient({ baseUrl:'http://localhost:4096' });
+     // 1) cheap "something changed" tick from the server event bus:
+     const events = await client.event.subscribe();
+     for await (const e of events.stream){ if(e.type.startsWith('session')) refresh(); }
+     // 2) on tick (or a poll), diff the live agent list against what's drawn:
+     async function refresh(){
+       const live = await client.agent.list();
+       for(const a of live) if(!agents.find(x=>x.sa.name===a.name)) window.galaxy.spawnSubagent(map(a));
+     }
+   Your checklist already writes the new agent .md + updates AGENTS.md, so the diff
+   picks it up and the UI lights it in — even if the running agent needs a reload to use it.
+   ============================================================================ */
+function spawnSubagent(def){
+  const i=agents.length;
+  const ag=buildSubagent(def, i, i+1);
+  if(THEME) applyTheme(THEME);                 // match the active visual style
+  ag.planetBody.mesh.scale.setScalar(0.0001);
+  ag.link.material.opacity=0; if(ag.planetBody.ring) ag.planetBody.ring.material.opacity=0;
+  const shock=makeGlow(ag.planetBody.color, 8); scene.add(shock); shock.material.opacity=0.9;
+  spawning.push({ kind:'subagent', body:ag.planetBody, ag, t:0, dur:0.95, shock });
+  ag.caps.forEach(c=>{ c.mesh.scale.setScalar(0.0001); c.tether.material.opacity=0;
+    spawning.push({ kind:'tool', body:c, ag, t:-0.25, dur:0.9, shock:null }); });
+  select(ag.planetBody);
+  logCreation('subagent', def.name);
+  updateCounts();
+  return ag;
+}
+function spawnTool(def, ownerName){
+  let ag = ownerName ? agents.find(a=>a.sa.name===ownerName) : null;
+  if(!ag) ag = agents[agents.length-1] || agents[0];
+  if(!ag) return;
+  const cb=buildCapability(def, ag);
+  if(THEME) applyTheme(THEME);
+  cb.mesh.scale.setScalar(0.0001); cb.tether.material.opacity=0;
+  const shock=makeGlow(cb.color, 6); scene.add(shock); shock.material.opacity=0.9;
+  spawning.push({ kind:'tool', body:cb, ag, t:0, dur:0.85, shock });
+  select(cb);
+  logCreation(def.type, def.name+' → '+ag.sa.name);
+  updateCounts();
+  return cb;
+}
+
+let toastTimer;
+function showToast(title, sub){
+  const t=document.getElementById('toast');
+  t.innerHTML=`<div class="tt">${title}</div><div class="ts">${sub||''}</div>`;
+  t.classList.add('show'); clearTimeout(toastTimer);
+  toastTimer=setTimeout(()=>t.classList.remove('show'), 2800);
+}
+function logCreation(kind, name){
+  showToast(`＋ ${kind}: ${name}`, 'AGENTS.md updated · orchestrator notified');
+  const el=document.createElement('div'); el.className='session';
+  const verb = kind==='subagent' ? 'Created subagent' : 'Added '+kind;
+  el.innerHTML=`<div class="title">${verb}: ${name.split(' → ')[0]}</div><div class="meta"><span>now</span><span class="cost">$0.00</span><span class="agent">orchestrator</span></div>`;
+  list.insertBefore(el, list.firstChild);
+  el.addEventListener('click', ()=>{ document.querySelectorAll('.session').forEach(x=>x.classList.remove('active')); el.classList.add('active'); });
+  ORCHESTRATOR.memoryEntries++;
+}
+
+// demo pools so the buttons (and another agent watching) can see the animation
+const NEW_AGENTS=[
+  { name:'security', mode:'subagent', model:'anthropic/claude-sonnet-4-6', desc:'Threat review of diffs and dependencies.', color:'#ff5d5d', perms:{edit:'deny',bash:'deny'}, sessions:0,
+    caps:[{type:'prompt',name:'security.md',detail:'system prompt'},{type:'skill',name:'audit',detail:'tool: read,grep'}] },
+  { name:'test', mode:'subagent', model:'anthropic/claude-haiku-4-5', desc:'Writes and runs the test suite.', color:'#52e0c4', perms:{edit:'allow',bash:'allow'}, sessions:0,
+    caps:[{type:'skill',name:'runner',detail:'tool: bash'},{type:'mcp',name:'playwright',detail:'mcp: local/stdio'}] },
+  { name:'migrate', mode:'subagent', model:'anthropic/claude-sonnet-4-6', desc:'Database schema migrations.', color:'#f0a93a', perms:{edit:'ask',bash:'ask'}, sessions:0,
+    caps:[{type:'skill',name:'schema-diff',detail:'tool: read'},{type:'prompt',name:'migrate.md',detail:'system prompt'}] },
+  { name:'release', mode:'subagent', model:'anthropic/claude-haiku-4-5', desc:'Cuts releases and changelogs.', color:'#b07bff', perms:{edit:'allow',bash:'allow'}, sessions:0,
+    caps:[{type:'skill',name:'changelog',detail:'tool: read,write'}] },
+];
+const NEW_TOOLS=[
+  { type:'mcp', name:'postgres', detail:'mcp: local/stdio' },
+  { type:'skill', name:'format', detail:'tool: write' },
+  { type:'prompt', name:'refactor.md', detail:'system prompt' },
+  { type:'mcp', name:'sentry', detail:'mcp: remote/http' },
+  { type:'skill', name:'profile', detail:'tool: bash' },
+];
+let agentIdx=0, toolIdx=0;
+document.getElementById('spawnAgent').onclick=()=>{
+  const base=NEW_AGENTS[agentIdx%NEW_AGENTS.length]; agentIdx++;
+  const d={ ...base, caps: base.caps.map(c=>({...c})) };
+  if(agentIdx>NEW_AGENTS.length) d.name = base.name+'-'+Math.ceil(agentIdx/NEW_AGENTS.length);
+  spawnSubagent(d);
+};
+document.getElementById('spawnTool').onclick=()=>{
+  const d={ ...NEW_TOOLS[toolIdx%NEW_TOOLS.length] }; toolIdx++;
+  spawnTool(d, null);
+};
+// public API for the real app to call from its checklist / event watcher
+window.galaxy = { spawnSubagent, spawnTool, applyTheme:(id)=>applyTheme(THEMES[id]) };
+
+// chat thread
+const threadEl=document.getElementById('thread');
+function renderThread(){
+  threadEl.innerHTML='';
+  THREAD.forEach(m=>{
+    if(m.turn){ const t=document.createElement('div'); t.className='turn'; t.textContent='turn '+m.turn; threadEl.appendChild(t); return; }
+    if(m.tool){ const t=document.createElement('div'); t.className='toolcall';
+      t.innerHTML=`<span class="dot"></span><span>${m.tool}</span> <span class="path">${m.path}</span><span class="done">done ▾</span>`;
+      threadEl.appendChild(t); return; }
+    const d=document.createElement('div'); d.className='msg '+m.role;
+    d.innerHTML=`<div class="av">${m.role==='ai'?'AI':'YOU'}</div><div class="bubble">${m.html}</div>`;
+    threadEl.appendChild(d);
+  });
+  threadEl.scrollTop=threadEl.scrollHeight;
+}
+renderThread();
+function setChatAgent(name,color,model){
+  document.getElementById('agentSelName').textContent=name;
+  document.getElementById('agentSelDot').style.background=color;
+  if(model) document.getElementById('modelSelName').textContent=model.split('/').pop();
+}
+document.getElementById('chatCost').textContent='$0.09';
+
+// panel toggles
+const body=document.body;
+document.getElementById('collapseLeft').onclick=()=>{ body.classList.add('left-collapsed'); document.getElementById('openLeft').style.display=''; setTimeout(resize,300); };
+document.getElementById('openLeft').onclick=()=>{ body.classList.remove('left-collapsed'); document.getElementById('openLeft').style.display='none'; setTimeout(resize,300); };
+document.getElementById('toggleChat').onclick=()=>{ body.classList.toggle('right-open'); setTimeout(resize,300); };
+document.getElementById('collapseRight').onclick=()=>{ body.classList.remove('right-open'); setTimeout(resize,300); };
+document.getElementById('scrim').onclick=()=>{ body.classList.add('left-collapsed'); body.classList.remove('right-open'); };
+document.getElementById('newSession').onclick=()=>{ /* demo */ };
+
+// layer toggles
+document.querySelectorAll('.layer-btn').forEach(btn=>{
+  btn.onclick=()=>{ btn.classList.toggle('on'); const layer=btn.dataset.layer; G[layer].visible=btn.classList.contains('on'); };
+});
+
+// settings popover
+const pop=document.getElementById('settingsPop');
+document.getElementById('settingsBtn').onclick=(e)=>{ e.stopPropagation(); pop.classList.toggle('show'); };
+document.addEventListener('click', ()=>pop.classList.remove('show'));
+pop.addEventListener('click', e=>e.stopPropagation());
+document.querySelectorAll('.toggle').forEach(t=>{
+  t.onclick=()=>{ t.classList.toggle('on'); opts[t.dataset.opt]=t.classList.contains('on'); };
+});
+
+// composer auto-grow
+const ta=document.getElementById('composerInput');
+ta.addEventListener('input', ()=>{ ta.style.height='auto'; ta.style.height=Math.min(ta.scrollHeight,120)+'px'; });
+
+/* ============================================================================
+   THEME ENGINE — swaps materials/sky/glow live; geometry & layout untouched
+   ============================================================================ */
+function toonGradient(){
+  const steps=4, d=new Uint8Array(steps);
+  for(let i=0;i<steps;i++) d[i]=Math.round((i/(steps-1))*255);
+  const t=new THREE.DataTexture(d, steps, 1, THREE.RedFormat);
+  t.minFilter=THREE.NearestFilter; t.magFilter=THREE.NearestFilter; t.needsUpdate=true; return t;
+}
+const TOON=toonGradient();
+
+let SUN_BANDED=null;
+function bandedSunTexture(cols){
+  const c=document.createElement('canvas'); c.width=8; c.height=128; const x=c.getContext('2d');
+  const g=x.createLinearGradient(0,0,0,128);
+  cols.forEach((col,i)=>g.addColorStop(i/(cols.length-1), col));
+  x.fillStyle=g; x.fillRect(0,0,8,128);
+  x.fillStyle='rgba(0,0,0,0.32)'; for(let y=66;y<128;y+=8) x.fillRect(0,y,8,3);
+  const t=new THREE.Texture(c); t.needsUpdate=true; return t;
+}
+
+function setBodyMaterial(mesh, color, cfg){
+  const old=mesh.material; let m;
+  if(cfg.material==='toon'){
+    m=new THREE.MeshToonMaterial({ color:new THREE.Color(color), gradientMap:TOON,
+      emissive:new THREE.Color(color).multiplyScalar(0.16) });
+  } else if(cfg.material==='wire'){
+    m=new THREE.MeshBasicMaterial({ color:new THREE.Color(color), wireframe:true });
+  } else {
+    m=new THREE.MeshStandardMaterial({ color:new THREE.Color(color), emissive:new THREE.Color(color),
+      emissiveIntensity:cfg.emissive!=null?cfg.emissive:0.85, roughness:0.5, metalness:0.1 });
+  }
+  mesh.material=m; if(old && old.dispose) old.dispose();
+}
+function setOutline(body, on, scale, color){
+  if(on){
+    if(!body.outline){
+      const o=new THREE.Mesh(body.mesh.geometry,
+        new THREE.MeshBasicMaterial({ color:new THREE.Color(color||0x0a0a14), side:THREE.BackSide }));
+      o.scale.setScalar(scale); body.mesh.add(o); body.outline=o;
+    } else { body.outline.visible=true; body.outline.scale.setScalar(scale); body.outline.material.color.set(color||0x0a0a14); }
+  } else if(body.outline){ body.outline.visible=false; }
+}
+function setRing(line, cfg, agentColor){
+  if(!line) return;
+  const color=(cfg.colorMode==='theme')?cfg.color:agentColor;
+  if(cfg.style==='dashed'){
+    line.material=new THREE.LineDashedMaterial({ color:new THREE.Color(color), transparent:true, opacity:cfg.opacity, dashSize:2.4, gapSize:2.4 });
+    line.computeLineDistances();
+  } else {
+    line.material=new THREE.LineBasicMaterial({ color:new THREE.Color(color), transparent:true, opacity:cfg.opacity });
+  }
+  line.visible=cfg.style!=='hidden' && opts.rings;
+}
+function setSun(cfg){
+  const m=sunBody.mesh;
+  if(cfg.banded){
+    if(!SUN_BANDED) SUN_BANDED=bandedSunTexture(cfg.bands);
+    m.material.map=SUN_BANDED; m.material.color.set(0xffffff);
+  } else { m.material.map=null; m.material.color.set(cfg.core); }
+  m.material.needsUpdate=true;
+  sunBody.glow[0].material.color.set(cfg.glow[0]);
+  sunBody.glow[1].material.color.set(cfg.glow[1]);
+}
+
+function applyTheme(t){
+  THEME=t;
+  renderer.setClearColor(t.clear,1);
+  scene.fog = t.fog ? new THREE.FogExp2(t.fog[0], t.fog[1]) : null;
+  setSky(t.sky[0], t.sky[1]);
+  setGrid(t.grid, t.gridY!=null?t.gridY:-40);
+  setEmbers(!!t.embers);
+
+  starPoints.visible = (t.star.visible!==false) && t.star.opacity>0;
+  starPoints.material.size = t.star.size;
+  starPoints.material.opacity = t.star.opacity;
+  starPoints.material.color.set(t.star.tint||0xffffff);
+  [nebA,nebB].forEach((n,i)=>{ if(t.nebula){ n.visible=true; n.material.color.set(t.nebula[i][0]); n.material.opacity=t.nebula[i][1]; } else n.visible=false; });
+
+  setSun(t.sun);
+  const gm=t.glow;
+  sunBody.glow.forEach(g=>g.scale.setScalar(g.userData.base*gm));
+
+  agents.forEach(a=>{
+    const pcol=t.planet.colorOverride||a.planetBody.color;
+    setBodyMaterial(a.planetBody.mesh, pcol, t.planet);
+    setOutline(a.planetBody, t.outline, 1.13, t.outlineColor);
+    a.planetBody.glow.forEach(g=>{ g.scale.setScalar(g.userData.base*gm); g.material.color.set(pcol); });
+    setRing(a.planetBody.ring, t.ring, a.planetBody.color);
+    a.link.material.color.set(new THREE.Color(t.link.colorMode==='theme'?t.link.color:a.planetBody.color));
+    a.pulses.forEach(p=>p.material.color.set(pcol));
+    if(a.commSat) styleSatellite(a.commSat, a.planetBody.color);
+    if(a.sigRings) a.sigRings.forEach(rm=>rm.material.color.set(a.planetBody.color));
+    a.caps.forEach(c=>{
+      const ccol=t.cap.colorOverride||c.color;
+      setBodyMaterial(c.mesh, ccol, t.cap);
+      setOutline(c, t.outline, 1.24, t.outlineColor);
+      c.glow.forEach(g=>{ g.scale.setScalar(g.userData.base*gm); g.material.color.set(ccol); });
+      c.tether.material.color.set(new THREE.Color(t.tether.colorMode==='theme'?t.tether.color:c.color));
+    });
+  });
+  if(stationEntry){
+    setRing(stationEntry.orbit, t.ring, ACCENT.artifact);
+    stationEntry.body.glow.forEach(g=>g.scale.setScalar(g.userData.base*gm));
+    stationEntry.mlink.material.color.set(new THREE.Color(t.memoryColor||ACCENT.memory));
+  }
+  if(selected) select(selected); // re-apply focus dimming under new theme
+}
+
+const THEMES = {
+  observatory:{
+    id:'observatory', clear:0x05070d, fog:[0x05070d,0.0016], sky:['#0a1326','#04060c'],
+    star:{ size:2.1, opacity:0.9, tint:0xffffff }, nebula:[['#1b3a6b',0.5],['#3a1b5b',0.4]],
+    sun:{ banded:false, core:0xffcf73, glow:['#ffb627','#ffe7a8'] },
+    planet:{ material:'standard', emissive:0.8 }, cap:{ material:'standard', emissive:0.9 },
+    outline:false, ring:{ style:'solid', opacity:0.12, colorMode:'agent' },
+    tether:{ colorMode:'agent' }, link:{ colorMode:'agent' },
+    grid:null, glow:1.0, embers:false, memoryColor:'#f564c4'
+  },
+  celshade:{
+    id:'celshade', clear:0x6fb0ff, fog:null, sky:['#7cb8ff','#cfe6ff'],
+    star:{ visible:false, size:3, opacity:0 }, nebula:[['#ffffff',0.12],['#ffe08a',0.16]],
+    sun:{ banded:false, core:0xffd23f, glow:['#ffb627','#fff3b0'] },
+    planet:{ material:'toon' }, cap:{ material:'toon' },
+    outline:true, outlineColor:0x0a1126, ring:{ style:'solid', opacity:0.42, colorMode:'agent' },
+    tether:{ colorMode:'agent' }, link:{ colorMode:'agent' },
+    grid:null, glow:0.7, embers:false, memoryColor:'#ff7ab0'
+  },
+  blueprint:{
+    id:'blueprint', clear:0x041018, fog:[0x05151f,0.0013], sky:['#06283a','#02060a'],
+    star:{ size:1.6, opacity:0.45, tint:0x66e0ff }, nebula:[['#0a3a5a',0.28],['#0a3a5a',0.0]],
+    sun:{ banded:false, core:0x7fe8ff, glow:['#36d6e7','#aef6ff'] },
+    planet:{ material:'wire', colorOverride:'#48dbef' }, cap:{ material:'wire', colorOverride:'#48dbef' },
+    outline:false, ring:{ style:'dashed', opacity:0.55, colorMode:'theme', color:'#36d6e7' },
+    tether:{ colorMode:'theme', color:'#36d6e7' }, link:{ colorMode:'theme', color:'#36d6e7' },
+    grid:'#0e6f99', gridY:-42, glow:0.6, embers:false, memoryColor:'#36d6e7'
+  },
+  synthwave:{
+    id:'synthwave', clear:0x140024, fog:[0x14012b,0.0011], sky:['#2c0a62','#08001a'],
+    star:{ size:2.0, opacity:0.5, tint:0xff8ad6 }, nebula:[['#ff2d95',0.35],['#36d6e7',0.3]],
+    sun:{ banded:true, bands:['#ffe24a','#ff7a45','#ff2d95'], glow:['#ff2d95','#ffd24a'] },
+    planet:{ material:'standard', emissive:1.15 }, cap:{ material:'standard', emissive:1.15 },
+    outline:false, ring:{ style:'solid', opacity:0.3, colorMode:'theme', color:'#ff5fd0' },
+    tether:{ colorMode:'theme', color:'#36d6e7' }, link:{ colorMode:'theme', color:'#ff5fd0' },
+    grid:'#ff2d95', gridY:-48, glow:1.7, embers:false, memoryColor:'#ff2d95'
+  },
+  forge:{
+    id:'forge', clear:0x140d08, fog:[0x140d08,0.0016], sky:['#241307','#0a0603'],
+    star:{ visible:false, size:2, opacity:0 }, nebula:[['#5a2a0a',0.4],['#3a1505',0.3]],
+    sun:{ banded:false, core:0xffb04a, glow:['#ff7a1a','#ffd9a0'] },
+    planet:{ material:'standard', emissive:0.95 }, cap:{ material:'standard', emissive:0.95 },
+    outline:false, ring:{ style:'solid', opacity:0.14, colorMode:'theme', color:'#ff8a3c' },
+    tether:{ colorMode:'theme', color:'#ffb060' }, link:{ colorMode:'theme', color:'#ff8a3c' },
+    grid:null, glow:1.25, embers:true, memoryColor:'#ff7ab0'
+  },
+  blackice:{
+    id:'blackice', clear:0x05080c, fog:[0x05080c,0.0016], sky:['#0b1016','#04060a'],
+    star:{ size:1.8, opacity:0.7, tint:0xcdd9e6 }, nebula:[['#27323e',0.3],['#1a2230',0.25]],
+    sun:{ banded:false, core:0x9fc0d8, glow:['#8ab0d0','#cfe2ee'] },
+    planet:{ material:'standard', emissive:0.5, colorOverride:'#aebfce' }, cap:{ material:'standard', emissive:0.55, colorOverride:'#9fb2c4' },
+    outline:false, ring:{ style:'solid', opacity:0.12, colorMode:'theme', color:'#8aa0b4' },
+    tether:{ colorMode:'theme', color:'#7f97ab' }, link:{ colorMode:'theme', color:'#8aa0b4' },
+    grid:null, glow:0.85, embers:false, memoryColor:'#c8dcec'
+  },
+  chrome:{
+    id:'chrome', clear:0x0c0e12, fog:[0x0c0e12,0.0015], sky:['#161b22','#070a0e'],
+    star:{ size:1.8, opacity:0.6, tint:0xaab4c4 }, nebula:[['#2a3340',0.3],['#1f2630',0.25]],
+    sun:{ banded:false, core:0x8aa0bc, glow:['#6080a0','#b9c6d6'] },
+    planet:{ material:'standard', emissive:0.55, colorOverride:'#9aa6ba' }, cap:{ material:'standard', emissive:0.6, colorOverride:'#8896ac' },
+    outline:false, ring:{ style:'solid', opacity:0.12, colorMode:'theme', color:'#7d8ca0' },
+    tether:{ colorMode:'theme', color:'#8090a8' }, link:{ colorMode:'theme', color:'#7d8ca0' },
+    grid:null, glow:1.0, embers:false, memoryColor:'#aab4c4'
+  }
+};
+document.getElementById('themeSelect').onchange=(e)=>applyTheme(THEMES[e.target.value]);
+
+/* ===================== ORCHESTRATOR → YOU: question modal ===================== */
+let askActive=false, askQ=null;
+const QUESTIONS=[
+  { q:"I'm ready to start the auth refactor. How do you want me to approach it?", to:'plan',
+    opts:["Plan it out first — read-only, no edits","Go ahead and make the changes","Write tests before touching code","Open a draft PR for review"] },
+  { q:"Three end-to-end tests are failing on the migration branch. What should I do?", to:'debug',
+    opts:["Investigate and fix them","Just show me the diffs","Skip for now and keep going","Re-run to check if they're flaky"] },
+  { q:"The dependency scan flagged 2 outdated packages. How should I handle the upgrade?", to:'scout',
+    opts:["Upgrade and run the full suite","Pin versions and leave a note","Only take the security patches"] },
+  { q:"I can pick up the next piece of work. Where should I focus?", to:'general',
+    opts:["Finish the galaxy styles","Wire the office ⟷ galaxy toggle","Harden error handling","Write the docs"] },
+];
+function openAsk(q){
+  askActive=true; askQ = q || QUESTIONS[Math.floor(Math.random()*QUESTIONS.length)];
+  document.getElementById('askQuestion').textContent=askQ.q;
+  const wrap=document.getElementById('askOptions'); wrap.innerHTML='';
+  askQ.opts.forEach(o=>{ const row=document.createElement('label'); row.className='askopt';
+    row.innerHTML=`<span class="cb"></span><span class="lbltxt">${o}</span>`;
+    row.onclick=()=>row.classList.toggle('on'); wrap.appendChild(row); });
+  document.getElementById('askText').value='';
+  document.getElementById('askModal').classList.add('show');
+}
+function closeAsk(){ askActive=false; document.getElementById('askModal').classList.remove('show'); }
+function submitAsk(){
+  const chosen=[...document.querySelectorAll('#askOptions .askopt.on .lbltxt')].map(s=>s.textContent);
+  const custom=document.getElementById('askText').value.trim();
+  const parts=[...chosen]; if(custom) parts.push('“'+custom+'”');
+  const summary = parts.length ? parts.join(' · ') : 'use your judgement';
+  const ag=agents.find(a=>a.sa.name===askQ.to) || agents[0];
+  if(ag){ sunBody.flare=1;
+    launchProbe(new THREE.Vector3(0,0,0), planetPos(ag), 1.4, ag.planetBody.color, ()=>{
+      ag.ringing=true; setTimeout(()=>{ ag.ringing=false; ag.onCall=true; setTimeout(()=>{ ag.onCall=false; }, 2400); }, 800); });
+  }
+  showToast(`Handed off to ${askQ.to}`, summary.length>64?summary.slice(0,64)+'…':summary);
+  const el=document.createElement('div'); el.className='session';
+  const label = custom || chosen[0] || 'proceed';
+  el.innerHTML=`<div class="title">You → ${askQ.to}: ${label}</div><div class="meta"><span>now</span><span class="cost">$0.00</span><span class="agent">orchestrator</span></div>`;
+  list.insertBefore(el, list.firstChild);
+  el.addEventListener('click', ()=>{ document.querySelectorAll('.session').forEach(x=>x.classList.remove('active')); el.classList.add('active'); });
+  closeAsk();
+}
+document.getElementById('askBtn').onclick=()=>openAsk();
+document.getElementById('askClose').onclick=closeAsk;
+document.getElementById('askDismiss').onclick=closeAsk;
+document.getElementById('askSend').onclick=submitAsk;
+document.getElementById('askModal').addEventListener('click',(e)=>{ if(e.target.id==='askModal') closeAsk(); });
+
+// boot
+// on phones, start galaxy-first (panels closed) so the sun is centered in the full window
+if(window.matchMedia('(max-width:900px)').matches){
+  document.body.classList.add('left-collapsed');
+  document.body.classList.remove('right-open');
+  document.getElementById('openLeft').style.display='';
+}
+resize();
+camTo.radius=265; camTo.theta=0.7; camTo.phi=1.05;
+applyTheme(THEMES.observatory);
+animate();
+// re-measure as mobile layout / address bar settle
+[60,250,600,1200].forEach(d=>setTimeout(resize,d));
+</script>
+</body>
+</html>

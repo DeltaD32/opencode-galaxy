@@ -1,6 +1,6 @@
 # JARVIS — Agent Brief
 **For:** Any agent working on the OpenCode JARVIS frontend  
-**Version:** 1.1 — updated with current branch state  
+**Version:** 1.2 — Opus review corrections applied  
 **Last updated:** 2026-06-26
 
 **Read this first.** This is the single source of truth for what JARVIS is, what
@@ -295,8 +295,9 @@ from right. Multiple panels stack `+20px x/y`. Draggable + resizable via interac
 PTT (CMD+SHIFT+SPACE / hold-SPACE / mic button)
   │
   ▼
-useVoice.ts (Web Speech API) ─── already exists, reuse ───► Transcript
-  │  (mlx-whisper FastAPI bridge localhost:5001 — opt-in, Phase 2+)
+useVoice.ts (Web Speech API) ─── opt-in only (⚠ audio → Google) ──► Transcript
+  │  mlx-whisper FastAPI bridge localhost:5001 ← PRIVACY DEFAULT (Phase 2+)
+  │  [Web Speech = convenience path, requires explicit "audio leaves device" disclosure]
   ▼
 POST /session/{id}/prompt_async  →  OpenCode backend
   │
@@ -305,7 +306,7 @@ SSE message.part (tool) events  →  ActivityModal steps
   │
   ▼
 session.idle event  →  TTS decision:
-  ├── ≤120 chars  →  macOS `say -v Daniel`  (instant, offline, British)
+  ├── ≤120 chars  →  macOS `say -v Daniel -o /tmp/jarvis.aiff`  (offline, no extra perms)
   └──  >120 chars  →  BMW Audio TTS API     (quality, streaming MP3)
   │
   ▼
@@ -609,6 +610,20 @@ Estimate: **1–2 weeks**
 
 ---
 
+## Validated Corrections (from Opus review — 2026-06-26)
+
+These supersede any conflicting claims in `JARVIS-ROADMAP.md` or `JARVIS-ARCHITECTURE-SPEC.md`.
+
+| # | Claim corrected | Correct behaviour | Priority |
+|---|---|---|---|
+| 1 | ~~Web Speech API is "privacy-safe, no external call"~~ | `webkitSpeechRecognition` streams mic audio to Google's servers. **mlx-whisper local bridge is the privacy default**; Web Speech is opt-in only with explicit "audio leaves this device" disclosure | **HIGH — affects BMW data policy** |
+| 2 | ~~TTS local via `ffmpeg -f avfoundation` capture~~ | Use `say -v Daniel -r 180 -o /tmp/jarvis.aiff "text"` directly — writes audio file without system-audio capture, no extra permissions needed. `avfoundation` is fragile across machines | MED |
+| 3 | ~~`CMD+SHIFT+SPACE` is reliable in-browser~~ | Browser-side it only fires when the tab is focused; Spotlight may intercept. Documented primary path for Phase 1/2 is **on-screen mic button + hold-SPACE**. OS-level chord deferred to Tauri Phase 4 (already our plan) | LOW — already handled |
+
+**Phase 1/2 STT decision:** Ship Phase 1 with Web Speech API (no network calls needed for text-only mode), but `SttBridge.ts` must expose a `mode: 'webspeech' | 'mlxwhisper'` toggle and the UI must show a warning badge when `webspeech` is active. mlx-whisper bridge becomes the default the moment the sidecar is available (Phase 2+).
+
+---
+
 ## Reference Documents
 
 | Document | Path | What's in it |
@@ -616,8 +631,10 @@ Estimate: **1–2 weeks**
 | **This brief** | `web/JARVIS-AGENT-BRIEF.md` | Current state, what changes, full context |
 | Full design spec | `web/JARVIS-ROADMAP.md` | Complete UX/visual spec — particle physics, animation curves, component designs, theme tokens |
 | Full architecture spec | `web/JARVIS-ARCHITECTURE-SPEC.md` | 2080-line technical spec — voice pipeline code, panel IPC, Tauri migration, full data flow |
+| Opus review | `web/JARVIS-ROADMAP-REVIEW.md` | Corrections, blank-render root cause, punch list |
+| **Galaxy panel reference** *(Panel #1)* | `web/reference/memory-galaxy.html` | **Runnable.** All 7 themes, work-loop (probes/satellites/meteors), orchestrator→user ask modal. Iframe-ready. Matches `jarvis-panel-galaxy.png` exactly. Served at `/reference/memory-galaxy.html` in dev |
+| Office reference | `web/reference/agent-office.html` | Alternate office-metaphor world — not on critical path |
 | Design ref images | `web/jarvis-design-refs/*.png` | 4 AI-generated visual references |
-| Galaxy reference | `/Users/QTE2362/ECC-APPS/memory-galaxy.html` | Original Galaxy HTML — 5 theme defs, orbital metaphor, CSS tokens |
 | Existing web roadmap | `web/ROADMAP.md` (on `feat/web-frontend`) | Prior phase decisions, validated API facts, known gotchas |
 
 ---
@@ -640,4 +657,4 @@ This brief is the summary; those documents are the authority.
 
 ---
 
-*JARVIS Agent Brief v1.1 — BMW Internal — 2026-06-26*
+*JARVIS Agent Brief v1.2 — BMW Internal — 2026-06-26 — Opus corrections applied*
