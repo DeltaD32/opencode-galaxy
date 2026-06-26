@@ -313,7 +313,7 @@
     "density-mcp": {
       "type": "remote",
       "url": "https://density.bmwgroup.net/mcp",
-      "enabled": true
+      "enabled": false
     },
     "fetch": {
       "type": "local",
@@ -342,7 +342,7 @@
     "wiz": {
       "type": "remote",
       "url": "https://mcp.app.wiz.io/",
-      "enabled": true
+      "enabled": false
     },
     "skills-mcp": {
       "type": "remote",
@@ -356,7 +356,7 @@
         "--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/",
         "@playwright/mcp@latest"
       ],
-      "enabled": true
+      "enabled": false
     }
   }
 }

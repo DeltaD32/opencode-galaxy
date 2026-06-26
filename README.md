@@ -357,26 +357,28 @@ opencode run "quick rename task" --model llm-api/claude-haiku-4-5
 
 ## MCP Servers
 
-MCP servers extend OpenCode with tools for external systems. Only `memory` is enabled by default for the fastest possible startup.
+MCP servers extend OpenCode with tools for external systems. Only `memory` and `skills-mcp` are enabled by default — keeping the always-on tool count at **29 tools**, well under the GPT hard cap of 128.
 
-### Enabled by Default
+> **⚠️ GPT tool cap:** OpenAI GPT models hard-cap at 128 tools per request. `wiz` alone exposes 144 tools — enabling it while using a GPT-model agent will cause a `tool array too large` error. Always enable heavy MCPs only when needed, and disable them before switching back to a GPT agent.
 
-| MCP | Purpose | Type |
-|-----|---------|------|
-| **memory** | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`, invoked via direct node path for reliability) | Local |
+### Enabled by Default (29 tools total)
 
-### Available (Disabled by Default)
+| MCP | Tools | Purpose | Type |
+|-----|-------|---------|------|
+| **memory** | 9 | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`) | Local |
+| **skills-mcp** | 20 | TTT skill catalog discovery and installation (`skills.bmwgroup.net/mcp`) | Remote |
 
-| MCP | Purpose | BMW Infrastructure Required |
-|-----|---------|----------------------------|
-| **skills-mcp** | TTT skill catalog discovery (`skills.bmwgroup.net/mcp`) — enable when browsing/installing skills | `TTT_PAT` env var + BMW network |
-| **jira-atc** | Create/update Jira tickets, read sprints | `atc-jira.azure.cloud.bmw` |
-| **confluence-atc** | Read/write Confluence pages | `bmwgroup.atlassian.net` |
-| **density-mcp** | Alphabet/Density design system components | BMW Nexus registry |
-| **fetch** | Fetch public web pages | BMW npm registry |
-| **grafana** | Query Grafana dashboards | BMW Grafana + service account token |
-| **wiz** | Security findings, CVEs, cloud posture | `mcp.app.wiz.io` (OAuth via BMW) |
-| **playwright** | Browser automation — navigate, click, screenshot, scrape, E2E test | BMW Nexus (`@playwright/mcp`) |
+### Available (Disabled by Default — enable per-session)
+
+| MCP | Tools | Purpose | BMW Infrastructure Required |
+|-----|-------|---------|----------------------------|
+| **wiz** | 144 | Security findings, CVEs, cloud posture | `mcp.app.wiz.io` (OAuth via BMW) — ⚠️ GPT-incompatible alone |
+| **playwright** | 23 | Browser automation — navigate, click, screenshot, scrape, E2E test | BMW Nexus (`@playwright/mcp`) |
+| **density-mcp** | 15 | Alphabet/Density design system components | BMW Nexus registry |
+| **jira-atc** | ~10 | Create/update Jira tickets, read sprints | `atc-jira.azure.cloud.bmw` |
+| **confluence-atc** | ~10 | Read/write Confluence pages | `bmwgroup.atlassian.net` |
+| **fetch** | ~5 | Fetch public web pages | BMW npm registry |
+| **grafana** | ~10 | Query Grafana dashboards | BMW Grafana + service account token |
 
 ### Enabling an MCP
 
