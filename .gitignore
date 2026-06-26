@@ -38,6 +38,9 @@ package-lock.json
 .opencode/
 sessions/
 
+# Local sqlite / scratch
+opencode.db
+
 # Binary assets inside skills (pptx templates, images — too large for git)
 skills/**/*.pptx
 skills/**/*.png

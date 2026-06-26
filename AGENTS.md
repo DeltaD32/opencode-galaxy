@@ -572,6 +572,33 @@ All design and UX requests route through `design-expert`, which owns and orchest
 - Agents MUST explicitly declare a handoff: name the target agent, what to pass, and why.
 - When handing off involving Oracle/APEX context, always pass: APEX version, DB version, relevant table/view/page IDs.
 
+### Context Handoff Protocol (ENFORCING)
+
+**Goal:** eliminate “thin” delegations that cause subagents to lose repo/branch context and
+operate on the wrong directory/files.
+
+**Rule:** Every orchestrator → specialist handoff MUST include a single complete **HANDOFF v1**
+block, and every specialist response MUST use **RESPONSE v1**.
+
+Source of truth: `~/.config/opencode/handoff-protocol.md`
+
+Minimum required fields in HANDOFF v1:
+- handoff_id (unique per task delegation)
+- project name
+- absolute `repo_root` (source of truth)
+- git branch
+- files_to_inspect / files_to_change
+- prior decisions in force
+- exact task + acceptance criteria
+- expected deliverable format (RESPONSE v1)
+
+Minimum required fields in RESPONSE v1:
+- summary of findings
+- file paths changed / to change
+- worker-executable plan (prefer unified diffs)
+- blockers / open questions
+- memory_to_persist (worked/avoided/patterns)
+
 #### Full routing matrix (TTT agents are Copilot-only; custom agents are OpenCode)
 
 | From | To | Trigger |

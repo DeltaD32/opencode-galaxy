@@ -261,6 +261,40 @@ Execute each step in document order. If Step 1 fails, do not run Steps 2 or 3.
 
 ---
 
+## Preconditions on Specialist Output (NEW)
+
+Worker success depends on specialists producing unambiguous, executable instructions.
+
+### Required in the blackboard before execution
+
+The `## Execution Plan` MUST include:
+
+1. A **repo_root** line (absolute path) — worker must never guess CWD.
+2. For every bash command: an explicit `workdir` (or a `cd <repo_root>` inside the command).
+3. For every file edit: an explicit file path (repo-relative or absolute) and either:
+   - a unified diff, or
+   - a full replacement code block.
+
+### If preconditions are missing
+
+If the Execution Plan lacks repo_root / workdir / file paths, the worker must treat this as
+"plan not executable" and block immediately:
+
+- Write to `## Execution Result`: `BLOCKED: Execution Plan missing repo_root/workdir/path details; requires specialist rework.`
+- `mark_status(file_path, "blocked")`
+- Stop.
+
+### RESPONSE v1 / Execution Plan format
+
+Specialists MUST provide either:
+- A RESPONSE v1 `worker_plan.method: diff` with unified diffs, or
+- A RESPONSE v1 `worker_plan.method: steps` with numbered steps.
+
+If the blackboard content is missing a RESPONSE v1 envelope (or it is present but lacks
+repo_root/workdir/paths), treat it as non-executable and BLOCK.
+
+---
+
 ## Cross-Agent Communication
 
 After writing `## Execution Result` and updating the status:

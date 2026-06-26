@@ -626,6 +626,41 @@ programming-expert   design-expert   project-manager      │  returns: ROUTE TO
                route out-of-scope back to orchestrator
 ```
 
+### Context Handoff Protocol (HANDOFF v1 / RESPONSE v1)
+
+Every agent-to-agent message follows the **HANDOFF v1 / RESPONSE v1** protocol defined in [`handoff-protocol.md`](handoff-protocol.md). This prevents the most common failure mode: sub-agents losing working-directory context and operating on wrong files.
+
+**HANDOFF v1** — every orchestrator-to-specialist message must include:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `handoff_id` | ✅ MANDATORY | Unique ID per delegation — format: `<project>-<yyyymmdd>-<seq>` e.g. `apex-fixer-20260626-001` |
+| `project` | ✅ | Project name |
+| `repo_root` | ✅ | Absolute path — source of truth, never inferred |
+| `branch` | ✅ | Git branch name |
+| `files_to_inspect` | ✅ | Scoped file list — prevents filesystem wandering |
+| `files_to_change` | ✅ | Files that may be modified |
+| `prior_decisions` | ✅ | Architectural decisions in force — specialists must not contradict these |
+| `task` | ✅ | Exact task description + acceptance criteria |
+| `deliverable` | ✅ | Must be `RESPONSE v1` |
+
+**RESPONSE v1** — every specialist response must include:
+
+| Field | Required | Description |
+|-------|----------|-------------|
+| `handoff_id` | ✅ | Echo back the originating handoff_id |
+| `context_echo` | ✅ | Echo `repo_root` + `branch` — confirms correct context was used |
+| `summary` | ✅ | Findings summary |
+| `files_to_change` | ✅ | Exact absolute paths |
+| `worker_plan` | ✅ | Unified diff or numbered steps — worker-executable, zero ambiguity |
+| `validation` | ✅ | Command + explicit `workdir` |
+| `blockers` | ✅ | Open questions or blockers |
+| `memory_to_persist` | ✅ | `worked` / `avoided` / `patterns` for the scribe |
+
+**If `repo_root` or `branch` are missing from a handoff, specialists must request a re-handoff — never guess.**
+
+See [`handoff-protocol.md`](handoff-protocol.md) for full templates and worked examples.
+
 ### Creating a Custom Agent
 
 ```bash
@@ -791,6 +826,7 @@ print(f'[routing-cache] +{n} new pairs → {s[\"count\"]} total entries')
 | `WINDOWS-SETUP.md` | Windows gap analysis, open questions (resolved), and implementation plan |
 | `bin/opencode-bmw-wsl2` | WSL2 wrapper script — reads `.env` instead of Keychain, same heal logic |
 | `bin/test-opencode-auth-wsl2` | WSL2 auth diagnostic — checks `.env`, proxy, VPN, OAuth2, LLM API, TTT |
+| `handoff-protocol.md` | **HANDOFF v1 / RESPONSE v1** — mandatory agent communication protocol with templates and worked examples |
 | `routing-matrix.md` | Cross-agent routing documentation |
 | `.gitignore` | Prevents secrets and generated files from being committed |
 | `ai4devops_catalog.md` | BMW AI4DevOps skills catalog reference |

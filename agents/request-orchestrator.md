@@ -190,24 +190,100 @@ paraphrases (0.78–0.80) and different domains (< 0.40) do not. See `routing_ca
 
 | Domain Keywords | Delegate To | Pass Context |
 |---|---|---|
-| `write code`, `fix bug`, `implement`, `refactor`, `angular`, `react`, `python`, `typescript`, `javascript`, `unit test`, `vitest`, `playwright`, `pytest`, `npm`, `nx`, `webpack`, `esbuild`, `frontend code`, `backend`, `full stack`, `api integration`, `rest api`, `data pipeline`, `script`, `automation script`, `embedded`, `c++`, `firmware`, `code review`, `code quality`, `debug`, `build error`, `compile error`, `linting`, `tool-calling agent`, `react agent`, `function calling`, `agentic workflow` | `programming-expert` | Include: language/framework, repo path, error messages, relevant file paths |
-| `ux review`, `ui design`, `figma`, `design system`, `density`, `wireframe`, `prototype`, `accessibility audit`, `wcag`, `a11y`, `component design`, `visual design`, `poster`, `infographic`, `bmw branding`, `bmw ci`, `design tokens`, `color contrast`, `typography`, `layout`, `core-components`, `frontend prototype`, `html mockup`, `figjam`, `architecture diagram`, `flowchart`, `ux writing`, `usability`, `heuristics`, `design feedback`, `design review` | `design-expert` | Include: UI screenshots or URLs, design requirements, Figma file key if applicable |
-| `sprint planning`, `backlog`, `jira ticket`, `jira story`, `epic`, `acceptance criteria`, `definition of ready`, `dor`, `story points`, `velocity`, `burndown`, `pr triage`, `pr overview`, `release notes`, `changelog`, `milestone`, `roadmap`, `retrospective`, `stand-up`, `sprint review`, `backlog refinement`, `git workflow`, `branch strategy`, `capacity planning`, `okr`, `kpi tracking`, `release planning` | `project-manager` | Include: Jira project key, repo/branch context, sprint number, team size |
-| `oracle`, `apex`, `plsql`, `pl/sql`, `ora-`, `oracle sql`, `apex page`, `apex region`, `apex plugin` | `oracle-apex-expert` | Include: APEX version, DB version, error messages, page/region IDs |
-| `uipath`, `rpa`, `dispatcher`, `worker`, `xaml`, `bot`, `automation workflow` | `uipath-rpa-expert` | Include: bot name, XAML file paths, error logs |
-| `jirri`, `cost savings`, `mb1b`, `lt01`, `jirri_cost_savings.py` | `jirri-data-analyst` | Include: data file paths, calculation requirements |
-| `slides`, `ppt`, `pptx`, `deck`, `presentation`, `powerpoint` | `presentation-builder` | Include: audience, deck purpose, content outline |
-| `ghas`, `codeql`, `wiz`, `security findings`, `vulnerabilities`, `cve` | `aaa-security-fixer` | Include: scan platform (GHAS/Wiz), repo, finding IDs |
-| `pi planning`, `sprint health`, `roam`, `art sync`, `program increment`, `agile release train` | `agile-master-pi-planning` | Include: sprint number, PI number, team capacity |
-| `coaching`, `1:1`, `catalyst conversation`, `team coaching`, `po coaching` | `agile-master-catalyst-coaching` | Include: coachee role, session goal |
-| `dor`, `definition of ready`, `jira story readiness`, `backlog compliance` | `dor-agent` | Include: Jira project key, Confluence backlog URL |
-| `opencode upgrade`, `new opencode version`, `brew upgrade opencode`, `wrapper script`, `opencode broken`, `skill install`, `plugin update`, `mcp setup`, `opencode config`, `opencode development` | `opencode-dev-expert` | Include: current version, target version, error output, which component is broken |
-| *(internal — after blackboard Execution Plan is ready)* | `worker` | Include: absolute path to blackboard file |
+| `write code`, `fix bug`, `implement`, `refactor`, `angular`, `react`, `python`, `typescript`, `javascript`, `unit test`, `vitest`, `playwright`, `pytest`, `npm`, `nx`, `webpack`, `esbuild`, `frontend code`, `backend`, `full stack`, `api integration`, `rest api`, `data pipeline`, `script`, `automation script`, `embedded`, `c++`, `firmware`, `code review`, `code quality`, `debug`, `build error`, `compile error`, `linting`, `tool-calling agent`, `react agent`, `function calling`, `agentic workflow` | `programming-expert` | Include a complete **[HANDOFF v1]** block + language/framework, errors, and relevant file paths |
+| `ux review`, `ui design`, `figma`, `design system`, `density`, `wireframe`, `prototype`, `accessibility audit`, `wcag`, `a11y`, `component design`, `visual design`, `poster`, `infographic`, `bmw branding`, `bmw ci`, `design tokens`, `color contrast`, `typography`, `layout`, `core-components`, `frontend prototype`, `html mockup`, `figjam`, `architecture diagram`, `flowchart`, `ux writing`, `usability`, `heuristics`, `design feedback`, `design review` | `design-expert` | Include a complete **[HANDOFF v1]** block + UI screenshots/URLs, design requirements, and Figma file key if applicable |
+| `sprint planning`, `backlog`, `jira ticket`, `jira story`, `epic`, `acceptance criteria`, `definition of ready`, `dor`, `story points`, `velocity`, `burndown`, `pr triage`, `pr overview`, `release notes`, `changelog`, `milestone`, `roadmap`, `retrospective`, `stand-up`, `sprint review`, `backlog refinement`, `git workflow`, `branch strategy`, `capacity planning`, `okr`, `kpi tracking`, `release planning` | `project-manager` | Include a complete **[HANDOFF v1]** block + Jira project key, repo/branch context, sprint number, team size |
+| `oracle`, `apex`, `plsql`, `pl/sql`, `ora-`, `oracle sql`, `apex page`, `apex region`, `apex plugin` | `oracle-apex-expert` | Include a complete **[HANDOFF v1]** block + APEX version, DB version, errors, page/region IDs |
+| `uipath`, `rpa`, `dispatcher`, `worker`, `xaml`, `bot`, `automation workflow` | `uipath-rpa-expert` | Include a complete **[HANDOFF v1]** block + bot name, XAML file paths, error logs |
+| `jirri`, `cost savings`, `mb1b`, `lt01`, `jirri_cost_savings.py` | `jirri-data-analyst` | Include a complete **[HANDOFF v1]** block + data file paths, calculation requirements |
+| `slides`, `ppt`, `pptx`, `deck`, `presentation`, `powerpoint` | `presentation-builder` | Include a complete **[HANDOFF v1]** block + audience, deck purpose, content outline |
+| `ghas`, `codeql`, `wiz`, `security findings`, `vulnerabilities`, `cve` | `aaa-security-fixer` | Include a complete **[HANDOFF v1]** block + scan platform (GHAS/Wiz), repo, finding IDs |
+| `pi planning`, `sprint health`, `roam`, `art sync`, `program increment`, `agile release train` | `agile-master-pi-planning` | Include a complete **[HANDOFF v1]** block + sprint number, PI number, team capacity |
+| `coaching`, `1:1`, `catalyst conversation`, `team coaching`, `po coaching` | `agile-master-catalyst-coaching` | Include a complete **[HANDOFF v1]** block + coachee role, session goal |
+| `dor`, `definition of ready`, `jira story readiness`, `backlog compliance` | `dor-agent` | Include a complete **[HANDOFF v1]** block + Jira project key, Confluence backlog URL |
+| `opencode upgrade`, `new opencode version`, `brew upgrade opencode`, `wrapper script`, `opencode broken`, `skill install`, `plugin update`, `mcp setup`, `opencode config`, `opencode development` | `opencode-dev-expert` | Include a complete **[HANDOFF v1]** block + current version, target version, error output, which component is broken |
+| *(internal — after blackboard Execution Plan is ready)* | `worker` | Include: absolute path to blackboard file (worker input is constrained to this) |
 
-**Handoff syntax:**
+## Handoff Protocol (MANDATORY)
+
+**Problem being fixed:** thin/multi-message handoffs cause specialists to lose
+`repo_root` / `branch` / file scope and then operate on the wrong directory/files.
+
+**Rule:** Every orchestrator → specialist delegation MUST be a single message that
+contains **one complete [HANDOFF v1] block**.
+
+Source of truth: `~/.config/opencode/handoff-protocol.md`.
+
+### Handoff syntax (use verbatim)
+
+`handoff_id` is **mandatory** and must be **unique per task delegation**.
+
+```text
+I'm delegating this to @<agent-name> because <reason>.
+
+[HANDOFF v1]
+handoff_id: <REQUIRED unique id; suggested: <project>-<yyyymmdd>-<sequence> e.g. apex-fixer-20260626-001>
+project: <project-name>
+repo_root: <absolute path to repo root>
+workdir: <absolute path; usually same as repo_root>
+git:
+  branch: <current branch>
+scope:
+  files_to_inspect:
+    - <paths>
+  files_to_change:
+    - <paths>
+prior_decisions_in_force:
+  - <bullets>
+task:
+  description: |
+    <exact task>
+  acceptance_criteria:
+    - <bullets>
+deliverable:
+  response_format: RESPONSE v1
+  expected_artifacts:
+    - <bullets>
+constraints:
+  - Use absolute paths; do not assume CWD.
+  - If context is missing, request a re-handoff (do not guess).
 ```
-I'm delegating this to @<agent-name> because [brief reason].
-[Agent-name], here is the context: [user request + relevant details from table above]
+
+### Example (apex-fixer — replace paths with the real repo_root)
+
+```text
+I'm delegating this to @programming-expert because it's a frontend JS bugfix.
+
+[HANDOFF v1]
+handoff_id: apex-fixer-20260626-001
+project: apex-fixer
+repo_root: /Users/QTE2362/ECC-APPS/<apex-fixer-repo>
+workdir: /Users/QTE2362/ECC-APPS/<apex-fixer-repo>
+git:
+  branch: <your-branch>
+scope:
+  files_to_inspect:
+    - web/index.html
+    - web/app.js
+    - web/setup.html
+  files_to_change:
+    - web/app.js
+prior_decisions_in_force:
+  - Keep SPA tab architecture; no framework migration.
+task:
+  description: |
+    Investigate and fix tab-state persistence (Settings tab resets after refresh).
+  acceptance_criteria:
+    - Refresh preserves last active tab
+    - No regression in setup wizard
+deliverable:
+  response_format: RESPONSE v1
+  expected_artifacts:
+    - Unified diff for worker
+    - Repro + validation steps
+constraints:
+  - Use absolute paths; do not assume CWD.
+  - If context is missing, request a re-handoff (do not guess).
 ```
 
 **Ambiguous requests** — if you cannot apply the tiebreaker above with confidence, escalate to P2.5 (secretary).
