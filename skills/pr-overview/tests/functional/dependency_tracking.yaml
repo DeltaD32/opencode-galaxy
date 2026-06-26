@@ -1,0 +1,9 @@
+name: "pr-overview: Dependency Tracking"
+description: "Test that pr-overview can identify and track PR dependencies (Depends-On: tags)"
+test_type: functionality
+prompt: |
+  I need to check PR #123 and see if it has any dependencies on other PRs. Can you check the dependency chain and let me know if all blocking PRs are ready?
+validation_criteria:
+  - type: tool_called
+    value:
+      name: bash

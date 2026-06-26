@@ -1,0 +1,119 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Figma MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup Figma MCP Server"
+
+objective: |
+  Configure Figma remote MCP server to enable GitHub Copilot to access Figma UI designs,
+  extract design context, generate frontend code from frames, and work with Code Connect
+  mappings directly from GitHub Copilot Chat in VS Code.
+
+prerequisites:
+  - GitHub Copilot license active in VS Code
+  - Figma access with dev license (required for MCP server features)
+  - Access to Figma team containing target UI designs
+  - Frontend project with framework setup (Angular, React, etc.) recommended
+
+estimated_time: "5-10 minutes"
+
+server_definition:
+  server_key: "figma"
+  default_scope: "global"
+  prerequisites: []
+  mcp_config:
+    type: "http"
+    url: "https://mcp.figma.com/mcp"
+
+actions:
+  - "Run setup script: `uv run scripts/setup-mcp.py --server figma --scope [global|project]`"
+  - "Script generates MCP configuration pointing to https://mcp.figma.com/mcp, merges with existing mcp.json"
+  - "Start MCP server: Command Palette (Cmd+Shift+P / Ctrl+Shift+P) → 'MCP: Open User Configuration' → Click 'Start' next to 'figma' → Wait for 'Running' status"
+  - "Authenticate: When prompted by the MCP server, complete Figma OAuth login in browser"
+  - "Verify setup: Open GitHub Copilot Chat (Cmd+Option+B or Ctrl+Alt+I) → Switch to Agent mode → Type `#get_design_context` to confirm tools available"
+  - "Test with link: Copy Figma frame URL → In VS Code prompt 'help me implement the design at [paste-url]'"
+
+tools_used:
+  - setup-mcp.py --server figma (unified setup script)
+  - VS Code MCP configuration panel
+  - GitHub Copilot Chat with Agent mode
+
+expected_outcome:
+  - Figma remote MCP server configured in mcp.json pointing to https://mcp.figma.com/mcp
+  - MCP server shows "Running" status in VS Code
+  - Figma design tools accessible via #get_design_context in GitHub Copilot Chat
+  - GitHub Copilot can generate code from Figma frames using URL-based prompts
+  - Design context (variables, components, layout) extractable from Figma files
+
+validation:
+  - "Check MCP config contains 'figma' entry with URL https://mcp.figma.com/mcp"
+  - "VS Code MCP configuration panel shows 'figma' server with 'Running' status"
+  - "In GitHub Copilot Chat Agent mode, typing '#' shows get_design_context, get_screenshot, get_code_connect_map, get_metadata, get_variable_defs tools"
+  - "Test query with Figma frame URL returns design structure or generates code"
+
+configuration:
+  remote_server:
+    url: "https://mcp.figma.com/mcp"
+    authentication: "OAuth via browser - handled automatically on first connection"
+
+usage_examples:
+  - "Copy Figma URL → In VS Code: 'generate React code for https://figma.com/design/abc123/MyApp?node-id=1-2'"
+  - "@figma get design context for node 1:2 in file abc123"
+  - "@figma extract all design variables from current file"
+  - "@figma get Code Connect mapping for component Button in file abc123"
+  - "Generate component using Density design system from this Figma frame: [paste-url]"
+
+best_practices:
+  - "Start with frontend project that has framework and design system already set up (use Angular template from Frontend Dev Standards)"
+  - "Structure Figma files with clear component hierarchy and proper naming for better code generation"
+  - "Use Code Connect to map Figma components to actual codebase components for consistency"
+  - "Write effective prompts: be specific about framework, design system, and desired output structure"
+  - "Avoid selecting very large or complex frames - break down into smaller components"
+  - "Trigger specific tools explicitly when needed: #get_design_context, #get_screenshot, #get_code_connect_map"
+  - "Add custom rules and instructions to Copilot for project-specific conventions"
+
+troubleshooting:
+  - issue: "Tools not showing up when typing '#' in GitHub Copilot Chat"
+    cause: "MCP server not running or not connected properly"
+    solution: "Restart VS Code; verify server shows 'Running' status in MCP configuration panel; re-authenticate if OAuth session expired"
+
+  - issue: "Connection failed to https://mcp.figma.com/mcp"
+    cause: "Network issue or corporate proxy blocking the connection"
+    solution: "Check network connectivity; verify proxy settings; ensure https://mcp.figma.com is accessible"
+
+  - issue: "Authentication failed or OAuth prompt not appearing"
+    cause: "Browser blocked OAuth popup or session expired"
+    solution: "Restart the MCP server in VS Code; allow browser popups for Figma; try authenticating in default browser"
+
+  - issue: "Generated code doesn't match design system"
+    cause: "GitHub Copilot not aware of project conventions or Code Connect not configured"
+    solution: "Set up Code Connect to map Figma components to codebase; add custom Copilot instructions with design system rules; provide example component structure in prompts"
+
+  - issue: "GitHub Copilot can't access private Figma files"
+    cause: "Insufficient permissions or dev license not active"
+    solution: "Verify Figma dev license active; ensure team access granted by UX Designer"
+
+security_best_practices:
+  - "Remote MCP server uses OAuth authentication - no manual tokens to manage"
+  - "Connection uses HTTPS for secure communication"
+  - "Use project-scoped configuration for team collaboration, global for personal files"
+  - "Figma dev licenses are expensive - confirm business need before requesting"
+
+resources:
+  - name: "Figma MCP Server Official Documentation"
+    url: "https://www.figma.com/developers/docs/mcp"
+  - name: "VS Code MCP Configuration"
+    url: "https://code.visualstudio.com/docs/copilot/copilot-extensibility-overview"
+  - name: "GitHub Copilot Information (ATC)"
+    url: "https://atc.bmwgroup.net/confluence/x/github-copilot"
+  - name: "Figma Access and Teams"
+    url: "https://ux.bmwgroup.net/figma"
+  - name: "Frontend Dev Standards Angular Template"
+    url: "https://atc.bmwgroup.net/confluence/x/frontend-dev-standards"
+  - name: "Write Effective Prompts for Figma"
+    url: "https://www.figma.com/developers/docs/mcp/best-practices/prompts"
+  - name: "Code Connect Documentation"
+    url: "https://www.figma.com/developers/docs/code-connect"
+  - name: "Structure Figma Files for Better Code"
+    url: "https://www.figma.com/developers/docs/mcp/best-practices/file-structure"

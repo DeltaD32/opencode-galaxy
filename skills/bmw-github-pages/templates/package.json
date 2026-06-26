@@ -1,0 +1,14 @@
+{
+  "name": "bmw-static-site",
+  "version": "1.0.0",
+  "private": true,
+  "description": "BMW-styled static site with GitHub Pages deployment",
+  "scripts": {
+    "build": "node scripts/build-site.js",
+    "dev": "node scripts/build-site.js && npx --yes serve dist",
+    "clean": "node -e \"require('fs').rmSync('dist',{recursive:true,force:true})\""
+  },
+  "dependencies": {
+    "mustache": "^4.2.0"
+  }
+}

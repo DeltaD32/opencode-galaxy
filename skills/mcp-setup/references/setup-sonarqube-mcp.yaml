@@ -1,0 +1,169 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# SonarQube MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup SonarQube MCP Server"
+
+objective: |
+  Configure SonarQube MCP server to enable AI agents to query code quality metrics,
+  issues, and security vulnerabilities from BMW CIaaS SonarQube instances directly
+  in GitHub Copilot Chat.
+
+prerequisites:
+  - Docker installed and running
+  - Access to BMW SonarQube instance (ITO, OTO, OTD, ITM, or ITGOV)
+  - SonarQube User Token with appropriate permissions
+
+estimated_time: "5 minutes (including token generation)"
+
+server_definition:
+  server_key: "sonarqube"
+  default_scope: "global"
+  prerequisites: ["docker", "docker_daemon"]
+  docker_image: "nexus.bmwgroup.net/mcp/sonarqube"
+  mcp_config:
+    command: "docker"
+    args:
+      - "run"
+      - "--rm"
+      - "-i"
+      - "--pull"
+      - "always"
+      - "-e"
+      - "SONARQUBE_TOKEN"
+      - "-e"
+      - "SONARQUBE_URL"
+      - "nexus.bmwgroup.net/mcp/sonarqube"
+    env:
+      SONARQUBE_TOKEN: "${input:sonarqube_token}"
+      SONARQUBE_URL: "{{instance_url}}"
+  inputs:
+    - type: "promptString"
+      id: "sonarqube_token"
+      description: "SonarQube User Token"
+      password: true
+  instance_selection:
+    placeholder: "{{instance_url}}"
+    prompt: "BMW SonarQube Instances (CIaaS)"
+    options:
+      ito: "https://ito-ci.bmwgroup.net/sonar"
+      oto: "https://oto-ci.bmwgroup.net/sonar"
+      otd: "https://otd-ci.bmwgroup.net/sonar"
+      itm: "https://itm-ci.bmwgroup.net/sonar"
+      itgov: "https://itgov-ci.bmwgroup.net/sonar"
+    allow_custom: true
+
+actions:
+  - "Run setup script in interactive mode (will prompt for details): `uv run scripts/setup-mcp.py --server sonarqube` or with explicit scope: `--scope [global|project]`"
+  - "For AI agent command-line mode: `uv run scripts/setup-mcp.py --server sonarqube --instance [ito|oto|otd|itm|itgov|custom-url] --scope [global|project]`"
+  - "Script will check Docker, pull the Nexus-mirrored SonarQube image, generate MCP config with Docker command, store token directly in config (no environment variables)"
+  - "Generate SonarQube User Token: Navigate to [instance-url]/account/security → Click 'Generate Tokens' → Name='MCP Server - [machine-name]', Type='User Token', Expires='90 days' → Click 'Generate' → Copy token immediately"
+  - "CRITICAL: User must save the token securely - VS Code will prompt for it when starting the server"
+  - "Start MCP server: Open Command Palette → 'MCP: Open User Configuration' → Click 'Start' next to 'sonarqube' → VS Code will prompt for token → Paste token into secure prompt → Wait for 'Running' status"
+  - "Verify setup: Test with `@sonarqube help` in Copilot Chat"
+
+tools_used:
+  - Docker (for the Nexus-mirrored mcp/sonarqube image)
+  - setup-mcp.py --server sonarqube (unified setup script)
+  - BMW CIaaS SonarQube UI (for token generation)
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - SonarQube MCP configuration created with Docker command
+  - SonarQube user token stored in mcp.json args array
+  - Docker image nexus.bmwgroup.net/docker-hub/mcp/sonarqube available
+  - MCP server shows "Running" status
+  - AI agent can query SonarQube via @sonarqube commands
+  - Correct BMW CIaaS instance URL configured
+
+validation:
+  - "Run `docker images | grep nexus.bmwgroup.net/mcp/sonarqube` to verify Docker image available"
+  - "Check MCP config file contains 'sonarqube' entry with correct SONARQUBE_URL and SONARQUBE_TOKEN in args array"
+  - "Verify token is not placeholder value"
+  - "MCP configuration panel shows 'sonarqube' server with 'Running' status"
+  - "Test `@sonarqube help` returns list of commands (get project metrics, list issues, analyze code quality, etc.)"
+
+configuration:
+  bmw_instances:
+    ito:
+      name: "CIaaS ITO"
+      url: "https://ito-ci.bmwgroup.net/sonar"
+    oto:
+      name: "CIaaS OTO"
+      url: "https://oto-ci.bmwgroup.net/sonar"
+    otd:
+      name: "CIaaS OTD"
+      url: "https://otd-ci.bmwgroup.net/sonar"
+    itm:
+      name: "CIaaS ITM"
+      url: "https://itm-ci.bmwgroup.net/sonar"
+    itgov:
+      name: "CIaaS ITGOV"
+      url: "https://itgov-ci.bmwgroup.net/sonar"
+
+  token_requirements:
+    type: "User Token"
+    permissions: "Read-only access recommended"
+    expiration: "90 days recommended"
+    generation_path: "/account/security"
+    format: "Starts with 'squ_'"
+
+  ai_agent_cli_usage: |
+    Valid instance names: ito, oto, otd, itm, itgov
+    Or any custom URL starting with https://
+    Example: uv run scripts/setup-mcp.py --server sonarqube --instance ito --scope global
+
+usage_examples:
+  - "@sonarqube show code quality metrics for project 'my-project'"
+  - "@sonarqube list security vulnerabilities in 'my-project'"
+  - "@sonarqube get code coverage for 'my-project'"
+  - "@sonarqube show open issues by severity"
+  - "@sonarqube analyze technical debt in 'my-project'"
+
+troubleshooting:
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid or expired User Token"
+    solution: "Generate new token at [instance-url]/account/security, open MCP config, update SONAR_TOKEN value in args section, click 'Restart' in MCP configuration"
+
+  - issue: "docker: command not found or Cannot connect to Docker daemon"
+    cause: "Docker not installed or daemon not running"
+    solution: "Linux: `curl -fsSL https://get.docker.com -o get-docker.sh && sudo sh get-docker.sh && sudo systemctl start docker`; macOS: `brew install --cask docker` or download Docker Desktop; Windows: Install Docker Desktop"
+
+  - issue: "Cannot pull Docker image"
+    cause: "Network issues or image not available"
+    solution: "Manually pull: `docker pull nexus.bmwgroup.net/docker-hub/mcp/sonarqube`; If behind proxy, configure Docker proxy settings (see https://docs.docker.com/network/proxy/)"
+
+  - issue: "Permission denied when running Docker"
+    cause: "User not in docker group (Linux)"
+    solution: "Add user to docker group: `sudo usermod -aG docker $USER && newgrp docker`"
+
+  - issue: "Connection timeout or network errors"
+    cause: "SonarQube instance URL incorrect or not accessible"
+    solution: "Verify URL in browser, check if VPN/proxy needed, open MCP config and update SONAR_HOST_URL value in args section, restart MCP server"
+
+security_best_practices:
+  - "Use token expiration: Set tokens to expire after 90 days"
+  - "Minimal permissions: User tokens should have read-only access"
+  - "Rotate regularly: Generate new tokens periodically and update MCP config"
+  - "Secure storage: Secrets stored in MCP config with file permissions 600 (read/write for owner only)"
+  - "Monitor usage: Check token usage in SonarQube security settings"
+  - "Protect config file: Ensure mcp.json is not committed to version control"
+
+uninstall:
+  steps:
+    - "Remove Docker image: `docker rmi nexus.bmwgroup.net/docker-hub/mcp/sonarqube`"
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete 'sonarqube' entry from mcpServers (removes stored credentials)"
+
+resources:
+  - name: "SonarQube MCP Repository"
+    url: "https://github.com/SonarSource/sonarqube-mcp-server"
+  - name: "SonarQube API Documentation"
+    url: "https://docs.sonarqube.org/latest/extend/web-api/"
+  - name: "SonarQube User Token Docs"
+    url: "https://docs.sonarqube.org/latest/user-guide/user-account/generating-and-using-tokens/"
+  - name: "Docker Installation"
+    url: "https://docs.docker.com/get-docker/"
+  - name: "MCP Protocol"
+    url: "https://modelcontextprotocol.io/"

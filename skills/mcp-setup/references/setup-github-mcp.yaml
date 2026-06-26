@@ -1,0 +1,211 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# GitHub MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup GitHub MCP Server"
+
+objective: |
+  Configure GitHub MCP server to enable AI agents to interact with GitHub repositories,
+  issues, pull requests, and workflows directly from GitHub Copilot Chat.
+
+prerequisites:
+  - VS Code 1.99+
+  - Docker installed and running (for ATC/CodeCraft instances)
+  - GitHub Personal Access Token (PAT) with appropriate scopes
+
+estimated_time: "3-5 minutes (including PAT generation)"
+
+server_definition:
+  default_scope: "global"
+  instances:
+    ghe:
+      server_key: "github-ghe-local"
+      prerequisites: ["docker", "docker_daemon"]
+      docker_image: "nexus.bmwgroup.net/github/github-mcp-server:latest"
+      mcp_config:
+        command: "docker"
+        args:
+          - "run"
+          - "-i"
+          - "--rm"
+          - "-e"
+          - "GITHUB_PERSONAL_ACCESS_TOKEN"
+          - "-e"
+          - "GITHUB_HOST"
+          - "-e"
+          - "GITHUB_TOOLSETS"
+          - "nexus.bmwgroup.net/github/github-mcp-server"
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: "${input:ghe_github_token}"
+          GITHUB_HOST: "https://bmw.ghe.com/"
+          GITHUB_TOOLSETS: "default"
+      inputs:
+        - type: "promptString"
+          id: "ghe_github_token"
+          description: "GitHub Personal Access Token"
+          password: true
+    atc:
+      server_key: "github-atc-local"
+      prerequisites: ["docker", "docker_daemon"]
+      docker_image: "nexus.bmwgroup.net/github/github-mcp-server:latest"
+      mcp_config:
+        command: "docker"
+        args:
+          - "run"
+          - "-i"
+          - "--rm"
+          - "-e"
+          - "GITHUB_PERSONAL_ACCESS_TOKEN"
+          - "-e"
+          - "GITHUB_HOST"
+          - "-e"
+          - "GITHUB_TOOLSETS"
+          - "nexus.bmwgroup.net/github/github-mcp-server"
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: "${input:atc_github_token}"
+          GITHUB_HOST: "https://atc-github.azure.cloud.bmw"
+          GITHUB_TOOLSETS: "default"
+      inputs:
+        - type: "promptString"
+          id: "atc_github_token"
+          description: "GitHub Personal Access Token"
+          password: true
+    codecraft:
+      server_key: "github-codecraft-local"
+      prerequisites: ["docker", "docker_daemon"]
+      docker_image: "nexus.bmwgroup.net/github/github-mcp-server:latest"
+      mcp_config:
+        command: "docker"
+        args:
+          - "run"
+          - "-i"
+          - "--rm"
+          - "-e"
+          - "GITHUB_PERSONAL_ACCESS_TOKEN"
+          - "-e"
+          - "GITHUB_HOST"
+          - "-e"
+          - "GITHUB_TOOLSETS"
+          - "nexus.bmwgroup.net/github/github-mcp-server"
+        env:
+          GITHUB_PERSONAL_ACCESS_TOKEN: "${input:codecraft_github_token}"
+          GITHUB_HOST: "https://cc-github.bmwgroup.net"
+          GITHUB_TOOLSETS: "default"
+      inputs:
+        - type: "promptString"
+          id: "codecraft_github_token"
+          description: "GitHub Personal Access Token"
+          password: true
+
+actions:
+  - "Ask user to choose GitHub instance: 'ghe' (https://bmw.ghe.com), 'atc' (https://atc-github.azure.cloud.bmw), or 'codecraft' (https://cc-github.bmwgroup.net)"
+  - "Ask user to choose configuration scope: 'global' (user-wide, applies to all workspaces) or 'project' (workspace-specific, stored in .vscode/mcp.json)"
+  - "Run automated setup script with chosen instance and scope: `uv run scripts/setup-mcp.py --server github --instance [ghe|atc|codecraft] --scope [global|project]`"
+  - "Wait for script completion - it will verify prerequisites (Docker for ATC/CodeCraft), create MCP config directory, pull Docker image if needed, and generate configuration"
+  - "Guide user to generate PAT at the appropriate URL (GHE: https://bmw.ghe.com/settings/tokens/new, ATC: https://atc-github.azure.cloud.bmw/settings/tokens/new, CodeCraft: https://cc-github.bmwgroup.net/settings/tokens/new) with Note='MCP Server - GitHub [INSTANCE] - [machine-name]', Expiration='90 days', and scopes: repo, read:org, read:user, gist"
+  - "CRITICAL: User must copy token immediately (starts with 'ghp_') - it won't be visible again after leaving the page"
+  - "Start MCP server: Open Command Palette (Ctrl+Shift+P / Cmd+Shift+P) → Run 'MCP: Open User Configuration' → Click 'Start' next to 'github' server"
+  - "VS Code will automatically prompt for GitHub Personal Access Token in a secure input field → Paste token when prompted → VS Code will securely store it"
+  - "Verify setup: Test with `@github help` in Copilot Chat - should list available GitHub commands"
+
+tools_used:
+  - setup-mcp.py --server github --instance [ghe|atc|codecraft] (unified setup script)
+  - Docker (for ATC/CodeCraft instances)
+  - GitHub PAT generation UI
+  - VS Code Command Palette
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - GitHub MCP server configuration created in chosen scope location
+  - GitHub PAT stored securely in mcp.json
+  - MCP server status shows "Running" in VS Code
+  - AI agent can execute GitHub commands via @github prefix in Copilot Chat
+  - Test queries return expected GitHub data
+
+validation:
+  - "Run `uvx --version` to confirm uvx is installed and accessible"
+  - "Verify MCP config file exists at correct location (global: ~/.config/Code/User/globalStorage/mcp.json on Linux/macOS or %APPDATA%\\Code\\User\\globalStorage\\mcp.json on Windows; project: .vscode/mcp.json)"
+  - "Check mcp.json contains 'github' server entry with token configured"
+  - "MCP configuration panel shows server with 'Running' status"
+  - "Test `@github help` in Copilot Chat returns list of commands (create issue, list PRs, search repositories, etc.)"
+
+configuration:
+  github_instances:
+    ghe:
+      url: "https://bmw.ghe.com"
+      token_url: "https://bmw.ghe.com/settings/tokens/new"
+      transport: "Docker (nexus.bmwgroup.net/github/github-mcp-server)"
+    atc:
+      url: "https://atc-github.azure.cloud.bmw"
+      token_url: "https://atc-github.azure.cloud.bmw/settings/tokens/new"
+      transport: "Docker (nexus.bmwgroup.net/github/github-mcp-server)"
+    codecraft:
+      url: "https://cc-github.bmwgroup.net"
+      token_url: "https://cc-github.bmwgroup.net/settings/tokens/new"
+      transport: "Docker (nexus.bmwgroup.net/github/github-mcp-server)"
+
+  token_requirements:
+    scopes:
+      - "repo (Full control of private repositories)"
+      - "read:org (Read org and team membership)"
+      - "read:user (Read user profile data)"
+      - "gist (Create and read gists)"
+    expiration: "90 days recommended"
+    format: "Starts with 'ghp_'"
+
+usage_examples:
+  - "@github list open issues in DX/token-toms-toolbelt"
+  - "@github create issue 'Bug: Setup script fails' with label 'bug'"
+  - "@github show PR #42 details"
+  - "@github list my open pull requests"
+  - "@github search repositories owned by DX"
+
+troubleshooting:
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid or expired Personal Access Token"
+    solution: "Generate new token at your GitHub instance's token page (GHE: https://bmw.ghe.com/settings/tokens/new, ATC: https://atc-github.azure.cloud.bmw/settings/tokens/new, CodeCraft: https://cc-github.bmwgroup.net/settings/tokens/new), update mcp.json with new token value in GITHUB_PERSONAL_ACCESS_TOKEN field, save file, restart VS Code, click 'Restart' in MCP configuration"
+
+  - issue: "uvx: command not found"
+    cause: "uvx not installed or not in PATH"
+    solution: "Linux/macOS: `curl -LsSf https://astral.sh/uv/install.sh | sh && source ~/.zshrc`; Windows PowerShell: `irm https://astral.sh/uv/install.ps1 | iex`"
+
+  - issue: "Token not being recognized"
+    cause: "Token not properly set in MCP configuration file"
+    solution: "Open mcp.json file, verify token is correctly formatted in JSON (no extra quotes or escape characters), ensure it's in the GITHUB_PERSONAL_ACCESS_TOKEN field, restart VS Code and restart GitHub MCP server"
+
+  - issue: "Failed to pull Docker image (ATC/CodeCraft)"
+    cause: "Network issues or Docker not properly configured"
+    solution: "Check Docker is running: `docker ps`, test Docker pull manually: `docker pull nexus.bmwgroup.net/github/github-mcp-server:latest`, ensure you're connected to the BMW network with access to Nexus"
+
+  - issue: "Docker daemon not running (ATC/CodeCraft)"
+    cause: "Docker service is not started"
+    solution: "Linux: `sudo systemctl start docker`, macOS/Windows: Start Docker Desktop application, verify with `docker ps`"
+
+  - issue: "Token has insufficient permissions"
+    cause: "Missing required scopes on the Personal Access Token"
+    solution: "Go to your GitHub instance's tokens page (GHE: https://bmw.ghe.com/settings/tokens, ATC: https://atc-github.azure.cloud.bmw/settings/tokens, CodeCraft: https://cc-github.bmwgroup.net/settings/tokens), find token, click 'Edit', ensure all required scopes checked (repo, read:org, read:user, gist), click 'Update token', restart MCP server"
+
+security_best_practices:
+  - "Use token expiration: Set tokens to expire after 90 days"
+  - "Minimal scopes: Only grant the scopes you need"
+  - "Rotate regularly: Generate new tokens periodically"
+  - "Secure storage: Store tokens in MCP config file (not in code or scripts)"
+  - "File permissions: Ensure MCP config file has appropriate read permissions"
+  - "Monitor usage: Check token usage at your GitHub instance's tokens page"
+
+uninstall:
+  steps:
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete the 'github' entry from mcpServers (this removes stored token)"
+    - "Optional (ATC/CodeCraft): Remove Docker image: `docker rmi nexus.bmwgroup.net/github/github-mcp-server:latest`"
+
+resources:
+  - name: "GitHub MCP Repository"
+    url: "https://github.com/github/github-mcp-server"
+  - name: "GitHub PAT Documentation"
+    url: "https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/creating-a-personal-access-token"
+  - name: "uvx Documentation"
+    url: "https://docs.astral.sh/uv/"
+  - name: "MCP Protocol"
+    url: "https://modelcontextprotocol.io/"

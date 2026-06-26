@@ -1,0 +1,51 @@
+# Secrets and credentials
+.env
+*.key
+*.pem
+*.token
+
+# Backup files
+*.hardcoded-backup-*
+*.cache-fix-backup-*
+opencode.json.dep
+opencode copy.json
+
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Logs
+*.log
+logs/
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+
+# Temporary files
+*.tmp
+*.swp
+*.swo
+*~
+
+# Node modules (if any plugins install deps)
+node_modules/
+package-lock.json
+
+# OpenCode session data
+.opencode/
+sessions/
+
+# Binary assets inside skills (pptx templates, images — too large for git)
+skills/**/*.pptx
+skills/**/*.png
+skills/**/*.jpg
+skills/**/*.jpeg
+skills/**/*.gif
+skills/**/*.mp4
+skills/**/*.mp3
+skills/**/*.pdf
+skills/**/*.zip
+skills/**/*.venv

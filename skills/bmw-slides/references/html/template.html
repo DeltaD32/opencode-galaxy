@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>{title}</title>
+<style>
+/* {base-css} */
+
+/* {overrides-css} */
+</style>
+</head>
+<body>
+
+<div class="progress-bar" id="progress" style="width:0%"></div>
+
+<div class="deck" id="deck">
+
+<!-- {slides} -->
+
+</div><!-- /deck -->
+
+<!-- ── Navigation ──────────────────────────────────────────────────────────── -->
+<div class="nav">
+  <button class="nav-btn" id="btn-prev" onclick="navigate(-1)" disabled>&#8249;</button>
+  <div class="dots" id="dots"></div>
+  <span class="counter" id="counter">1 / {total}</span>
+  <button class="nav-btn" id="btn-next" onclick="navigate(1)">&#8250;</button>
+</div>
+
+<script>
+const TOTAL = {total};
+let current = 1;
+const dots = document.getElementById('dots');
+const counter = document.getElementById('counter');
+const btnPrev = document.getElementById('btn-prev');
+const btnNext = document.getElementById('btn-next');
+const progress = document.getElementById('progress');
+
+for (let i = 1; i <= TOTAL; i++) {
+  const d = document.createElement('button');
+  d.className = 'dot' + (i === 1 ? ' active' : '');
+  d.onclick = () => goTo(i);
+  dots.appendChild(d);
+}
+
+function goTo(n) {
+  document.getElementById('slide-' + current).classList.remove('active');
+  dots.children[current - 1].classList.remove('active');
+  current = Math.max(1, Math.min(TOTAL, n));
+  document.getElementById('slide-' + current).classList.add('active');
+  dots.children[current - 1].classList.add('active');
+  counter.textContent = current + ' / ' + TOTAL;
+  btnPrev.disabled = current === 1;
+  btnNext.disabled = current === TOTAL;
+  progress.style.width = ((current / TOTAL) * 100) + '%';
+}
+
+function navigate(dir) { goTo(current + dir); }
+
+/* Keyboard navigation */
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight' || e.key === 'ArrowDown') navigate(1);
+  if (e.key === 'ArrowLeft'  || e.key === 'ArrowUp')   navigate(-1);
+});
+
+/* Touch / swipe navigation */
+let touchStartX = 0;
+document.addEventListener('touchstart', e => {
+  touchStartX = e.changedTouches[0].screenX;
+}, { passive: true });
+document.addEventListener('touchend', e => {
+  const diff = e.changedTouches[0].screenX - touchStartX;
+  if (Math.abs(diff) > 50) navigate(diff < 0 ? 1 : -1);
+});
+</script>
+</body>
+</html>

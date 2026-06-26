@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About &mdash; {{site.name}}</title>
+  <link rel="stylesheet" href="{{basePath}}/assets/styles.css">
+</head>
+<body>
+
+{{{header}}}
+
+<!-- Hero -->
+<section class="hero" style="padding: var(--space-12) 0;">
+  <div class="container" style="text-align: center;">
+    <div class="hero-eyebrow">{{site.organization}}</div>
+    <h1>About</h1>
+    <p class="hero-tagline" style="margin: var(--space-4) auto 0;">{{site.tagline}}</p>
+  </div>
+</section>
+
+<div class="content-page">
+
+  <p>{{about.intro}}</p>
+
+  {{#about.sections}}
+  <h2>{{title}}</h2>
+  <p>{{content}}</p>
+  {{/about.sections}}
+
+</div>
+
+{{{footer}}}
+
+</body>
+</html>

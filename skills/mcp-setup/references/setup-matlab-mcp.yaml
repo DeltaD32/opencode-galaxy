@@ -1,0 +1,81 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# MATLAB MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup MATLAB MCP Server"
+
+objective: |
+  Configure MATLAB MCP server to enable AI agents to interact with MATLAB
+  for numerical computing, simulation, data analysis, and running MATLAB scripts
+  directly from GitHub Copilot Chat in VS Code.
+
+prerequisites:
+  - MATLAB R2023b or later installed (e.g. C:\Program Files\MATLAB_R2023b_x64)
+  - MATLAB MCP core server binary available (matlab-mcp-core-server-win64.exe)
+  - VS Code 1.99+
+  - Windows environment (stdio-based server with Windows executable)
+
+estimated_time: "5-10 minutes"
+
+server_definition:
+  server_key: "matlab"
+  default_scope: "project"
+  prerequisites: []
+  mcp_config:
+    type: "stdio"
+    command: "C:\\programs\\matlab-mcp\\matlab-mcp-core-server-win64.exe"
+    args:
+      - "--matlab-root=C:\\Program Files\\MATLAB_R2023b_x64"
+      - "--initial-working-folder=${workspaceFolder}"
+      - "--matlab-display-mode=nodesktop"
+      - "--disable-telemetry=true"
+
+actions:
+  - "Verify MATLAB is installed and the MATLAB root path is correct (e.g. C:\\Program Files\\MATLAB_R2023b_x64)"
+  - "Verify the MATLAB MCP core server binary exists at the configured path (e.g. C:\\programs\\matlab-mcp\\matlab-mcp-core-server-win64.exe) if not installed guide the user to https://github.com/matlab/matlab-mcp-core-server/releases to download the latest version"
+  - "Ask user for correct paths if defaults don't match their environment: MATLAB root, MCP server binary location, and initial working folder"
+  - "Run setup script: `uv run scripts/setup-mcp.py --server matlab --scope [global|project]`"
+  - "Script generates MCP configuration with stdio transport, merges with existing mcp.json"
+  - "Start MCP server: Command Palette (Cmd+Shift+P / Ctrl+Shift+P) → 'MCP: Open User Configuration' → Click 'Start' next to 'matlab' → Wait for 'Running' status"
+  - "Verify setup: Open GitHub Copilot Chat → Switch to Agent mode → Test with a MATLAB command"
+
+tools_used:
+  - setup-mcp.py --server matlab (unified setup script)
+  - VS Code MCP configuration panel
+  - GitHub Copilot Chat with Agent mode
+
+expected_outcome:
+  - MATLAB MCP server configured in mcp.json with stdio transport
+  - MCP server shows "Running" status in VS Code
+  - MATLAB tools accessible via GitHub Copilot Chat
+  - AI agents can execute MATLAB commands and scripts
+
+validation:
+  - "Check MCP config contains 'matlab' entry with stdio transport and correct executable path"
+  - "VS Code MCP configuration panel shows 'matlab' server with 'Running' status"
+  - "Test query in GitHub Copilot Chat Agent mode returns MATLAB output"
+
+notes:
+  - "Paths in mcp_config use Windows-style backslashes — adjust if your MATLAB installation differs"
+  - "The --initial-working-folder should point to your MATLAB project directory"
+  - "The --matlab-display-mode=nodesktop runs MATLAB without a desktop UI for headless operation"
+  - "Telemetry is disabled by default via --disable-telemetry=true"
+
+troubleshooting:
+  - issue: "Server fails to start with 'file not found' error"
+    cause: "MATLAB MCP server binary path is incorrect"
+    solution: "Verify the path to matlab-mcp-core-server-win64.exe exists; update mcp.json command path if needed"
+
+  - issue: "MATLAB engine fails to initialize"
+    cause: "MATLAB root path is incorrect or MATLAB is not properly installed"
+    solution: "Check --matlab-root argument points to a valid MATLAB installation; verify MATLAB license is active"
+
+  - issue: "Server starts but no tools appear in Copilot Chat"
+    cause: "MCP server connection not established properly"
+    solution: "Restart VS Code; check Output panel → 'GitHub Copilot Chat' for error messages; verify stdio transport is working"
+
+security_best_practices:
+  - "Use project-scoped configuration to avoid exposing local paths globally"
+  - "Telemetry is disabled by default for corporate compliance"
+  - "Ensure the MATLAB MCP server binary is obtained from a trusted source"

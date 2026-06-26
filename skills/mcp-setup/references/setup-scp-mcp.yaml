@@ -1,0 +1,179 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+name: "Setup SCP MCP Server"
+
+objective: |
+  Configure SCP MCP server so AI agents can create and manage BMW Group SCP
+  resources (projects, applications, environments, and PostgreSQL deployments)
+  via GitHub Copilot Chat.
+
+prerequisites:
+  - uv installed and available in PATH
+  - Access to clone https://atc-github.azure.cloud.bmw/ATC/scp-mcp
+  - SCP Customer API credentials (API_KEY, CLIENT_ID, CLIENT_SECRET)
+  - SCP Application IDs (APPID, APPD_ID_PROD, APPD_ID_INT)
+  - Cost center and WBS information
+  - Owner email addresses
+
+estimated_time: "10-15 minutes (including credentials setup)"
+
+server_definition:
+  server_key: "scp-mcp"
+  default_scope: "project"
+  prerequisites: ["uv"]
+  mcp_config:
+    url: "http://localhost:8000/mcp"
+    type: "http"
+
+actions:
+  - "Clone SCP MCP repository: `git clone https://atc-github.azure.cloud.bmw/ATC/scp-mcp.git && cd scp-mcp`"
+  - "Create credentials file: `mkdir -p secret` and create `secret/.env` using the template in this reference"
+  - "MANDATORY: Populate all required values in `secret/.env`. Never paste credentials into chat."
+  - "Run setup script from workspace root so project config is written to workspace `.vscode/mcp.json`: `uv run .github/skills/mcp-setup/scripts/setup-mcp.py --server scp --scope project`"
+  - "Final handoff step (default): Do NOT start the runtime automatically. Instead, tell the user exactly what to run to start/stop the server so the user controls runtime lifecycle."
+
+agent_handoff_policy:
+  default_mode: "config-only"
+  rules:
+    - "Default behavior: finish with configuration complete and provide explicit start/stop commands to the user."
+    - "Do not ask the user to click 'Start' in MCP UI as the final step."
+    - "Do not auto-start the Python MCP runtime unless the user explicitly asks for runtime start/validation."
+    - "If the user requests full validation, then start runtime, verify endpoint reachability, and attempt `@scp-mcp help`."
+
+manual_steps:
+  - "1. Open terminal in `scp-mcp` repository"
+  - "2. Start runtime: `uv run --python 3.11 --with-requirements requirements.txt main.py --transport streamable-http --host 0.0.0.0 --port 8000`"
+  - "3. Stop runtime when finished: Ctrl+C in the same terminal"
+  - "4. Optional validation (only when requested): `curl -i http://localhost:8000/mcp` (HTTP 406 is acceptable for plain GET)"
+  - "5. Optional Copilot validation (only when requested): `@scp-mcp help`"
+
+completion_requirements:
+  - "MCP configuration entry exists for 'scp-mcp' in workspace-level `.vscode/mcp.json` (project scope) or global mcp.json (global scope)"
+  - "SCP MCP repository is cloned locally"
+  - "Credentials are populated in `scp-mcp/secret/.env` (no placeholders)"
+  - "Agent has provided explicit start/stop commands to the user so runtime lifecycle stays user-controlled"
+
+full_validation_requirements:
+  - "SCP MCP Python process is running"
+  - "http://localhost:8000/mcp is reachable"
+  - "`@scp-mcp help` was attempted in Copilot Chat"
+
+enforcement:
+  - "Do not mark setup complete if only mcp.json was created and credentials/repository steps were skipped."
+  - "For default config-only mode, finish by giving the user start/stop commands instead of auto-starting runtime."
+  - "Runtime start and endpoint verification are mandatory only when user explicitly requests full validation."
+  - "If full-validation endpoint check fails, continue troubleshooting until runtime is healthy or user stops the process."
+
+tools_used:
+  - Git (for cloning repository)
+  - uv (for Python runtime and dependency resolution)
+  - setup-mcp.py --server scp (unified setup script for mcp.json generation)
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - SCP MCP repository cloned locally
+  - "`scp-mcp/secret/.env` exists and contains valid credentials"
+  - VS Code MCP configuration includes `scp-mcp`
+  - User has clear start/stop commands and controls when runtime is running
+
+expected_outcome_full_validation:
+  - Python MCP server running on localhost:8000
+  - MCP endpoint reachable at http://localhost:8000/mcp
+  - AI agent can call SCP MCP tools via `@scp-mcp`
+
+validation:
+  - "Check repository cloned: `ls -la scp-mcp/src` should show SCP source files"
+  - "Verify uv installed: `uv --version` returns installed version"
+  - "Verify credentials file exists: `ls -la scp-mcp/secret/.env`"
+  - "Verify VS Code config: `.vscode/mcp.json` contains `scp-mcp` with type `http` and url `http://localhost:8000/mcp`"
+  - "Provide runtime control commands to user: start/stop command pair"
+
+validation_full:
+  - "Start server: `cd scp-mcp && uv run --python 3.11 --with-requirements requirements.txt main.py --transport streamable-http --host 0.0.0.0 --port 8000`"
+  - "Test endpoint: `curl -i http://localhost:8000/mcp` returns an HTTP response (406 is acceptable for plain GET)"
+  - "Test with Copilot: `@scp-mcp help` returns available SCP commands"
+
+configuration:
+  env_template: |
+    API_KEY=your-scp-api-key-here
+    CLIENT_ID=your-oauth-client-id-here
+    CLIENT_SECRET=your-oauth-client-secret-here
+    APPID=your-application-id-here
+    APPD_ID_PROD=production-app-domain-id
+    APPD_ID_INT=integration-app-domain-id
+    COSTCENTER=your-cost-center-code
+    WBS=your-wbs-element
+    OWNER_EMAIL=primary.owner@bmw.com
+    OWNER_EMAIL2=secondary.owner@bmw.com
+
+  credential_sources:
+    api_key: "Obtain from SCP Customer API portal or platform admin"
+    client_credentials: "OAuth client ID and secret from SCP OAuth registration"
+    app_domain_ids: "Application domain IDs from SCP console for prod and integration environments"
+    cost_center_wbs: "Financial tracking codes from project management or finance team"
+    owner_emails: "BMW email addresses of project owners/administrators"
+
+usage_examples:
+  - "@scp-mcp create new project with name 'my-project'"
+  - "@scp-mcp list all applications in project 'my-project'"
+  - "@scp-mcp create environment 'dev' for application 'my-app'"
+  - "@scp-mcp provision PostgreSQL server in environment 'prod'"
+  - "@scp-mcp get application details for 'my-app'"
+
+troubleshooting:
+  - issue: "uv not found"
+    cause: "uv is not installed or not in PATH"
+    solution: "Install uv (https://docs.astral.sh/uv/getting-started/installation/) and restart terminal. Verify with `uv --version`."
+
+  - issue: "Python dependency build fails with C++ build tools error"
+    cause: "Using an incompatible interpreter version that triggers native build requirements"
+    solution: "Run with Python 3.11 via uv: `uv run --python 3.11 --with-requirements requirements.txt main.py --transport streamable-http --host 0.0.0.0 --port 8000`."
+
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid API credentials or expired tokens"
+    solution: "Verify API_KEY, CLIENT_ID, and CLIENT_SECRET in `scp-mcp/secret/.env` are current and complete. Regenerate credentials if needed, then restart the Python MCP process."
+
+  - issue: "Cannot connect to http://localhost:8000/mcp"
+    cause: "Server is not running, crashed on startup, or port conflict"
+    solution: "Restart server from `scp-mcp` with the uv command above. Check whether port 8000 is occupied and change port only if necessary, then update `.vscode/mcp.json` accordingly."
+
+  - issue: "MCP server not appearing in VS Code"
+    cause: "Configuration not loaded or wrong config scope/path"
+    solution: "Run setup script from workspace root for project scope and verify `.vscode/mcp.json` has `scp-mcp`. Reload VS Code and test endpoint reachability."
+
+  - issue: "Repository clone fails with authentication error"
+    cause: "No access to ATC GitHub instance or missing authentication"
+    solution: "Ensure access to https://atc-github.azure.cloud.bmw and configure authentication. Contact repository owner if access is missing."
+
+security_best_practices:
+  - "Store credentials in `scp-mcp/secret/.env` only (never commit to git)"
+  - "Add `secret/` to `.gitignore` to prevent accidental commits"
+  - "Use separate credentials for development and production"
+  - "Rotate API keys and secrets regularly (every 90 days recommended)"
+  - "Limit credential access to only required personnel"
+  - "Monitor API usage for anomalies"
+
+uninstall:
+  steps:
+    - "Stop the running SCP MCP Python process"
+    - "Delete cloned repository if no longer needed: `rm -rf scp-mcp`"
+    - "Remove MCP configuration entry from mcp.json (delete 'scp-mcp' server block)"
+    - "Optional: Remove credentials directory: `rm -rf scp-mcp/secret`"
+
+resources:
+  - name: "SCP MCP Server Repository"
+    url: "https://atc-github.azure.cloud.bmw/ATC/scp-mcp"
+  - name: "SCP Customer API Documentation"
+    url: "[Internal BMW SCP API docs]"
+  - name: "FastMCP Framework"
+    url: "https://github.com/jlowin/fastmcp"
+  - name: "Model Context Protocol"
+    url: "https://modelcontextprotocol.io/"
+
+notes:
+  - "This is a PoC (Proof of Concept) implementation for integrating SCP with AI agents"
+  - "Server does not maintain stateful interactions (no database tracking)"
+  - "LLMs work better with XML-ish formats than complex JSON; API outputs are converted"
+  - "To add new SCP endpoints: modify `src/scp.py` and create wrappers in `main.py`"
+  - "Server must be running locally to respond to MCP requests (not a hosted service)"
+  - "Creating MCP config alone is insufficient; the local SCP MCP runtime must be up"

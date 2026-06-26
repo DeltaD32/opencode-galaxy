@@ -1,0 +1,143 @@
+{
+  "version": 1,
+  "styles": {
+    "bmw-ci": {
+      "slug": "bmw-ci",
+      "name": "BMW CI",
+      "description": "Official BMW Group Corporate Identity",
+      "is_builtin": true,
+      "source_file": "Presentation1.pptx",
+      "source_sha256": "d58c98e3692bd5cbc6b1a9a146a05063f6b9c80ae85694faa07b6bca2daf844a",
+      "cloned_at": "2026-06-24T13:10:39.611273+00:00",
+      "style_dir": "/Users/QTE2362/.config/opencode/ppt-styles/bmw-ci",
+      "brand_guide_path": "/Users/QTE2362/.config/opencode/ppt-styles/bmw-ci/brand-guide.md",
+      "has_title_bg": false,
+      "slide_dimensions": {
+        "width_in": 13.333,
+        "height_in": 7.5,
+        "aspect_ratio": "16:9",
+        "width_emu": 12192000,
+        "height_emu": 6858000
+      },
+      "typography_summary": {
+        "primary_font": "BMWGroupTN Condensed",
+        "title_font": "BMWGroupTN Condensed",
+        "title_size_pt": 26.0,
+        "body_size_pt": 18.0,
+        "primary_color": "#035970",
+        "dominant_color": "#035970",
+        "palette": []
+      },
+      "theme_summary": {
+        "scheme_name": "BMW Group 21",
+        "dk1": "#000000",
+        "lt1": "#FFFFFF",
+        "dk2": "#035970",
+        "accent1": "#548D9E",
+        "major_font": "BMWGroupTN Condensed",
+        "minor_font": "BMWGroupTN Condensed"
+      },
+      "layout_stats": {
+        "total": 20,
+        "dark": 0,
+        "light": 20
+      },
+      "total_slides_in_source": 2,
+      "layout_count": 20
+    },
+    "ai-for-pos": {
+      "slug": "ai-for-pos",
+      "name": "AI for POs",
+      "description": "AI for Product Owners with Copilot",
+      "source_file": "source.pptx",
+      "source_sha256": "d347b244d061d0f22a7d00dbea8f438fcc167849644d53cd09b9d9e88eee6709",
+      "cloned_at": "2026-06-24T13:09:17.306591+00:00",
+      "style_dir": "/Users/QTE2362/.config/opencode/ppt-styles/ai-for-pos",
+      "brand_guide_path": "/Users/QTE2362/.config/opencode/ppt-styles/ai-for-pos/brand-guide.md",
+      "has_title_bg": false,
+      "slide_dimensions": {
+        "width_in": 13.333,
+        "height_in": 7.5,
+        "aspect_ratio": "16:9",
+        "width_emu": 12192000,
+        "height_emu": 6858000
+      },
+      "typography_summary": {
+        "primary_font": "BMWGroupTN Condensed",
+        "title_font": "BMWGroupTN Condensed",
+        "title_size_pt": 26.0,
+        "body_size_pt": 18.0,
+        "primary_color": "#035970",
+        "dominant_color": "#035970",
+        "palette": [
+          "#035970",
+          "#548D9E",
+          "#85ACB9",
+          "#ABC4CF"
+        ]
+      },
+      "theme_summary": {
+        "scheme_name": "BMW Group 21",
+        "dk1": "#000000",
+        "lt1": "#FFFFFF",
+        "dk2": "#035970",
+        "accent1": "#548D9E",
+        "major_font": "BMWGroupTN Condensed",
+        "minor_font": "BMWGroupTN Condensed"
+      },
+      "layout_stats": {
+        "total": 20,
+        "dark": 0,
+        "light": 20
+      },
+      "total_slides_in_source": 12,
+      "layout_count": 20
+    },
+    "aiconic-grand-prix": {
+      "slug": "aiconic-grand-prix",
+      "name": "Aiconic Grand Prix",
+      "description": "MN Information Aiconic Grand Prix overview deck",
+      "source_file": "Overview_Aiconic-GrandPrix  -  Read-Only.pptx",
+      "source_sha256": "53cb31bdc2e07d37fbfd928a3b696a420ecf6a45be11a26c9bb185aecb1d3639",
+      "cloned_at": "2026-06-24T13:09:19.066149+00:00",
+      "style_dir": "/Users/QTE2362/.config/opencode/ppt-styles/aiconic-grand-prix",
+      "brand_guide_path": "/Users/QTE2362/.config/opencode/ppt-styles/aiconic-grand-prix/brand-guide.md",
+      "has_title_bg": true,
+      "slide_dimensions": {
+        "width_in": 13.333,
+        "height_in": 7.5,
+        "aspect_ratio": "16:9",
+        "width_emu": 12192000,
+        "height_emu": 6858000
+      },
+      "typography_summary": {
+        "primary_font": "BMWGroupTN Condensed",
+        "title_font": "BMWGroupTN Condensed",
+        "title_size_pt": 26.0,
+        "body_size_pt": 18.0,
+        "primary_color": "#F69954",
+        "dominant_color": "#F69954",
+        "palette": [
+          "#F69954",
+          "#035970"
+        ]
+      },
+      "theme_summary": {
+        "scheme_name": "BMW Group 21",
+        "dk1": "#000000",
+        "lt1": "#FFFFFF",
+        "dk2": "#035970",
+        "accent1": "#548D9E",
+        "major_font": "BMWGroupTN Condensed",
+        "minor_font": "BMWGroupTN Condensed"
+      },
+      "layout_stats": {
+        "total": 21,
+        "dark": 20,
+        "light": 1
+      },
+      "total_slides_in_source": 5,
+      "layout_count": 21
+    }
+  }
+}

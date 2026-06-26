@@ -1,0 +1,111 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Jira MCP Server Setup - AI-Focused Configuration
+# For BMW ATC Jira instance (remote HTTP endpoint)
+
+name: "Setup ATC Jira MCP Server"
+
+objective: |
+  Configure ATC Jira MCP server to enable AI agents to query and update Jira issues
+  directly from GitHub Copilot Chat via the remote HTTP endpoint.
+
+prerequisites:
+  - Access to https://atc.bmwgroup.net/mcp
+  - Jira Personal Access Token (PAT)
+
+estimated_time: "3-5 minutes (including PAT generation)"
+
+server_definition:
+  server_key: "jira-atc"
+  default_scope: "global"
+  prerequisites: []
+  features: []
+  mcp_config:
+    type: "http"
+    url: "https://atc.bmwgroup.net/mcp"
+    headers:
+      X-Atlassian-Jira-Personal-Token: "${input:jira_token}"
+      X-Atlassian-Jira-Url: "https://atc.bmwgroup.net/jira"
+  inputs:
+    - type: "promptString"
+      id: "jira_token"
+      description: "Jira Personal Access Token"
+      password: true
+
+actions:
+  - "IMPORTANT: This reference is for the BMW ATC Jira instance (https://atc.bmwgroup.net/jira) using the remote HTTP endpoint. If the user did not specify which instance they want, ask them: 'Which Jira instance would you like to set up — ATC or CodeCraft?' If the user wants the CodeCraft instance, use the reference file `setup-jira-codecraft-mcp.yaml` instead."
+  - "Ask user to choose configuration scope: 'global' (user-wide) or 'project' (workspace-specific, recommended for team collaboration)"
+  - "Run installation script: `uv run scripts/setup-mcp.py --server jira-atc --scope [global|project]`"
+  - "Wait for script to complete - it generates MCP config with the remote HTTP endpoint and merges with existing config"
+  - "Guide Jira token generation: User navigates to https://atc.bmwgroup.net/jira → Profile settings → Security → Create PAT with read/write permissions → Copy token"
+  - "CRITICAL: User must save the token securely - VS Code will prompt for it when starting the server"
+  - "Start MCP server: Open Command Palette → 'MCP: Open User Configuration' → Click 'Start' next to 'jira-atc' → VS Code will prompt for token → Paste token into secure prompt → Wait for 'Running' status"
+  - "Verify setup: Test with `@jira-atc help` in Copilot Chat - should list available Jira commands"
+
+tools_used:
+  - setup-mcp.py --server jira-atc (unified setup script)
+  - BMW ATC Jira PAT generation UI
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - ATC Jira MCP configuration created with remote HTTP endpoint
+  - Jira PAT stored in mcp.json
+  - MCP server shows "Running" status in VS Code
+  - AI agent can query Jira via @jira-atc commands
+
+validation:
+  - "Check MCP config file contains 'jira-atc' entry with url 'https://atc.bmwgroup.net/mcp'"
+  - "Verify headers include X-Atlassian-Jira-Personal-Token and X-Atlassian-Jira-Url"
+  - "MCP configuration panel shows 'jira-atc' server with 'Running' status"
+  - "Test `@jira-atc help` returns Jira command list (search issues, get issue details, update issues, etc.)"
+  - "Test actual query: `@jira-atc search issues in [project-key]` returns results"
+
+configuration:
+  instance_url: "https://atc.bmwgroup.net/jira"
+  mcp_endpoint: "https://atc.bmwgroup.net/mcp"
+
+  token_requirements:
+    generation_path: "https://atc.bmwgroup.net/jira/secure/ViewProfile.jspa → Personal Access Tokens"
+    permissions: "Read/write access to projects"
+    expiration: "90 days recommended"
+
+usage_examples:
+  - "@jira-atc search issues in DX assigned to me"
+  - "@jira-atc create issue in project DX with title 'Bug: Setup fails' and type Bug"
+  - "@jira-atc show issue DX-123"
+  - "@jira-atc update issue DX-123 set status to 'In Progress'"
+  - "@jira-atc add comment to DX-123 'Working on this now'"
+  - "@jira-atc list my open issues"
+  - "@jira-atc transition issue DX-123 to 'Done'"
+
+troubleshooting:
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid or expired API token"
+    solution: "Regenerate PAT in Jira instance, update mcp.json with new token, restart application, click 'Restart' in MCP configuration"
+
+  - issue: "Authentication errors after updating token"
+    cause: "MCP server needs restart to pick up new configuration"
+    solution: "Open Command Palette → 'MCP: Open User Configuration' → Click 'Restart' next to 'jira-atc' server → Wait for 'Running' status"
+
+  - issue: "Cannot find custom fields or workflows"
+    cause: "Custom fields/workflows specific to ATC Jira"
+    solution: "Set up ATC custom instructions (see atc_custom_instructions section above) to provide field IDs and workflow knowledge to Copilot"
+
+  - issue: "Network connectivity errors"
+    cause: "Cannot reach https://atc.bmwgroup.net/mcp"
+    solution: "Verify you are connected to the BMW network or VPN; Check proxy settings if applicable"
+
+uninstall:
+  steps:
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete 'jira-atc' entry from mcpServers"
+
+resources:
+  - name: "BMW ATC Jira"
+    url: "https://atc.bmwgroup.net/jira"
+  - name: "ATC Jira Fields Documentation"
+    url: "https://atc.bmwgroup.net/confluence/x/jira-fields"
+  - name: "ATC Jira Workflows Documentation"
+    url: "https://atc.bmwgroup.net/confluence/x/jira-workflows"
+  - name: "Jira REST API Documentation"
+    url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/"

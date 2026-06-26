@@ -1,0 +1,169 @@
+{
+  "comment": "Reference file showing all available BMW LLM API models",
+  "comment2": "Copy individual model blocks from here into opencode.json as needed",
+  "comment3": "Test after each addition to ensure OpenCode still works",
+  "comment4": "AVOID RESTRICTED MODELS - they require special access and have limited capacity",
+  
+  "ANTHROPIC_CLAUDE_MODELS": {
+    "claude-sonnet-4-6": {
+      "name": "claude-sonnet-4-6",
+      "status": "Available",
+      "description": "Newer Claude Sonnet (Vision, Reasoning, Function Calling)",
+      "cost": { "input": 3.3, "cache_read": 0.33, "cache_write": 4.125, "output": 16.5 },
+      "limit": { "context": 200000, "output": 64000 }
+    },
+    "claude-sonnet-4": {
+      "name": "claude-sonnet-4",
+      "status": "Available",
+      "description": "Standard Claude Sonnet (Vision, Reasoning, Function Calling)",
+      "cost": { "input": 3.3, "cache_read": 0.33, "cache_write": 4.125, "output": 16.5 },
+      "limit": { "context": 200000, "output": 64000 }
+    },
+    "claude-haiku-4-5": {
+      "name": "claude-haiku-4-5",
+      "status": "Available",
+      "description": "Lightweight Claude (Vision, Fast, Cheap)",
+      "cost": { "input": 1.1, "cache_read": 0.11, "cache_write": 1.375, "output": 5.5 },
+      "limit": { "context": 200000, "output": 64000 }
+    },
+    "DO_NOT_ADD_RESTRICTED": {
+      "claude-opus-4-5": "RESTRICTED - requires access request",
+      "claude-opus-4-6": "RESTRICTED - requires access request",
+      "claude-opus-4-7": "RESTRICTED - requires access request",
+      "claude-opus-4-8": "RESTRICTED - requires access request"
+    }
+  },
+
+  "OPENAI_GPT_MODELS": {
+    "gpt-5.4": {
+      "name": "gpt-5.4",
+      "status": "Available",
+      "description": "Versatile GPT (Vision, 922K context, Reasoning)",
+      "cost": { "input": 2.76, "cache_read": 0.28, "output": 16.5 },
+      "limit": { "context": 922000, "output": 128000 }
+    },
+    "gpt-5.4-mini": {
+      "name": "gpt-5.4-mini",
+      "status": "Available - US only",
+      "description": "Lightweight GPT (Vision, 272K context)",
+      "cost": { "input": 0.825, "cache_read": 0.0825, "output": 4.95 },
+      "limit": { "context": 272000, "output": 128000 }
+    },
+    "gpt-5.4-nano": {
+      "name": "gpt-5.4-nano",
+      "status": "Available - US only",
+      "description": "Ultra-lightweight GPT (Cheapest OpenAI option)",
+      "cost": { "input": 0.24, "cache_read": 0.02, "output": 1.36 },
+      "limit": { "context": 272000, "output": 128000 }
+    },
+    "gpt-5.2": {
+      "name": "gpt-5.2",
+      "status": "Available",
+      "description": "Mid-tier GPT (Vision, 922K context)",
+      "cost": { "input": 2.2, "cache_read": 0.22, "output": 13.2 },
+      "limit": { "context": 922000, "output": 128000 }
+    },
+    "gpt-4o": {
+      "name": "gpt-4o",
+      "status": "Available",
+      "description": "Legacy GPT-4o (Vision, 128K context)",
+      "cost": { "input": 2.75, "cache_read": 0.28, "output": 11.0 },
+      "limit": { "context": 128000, "output": 16384 }
+    },
+    "gpt-4o-mini": {
+      "name": "gpt-4o-mini",
+      "status": "Available",
+      "description": "Legacy lightweight GPT (Vision, 128K context)",
+      "cost": { "input": 0.165, "cache_read": 0.017, "output": 0.66 },
+      "limit": { "context": 128000, "output": 16384 }
+    },
+    "o3-mini": {
+      "name": "o3-mini",
+      "status": "Available",
+      "description": "Reasoning-focused model (200K context)",
+      "cost": { "input": 1.1, "output": 4.4 },
+      "limit": { "context": 200000, "output": 100000 }
+    },
+    "o4-mini": {
+      "name": "o4-mini",
+      "status": "Available",
+      "description": "Advanced reasoning model (200K context)",
+      "cost": { "input": 1.65, "output": 6.6 },
+      "limit": { "context": 200000, "output": 100000 }
+    },
+    "DO_NOT_ADD_RESTRICTED": {
+      "gpt-5.5": "RESTRICTED - requires access request",
+      "gpt-5.5:global": "RESTRICTED - requires access request",
+      "o3": "RESTRICTED - requires access request"
+    }
+  },
+
+  "GOOGLE_GEMINI_MODELS": {
+    "gemini-3.5-flash": {
+      "name": "gemini-3.5-flash",
+      "status": "Available",
+      "description": "Fast & cheap Gemini (1M context window!)",
+      "cost": { "input": 0.15, "cache_read": 0.0375, "output": 0.6 },
+      "limit": { "context": 1000000, "output": 8192 }
+    },
+    "gemini-3.1-flash-lite": {
+      "name": "gemini-3.1-flash-lite",
+      "status": "Available",
+      "description": "Ultra-cheap Gemini (1M context, cheapest overall)",
+      "cost": { "input": 0.075, "cache_read": 0.01875, "output": 0.3 },
+      "limit": { "context": 1000000, "output": 8192 }
+    },
+    "gemini-3.1-pro": {
+      "name": "gemini-3.1-pro:global",
+      "status": "Available",
+      "description": "Pro quality Gemini (2M context window!)",
+      "cost": { "input": 1.25, "cache_read": 0.3125, "output": 5.0 },
+      "limit": { "context": 2000000, "output": 8192 }
+    }
+  },
+
+  "HOW_TO_ADD_MODELS": {
+    "step1": "Copy a model block from above",
+    "step2": "Add to opencode.json under provider.llm-api.models",
+    "step3": "Keep the same format as existing models (add options.reasoningEffort if needed)",
+    "step4": "Save and test by restarting OpenCode",
+    "step5": "If OpenCode doesn't start, revert the change immediately",
+    
+    "example": {
+      "gpt-5.4-nano": {
+        "name": "gpt-5.4-nano",
+        "options": {
+          "reasoningEffort": "minimal"
+        },
+        "cost": {
+          "input": 0.24,
+          "cache_read": 0.02,
+          "output": 1.36
+        },
+        "limit": {
+          "context": 272000,
+          "output": 128000
+        }
+      }
+    }
+  },
+
+  "RECOMMENDED_ADDITIONS_NON_RESTRICTED": {
+    "cheapest": "gemini-3.1-flash-lite ($0.075/$0.30 per M tokens, 1M context)",
+    "fast_cheap": "gpt-4o-mini ($0.165/$0.66 per M tokens) or gemini-3.5-flash ($0.15/$0.60)",
+    "huge_context": "gemini-3.1-pro (2M context!), gemini-3.5-flash (1M context)",
+    "large_context_gpt": "gpt-5.4 (922K context) or gpt-5.2 (922K context)",
+    "reasoning": "o3-mini ($1.1/$4.4) or o4-mini ($1.65/$6.6) for math/logic",
+    "balanced_claude": "claude-sonnet-4-6 (already added!) or claude-sonnet-4",
+    "us_only_cheap": "gpt-5.4-nano ($0.24/$1.36, cheapest OpenAI)"
+  },
+  
+  "SAFE_TO_ADD_NOW": [
+    "gemini-3.1-flash-lite - CHEAPEST overall",
+    "gemini-3.5-flash - Fast, cheap, huge 1M context",
+    "gpt-4o-mini - Cheap legacy OpenAI",
+    "o3-mini or o4-mini - Good for reasoning tasks",
+    "gpt-5.4 or gpt-5.2 - 922K context GPT models"
+  ]
+}
+}

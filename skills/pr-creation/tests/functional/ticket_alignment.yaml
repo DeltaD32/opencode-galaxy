@@ -1,0 +1,13 @@
+name: "pr-creation: Ticket Alignment Check"
+description: Test that the skill checks for ticket information and validates alignment
+test_type: functionality
+prompt: |
+  Create a PR for my changes. I'm working on ticket ABC-123 which should be documented in .ttt/memory/current-ticket.md
+validation_criteria:
+  - or:
+      - type: tool_called
+        value:
+          name: view
+      - type: tool_called
+        value:
+          name: glob

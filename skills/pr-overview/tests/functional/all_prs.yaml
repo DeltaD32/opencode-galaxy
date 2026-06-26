@@ -1,0 +1,9 @@
+name: "pr-overview: All PRs in Repository"
+description: Test that pr-overview can check all open PRs in a repository (not just user's PRs)
+test_type: functionality
+prompt: |
+  Show me all open pull requests in this repository, not just mine. I want to see the complete picture of pending work.
+validation_criteria:
+  - type: tool_called
+    value:
+      name: bash

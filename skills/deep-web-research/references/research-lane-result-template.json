@@ -1,0 +1,34 @@
+{
+  "lane": "primary-docs",
+  "query": "best persistent memory stack for rapid-automations",
+  "proposed_answer": "Graph-backed memory appears strongest when provenance and relationships matter.",
+  "key_findings": [
+    "LangGraph long-term memory stores JSON documents in a persistent store.",
+    "Graphiti is built for temporal context graphs rather than plain vector recall.",
+    "Mem0 combines vector retrieval with optional graph memory.",
+    "Vendor-authored comparisons overstate product fit unless corroborated by primary docs or implementation evidence."
+  ],
+  "references": [
+    {
+      "title": "LangGraph long-term memory",
+      "url": "https://docs.langchain.com/oss/python/langchain/long-term-memory",
+      "type": "primary",
+      "bias": "low"
+    },
+    {
+      "title": "Graphiti repository",
+      "url": "https://github.com/getzep/graphiti",
+      "type": "implementation",
+      "bias": "medium"
+    }
+  ],
+  "confidence": 0.82,
+  "confidence_reason": "Primary documentation exists and core claims are supported by implementation-oriented evidence, but some supporting material is vendor-authored.",
+  "open_questions": [
+    "Does the target system need temporal reasoning or only durable recall?"
+  ],
+  "follow_up_queries": [
+    "Graphology vs Neo4j for agent memory",
+    "LangGraph Postgres production limits"
+  ]
+}

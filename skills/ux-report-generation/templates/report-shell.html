@@ -1,0 +1,264 @@
+<!--
+  report-shell.html — Structural blueprint for all DesignOps evaluation reports
+  ─────────────────────────────────────────────────────────────────────────────
+  USAGE:
+    When generating a report, use this file as the structural reference.
+    - Inline the contents of report-styles.css inside the <style> tag below.
+    - Replace every [PLACEHOLDER] with real evaluation content.
+    - The final report must be a single self-contained HTML file (no external deps).
+
+  PLACEHOLDERS:
+    [APP_NAME]                 — Application or product name
+    [SKILL_LABEL]              — Skill/framework name (e.g. "Nelson HCI Heuristics")
+    [FRAMEWORK_NAME]           — Framework abbreviation or full name
+    [REVIEW_DATE]              — ISO date (YYYY-MM-DD)
+    [REVIEWER]                 — Reviewer name or "GitHub Copilot"
+    [MODEL_TESTED]             — Model name (e.g. "Claude Sonnet 4.6")
+    [TOTAL_CHECKS]             — Total number of heuristics/checks evaluated
+    [OVERALL_RISK]             — Critical | High | Medium | Low
+    [RISK_CLASS]               — critical | high | medium | low
+    [RISK_ICON]                — Emoji icon (🔴 🟠 🟡 🟢)
+    [RISK_LABEL]               — Critical | High | Medium | Low
+    [RISK_DESCRIPTION]         — One sentence describing the overall risk
+    [PASS_COUNT]               — Number of passing checks
+    [PARTIAL_COUNT]            — Number of partial checks
+    [FAIL_COUNT]               — Number of failing checks
+    [UNKNOWN_COUNT]            — Number of unknown checks
+    [EXECUTIVE_SUMMARY_TEXT]   — Narrative paragraph summarising the evaluation
+    [CATEGORY_NAME]            — Heuristic or category name
+    [CATEGORY_DESCRIPTION]     — Short description of the category
+    [FINDING_TITLE]            — Short descriptive finding title
+    [STATUS]                   — pass | partial | fail | unknown
+    [STATUS_LABEL]             — Pass | Partial | Fail | Unknown
+    [SEVERITY]                 — critical | high | medium | low
+    [SEVERITY_LABEL]           — Critical | High | Medium | Low
+    [EFFORT_CLASS]             — effort-s | effort-m | effort-l
+    [EFFORT_LABEL]             — S | M | L
+    [FINDING_DESCRIPTION]      — 1–3 sentence description of the issue
+    [EVIDENCE_TEXT]            — Specific observed evidence
+    [SCREENSHOT_FILE]          — e.g. h1-no-loading-state.png
+    [SCREENSHOT_ALT]           — Descriptive alt text for the screenshot
+    [SCREENSHOT_CAPTION]       — Short caption for the screenshot
+    [RECOMMENDATION_TEXT]      — Concrete, actionable fix
+    [FINDING_ID]               — e.g. F1, F2
+    [PRIORITY_TIER]            — P0 | P1 | P2 | P3
+    [ISSUE_TITLE]              — Short issue title for remediation matrix row
+    [CATEGORY]                 — Category name for remediation matrix row
+    [RECOMMENDED_ACTION]       — Brief action item for remediation matrix row
+    [FRAMEWORK_DESCRIPTION]    — Methodology card: framework description
+    [EVALUATION_APPROACH]      — Methodology card: how evaluation was conducted
+    [SCOPE_TEXT]               — What was included in scope and what was excluded
+    [ASSUMPTIONS_TEXT]         — Assumptions made during the evaluation
+    [CONFIDENCE_LEVEL]         — High | Medium | Low
+    [CONFIDENCE_NARRATIVE]     — 1–2 sentences describing evidence quality and confidence
+    [GAPS_TEXT]                — What could not be assessed and why
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>[APP_NAME] — [SKILL_LABEL] Report</title>
+  <style>
+    /* ── Inline contents of templates/report-styles.css here ── */
+  </style>
+</head>
+<body>
+<a href="#main-content" class="skip-link">Skip to main content</a>
+<main id="main-content">
+  <div class="container">
+
+    <!-- ① Cover -->
+    <div class="cover" role="banner">
+      <h1>[APP_NAME]</h1>
+      <p class="subtitle">[SKILL_LABEL] — Evaluation Report</p>
+      <div class="meta-grid">
+        <div class="meta-item">
+          <div class="label">Framework</div>
+          <div class="value">[FRAMEWORK_NAME]</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Review Date</div>
+          <div class="value">[REVIEW_DATE]</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Reviewer</div>
+          <div class="value">[REVIEWER]</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Model Tested</div>
+          <div class="value">[MODEL_TESTED]</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Checks Total</div>
+          <div class="value">[TOTAL_CHECKS]</div>
+        </div>
+        <div class="meta-item">
+          <div class="label">Overall Risk</div>
+          <div class="value">[OVERALL_RISK]</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ② Scope &amp; Assumptions -->
+    <div class="section">
+      <h2 class="section-title">Scope &amp; Assumptions</h2>
+      <div class="evidence">
+        <p><strong>Scope:</strong> [SCOPE_TEXT]</p>
+        <p style="margin-top:0.5rem;"><strong>Assumptions:</strong> [ASSUMPTIONS_TEXT]</p>
+      </div>
+    </div>
+
+    <!-- ③ Executive Summary -->
+    <div class="section">
+      <h2 class="section-title">Executive Summary</h2>
+      <div class="executive-summary">
+        <h3>Overview</h3>
+        <p>[EXECUTIVE_SUMMARY_TEXT]</p>
+      </div>
+    </div>
+
+    <!-- ④ Scorecard -->
+    <div class="section">
+      <h2 class="section-title">Scorecard</h2>
+      <div class="scorecard">
+        <div class="score-box pass">
+          <div class="count">[PASS_COUNT]</div>
+          <div class="label">Pass</div>
+        </div>
+        <div class="score-box partial">
+          <div class="count">[PARTIAL_COUNT]</div>
+          <div class="label">Partial</div>
+        </div>
+        <div class="score-box fail">
+          <div class="count">[FAIL_COUNT]</div>
+          <div class="label">Fail</div>
+        </div>
+        <div class="score-box unknown">
+          <div class="count">[UNKNOWN_COUNT]</div>
+          <div class="label">Unknown</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑤ Risk Banner — use class: critical | high | medium | low -->
+    <aside class="risk-banner [RISK_CLASS]" aria-label="Overall risk level">
+      <div class="icon" aria-hidden="true">[RISK_ICON]</div>
+      <div class="text">
+        <p class="risk-title">[RISK_LABEL] Risk</p>
+        <p>[RISK_DESCRIPTION]</p>
+      </div>
+    </aside>
+
+    <!-- ⑥ Findings — repeat .category block per evaluation category -->
+    <div class="section">
+      <h2 class="section-title">Findings</h2>
+
+      <div class="category">
+        <div class="category-header">
+          <h3>[CATEGORY_NAME]</h3>
+          <p>[CATEGORY_DESCRIPTION]</p>
+        </div>
+
+        <!-- Repeat .finding per sub-heuristic / check -->
+        <div class="finding">
+          <div class="finding-header">
+            <h4>[FINDING_TITLE]</h4>
+            <div class="finding-badges">
+              <!-- Status: pass | partial | fail | unknown -->
+              <span class="badge [STATUS]">[STATUS_LABEL]</span>
+              <!-- Severity: critical | high | medium | low -->
+              <span class="badge [SEVERITY]">[SEVERITY_LABEL]</span>
+              <!-- Effort: effort-s | effort-m | effort-l -->
+              <span class="badge [EFFORT_CLASS]">[EFFORT_LABEL]</span>
+            </div>
+          </div>
+          <div class="finding-body">
+            <p>[FINDING_DESCRIPTION]</p>
+            <div class="evidence">
+              <strong>Evidence:</strong> [EVIDENCE_TEXT]
+            </div>
+            <!-- Screenshot block — omit entirely if no screenshot is available.
+                 For unavailable screenshots use the placeholder from screenshot-guidance.md -->
+            <div class="screenshot">
+              <img src="screenshots/[SCREENSHOT_FILE]" alt="[SCREENSHOT_ALT]">
+              <div class="screenshot-caption">[SCREENSHOT_CAPTION]</div>
+            </div>
+            <div class="recommendation">
+              <strong>Recommendation:</strong> [RECOMMENDATION_TEXT]
+            </div>
+          </div>
+        </div>
+        <!-- /finding -->
+      </div>
+      <!-- /category -->
+    </div>
+
+    <!-- ⑦ Priority Remediation Matrix -->
+    <div class="section page-break">
+      <h2 class="section-title">Priority Remediation Matrix</h2>
+      <table class="matrix-table">
+        <thead>
+          <tr>
+            <th>Priority</th>
+            <th>Issue</th>
+            <th>Category</th>
+            <th>Severity</th>
+            <th>Effort</th>
+            <th>Recommended Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!-- Repeat rows sorted P0 → P3 -->
+          <tr>
+            <td><span class="priority-tag p0">P0</span></td>
+            <td>[ISSUE_TITLE]</td>
+            <td>[CATEGORY]</td>
+            <td><span class="badge critical">Critical</span></td>
+            <td><span class="badge effort-s">S</span></td>
+            <td>[RECOMMENDED_ACTION]</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- ⑧ Methodology -->
+    <div class="section">
+      <h2 class="section-title">Methodology</h2>
+      <div class="methodology-grid">
+        <div class="methodology-card">
+          <h5>Framework</h5>
+          <p>[FRAMEWORK_DESCRIPTION]</p>
+        </div>
+        <div class="methodology-card">
+          <h5>Evaluation Approach</h5>
+          <p>[EVALUATION_APPROACH]</p>
+        </div>
+        <div class="methodology-card">
+          <h5>Rating Scale</h5>
+          <p>Pass · Partial · Fail · Unknown</p>
+        </div>
+        <div class="methodology-card">
+          <h5>Severity Levels</h5>
+          <p>Critical · High · Medium · Low</p>
+        </div>
+        <div class="methodology-card">
+          <h5>Effort Estimates</h5>
+          <p>S (&lt;1 sprint) · M (1–2 sprints) · L (3+ sprints)</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- ⑨ Confidence &amp; Gaps -->
+    <div class="section">
+      <h2 class="section-title">Confidence &amp; Gaps</h2>
+      <div class="evidence">
+        <p><strong>Overall Confidence:</strong> [CONFIDENCE_LEVEL] — [CONFIDENCE_NARRATIVE]</p>
+        <p style="margin-top:0.5rem;"><strong>Gaps:</strong> [GAPS_TEXT]</p>
+      </div>
+    </div>
+
+  </div><!-- /container -->
+</main>
+</body>
+</html>

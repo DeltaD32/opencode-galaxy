@@ -1,0 +1,127 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# GitHub Remote MCP Server Setup - AI-Focused Configuration
+# Public GitHub Remote MCP API with web search capabilities
+
+name: "Setup GitHub Remote MCP Server"
+
+objective: |
+  Configure GitHub Remote MCP server to enable AI agents to access GitHub repositories,
+  issues, pull requests, code search, and web search directly from GitHub Copilot Chat
+  using the public GitHub Remote MCP API endpoint.
+
+prerequisites:
+  - VS Code 1.99+
+  - GitHub Copilot license (personal or organization subscription)
+  - Active GitHub Copilot session (signed in to GitHub Copilot in VS Code)
+
+estimated_time: "2-3 minutes"
+
+server_definition:
+  server_key: "github-ghe-remote"
+  default_scope: "global"
+  prerequisites: []
+  mcp_config:
+    type: "http"
+    url: "https://copilot-api.bmw.ghe.com/mcp/"
+    headers:
+      Authorization: ""
+      X-MCP-Toolsets: "repos,issues,pull_requests,code_search,web_search"
+
+actions:
+  - "Ask user to choose configuration scope: 'global' (user-wide, applies to all workspaces) or 'project' (workspace-specific, stored in .vscode/mcp.json)"
+  - "Run automated setup script with chosen scope: `uv run scripts/setup-mcp.py --server github-remote --scope [global|project]`"
+  - "Script will check prerequisites, create MCP config directory, and generate configuration with GitHub Copilot API endpoint"
+  - "IMPORTANT: Ensure you are signed in to GitHub Copilot in VS Code - the server uses your active Copilot session for authentication"
+  - "Start MCP server: Open Command Palette (Ctrl+Shift+P / Cmd+Shift+P) → Run 'MCP: Open User Configuration' → Click 'Start' next to 'github-ghe-remote'"
+  - "Wait for MCP server status to show 'Running' in VS Code"
+  - "IMPORTANT: If an authorization popup appears and is dismissed, it will not show again. The user must reload the VS Code window (Command Palette → 'Developer: Reload Window') and then restart the MCP server to re-trigger the authorization flow."
+  - "Verify setup: Test with `@github-ghe-remote help` in Copilot Chat - should list available commands including web search"
+
+tools_used:
+  - setup-mcp.py --server github-remote (unified setup script)
+  - VS Code Command Palette
+  - VS Code MCP configuration panel
+  - GitHub Copilot authentication (no separate token needed)
+
+expected_outcome:
+  - GitHub Copilot MCP server configuration created in chosen scope location
+  - Configuration includes repos, issues, pull_requests, code_search, and web_search toolsets
+  - MCP server status shows "Running" in VS Code
+  - AI agent can execute GitHub commands and web searches via @github-ghe-remote prefix
+  - Test queries return expected results from GitHub and web search
+
+validation:
+  - "Verify MCP config file exists at correct location (global: ~/.config/Code/User/globalStorage/mcp.json on Linux/macOS or %APPDATA%\\Code\\User\\globalStorage\\mcp.json on Windows; project: .vscode/mcp.json)"
+  - "Check mcp.json contains 'github-ghe-remote' entry with type 'http' and URL 'https://copilot-api.bmw.ghe.com/mcp/'"
+  - "Verify X-MCP-Toolsets header includes: repos,issues,pull_requests,code_search,web_search"
+  - "Check GitHub Copilot sign-in status: Command Palette → 'GitHub Copilot: Check Status' → Should show 'active and signed in'"
+  - "MCP configuration panel shows 'github-ghe-remote' with 'Running' status"
+  - "Test `@github-ghe-remote help` in Copilot Chat returns list of commands"
+  - "Test web search: Ask '@github-ghe-remote search the web for MCP protocol' returns web results"
+
+configuration:
+  toolsets:
+    repos: "Repository operations (list, get, create, update)"
+    issues: "Issue management (search, create, update, comment)"
+    pull_requests: "Pull request operations (list, get, create, review)"
+    code_search: "GitHub code search across repositories"
+    web_search: "Web search using GitHub Copilot's search capabilities"
+
+  authentication:
+    method: "Automatic via GitHub Copilot session"
+    requirement: "Must be signed in to GitHub Copilot in VS Code"
+    no_token_needed: "Uses your active Copilot subscription authentication"
+
+usage_examples:
+  - "@github-ghe-remote list my repositories"
+  - "@github-ghe-remote search issues in microsoft/vscode with label 'bug'"
+  - "@github-ghe-remote search code for 'MCP server' in language:python"
+  - "@github-ghe-remote search the web for Model Context Protocol documentation"
+  - "@github-ghe-remote get PR details for microsoft/vscode#12345"
+
+troubleshooting:
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Not signed in to GitHub Copilot or Copilot session expired"
+    solution: "Verify GitHub Copilot sign-in: Check bottom-left status bar for Copilot icon → Click if it says 'Sign in' → Complete GitHub authentication flow → Command Palette → 'GitHub Copilot: Check Status' to verify active session → Restart MCP server"
+
+  - issue: "MCP server not appearing in configuration panel"
+    cause: "Configuration file not properly formatted or saved"
+    solution: "Open mcp.json and validate JSON syntax: `cat [config-path] | jq .` (where config-path is from scope_options above) → Fix any JSON errors → Reload VS Code window: Command Palette → 'Developer: Reload Window'"
+
+  - issue: "Web search not working but other commands work"
+    cause: "X-MCP-Toolsets header missing web_search"
+    solution: "Open mcp.json → Locate 'github-ghe-remote' entry → Verify headers.X-MCP-Toolsets includes 'web_search' in the comma-separated list → Save file → Restart MCP server in configuration panel"
+
+  - issue: "GitHub Copilot not licensed"
+    cause: "No active Copilot subscription"
+    solution: "Obtain GitHub Copilot license: Personal (https://github.com/settings/copilot) or Organization subscription → Once license is active, restart VS Code → Sign in to Copilot when prompted"
+
+  - issue: "Server shows 'Running' but queries fail"
+    cause: "Network connectivity or API endpoint unreachable"
+    solution: "Test connectivity: `curl -I https://copilot-api.bmw.ghe.com/mcp/` (expect HTTP/2 200) → Check proxy settings if on corporate network → Verify no firewall blocking api.githubcopilot.com → Check VS Code output panel for MCP errors"
+
+security_best_practices:
+  - "Uses existing GitHub Copilot authentication: No separate tokens to manage"
+  - "Session-based security: Authentication tied to your active Copilot session"
+  - "Automatic expiration: Access expires when Copilot session ends"
+  - "Audit trail: All API calls are logged under your GitHub Copilot usage"
+  - "Principle of least privilege: Only grants access available through your Copilot license"
+
+uninstall:
+  steps:
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete the 'github-ghe-remote' entry from mcpServers"
+    - "Reload VS Code window to apply changes"
+
+resources:
+  - name: "GitHub Copilot MCP Server Discussion"
+    url: "https://github.com/microsoft/vscode/issues/271863"
+  - name: "GitHub Copilot Documentation"
+    url: "https://docs.github.com/copilot"
+  - name: "GitHub Copilot Pricing and Licensing"
+    url: "https://github.com/features/copilot#pricing"
+  - name: "MCP Protocol Specification"
+    url: "https://modelcontextprotocol.io/"
+  - name: "MCP Gallery"
+    url: "https://api.mcp.github.com/2025-09-15"

@@ -1,0 +1,4486 @@
+{
+  "fetched_at": 1782308801.6280682,
+  "count": 560,
+  "apps": [
+    {
+      "id": "b55d53fb-012f-4cdb-af7e-6ed11a60b26f",
+      "name": "Business Services (E&T Toolbox)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q446514"
+    },
+    {
+      "id": "3dbd509f-cfa6-43ac-91ce-393901b2c23f",
+      "name": "AI EKW Writing Assistant CS-DC",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q397358"
+    },
+    {
+      "id": "db4914e2-7ddc-4a63-ae93-3c41bfa0d5df",
+      "name": "Verschleißmanagement CBS ChatBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q641557"
+    },
+    {
+      "id": "4a9f2aee-ed6e-4668-bb7f-1c035c54b6e8",
+      "name": "GPTicket",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf1893"
+    },
+    {
+      "id": "800a3b05-9a1d-4554-8011-4ae576355bec",
+      "name": "QMT-VT Chat Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q618625"
+    },
+    {
+      "id": "2f71dd03-114c-40a2-96d5-f790b227698c",
+      "name": "RoPA AL-ES",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte3740"
+    },
+    {
+      "id": "fbd3decd-08d7-4db0-b5c2-453aa2c2dfc0",
+      "name": "DEB Travel Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q386751"
+    },
+    {
+      "id": "b6cad5b0-d315-40ec-8cf0-1a9a6f396595",
+      "name": "AI EKW Writing Assistant FG-V-4",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277343"
+    },
+    {
+      "id": "4edbcb4c-dd2f-4a4d-87ba-84c7c8775b7c",
+      "name": "GAIA RAG MCP CDH n8n PoC",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtg3435"
+    },
+    {
+      "id": "7f63f69d-f5d9-47e9-b8dc-e9439bbe40d6",
+      "name": "MIM-MOD",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz170n"
+    },
+    {
+      "id": "f3193ed8-66c7-4b96-8199-aa599840c575",
+      "name": "SF External Vendor Management Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q293665"
+    },
+    {
+      "id": "9792cd10-e5fa-4b98-9f0e-84cda481fae3",
+      "name": "PlantUML Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz53iv"
+    },
+    {
+      "id": "5407db92-f4f9-481a-964b-06573c54c1a1",
+      "name": "DailyDigest",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz170n"
+    },
+    {
+      "id": "2aabdbd4-a259-479a-a0c9-5c77140297b8",
+      "name": "BOSS ChatBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q254706"
+    },
+    {
+      "id": "2bbdda53-20d4-4b6a-acbd-8759fb775d90",
+      "name": "IT Risk Management Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q139710"
+    },
+    {
+      "id": "0e36374d-bb80-47a4-a7ef-c09af034dc98",
+      "name": "WPS - Wertstromanalyse (VSM)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q212975"
+    },
+    {
+      "id": "c3825255-0c5e-46d5-8d7e-5789bbbd938d",
+      "name": "COMS Knowledge Engine | BB5.2 PACK",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf4789"
+    },
+    {
+      "id": "e358cd94-5cdc-412b-a791-1ba2b372667b",
+      "name": "Planning and quality documents",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q350865"
+    },
+    {
+      "id": "c726747c-7096-4298-bf94-46b538132d6c",
+      "name": "Lastenheft-Prüftool",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q155644"
+    },
+    {
+      "id": "a4265c04-d808-4ca3-8132-33ea916606d1",
+      "name": "Tornado Assist",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q293160"
+    },
+    {
+      "id": "02f9f711-6c41-4478-a1c9-e3ea2135235b",
+      "name": "Compliance Hospitality Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q149523"
+    },
+    {
+      "id": "be996430-d86d-4ec0-9a0c-d96b236e75ce",
+      "name": "One Workspace Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf5240"
+    },
+    {
+      "id": "c07a29e8-1f93-4561-a78d-d681cea059e5",
+      "name": "Produktionsunternehmer EKW-Bewertung",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q322750"
+    },
+    {
+      "id": "1cc8d8d8-ed4a-47a4-9f41-18e4631ca33d",
+      "name": "Impact.Next Chatbot Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5ioq"
+    },
+    {
+      "id": "edb0dc10-f172-4570-b1d7-1af042914e67",
+      "name": "Safety Snapshot Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q278697"
+    },
+    {
+      "id": "f9885861-d53a-4eea-a923-91d389d5a2b7",
+      "name": "KnowledgeBot gAMS>NEXT",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf4128"
+    },
+    {
+      "id": "02dc078f-c5f9-424b-b1a3-6f16cd35618a",
+      "name": "ItO Process Copilot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q651884"
+    },
+    {
+      "id": "3a72fff5-24d6-40d3-934b-e922edd6fe95",
+      "name": "PKT Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q296445"
+    },
+    {
+      "id": "cb87b978-f3ce-402b-b539-b52e753839a1",
+      "name": "Claims Support Agent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q362930"
+    },
+    {
+      "id": "cd74574e-8b82-4135-bb9d-1a3608bf2cd0",
+      "name": "CPIC",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q217445"
+    },
+    {
+      "id": "b2ebd746-d8b1-4b91-8945-d1765ce53aae",
+      "name": "HWS Master",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q282345"
+    },
+    {
+      "id": "1e06fb7f-95bd-4877-9021-5875e644d7ab",
+      "name": "Verifikations-Leitfaden",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q164438"
+    },
+    {
+      "id": "609e337b-d73f-4d5e-8e79-dbf5918da002",
+      "name": "C1-DE Compliance & Hospitality Navigator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q253504"
+    },
+    {
+      "id": "2cca5364-634d-42c5-abda-b499c1441660",
+      "name": "NEXUS Knowledge Agent (Only for SF3-AU)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte3122"
+    },
+    {
+      "id": "d3895e5c-3de1-4c3d-8298-031dc7b6627a",
+      "name": "TA Bluebook Antriebsmaschine",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q295601"
+    },
+    {
+      "id": "021d1117-00ad-486f-b08a-6afb39e0ac29",
+      "name": "QCUBE GAIA Application",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q362930"
+    },
+    {
+      "id": "c540150d-1c79-4e85-a040-e8906753bf3c",
+      "name": "Revisión Operaciones CI-AP",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt44522"
+    },
+    {
+      "id": "78f57bec-95c1-46da-8efe-c1aae99e6876",
+      "name": "TNR Requirements",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte2397"
+    },
+    {
+      "id": "68963fc1-95fb-4026-8481-370a196f2e1c",
+      "name": "Verwenderhinweis-Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q365043"
+    },
+    {
+      "id": "83f744c4-75e9-4356-ab70-d2f653176cfd",
+      "name": "Digitales Qualitäts-Cockpit (DQC)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q641313"
+    },
+    {
+      "id": "e81ae74c-f5df-4504-9a3a-22ef3cf3fcff",
+      "name": "Due Diligence Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q197907"
+    },
+    {
+      "id": "022c6aeb-2a4a-41ef-8969-e38c2fef4ab5",
+      "name": "Análisis financieros empresas",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt44522"
+    },
+    {
+      "id": "f989ef9b-f82e-44f7-9127-7ee99c39ffef",
+      "name": "TEREGnext - Chat AI Internal",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q505034"
+    },
+    {
+      "id": "4f028720-0f92-40bf-b866-1659b0944e34",
+      "name": "WIT-Knowledge-Artikel",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q603050"
+    },
+    {
+      "id": "3f747478-4180-4d15-9192-22a3a58f2aef",
+      "name": "BMW T-Steuergrößen Bot.",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q173247"
+    },
+    {
+      "id": "08bb3b70-0c6a-4ee3-b080-89fb0429864b",
+      "name": "Mobius",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz6v4o"
+    },
+    {
+      "id": "9e520ed3-a644-4e42-b977-41a520ea54a2",
+      "name": "SmartHandover Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q662722"
+    },
+    {
+      "id": "e0c6e483-0f54-4442-9ddf-e89b00ebd422",
+      "name": "Kommunikation",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q280592"
+    },
+    {
+      "id": "4914b337-6132-42cd-895b-aef868a026a4",
+      "name": "GlueIQ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q516971"
+    },
+    {
+      "id": "0c79c877-e26e-48ab-a917-cb2a40116196",
+      "name": "IH-Buddy Gen6",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q345327"
+    },
+    {
+      "id": "1d614ac6-f7bf-48c9-b92c-7482d0b610d9",
+      "name": "Data Privacy Protection ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt52189"
+    },
+    {
+      "id": "49190d0f-b64b-483c-b6f9-733014e0fe18",
+      "name": "GSC Software Wissen de",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q293131"
+    },
+    {
+      "id": "8e0eff46-36fd-4712-af9c-3e475e2eb8b7",
+      "name": "SF6-ES Process Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtc9079"
+    },
+    {
+      "id": "e2f61b4e-f5c1-4e2d-9b66-0e45a500aefb",
+      "name": "DMAIC Problem Solver",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtb3804"
+    },
+    {
+      "id": "e5564acd-68aa-44f8-bc09-25e951a1a3bd",
+      "name": "Race Knowledge",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q431187"
+    },
+    {
+      "id": "c353ce7c-ea70-4b67-bf4c-817eb66d3f3e",
+      "name": "Onechatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt95236"
+    },
+    {
+      "id": "b3365558-07a9-4a59-98e1-5b217d3f93cd",
+      "name": "QualityQ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q512257"
+    },
+    {
+      "id": "5b91350b-3a38-477b-bd92-fdac97695a81",
+      "name": "SFUKAI - Use case logging",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q659406"
+    },
+    {
+      "id": "5561436a-f474-400b-8d16-78b40ef74a64",
+      "name": "PreCheck Pro",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q504549"
+    },
+    {
+      "id": "5fea4035-9729-47aa-9871-46418e93c23d",
+      "name": "Knowledge Hub Datenschutz",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q184306"
+    },
+    {
+      "id": "556bc2c9-9f45-4ac4-85ca-6b88bc6b2737",
+      "name": "AFW Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q663148"
+    },
+    {
+      "id": "3f5e6f0e-9562-4ce3-8a02-c9db4e2ea542",
+      "name": "CA-Lizenzserver Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q372211"
+    },
+    {
+      "id": "b20bef0b-b0e7-45d2-82b2-336059c7c85b",
+      "name": "Quantum Change Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz170n"
+    },
+    {
+      "id": "3634fbe7-ef38-49d0-9e88-f3a29590d738",
+      "name": "Test Set Generator GenAI Test Automation",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5t2p"
+    },
+    {
+      "id": "c04e364b-ece7-440e-9238-16a35b4c752b",
+      "name": "DIP Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf0478"
+    },
+    {
+      "id": "f47b651e-f921-4b23-824c-dcfdfb0a3dc5",
+      "name": "ITSM.next RAG CC Articles [PROD]",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q183059"
+    },
+    {
+      "id": "3973103d-78ae-43be-87fa-23b02f8c22d5",
+      "name": "OpenSourceComplianceBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q189161"
+    },
+    {
+      "id": "767d8126-f5f7-4519-bc18-e79641a204a2",
+      "name": "MP1 Guru",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt43376"
+    },
+    {
+      "id": "d2037c1a-8158-45e4-bd3f-f5aaef039e83",
+      "name": "DPDP Act India",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf3749"
+    },
+    {
+      "id": "0516a199-be2c-48a7-9264-699d6fe035e2",
+      "name": "Technische Regeln für Arbeitsstätten ASR",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz46na"
+    },
+    {
+      "id": "c0460fc2-8480-4aa7-b695-53c5e814dee6",
+      "name": "EEW Interviewer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277700"
+    },
+    {
+      "id": "6bc90574-7053-473c-8c7f-a33a34f6086e",
+      "name": "BEG Interviewer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277700"
+    },
+    {
+      "id": "2e793c47-e042-4a8d-a2f1-f85fa204bbb9",
+      "name": "LISA Nomenclature Standard",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte9274"
+    },
+    {
+      "id": "76ead655-ae4f-42d8-abf2-ffc3a20e34b0",
+      "name": "Chat about MADAM",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q606506"
+    },
+    {
+      "id": "0fc04333-d338-49ae-952f-3cb58093130b",
+      "name": "PolicyBot BMW Italia Retail",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt95491"
+    },
+    {
+      "id": "686f16bf-c83e-466a-aa03-a002bb6af659",
+      "name": "SWP-3897 Enterprise Data, Platforms",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q463376"
+    },
+    {
+      "id": "2ec6389d-41a5-4c19-bbfc-2f60df928e05",
+      "name": "FMEA Experte mit Moderator-Kompetenz",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q138810"
+    },
+    {
+      "id": "cf49cee0-ddc9-4d9c-99ca-833629e2b931",
+      "name": "Hot fix Test",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz6nio"
+    },
+    {
+      "id": "d1319d18-ea64-44ad-8566-50e98e011fee",
+      "name": "Handbook DART",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q258956"
+    },
+    {
+      "id": "929b04c8-f4ba-4792-a292-0e71e08a5565",
+      "name": "DLSS Q&A ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q375614"
+    },
+    {
+      "id": "5cc57768-fa1b-4820-9b6d-d624db301213",
+      "name": "Viz'ard - Build Dashboard Magically!",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf5201"
+    },
+    {
+      "id": "cf3a174d-d51f-4199-80e3-510eb8f2e0bd",
+      "name": "Systemfunktionen SnapS & CDC Client",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q545544"
+    },
+    {
+      "id": "075ab385-4362-4c51-990f-00dbf598f61a",
+      "name": "CoCoTestMate",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q389946"
+    },
+    {
+      "id": "5138f10e-6135-40ad-b42a-a49b27187568",
+      "name": "IT-TAF Checker",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q551064"
+    },
+    {
+      "id": "79f1d292-4009-4c5b-88ef-985ad81d6713",
+      "name": "Epic Readiness Evaluation",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q631995"
+    },
+    {
+      "id": "c73d51cc-0d5d-433f-8516-29522239117d",
+      "name": "SW8P Information Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q646028"
+    },
+    {
+      "id": "26e5f8ee-7eaf-4dd1-a492-28f832c81119",
+      "name": "Bestelltext und Genehmigungstext - MG-30",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q480250"
+    },
+    {
+      "id": "b6f62ffc-7ba6-45e1-ad4e-739743c4ee00",
+      "name": "Personal Trainer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q550536"
+    },
+    {
+      "id": "76df7e4a-d88a-412b-937d-582b3bc1c149",
+      "name": "QM Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q197461"
+    },
+    {
+      "id": "bd7577f2-fdcb-46dc-ab8a-ece5f25a7402",
+      "name": "NGL Building Block Generator ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q455164"
+    },
+    {
+      "id": "3551dcd3-9494-480e-94b7-256f92e94ea7",
+      "name": "Job Ad Bot: indirekte Stellen (extern)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q452856"
+    },
+    {
+      "id": "7cd41069-b4ae-4fd7-b4d3-66de1c8629d2",
+      "name": "Japan IT Genius AI Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q614582"
+    },
+    {
+      "id": "15314db4-3544-4824-9cb0-0621bbc6304f",
+      "name": "EWM SLP  Support Agent  ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q499366"
+    },
+    {
+      "id": "dafaef95-7e38-473d-a14e-4d369ff83169",
+      "name": "IAMM AppConnect Advisor",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q560489"
+    },
+    {
+      "id": "95cb1c21-1558-4d49-bc71-f90995306ad6",
+      "name": "FS-ES Draw.io Creator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt42919"
+    },
+    {
+      "id": "2e86cd2a-a70d-4653-b27a-9903844c8f12",
+      "name": "Process Timer Production - BMW Group",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680667"
+    },
+    {
+      "id": "1c48584b-49a4-4ce8-b519-e9e36279ad71",
+      "name": "Process Timer Logistics - Hams Hall",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680667"
+    },
+    {
+      "id": "cb88342b-f63b-4030-a23f-c1e3c9b369ad",
+      "name": "Process Timer Logistics - BMW Group",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680667"
+    },
+    {
+      "id": "a4ee87ad-b91f-4a2b-b93b-2217e451ee47",
+      "name": "Professor NSL",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q549152"
+    },
+    {
+      "id": "f74d1f15-9aa1-45ad-9ef2-7d5296f7b82b",
+      "name": "SF-ES Bastanteo de documentación",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt44522"
+    },
+    {
+      "id": "69ab5e58-5d30-4e85-a6bb-1c4b3d8e149d",
+      "name": "ITaaS Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q560803"
+    },
+    {
+      "id": "333013eb-9101-4e57-a47c-a27404051578",
+      "name": "BMW Sales Analysis",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5i36"
+    },
+    {
+      "id": "d3976eeb-006b-4f9d-8edf-389f010662d1",
+      "name": "FG-8 EKW Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q526455"
+    },
+    {
+      "id": "82edf01f-9819-42dc-9ff5-611c6910910a",
+      "name": "GAIA PowerPoint Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q536348"
+    },
+    {
+      "id": "3480ef23-825b-46eb-b10a-f5807c99107d",
+      "name": "WSS User Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q199890"
+    },
+    {
+      "id": "07f99c7c-ca23-4f52-b798-45a16220f5cd",
+      "name": "PREEvision Wissensdatenbank",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q544275"
+    },
+    {
+      "id": "658da6a2-219c-4b21-b81b-940de2f00131",
+      "name": "SERA Knowledge",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q433108"
+    },
+    {
+      "id": "b27a66aa-55c0-40be-b865-f5299ff04762",
+      "name": "TNR Release Insights |  Assistant ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q677536"
+    },
+    {
+      "id": "2cf61b02-515d-4dca-bace-2ff8d713edda",
+      "name": "Catena-X Knowledge Base",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q608340"
+    },
+    {
+      "id": "0a4fd850-75d5-4bff-803d-11cb164c7c96",
+      "name": "AMI. Additive Manufacturing Intelligence",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz31an"
+    },
+    {
+      "id": "9c200a9c-3acb-4174-b94b-143e0e586553",
+      "name": "Hub EcoSystem Guide",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4nyg"
+    },
+    {
+      "id": "ddbde4d8-ddb6-4d14-a511-882b43cd182a",
+      "name": "ICS Standard Control Mapper 1",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277334"
+    },
+    {
+      "id": "ad1f19d9-c3da-49e3-94cd-2d8880f51cbc",
+      "name": "ICS Standard Control Mapper 2",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277334"
+    },
+    {
+      "id": "42636c14-b3e4-4bce-b94f-2d62a0b5cba3",
+      "name": "GS98000 BBL1 Knowledge Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q369911"
+    },
+    {
+      "id": "2993f755-a8cf-468b-87c4-c72b99d2b095",
+      "name": "Policy Knowledge Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q519331"
+    },
+    {
+      "id": "81fe8e1a-186f-45cf-92da-5f672e7648ab",
+      "name": "PQM 8D - Problem Solver & Report Analyst",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q315354"
+    },
+    {
+      "id": "c9893864-a50e-4efb-93e0-e1a009bb6524",
+      "name": "MASTERCLASS Chatbot ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q497594"
+    },
+    {
+      "id": "474e714a-fdd1-4eea-baba-0a12754eab6a",
+      "name": "AnforderungsScout ES-6",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q545516"
+    },
+    {
+      "id": "5087a9f6-91c0-412f-9df6-73eb2cec47a0",
+      "name": "Benefit in Kind Calculation - Sweden",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd7488"
+    },
+    {
+      "id": "e8a567e7-f540-4031-8d63-483c0f99d6e7",
+      "name": "MQ & EAI Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q429890"
+    },
+    {
+      "id": "1c79e008-fd3c-4382-9143-cffce54dc11d",
+      "name": "Genyos dictionary",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd9971"
+    },
+    {
+      "id": "ba66365c-3aa3-4709-b03f-c83c439c6f61",
+      "name": "Atlassian MCP Agent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q612118"
+    },
+    {
+      "id": "8bff2a3a-ac69-4190-b768-bf8c36c2a95e",
+      "name": "AI Epic writing Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277343"
+    },
+    {
+      "id": "4d2fc3ee-746b-4e4e-a915-f7ad161c7e44",
+      "name": "AI Saga writing Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277343"
+    },
+    {
+      "id": "c5141445-679a-4d9f-9f74-ca7119cb6fe6",
+      "name": "User Journey Generator by UX DesignOps",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1w4j"
+    },
+    {
+      "id": "205661d2-7089-43ca-a63b-041149864c92",
+      "name": "EWC Check -\nLeistungsverzeichnis",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q271692"
+    },
+    {
+      "id": "090a3cd1-c7d1-491c-8f5a-d7197c983eac",
+      "name": "SAPAi Chat Your FIN Data (PROD)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz2t3t"
+    },
+    {
+      "id": "472c48b5-a7a9-4f88-829f-5fe9e1e389b3",
+      "name": "ASK MADAM",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q557681"
+    },
+    {
+      "id": "c1d9a1be-4f2b-4d23-8a0f-4711dbc09a94",
+      "name": "KipEx",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q464159"
+    },
+    {
+      "id": "b26c2781-3b3d-4120-b18c-6e9a48dd0808",
+      "name": "SAPAi Chat Your Meta & Master Data (MCP)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q483115"
+    },
+    {
+      "id": "4a5785c5-0243-4b01-a201-4c5089c8e6a9",
+      "name": "SAPAi Chat Your PLT Data (PROD)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz2t3t"
+    },
+    {
+      "id": "723f6ebb-ec45-4e2f-b8eb-0efbd6bc0276",
+      "name": "IBM Mainframe Knowledge Chat bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q647299"
+    },
+    {
+      "id": "5bafc1bb-2432-44f8-bde5-d257edc99c32",
+      "name": "K-InfoSecurity Law Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd7763"
+    },
+    {
+      "id": "450363db-3da8-4951-a511-6983c77cae23",
+      "name": "Expat Support Plant Debrecen",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q625503"
+    },
+    {
+      "id": "34dd60ba-fb19-4f8e-8ce8-c505588a9cbb",
+      "name": "JiraBoost",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q280592"
+    },
+    {
+      "id": "c5f27377-a805-435b-a388-e500784107dc",
+      "name": "Regulatory alerts AI screening",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q524780"
+    },
+    {
+      "id": "0fba02cf-f2a8-46ab-9f8e-559120f1cce1",
+      "name": "Inbound Logistics Wizard",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q179522"
+    },
+    {
+      "id": "3c03f186-dabc-4881-9d4b-fdcbfdab78b7",
+      "name": "TEST Chatbot BMW Proving Ground Network",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q502264"
+    },
+    {
+      "id": "4f0a1b96-c08b-4cbf-bf4f-17c5f8c9d0f3",
+      "name": "Chat Your Data",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5lbx"
+    },
+    {
+      "id": "d3fd0767-07c5-4a0a-ba0d-978c40af8d19",
+      "name": "BlueMind ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q677339"
+    },
+    {
+      "id": "54bcaf73-2a02-4218-b24f-7051013e5348",
+      "name": "Lastenheft Analyse",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q371831"
+    },
+    {
+      "id": "d5871d4c-47e2-449a-9cb8-8688f3a32cbd",
+      "name": "TME Briefing Support",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q386244"
+    },
+    {
+      "id": "0c7b76fe-b1c1-4dd7-a70a-737cae790ded",
+      "name": "GDMS helper",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q343260"
+    },
+    {
+      "id": "67f3f01a-9c4e-4f57-b8ff-ebd0a7fd641d",
+      "name": "Customer Outcomes: Compliance Library ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt40465"
+    },
+    {
+      "id": "c538c37c-22d2-453a-b44e-3309ffe15058",
+      "name": "Hardy - Hardware Lifecycle AI Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q341181"
+    },
+    {
+      "id": "7dec2350-a43d-4c4e-ba44-db1b0fe400c0",
+      "name": "Vehicle Routing Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q436296"
+    },
+    {
+      "id": "b084a71e-12b1-4cbb-a965-7784ef4dd172",
+      "name": "InnoBot (public)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q243119"
+    },
+    {
+      "id": "b8dd81cd-9af3-42dc-9d87-62c8f7b4421a",
+      "name": "EG-21 Praktikanten Wissen",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf5907"
+    },
+    {
+      "id": "ded0c353-df66-452e-b3c8-3732f1f45119",
+      "name": "Regelwerk Freizeichnung @EL-5 (EG-7)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q278556"
+    },
+    {
+      "id": "8785e0bb-8e9e-402c-8660-163b8bdbd6e9",
+      "name": "FZ-Cockpit>NEXT AI (Use Case Pilot)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q278556"
+    },
+    {
+      "id": "6e982182-1831-4f59-bdcd-61fc775ba245",
+      "name": "Stick‑Slip Database Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q672121"
+    },
+    {
+      "id": "01159c64-6015-4177-8b73-60d350bc518d",
+      "name": "IH-Buddy Gen5",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q345327"
+    },
+    {
+      "id": "3857b3b4-866b-4f02-aa43-bda932c6bce9",
+      "name": "APROT Cross Product Planning",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q335963"
+    },
+    {
+      "id": "472c4253-7810-4927-9319-ff5d02a4180f",
+      "name": "Master Data Governance (MDG) Navigator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q645069"
+    },
+    {
+      "id": "489dd403-529f-4128-9628-d3de343c36e2",
+      "name": "INLA-Wissensdatenbank",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4xrz"
+    },
+    {
+      "id": "1ad9b184-e012-4f01-ae98-b9db02ea6394",
+      "name": "Guideline Updater",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q630562"
+    },
+    {
+      "id": "4ac7c715-711b-4f1d-b712-c7212916eac0",
+      "name": "BMW Bank DORA IT-Compliance Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q446801"
+    },
+    {
+      "id": "e8fbd3f4-76ca-4e35-ad96-4cec7c3243bf",
+      "name": "IPST.Make handbook",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q639992"
+    },
+    {
+      "id": "26452c2e-634e-4398-944b-59153127bf54",
+      "name": "Empower GenAI@TS - Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q553350"
+    },
+    {
+      "id": "62786bef-577d-41f0-8bc0-379aaa9e14dc",
+      "name": "UCP Service Desk Helper",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q629511"
+    },
+    {
+      "id": "6e375e51-cea2-417f-8fa0-caea3a8c64ff",
+      "name": "Exploratory  Data Analysis",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf1299"
+    },
+    {
+      "id": "79bd87d0-9725-4840-8cbb-41137c0965ab",
+      "name": "BTRV-Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q624448"
+    },
+    {
+      "id": "8243298a-50e0-4d75-b696-1412b7ddc392",
+      "name": "Virtual Portal",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q353897"
+    },
+    {
+      "id": "52435ba5-760d-4f8d-bb3e-a6e85b16df9c",
+      "name": "Linguistische Sprachprüfung (SQS)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q276990"
+    },
+    {
+      "id": "c6b4354f-7aeb-494b-a7db-db31d670cc08",
+      "name": "CAP-App",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf5192"
+    },
+    {
+      "id": "58a20575-e525-4e3f-9fc4-8df67e62e938",
+      "name": "HR e-Compass Navigator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd8384"
+    },
+    {
+      "id": "6aeaed27-3068-40e3-85d1-c15cc2bfb7c2",
+      "name": "Benutzerhandbuch TS-411",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q616993"
+    },
+    {
+      "id": "ec576016-335a-48d5-b137-675bef65fc89",
+      "name": "SAP TechOps Maintenance Planner",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4nyh"
+    },
+    {
+      "id": "ec491ba8-fff2-4586-a8f2-38823ba8a2d8",
+      "name": "AI Model Selection Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q514005"
+    },
+    {
+      "id": "2dd85760-2af7-43fc-a523-cafcf9bbb000",
+      "name": "Signavio Email Reporting Converter",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte9782"
+    },
+    {
+      "id": "b4622624-c541-4496-91d6-fe30a153a60a",
+      "name": "InnoFeatureEFA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q284396"
+    },
+    {
+      "id": "6e2a531d-b341-4da3-bf93-cb79f4b2423f",
+      "name": "Recall Responsibility Search",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q295182"
+    },
+    {
+      "id": "5d795924-8eaa-4457-8cc1-29dfa6d0603f",
+      "name": "ACE Lounge Ticketsystem Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q233461"
+    },
+    {
+      "id": "1cdcb7cb-04c2-4de8-90d7-8e7ea0b1f950",
+      "name": "Plain Language (SF1-PL)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd0661"
+    },
+    {
+      "id": "3dac97df-e3d2-426f-bc8f-fdae5af44892",
+      "name": "KnowledgeBot iRAM\n",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf4128"
+    },
+    {
+      "id": "de1b84f7-fafe-472e-8fe3-5cbf719ad553",
+      "name": "XmasDriveMate",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q389946"
+    },
+    {
+      "id": "3a319250-670d-435a-9093-1163bdf27a55",
+      "name": "MyBMW IT - Knowledge for end-user",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q183059"
+    },
+    {
+      "id": "7f0946e5-9ced-4183-833f-8399ed4abcbf",
+      "name": "Asset Risk Trainer ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q498369"
+    },
+    {
+      "id": "91012464-cf8f-47ad-8420-639beee39524",
+      "name": "SF1-UK Customer Comms Classification",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q663569"
+    },
+    {
+      "id": "5cba63ec-bd08-43a2-a56e-62914514ed43",
+      "name": "SF1-UK Customer Comms Feedback",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q663569"
+    },
+    {
+      "id": "bfbb593c-fa6b-4897-8008-14b321b00ce8",
+      "name": "SF1-UK Customer Comms Testing Toolkit",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q663569"
+    },
+    {
+      "id": "971c946c-d18f-4b76-9dcd-9229fe7563c1",
+      "name": "SF1-UK Policy Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt47847"
+    },
+    {
+      "id": "ec5fd2bc-8e17-4dd3-ace6-8596c2e26c48",
+      "name": "SecureBot Steyr",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q428038"
+    },
+    {
+      "id": "f4dcec24-66ac-4fc5-a76f-8ae35f54c11e",
+      "name": "\"Hey SIRI\"",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q550416"
+    },
+    {
+      "id": "082b16e8-81de-445e-b140-0442b839a912",
+      "name": "Alphabet PowerPoint Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf0380"
+    },
+    {
+      "id": "e4195591-442f-47ac-8672-510955fe930e",
+      "name": "PrivyQ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q453305"
+    },
+    {
+      "id": "d8d0ae3e-1977-43e7-8585-494366b7162a",
+      "name": "LP Guidebook",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q198151"
+    },
+    {
+      "id": "21f13298-b7c9-4135-a7fb-7935aefece6c",
+      "name": "CoCo Test Strategy Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf0556"
+    },
+    {
+      "id": "d36eaa5c-4195-43b7-b357-16f3f45e59e9",
+      "name": "How To Bauantrag",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q454632"
+    },
+    {
+      "id": "dad400ea-570f-4969-8a66-4d53b115e93f",
+      "name": "KomNet (Web Search)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q465953"
+    },
+    {
+      "id": "622c2796-c158-4dac-98fa-72aab1dbd071",
+      "name": "Gesetze und Verordnungen DE (Web Search)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q465953"
+    },
+    {
+      "id": "a7085697-efaa-4344-a771-b94455d1f293",
+      "name": "BRiAN Confluence ChatBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q551685"
+    },
+    {
+      "id": "09bf24cf-9103-4498-a537-23959c13b64b",
+      "name": "MO-3 QMT Front Desk Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte9606"
+    },
+    {
+      "id": "02dd2a91-b027-4906-af33-7986152d7e10",
+      "name": "ePDCA Assistent TS Edition (T-Cube)",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q553350"
+    },
+    {
+      "id": "be8fd0e9-1a72-4bca-96d9-7da4c674c2a9",
+      "name": "Test App Ops - External ",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "qxz6ayt"
+    },
+    {
+      "id": "9e88d72d-7818-46d3-9a5e-76c4ccc55978",
+      "name": "App-2 External-Yes",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz6gbr"
+    },
+    {
+      "id": "fc8b2de9-ec88-4756-81cb-07acac653aab",
+      "name": "Jira Actions-Tool",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz6gbr"
+    },
+    {
+      "id": "32f3e363-b0ce-4c8d-bab4-d80abb1a778b",
+      "name": "CCT Training Database",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4kl0"
+    },
+    {
+      "id": "9ab4c5df-f2b8-4c11-a22f-0de3d8c44a35",
+      "name": "MathWorks @ BMW Companion",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q191822"
+    },
+    {
+      "id": "0fbbea6b-091e-4992-a520-d98bd1e6145c",
+      "name": "MiM Assist OtD",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q315433"
+    },
+    {
+      "id": "2cb72a71-2d30-4d71-8162-172c70ed0b52",
+      "name": "Geschäftsvorfälle  Umsatzsteuer Q & A",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q064648"
+    },
+    {
+      "id": "c902e3b9-de45-427c-843b-2cb837e8be05",
+      "name": "Ask EDI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q412170"
+    },
+    {
+      "id": "3591c4f6-f3b8-4dbf-a9a1-7ad1220dc50b",
+      "name": "Betreuerassistent ProMotion",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q610335"
+    },
+    {
+      "id": "41a916ec-781c-4dfd-9a4d-659fa9114591",
+      "name": "FinOps and CLEA Knowledge Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q607970"
+    },
+    {
+      "id": "f49c3204-a05a-48e2-80a5-0101cb46faac",
+      "name": "Showroom Mode",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q544837"
+    },
+    {
+      "id": "2b1adc49-0c4b-4cb6-9235-320f8545ab23",
+      "name": "ELEKI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q457707"
+    },
+    {
+      "id": "cceb6d0a-5c96-45e1-9d13-321d8f12fe70",
+      "name": "GremiXpert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q358674"
+    },
+    {
+      "id": "242a1e75-f73a-48f1-a426-63659b51f2a2",
+      "name": "K.i.ometer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q358460"
+    },
+    {
+      "id": "5f18719d-7ab7-42c5-b232-8add0f7b159f",
+      "name": "F.IT.4.Cloud ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q487925"
+    },
+    {
+      "id": "9d659dc2-a939-4155-9f40-173793234ad5",
+      "name": "LIGHT Support-Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q423636"
+    },
+    {
+      "id": "3dda8d54-4c61-4cbf-8de6-a8e350b199fa",
+      "name": "Guideline Comparison ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q610803"
+    },
+    {
+      "id": "63db0169-7d75-414b-aff6-4a59c35b921e",
+      "name": "BON Data Consistency Consultant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q624482"
+    },
+    {
+      "id": "080656a2-17a9-4a50-8a96-87b6cb77d276",
+      "name": "IT Compliance Radar",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte4812"
+    },
+    {
+      "id": "181d94c6-40be-4aab-9a87-7e7a0a7eb9ac",
+      "name": "HUBi - Hub Intelligence",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q191890"
+    },
+    {
+      "id": "f631f857-c0fe-4f05-9c81-dedc211e850a",
+      "name": "SAP C&E Chatbot ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q188735"
+    },
+    {
+      "id": "3d450fd4-f36a-495f-97c1-4f5c9ffbae3f",
+      "name": "Accessories Knowledge Data Base (AK)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf7936"
+    },
+    {
+      "id": "7e6f80f5-d77a-423f-a589-0e5120af71d0",
+      "name": "Vehicle Mechatronics Handbook, TH-65",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q615565"
+    },
+    {
+      "id": "06b8bf1d-d64f-4286-903a-52fbae86a56f",
+      "name": "MPP Chat Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q412351"
+    },
+    {
+      "id": "2cc576a2-c2c0-4c6e-affb-4bbc25f2f961",
+      "name": "Poland Internship Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte9248"
+    },
+    {
+      "id": "65c00640-5308-4b36-bb99-2b2ef218fdc3",
+      "name": "AI@SWQ: Requirements Alignment",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q288650"
+    },
+    {
+      "id": "a71f9857-645d-4c41-8aa6-0dd78187d34e",
+      "name": "Rolls-Royce Connected assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q664856"
+    },
+    {
+      "id": "99500042-6dd6-4f49-ab18-65a3a5c0e7c0",
+      "name": "AI4DE - CDEC Iceberg Batch Blueprint",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1vft"
+    },
+    {
+      "id": "3cf4e0c5-811f-4f23-b935-69d382fd3708",
+      "name": "Q&A Debrecen TS-6",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q467675"
+    },
+    {
+      "id": "8991d27c-1b4c-4a1f-8498-da626282fdb9",
+      "name": "SAPIgee",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5cf5"
+    },
+    {
+      "id": "7557d690-a72a-4b33-ae19-76da68247e50",
+      "name": "Travel AI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf1946"
+    },
+    {
+      "id": "b42a729b-e670-4586-90d6-3cb62decb4c7",
+      "name": "SWP-3904 Cross Platform Services",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q647299"
+    },
+    {
+      "id": "ac150cd2-d4c8-4be4-a4c1-19b1502d0795",
+      "name": "AI @ SWQ: Manual TC Gen + Alignment",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q364358"
+    },
+    {
+      "id": "6324b5f0-e178-4186-8a8a-6f3bf8bcffcf",
+      "name": "Work Instruction Creation",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf0167"
+    },
+    {
+      "id": "46124bec-c9dc-4037-89ea-5c7bd0e9cc60",
+      "name": "Digitalisation Qualification at TA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q297124"
+    },
+    {
+      "id": "5540c5c2-a385-48b7-9113-b231c9b03120",
+      "name": "PHWS - CTD / HDL Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q163490"
+    },
+    {
+      "id": "a5bfec8f-e886-4b71-ab6c-fff50a85c043",
+      "name": "ITEE Ransomware Tabletop",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q292139"
+    },
+    {
+      "id": "be675e9d-ca17-4802-ab86-f8f853f900a1",
+      "name": "AI Agile Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q362397"
+    },
+    {
+      "id": "502ecb57-5a99-4fe1-b68f-60b635d63902",
+      "name": "DevOps Service Catalog Checker",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q362397"
+    },
+    {
+      "id": "e3dfcfcd-4683-444f-8449-dbabf94ca398",
+      "name": "Engineering Search",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q561436"
+    },
+    {
+      "id": "bfb0e36f-32be-4af9-b2bd-a1ee598a9bfa",
+      "name": "QMT Hilfe ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q662789"
+    },
+    {
+      "id": "c15cb508-f8fe-4254-86a3-f0ce3638ce3a",
+      "name": "CoCo Dev Docs Linter",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q475715"
+    },
+    {
+      "id": "60d8eb2d-b067-4e67-98b9-b70836783ecd",
+      "name": "GAIA-Übungsguide",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q068566"
+    },
+    {
+      "id": "eb65e4b3-63a8-4e67-a939-bd9acfd7ade2",
+      "name": "Auswertung MAB",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q258956"
+    },
+    {
+      "id": "29e6ac06-7b90-4ac4-8c40-5a0b2ed5443b",
+      "name": "Prompt Engineer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4ve4"
+    },
+    {
+      "id": "01f5bccc-056d-45fe-a687-d5e03e2d71d2",
+      "name": "iStore",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q474552"
+    },
+    {
+      "id": "85714ca4-0b1b-43db-9464-bbab66a41733",
+      "name": "SAP TechOps Report/Error Analyzer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4nyh"
+    },
+    {
+      "id": "3d702019-08c7-4572-b0f3-e14dacb3fce4",
+      "name": "Lean Leadership GPT",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q198959"
+    },
+    {
+      "id": "2766a877-2f46-4eea-8637-eb5569d08733",
+      "name": "AI Platform, Proc Intelli & Automation",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q293941"
+    },
+    {
+      "id": "97bddd2b-cbd7-42cc-979b-8fd13926e107",
+      "name": "eGRC Corporate Audit Follow-Up Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd4956"
+    },
+    {
+      "id": "78c07880-e86b-4090-bc5a-ec6f223746f2",
+      "name": "CYBERIA JCN9001",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q292139"
+    },
+    {
+      "id": "c4cc4737-dd8f-43cd-bfa8-7a6a7a9072ab",
+      "name": "ILAS Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxr1545"
+    },
+    {
+      "id": "43656fca-0828-4dc0-9c1c-6a795ca42cdb",
+      "name": "IMAGINE",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5sht"
+    },
+    {
+      "id": "61b403e4-3b9e-477c-bfdb-e0da69a8b197",
+      "name": "Process Timer Production - Hams Hall",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680667"
+    },
+    {
+      "id": "52f85d3f-8832-4c1d-b7dd-3c270b19b86b",
+      "name": "Powerpoint Generator 2.0",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q662532"
+    },
+    {
+      "id": "2e6817c9-bf37-4831-801a-4f4173907347",
+      "name": "MIA Support ChatBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q297318"
+    },
+    {
+      "id": "41ccfdf7-808d-4f9d-a64b-dd06fafce17c",
+      "name": "DCM Infobot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q150864"
+    },
+    {
+      "id": "36a00d83-0770-40ce-8539-a55f17c96784",
+      "name": "HPCAP Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1f1e"
+    },
+    {
+      "id": "9a2d4c2f-0559-4c61-af6e-f8c1b26519fe",
+      "name": "Retailer Contact Report Analysis Tool",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte6475"
+    },
+    {
+      "id": "3d6de9a4-7f1f-4920-b91b-45da52ad63f2",
+      "name": "Website Knowledge Hub",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q460346"
+    },
+    {
+      "id": "5e64e1d2-e7dc-408a-96e8-33150d29ca60",
+      "name": "Glossary",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q561436"
+    },
+    {
+      "id": "432f0a17-6453-46d2-996a-34937d9a1572",
+      "name": "SWP-3900 SAP T., Integration Platforms",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q273079"
+    },
+    {
+      "id": "562f9de3-3f07-4b5c-bf34-b6ce6233b3e4",
+      "name": "SCP.apps",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q349193"
+    },
+    {
+      "id": "eb63da1d-2f1f-4bac-ad3b-8816081d0831",
+      "name": "JOB SCRIBE",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf3546"
+    },
+    {
+      "id": "1c725d3f-8950-4b4d-a7a4-fb8b808f430e",
+      "name": "Official IT-Security Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q459149"
+    },
+    {
+      "id": "5a46a081-82a5-4f79-908d-ee61b64ff919",
+      "name": "GSS User Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q379841"
+    },
+    {
+      "id": "d8db27de-e21d-4cd2-8977-82428aa397ef",
+      "name": "IFRS 9 Application Knowledge Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q394198"
+    },
+    {
+      "id": "b11c6c35-8820-4fe6-b710-b66919b6ce4b",
+      "name": "E/E-Testautomatisierung Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5sxv"
+    },
+    {
+      "id": "c09aadb7-09fb-490b-b9e3-52fcf5ebb2d0",
+      "name": "SnAPP!  Knowledge Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q428294"
+    },
+    {
+      "id": "3ec354f3-bfab-460e-acbf-3bb5bbfdd2ca",
+      "name": "TV-612 EKW Textbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q359766"
+    },
+    {
+      "id": "90e0e4f8-588c-429a-a8c4-626563ed08b5",
+      "name": "MINI Handbook Tool - MINI-Handbuch-Tool",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680326"
+    },
+    {
+      "id": "a6934ff0-d857-410f-8bb2-197f8fbdd7a5",
+      "name": "User Personas Collection @BMW Group",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1w4j"
+    },
+    {
+      "id": "ebef3d57-c2aa-459c-b446-bd07ee061ea7",
+      "name": "cP Support Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q556000"
+    },
+    {
+      "id": "86ee03d2-c196-4c04-8c5d-1bca0c27c51f",
+      "name": "AssetClassification",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q622789"
+    },
+    {
+      "id": "ac371b77-11c4-45fb-9b3e-d04eafa00961",
+      "name": "DaCaPO User Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q273635"
+    },
+    {
+      "id": "47dd981d-c9c4-4a2f-b9d3-5ba9004ccec8",
+      "name": "SAP EAM - Helpbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4m79"
+    },
+    {
+      "id": "6e310f2b-1827-4751-8b5a-5126fe7f910e",
+      "name": "FR-Ǝ-DDY",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q272999"
+    },
+    {
+      "id": "c2dc638a-1d12-411a-b316-1d9df859c527",
+      "name": "TMO Bluebook",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q547595"
+    },
+    {
+      "id": "1b61c16e-eac7-4b57-a16c-91ba7ba673bc",
+      "name": "HVS-Cockpit Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q533952"
+    },
+    {
+      "id": "e1b6bd1a-8c2e-448b-b0da-ed478ed1a7b4",
+      "name": "Viva Engage Post Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q368509"
+    },
+    {
+      "id": "e5423842-b390-4b72-a2c5-bbb09176ac17",
+      "name": "PMP Process Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q377934"
+    },
+    {
+      "id": "ecfefc93-ef1f-4ce1-8ba3-8a1153b0513f",
+      "name": "TEMPI (Test Equipment Mgmt Process Info)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtb9462"
+    },
+    {
+      "id": "d18fa510-68e8-47af-9403-ade483cea90d",
+      "name": "RED Project Manager Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q649286"
+    },
+    {
+      "id": "57fdc6ec-9c54-4c73-9e38-139968bcedbf",
+      "name": "VNT Bot ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q624668"
+    },
+    {
+      "id": "5a80bb55-c959-4486-908c-88d5b496230e",
+      "name": "AI Live Center Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q118957"
+    },
+    {
+      "id": "6bed766f-c7fb-47dc-b1e7-969fcab30fc0",
+      "name": "SAM (Survey Analysis Mentor)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q370709"
+    },
+    {
+      "id": "153c3fab-54b5-47af-af4b-b3c53ae4bcf4",
+      "name": "Create JIRA for \"Meldelinien\" Tools",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q557155"
+    },
+    {
+      "id": "cbfb86ae-6bd8-41e7-a6d7-f107bcc8bae9",
+      "name": "CSEE Strategy GAIA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt88730"
+    },
+    {
+      "id": "552bfbfa-ad2d-47c2-966b-b7f7551c9de8",
+      "name": "GAIA Search [BETA]",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q548597"
+    },
+    {
+      "id": "32d33aa4-50e8-483c-8de4-6913ec2c122a",
+      "name": "UI/UX Trends Genius",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q616807"
+    },
+    {
+      "id": "56d11314-a2bf-42b3-be67-2040ca7d09b2",
+      "name": "Learn AI Cyber Risks",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q547995"
+    },
+    {
+      "id": "b436183a-43d2-48aa-a649-ab05552fb8eb",
+      "name": "EinkaufsNavigator NL DE",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q375046"
+    },
+    {
+      "id": "16d737bd-4c5e-4eb2-afa9-9cf062b1eaea",
+      "name": "NSC KR - IT support AI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q273445"
+    },
+    {
+      "id": "ef63c231-7270-4467-a783-c1b8ca0f64c6",
+      "name": "Request SmartOps Access",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt60295"
+    },
+    {
+      "id": "62bfcaab-42ef-4937-bbe0-c4c55d0352b5",
+      "name": "IT-ICS Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q294763"
+    },
+    {
+      "id": "6c077169-5908-475a-bdf7-bc2c44c64251",
+      "name": "Chatbot BMW interne Fahrausbildung (IFA)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q053271"
+    },
+    {
+      "id": "79303cb6-7245-4653-aebb-e8b2b4c0f0bf",
+      "name": "Connected Test Platform (CTP)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf0556"
+    },
+    {
+      "id": "4617fd9a-48ca-4c07-ae1d-7c17c4fcbfff",
+      "name": "E/E Prozesslandschaft @ EP Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q347412"
+    },
+    {
+      "id": "74f6eaba-31a7-4c94-b18a-ede5570cbe2f",
+      "name": "Safety Saurus",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q143909"
+    },
+    {
+      "id": "4bdea7a3-9fe2-47be-bb58-8072a3fac598",
+      "name": "DGUV Regelwerk",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q143909"
+    },
+    {
+      "id": "9d8d3d17-ce72-4806-9bac-bde2f5b73d48",
+      "name": "MFM-Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680236"
+    },
+    {
+      "id": "62fff81f-2738-4620-8e07-7187e1b2d0fa",
+      "name": "VA-Finder Arbeits- und Umweltschutz",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q519166"
+    },
+    {
+      "id": "8984f9f8-c0e1-464f-8125-f5f5de52c52d",
+      "name": "OpenSCENARIO Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q463194"
+    },
+    {
+      "id": "5cb7ec1f-9e71-4196-be0e-bc3b67020f75",
+      "name": "Value Service Questions Bot (C4-US-A-22)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637455"
+    },
+    {
+      "id": "796cacf7-cbc9-49b9-a8c8-39d29af36b1f",
+      "name": "AnalytIQ Chemie",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q653792"
+    },
+    {
+      "id": "2daf7374-2ced-4976-ba9d-0e6c2518d37c",
+      "name": "Study Database Customer Support",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q672628"
+    },
+    {
+      "id": "123f2bdf-e2d6-4446-935d-3c919e2443f2",
+      "name": "Documentation Creator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q514005"
+    },
+    {
+      "id": "d3a8fc83-51fa-42fe-a7b0-8fb0a8045097",
+      "name": "IDP Self Service",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "qxz3g64"
+    },
+    {
+      "id": "c406dfbb-407e-427c-9d0a-cac04adebd4e",
+      "name": "Freigaberegelwerk Assistent ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q386372"
+    },
+    {
+      "id": "5b640585-60fb-46fd-a66e-4485e1e37cfd",
+      "name": "ICS Control Check",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277334"
+    },
+    {
+      "id": "c84fd74e-972e-43b6-89fc-12d5d7ee4974",
+      "name": "Catia AI Online Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q154850"
+    },
+    {
+      "id": "80788647-fd7d-4609-a6fa-ec8ba54976be",
+      "name": "Technipedia Chat",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q395325"
+    },
+    {
+      "id": "f771be87-4802-4809-a9f4-c1ad1200a068",
+      "name": "SUPRA Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q614911"
+    },
+    {
+      "id": "205bf200-5629-4d39-977b-bb8f843578f2",
+      "name": "SF3-KR Expense Claim",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte7082"
+    },
+    {
+      "id": "ca96b0f3-f3d8-4d22-adb4-810d277537e4",
+      "name": "Customer Feedback & Survey Analysis",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd9786"
+    },
+    {
+      "id": "e627dc97-b2bc-4950-8082-8e4f9ba881ba",
+      "name": "Process Maps from Text - Excel & Visio",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd9786"
+    },
+    {
+      "id": "04515a6f-6ccc-415e-bdd7-b51ec9ca9b44",
+      "name": "Easy Business Solutions with Python",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd9786"
+    },
+    {
+      "id": "47b01be5-2d1c-4c90-901d-03abbb9eed5d",
+      "name": "myTRACK",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q559929"
+    },
+    {
+      "id": "03fe194b-43c8-49db-9636-ae48834dd2ea",
+      "name": "GPT-5",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q279318"
+    },
+    {
+      "id": "ccc8477e-5b93-40e5-b2fb-64cc25825612",
+      "name": "A.I.D.A - Mechanical Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634347"
+    },
+    {
+      "id": "0118c4b6-2454-4544-aa8a-ea171e5211f5",
+      "name": "EPIC Splitting Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5780"
+    },
+    {
+      "id": "13cccccc-fe8e-4ba3-9130-8d3133af1d34",
+      "name": "Anlagenverkauf Need to Know",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q664512"
+    },
+    {
+      "id": "e357849e-a5a1-457a-b17e-01648b7e5982",
+      "name": "ESO CRM Support",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q625926"
+    },
+    {
+      "id": "780f33e0-d14e-485d-b185-adddcd112af0",
+      "name": "SPRINT Genius Virtual Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q178349"
+    },
+    {
+      "id": "fe9feab5-8480-4a3f-8d4a-e43883842a4e",
+      "name": "C1-CS Retail Counting Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte0482"
+    },
+    {
+      "id": "13b060e7-ce32-4047-ad20-a4bbba2fdaae",
+      "name": "SPICEify",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q535148"
+    },
+    {
+      "id": "e54581b0-8334-473c-96cf-073a16028dfd",
+      "name": "Suporte Compliance ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf2399"
+    },
+    {
+      "id": "51502d8f-0ddc-4471-af87-af5fb3abf384",
+      "name": "Briefing Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q146649"
+    },
+    {
+      "id": "11adfb06-de34-46d1-9bbe-58672bed70bf",
+      "name": "Nutzen & Wirksamkeit, Value Chain Helper",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q360944"
+    },
+    {
+      "id": "6670a64a-499b-4afd-818b-72edf22d663d",
+      "name": "Supplier Profiler",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q556000"
+    },
+    {
+      "id": "1f975353-524a-4161-8d27-89f8d6886781",
+      "name": "Process, APP & Automatisation Pilot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q428294"
+    },
+    {
+      "id": "0546cfc4-745a-4a7a-a6a5-2fce3fb6597a",
+      "name": "AWP Access",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q367465"
+    },
+    {
+      "id": "db065684-a8b9-4131-b27c-8f2c311f660c",
+      "name": "Operations and Security Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtc3905"
+    },
+    {
+      "id": "6680b6b2-fd19-4efb-b6e1-8b0aea74595d",
+      "name": "AWM Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt95236"
+    },
+    {
+      "id": "8381f210-aa8c-413d-9652-5ad57452546a",
+      "name": "CW-FRO-Test",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz6eex"
+    },
+    {
+      "id": "6e1ca1c3-c7d9-4fe1-9980-ef60a2765478",
+      "name": "T-Cube ChatBot Cubie",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q426421"
+    },
+    {
+      "id": "5ff0f535-b8df-4473-ad32-4bdbe2769d0b",
+      "name": "Travel Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q653076"
+    },
+    {
+      "id": "6a053775-7229-44a6-9079-ba81751b637c",
+      "name": "DE Tool and Process Guide",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz59df"
+    },
+    {
+      "id": "d4958c8a-63ed-47fc-b6e4-3a001cc8ee80",
+      "name": "KlaSu Helper (SF1-CH)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtf3327"
+    },
+    {
+      "id": "04d58338-f8fd-41fc-801b-2410a27cd0b1",
+      "name": "ELIDA Workbook naming convention",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte7762"
+    },
+    {
+      "id": "3851cb66-8777-432e-a41f-78cba19dd319",
+      "name": "PowerPoint Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q680342"
+    },
+    {
+      "id": "1c43ecdd-336d-4389-9b06-0e72576e8477",
+      "name": "One Shop AI (v0.7)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q424119"
+    },
+    {
+      "id": "00be2075-6879-43b0-b0aa-61b317979029",
+      "name": "QfQ Process",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q287718"
+    },
+    {
+      "id": "1692402a-cc47-4201-bc16-d254f3ec2913",
+      "name": "Golden Question Generator ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q351369"
+    },
+    {
+      "id": "0fa4526a-0fc3-45db-b7fc-2ba38efaee46",
+      "name": "Ask.RRMC",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q179404"
+    },
+    {
+      "id": "0d124c9f-efd6-47de-8e47-9e712c183f76",
+      "name": "Car2X InfoPilot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q544338"
+    },
+    {
+      "id": "8b8ad846-8250-4fa4-9e93-e641732404c6",
+      "name": "A TNR @ SF Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q446467"
+    },
+    {
+      "id": "d569eb93-3b4a-41ee-a831-e0fb65670b32",
+      "name": "One Shop AI (v0.32)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q424119"
+    },
+    {
+      "id": "d5dd9cd0-c851-473c-9219-1d783754b30b",
+      "name": "Frontend Development Standards - FEDEV",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4x0s"
+    },
+    {
+      "id": "997f0fd7-d407-4628-825c-abf743be8279",
+      "name": "MENTAI - The Process & Tool Buddy ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q553801"
+    },
+    {
+      "id": "3b3b6cee-89a9-4537-8fac-8f107f6e0efe",
+      "name": "MiM Onepager OTD",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q315433"
+    },
+    {
+      "id": "1f704240-2b53-4fd0-9ba9-6caacffc0abd",
+      "name": "Q-Leitstand Search",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q148724"
+    },
+    {
+      "id": "e8a70599-81ef-4f15-b635-4bd97f646a73",
+      "name": "Doc consistency",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt88730"
+    },
+    {
+      "id": "3024da0d-5861-4836-9f7e-f342ab805a14",
+      "name": "iP3 Wissenspool Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q553394"
+    },
+    {
+      "id": "e83a63f4-217e-4d0c-84ba-48f8c947bfa3",
+      "name": "JIRAID (JIRA Intelligent Drafting)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q271916"
+    },
+    {
+      "id": "eb335b37-839a-4c75-a5d0-6441b160fda1",
+      "name": "Benefit Calculator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q282536"
+    },
+    {
+      "id": "2a70c150-c372-4a64-8f39-32891bdb9281",
+      "name": "GAIA - Feature Request Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q414709"
+    },
+    {
+      "id": "55dc1d78-5fe2-4be2-ac70-c4dfe0515e10",
+      "name": "BEAT Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q282681"
+    },
+    {
+      "id": "83a91ff9-5c85-4fe3-8d3b-c8c59bee6d57",
+      "name": "EinkaufsKompass",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q151169"
+    },
+    {
+      "id": "2efc8600-86f1-492b-bdd4-d18da52185b1",
+      "name": "VM0 FAQ BOT",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz23h1"
+    },
+    {
+      "id": "906e7b6f-10b6-4dc9-8ef1-f5c01d27a5b2",
+      "name": "ITSM.NEXT Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q183059"
+    },
+    {
+      "id": "92dd892c-a670-4eef-96fb-b70ab23ebc7e",
+      "name": "PIP - Bot ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q183712"
+    },
+    {
+      "id": "e8dbfdf4-9eda-476f-a8d7-09e72ec2ac79",
+      "name": "AI4DE - CDEC Data Quality",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1vft"
+    },
+    {
+      "id": "53057dff-bc6d-4d37-ba15-863ad6c7203a",
+      "name": "IMPE Glossar-App",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q147234"
+    },
+    {
+      "id": "4197ae22-d323-4ca8-9d83-7d8322cc0ed8",
+      "name": "BEIT4U Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte9760"
+    },
+    {
+      "id": "6c79fed0-fd00-4ccc-8b44-1c6b576b6c16",
+      "name": "PROCESS WORLD CHATBOT ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q192152"
+    },
+    {
+      "id": "4925c6b4-b318-4cd5-86a2-9ae81d8204c8",
+      "name": "SAFe 6.0 Knowledge Library",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q395721"
+    },
+    {
+      "id": "40d86501-d0a4-4b65-9100-a8f059bad6c1",
+      "name": "Test2.4.0Miyo",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5tsg"
+    },
+    {
+      "id": "fa5c2765-21bf-4670-bd59-32889c7bd7c7",
+      "name": "UK Mobility Services Tool FAQ Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q645896"
+    },
+    {
+      "id": "c3577910-0fd4-43d7-b73b-3b87058e1f9b",
+      "name": "S.T.A.R. ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtb1917"
+    },
+    {
+      "id": "edd79faf-dcb4-486c-b06e-e010a4cd73d8",
+      "name": "TecSa Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q282536"
+    },
+    {
+      "id": "9782fd32-d2d6-428c-8454-c8c3aa4ce28a",
+      "name": "Onboarding EVM",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q293665"
+    },
+    {
+      "id": "d5396f85-1160-4f38-8f3a-e2e5967079d0",
+      "name": "FindME",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q506051"
+    },
+    {
+      "id": "8641aab5-3d58-48e7-a375-03725e9dc817",
+      "name": "Takt.board Chat Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtd9400"
+    },
+    {
+      "id": "68c733d5-1734-49c8-8212-e108d00c12ef",
+      "name": "HR Forecast Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q415399"
+    },
+    {
+      "id": "8603027f-ed19-473a-aef1-57f1f3262b73",
+      "name": "NPRM - Analysis ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q475276"
+    },
+    {
+      "id": "26a4a77c-7ff2-4bae-84b5-1a6b4fb7a395",
+      "name": "Industrial Image Processing Cognex",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634218"
+    },
+    {
+      "id": "e1dc07c0-8f9e-46d6-a921-50541804576b",
+      "name": "SVT- Spring Validation Tool",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q678016"
+    },
+    {
+      "id": "18fc73ec-04b5-4f51-b7bd-5ea59d708680",
+      "name": "AI Leadership Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q669030"
+    },
+    {
+      "id": "e09861f6-5c10-4370-be0d-22bb24ffd160",
+      "name": "HR Servicess MX Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q666430"
+    },
+    {
+      "id": "f7e3121d-d759-4544-bb31-0a70d7b46c32",
+      "name": "Developer Home",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q445891"
+    },
+    {
+      "id": "d76f4190-e603-4268-b8da-619912d559dd",
+      "name": "WebEAM.Next",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q385330"
+    },
+    {
+      "id": "e51f4b88-738c-4b5b-acaa-2bd2cfb5dff6",
+      "name": "Ai TextEssence Pro",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q414709"
+    },
+    {
+      "id": "d6ea25e9-5628-46b2-a6f3-8c1686c604a8",
+      "name": "TMO-Standard-Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q553348"
+    },
+    {
+      "id": "429b10b6-7483-4ed0-be33-ba33ba323b13",
+      "name": "TNR Switzerland Q&A",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte4348"
+    },
+    {
+      "id": "862c5b22-8e4a-41da-ab1f-3a4a7c7d7a10",
+      "name": "Heisenberg KPI-Trigger-Tool Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz45ln"
+    },
+    {
+      "id": "81433b5e-2e45-4850-8625-1a740df75ce3",
+      "name": "JIC - Job Instruction Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q527426"
+    },
+    {
+      "id": "58b82f8e-f70a-4c67-b517-57fa140cbcc8",
+      "name": "SAP S/4 HANA Wissensdatenbank",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q642699"
+    },
+    {
+      "id": "0a64dc90-e206-490c-a7cd-71676bc60e1b",
+      "name": "BV Chatbot Zeitwirtschaft",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q279186"
+    },
+    {
+      "id": "7f04cb2f-9c6a-44cf-9361-578a95f57d7e",
+      "name": "CBS Book of Agile Working (BOA)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q464739"
+    },
+    {
+      "id": "3f85fe23-779d-46a6-a8a8-b908de8c7a62",
+      "name": "Wirkketten@BMW Engineering Grid",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q229737"
+    },
+    {
+      "id": "d0d047fa-c558-4f0b-8648-df29f6f1a379",
+      "name": "Easy Newsletter",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q380767"
+    },
+    {
+      "id": "186d5c2c-3610-4a51-9186-e34cc002e8b1",
+      "name": "Bootcamp IT-Support Berufsausbildung",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q630426"
+    },
+    {
+      "id": "c72c0ad2-8643-4ba3-b2be-18fcf6f3efed",
+      "name": "Plant Debrecen – Benefits Compliance",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5cc7"
+    },
+    {
+      "id": "2bdc9e47-e3c9-44d8-8f25-50675e48dfcf",
+      "name": "PDM - Qualifizierungskompass",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q678013"
+    },
+    {
+      "id": "23ddf46d-0490-4e01-be58-0ef6337bd943",
+      "name": "TAM Product Depot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q681237"
+    },
+    {
+      "id": "55287aec-43bf-4208-a672-079447bd1ed7",
+      "name": "DIN 276 Kostengruppen",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634008"
+    },
+    {
+      "id": "e60285bf-3443-4ee3-b4cd-51485c0fc4ef",
+      "name": "A4M1 Manual Chat Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q635626"
+    },
+    {
+      "id": "3bfdee65-c47c-4a9a-ba81-252c3b8dc094",
+      "name": "VisionFlow SR",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q641048"
+    },
+    {
+      "id": "31c2a244-feee-46eb-b15a-d5ec7def669b",
+      "name": "Leitfaden Niederlassungsbuchhaltung",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634323"
+    },
+    {
+      "id": "3890522e-3032-4bc7-89ac-e24bb53425db",
+      "name": "LoCo@M - Ask me Anything Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q433051"
+    },
+    {
+      "id": "6dd99cd5-54c6-4a0f-a55f-e58e7ac0fbce",
+      "name": "Hack-A-Prompt UseCases",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q682897"
+    },
+    {
+      "id": "9472cf6d-9954-4703-b466-745a8cdcdc54",
+      "name": "GeoData Scout",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q170317"
+    },
+    {
+      "id": "95d4574d-74b6-4df5-861b-09253822a834",
+      "name": "MOVE Apprentice Exchange ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q627239"
+    },
+    {
+      "id": "6851caf4-c095-4742-b860-c47e25684727",
+      "name": "LaKa TU ChatBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q554125"
+    },
+    {
+      "id": "287beadc-5cdb-43b9-a3e6-46bcf1795235",
+      "name": "Assistent Hotel Buchungsplattform HRS",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q223605"
+    },
+    {
+      "id": "03453e20-d670-4547-b131-d520c5af2338",
+      "name": "IT Security Incidents Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q451061"
+    },
+    {
+      "id": "81b46a7e-7faf-4436-86b0-10d0f07dd43a",
+      "name": "iBBM & MaLi & OCEAN Knowledge Base",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q372969"
+    },
+    {
+      "id": "a5f9981d-b8e1-409d-b1fd-ee008b89f635",
+      "name": "UI Test Automation Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q277196"
+    },
+    {
+      "id": "8cf6200c-0ed2-4ce0-a1ec-a09acde41d9d",
+      "name": "PlantCon ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q677540"
+    },
+    {
+      "id": "548b7e56-4c8b-400f-86ff-a2e09aa4b197",
+      "name": "EFQM Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt17993"
+    },
+    {
+      "id": "cbb32b5f-8c2b-4c9d-a829-fece47d8b947",
+      "name": "Lean Six Sigma AI Chat Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt17993"
+    },
+    {
+      "id": "59ab285b-20eb-4c75-a62f-394489b4ac86",
+      "name": "SAGA RefineMate",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz1q2n"
+    },
+    {
+      "id": "1001e7a3-20bf-41ef-8f9b-dc8887666003",
+      "name": "Verbatim Clustering  Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q290706"
+    },
+    {
+      "id": "e1745037-5693-4d83-9684-e97b0f8ff402",
+      "name": "RFID Help-out",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q603006"
+    },
+    {
+      "id": "9f136d6a-89cd-4dcf-94f3-8dc74aceebfc",
+      "name": "Wissensfinder EDL Vergabe/Steuerung  EF",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q272175"
+    },
+    {
+      "id": "34f1d2af-b05c-46d9-a295-54cdcd09d03d",
+      "name": "Search Technipedia",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4c9x"
+    },
+    {
+      "id": "f5e96b67-689f-4c7f-a553-f8d5893794ab",
+      "name": "GAIA App Recommender",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q454024"
+    },
+    {
+      "id": "dbc35600-da23-4e9d-a22c-daf3a7a698b8",
+      "name": "Parcel Self-Service MUC",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q681249"
+    },
+    {
+      "id": "887893cc-31dd-4aa9-baf0-2a4fc8a409bb",
+      "name": "OUTDATED - Terminology Search",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4c9x"
+    },
+    {
+      "id": "2a1fe133-469d-4382-9396-9d260ea90e92",
+      "name": "AIQX-Use Case Factory Help Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q623483"
+    },
+    {
+      "id": "1c164dd9-0bbc-4ae5-8a73-ede1907c17d5",
+      "name": "TS NWC & CoC Assistant App",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634205"
+    },
+    {
+      "id": "5a9dcf91-3937-4d90-8504-7030254c67e3",
+      "name": "MEGA (Double-Track Vehicle Model) Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q657093"
+    },
+    {
+      "id": "3c789200-0ead-40f8-a417-04b98637299a",
+      "name": "New Car Pricing Assistant Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q656868"
+    },
+    {
+      "id": "58599f3a-580a-4775-bca1-119d0be55c05",
+      "name": "TAEE Knowledge Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q282694"
+    },
+    {
+      "id": "6be385c8-1273-455c-850c-d48cb46a4d29",
+      "name": "Produktkategorie - Suchmaschine",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q664245"
+    },
+    {
+      "id": "47d5c576-ad4f-494c-9e03-760bf8750db6",
+      "name": "Agent IntraAI @EL-5 (EG-7)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q278556"
+    },
+    {
+      "id": "70ec7d23-d4f8-44ef-b7ce-c18826506002",
+      "name": "ePrivacy as a Service (ePaaS)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q176909"
+    },
+    {
+      "id": "464466aa-8a1e-46d7-9c69-7471c0ced0e3",
+      "name": "AI Concept Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q414709"
+    },
+    {
+      "id": "e268e88a-055b-4ad5-82ea-ef26358f15bd",
+      "name": "Edge Ecosystem",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz0pei"
+    },
+    {
+      "id": "e8c8eb44-dac7-4159-aa22-999642482df7",
+      "name": "Geschäftsordnung ZX Gremien",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q034889"
+    },
+    {
+      "id": "16ea6922-2dda-422a-9b87-e435a1f43a4d",
+      "name": "Starting with RPA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q177514"
+    },
+    {
+      "id": "bebb0799-daec-499c-a734-619b06e7f6e9",
+      "name": "PPP4OSC Knowledge",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q449549"
+    },
+    {
+      "id": "d6c2263a-7143-4185-a853-393a6f26e323",
+      "name": "InnoBot",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q243119"
+    },
+    {
+      "id": "aa6989c3-e74d-4086-a0e4-3101de14fdb8",
+      "name": "GAIA-App Idea Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q334225"
+    },
+    {
+      "id": "973b18a9-8da1-48bc-a9e9-2c1cade9a880",
+      "name": "Requirement Checker",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q484149"
+    },
+    {
+      "id": "151ed51d-37e3-4e77-91c9-4ee2da4aa769",
+      "name": "Change & Deployment Management Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q246281"
+    },
+    {
+      "id": "620e819f-02d9-4aac-814e-2915b34ddc9a",
+      "name": "Security Dashboard Pro",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q544217"
+    },
+    {
+      "id": "eb64dff9-bba6-41d4-82f9-e965a9007946",
+      "name": "Freigabeberater",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q412256"
+    },
+    {
+      "id": "9b475156-3a82-48a4-ae40-73dc69bf2f9d",
+      "name": "CO-PA GUIDE",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q365814"
+    },
+    {
+      "id": "2cfb8510-fd69-4be7-8b03-6a88ca1fc436",
+      "name": "Agent ProCAT",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "qxz3m0v"
+    },
+    {
+      "id": "53e10d9e-d871-4fc0-88fc-df1cb16e61d0",
+      "name": "Mini Handbook Reader ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q654726"
+    },
+    {
+      "id": "1774619c-511d-49fb-8187-66cdaeea713f",
+      "name": "Workflow Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q221893"
+    },
+    {
+      "id": "5d577682-e1c9-4e41-b0fc-aa7cf6de54f4",
+      "name": "UX DesignOps @ BMW Group IT",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q118957"
+    },
+    {
+      "id": "7b59d12d-5ee2-4c0c-aa17-40d34ae016ad",
+      "name": "WPS Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q529258"
+    },
+    {
+      "id": "6f3f4433-855d-4163-a367-147862bbc815",
+      "name": "Job Spec Generator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q629035"
+    },
+    {
+      "id": "f3ca05e4-eb3c-42a5-9283-7af7e7ce60ff",
+      "name": "HR Tonality Tuner ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q253509"
+    },
+    {
+      "id": "625c6b8f-ece3-48a9-af06-38fdcb20c9bf",
+      "name": "AIconic Anforderungs Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q665908"
+    },
+    {
+      "id": "50997b46-3c7d-45e1-9bc5-0806923717b4",
+      "name": "MAPP Assistant",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "qxz4xum"
+    },
+    {
+      "id": "a5a9c142-2fd5-458d-88ba-09cb9ceaf7a0",
+      "name": "AWP-Reporting + DIRECT HePP ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q217126"
+    },
+    {
+      "id": "539d0845-9aa8-4352-a5b4-c527dd9df161",
+      "name": "Image Analyzer",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q523571"
+    },
+    {
+      "id": "5e7ccf71-c4e0-493c-922d-8b8e9b4d3e6d",
+      "name": "Finance Controlling Q&A (TU-O-71)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q555612"
+    },
+    {
+      "id": "64509b8b-5556-4bd4-bb56-a82dff410944",
+      "name": "WoMi | Copilot der Office-Reise",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q286774"
+    },
+    {
+      "id": "7d0ef9d5-8110-479d-a75e-ad9273966eb2",
+      "name": "Maturix (DBKR Experte)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q156897"
+    },
+    {
+      "id": "900c0df5-54d9-47ea-b58f-d9224488c6a2",
+      "name": "Refinement Companion",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q553460"
+    },
+    {
+      "id": "7288c4f4-d98c-46cb-8106-b0a6787b7ddf",
+      "name": "Pitch Perfect",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4ve4"
+    },
+    {
+      "id": "ca5a23f4-4924-44e6-a497-5919a8adb157",
+      "name": "Points-Estimator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q356778"
+    },
+    {
+      "id": "bb298164-9aed-4b81-97b4-15308b13c546",
+      "name": "AI Web Search App",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q289536"
+    },
+    {
+      "id": "639783f3-5b60-4138-95dc-5af7296b5fb6",
+      "name": "App Retirement in Connect IT ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q280571"
+    },
+    {
+      "id": "4ec40b60-4853-4782-9ce8-c76846c0c546",
+      "name": "PolicyBot Werk Steyr",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt54337"
+    },
+    {
+      "id": "919da483-9749-4fd8-be2f-1666cbced153",
+      "name": "Material Control Confluence x GAIA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q434710"
+    },
+    {
+      "id": "02f872d1-1b04-412e-aa8a-00849cd7ea1c",
+      "name": "test app v2",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz447u"
+    },
+    {
+      "id": "3d7691a6-31fa-4745-8f44-28e177028d33",
+      "name": "NormAI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q400009"
+    },
+    {
+      "id": "6332920d-db3e-4ccb-9440-845f607b26c9",
+      "name": "Deep Think",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q395325"
+    },
+    {
+      "id": "9a7ead31-aba0-475f-a41b-44a0bd0f1f2c",
+      "name": "BEV CHARGING EXPERT",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4nkg"
+    },
+    {
+      "id": "3c25e47a-0cf0-4d9a-a382-dddef4411ff2",
+      "name": "Platform Service Offering Agent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q342317"
+    },
+    {
+      "id": "1748653c-548e-4657-8fde-a3a9f997f1d4",
+      "name": "Oracle APEX Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q542940"
+    },
+    {
+      "id": "578a01ba-d1db-44ec-95cf-a110186a949c",
+      "name": "T-Prozessnavigator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q090286"
+    },
+    {
+      "id": "00aab475-6bc6-438c-a7a7-4c4706d10459",
+      "name": "EMA WD Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte7777"
+    },
+    {
+      "id": "20d01e4c-4532-4609-bd35-ba15fb106d15",
+      "name": "C4-US-A System Access Information",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt42070"
+    },
+    {
+      "id": "aef8b116-7ac9-4150-be79-c66c4a8c33a7",
+      "name": "BMW Python Code Buddy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q459782"
+    },
+    {
+      "id": "3e9defa6-2db1-4b28-ae06-d5a16b893a89",
+      "name": "Envision Yourself (Chatbot)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q673683"
+    },
+    {
+      "id": "1afe2598-0303-4bfe-8969-e591cdba704d",
+      "name": "eGAAP Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q532357"
+    },
+    {
+      "id": "4932536a-ea51-4feb-80c0-aca43bd9f6bd",
+      "name": "SAPAi Knowledge Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz2t3t"
+    },
+    {
+      "id": "47854de3-36be-49fa-979a-1976fdbfe90d",
+      "name": "BMW Pay and Doc Handling Guide",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q280081"
+    },
+    {
+      "id": "b5e33343-4000-4258-b6c8-f66bffbd2004",
+      "name": "Cloud Services Explainer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q449608"
+    },
+    {
+      "id": "7eab9e0d-564c-40d8-b3be-67f3bf11e367",
+      "name": "DVM-Check Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q140169"
+    },
+    {
+      "id": "c9b71c52-efc6-4cfc-9a6b-01f6d8c2c0d5",
+      "name": "GPT-4.1",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q279318"
+    },
+    {
+      "id": "a2bcf348-75d3-4291-a142-6f24c7062bd1",
+      "name": "Claude ❤ GAIA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q414709"
+    },
+    {
+      "id": "bd71ae71-6e41-4fd9-9da6-b12610f2c3a3",
+      "name": "Q-Space",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q445621"
+    },
+    {
+      "id": "fe4701f8-2381-49ee-ab2c-c82c282804ef",
+      "name": "Corporate Identity Support - CI",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q336545"
+    },
+    {
+      "id": "1bcf3e8a-23df-4afa-8577-b41a88960c33",
+      "name": "Proofreading",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q430426"
+    },
+    {
+      "id": "c861ae34-f39b-4c5a-85cb-b2f76938556d",
+      "name": "MDM Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q375852"
+    },
+    {
+      "id": "0649f563-dcf2-4241-b516-50754d3327fe",
+      "name": "IDMC_FS",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q540683"
+    },
+    {
+      "id": "5115d29d-5c7f-4f89-8d06-c7c87c0c5d7a",
+      "name": "EFACT User Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q679509"
+    },
+    {
+      "id": "0127ac8c-222a-4641-965a-884737c9c6c0",
+      "name": "FactoryGenius (Manuals) (Anlagendoku)",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q529258"
+    },
+    {
+      "id": "ed63b50a-f5e7-42d2-948e-3a961f1fe7ab",
+      "name": "OtD Prozessmanagement Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q330156"
+    },
+    {
+      "id": "b7f0cf6d-619f-4060-8ef9-683cde0ee057",
+      "name": "Innovation Assistant (T-Division)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q652159"
+    },
+    {
+      "id": "bbf8364f-b8f3-4071-9fc1-6d435775404a",
+      "name": "Employee Experience Leadership Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q372285"
+    },
+    {
+      "id": "4e31a19a-42fc-488d-b204-dc965f078ca6",
+      "name": "Prozessfragen zum ItO",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q276074"
+    },
+    {
+      "id": "6b9a1011-acdf-44df-9469-cfd75bc8c592",
+      "name": "Requirement Quality Check",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q447392"
+    },
+    {
+      "id": "debf44e9-2ac2-4302-a2eb-cb7c25b0b9f7",
+      "name": "ZX-Q-Berichtswesen Support",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q558235"
+    },
+    {
+      "id": "14e0bd5e-2e05-416d-b84c-97e8ec4f7d07",
+      "name": "Digital Identity Chatbot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q418957"
+    },
+    {
+      "id": "3f20fa1b-d4be-4860-85e3-21620d26683c",
+      "name": "Information Classification Assist",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q184283"
+    },
+    {
+      "id": "6d2ab58a-caad-4ff3-acef-e5cb6e67bbbe",
+      "name": "JQL Wizard",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qte8659"
+    },
+    {
+      "id": "1913b52d-6ed7-411a-aa7d-e1f833afdcab",
+      "name": "WerkverträglichkeitLeistungsverzeichnis ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q618119"
+    },
+    {
+      "id": "9723be3b-05de-468a-83ed-d9ac65bd41b2",
+      "name": "SF Guideline Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q098042"
+    },
+    {
+      "id": "656db67e-1f40-4405-85d6-f01b234d1429",
+      "name": "Handbuch LMS Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q622067"
+    },
+    {
+      "id": "7500825f-45dd-4931-a938-ab73bf4cbcad",
+      "name": "PCMA Insight",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qt11396"
+    },
+    {
+      "id": "e6fc5492-05d8-4ea1-a161-61e7afd3d4b6",
+      "name": "The Cyber Security Production Consult",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q399683"
+    },
+    {
+      "id": "a69b04a5-ab0c-43dc-9f7f-168f03d151ac",
+      "name": "DecisionPaper Avatar",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q271776"
+    },
+    {
+      "id": "7bf7e717-ae1b-44a5-a99b-39733805d77f",
+      "name": "ImpactNEXT Platform Apps",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q634124"
+    },
+    {
+      "id": "c53aabd1-1241-4797-bdd3-54042e3d4235",
+      "name": "Product Domain Navigator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz5d0u"
+    },
+    {
+      "id": "2038b8a3-3dec-40fa-a392-180e5f2db59f",
+      "name": "AA Assistant (AQ-21)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q288710"
+    },
+    {
+      "id": "a69d20b3-484b-4259-81a1-237a2e91bd29",
+      "name": "Shopfloor Digital Bot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q148575"
+    },
+    {
+      "id": "1d70045a-c5d7-46c1-8869-411bd26dcf28",
+      "name": "GAIUS - Digital Coach",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q148575"
+    },
+    {
+      "id": "126ebf70-9163-4f38-854a-27697d6ceba2",
+      "name": "AskSurveySpace",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q282437"
+    },
+    {
+      "id": "65219cb9-3645-49cd-bef1-4e998d667965",
+      "name": "CyberBot - Community Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q612971"
+    },
+    {
+      "id": "5445faeb-d763-4385-acc0-352b62d7b9d9",
+      "name": "AI4DevOps / JoyCode Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q460442"
+    },
+    {
+      "id": "e3e74add-7b08-49d9-8129-8c2fda052719",
+      "name": "Plant Debrecen-Digitalization on demand",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q491472"
+    },
+    {
+      "id": "8d34324c-4504-4f98-acad-df8788bc8f7d",
+      "name": "Code with Claude",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q395325"
+    },
+    {
+      "id": "cc51f0f8-280e-419e-bec7-4f366471a580",
+      "name": "ChatTheAct!!!",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q481942"
+    },
+    {
+      "id": "19b35690-ce6b-4bbb-974e-051b0f83bc8b",
+      "name": "EDIABAS Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q225941"
+    },
+    {
+      "id": "240631e7-2326-4ec9-981b-f9b1839ca971",
+      "name": "TNR  WIKI | Requirements Management",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q620097"
+    },
+    {
+      "id": "5d5cf1c3-75d5-4211-81a8-d73e80b52caf",
+      "name": "IDC Analytics Data Point Designer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q167160"
+    },
+    {
+      "id": "56a558ff-7ad8-4ae1-8c89-744b2f82d730",
+      "name": "TAKTIQ Assembly Suite Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q389307"
+    },
+    {
+      "id": "f712421c-3677-4b77-9aad-8420ebe6fbc1",
+      "name": "UX Sketcher",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q662186"
+    },
+    {
+      "id": "8871f9fa-a664-494f-b3bd-b551ac94989a",
+      "name": "LinkConverter (Mac)",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q204664"
+    },
+    {
+      "id": "8d94e5ae-233e-423c-81a1-a69d8f0b5916",
+      "name": "Accounts Payable Academy",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q665746"
+    },
+    {
+      "id": "4a0df071-d50d-4e44-9539-d99049081e99",
+      "name": "Meeting Efficiency",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q613988"
+    },
+    {
+      "id": "82828548-010e-486a-bd2e-15e1350e0649",
+      "name": "User Story Helper",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q657742"
+    },
+    {
+      "id": "cadae93e-c486-46de-8555-3805bf51abeb",
+      "name": "SF2-US Policy and Procedure Search ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qtb0858"
+    },
+    {
+      "id": "6fe2cced-13b0-43e2-8a8a-ac85c9ebcc99",
+      "name": "ACCESSIBILITY @ BMW GROUP",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz2raj"
+    },
+    {
+      "id": "1a1ad9e6-15ea-4b80-a8c1-ffec3391d796",
+      "name": "UX copywriting assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q614750"
+    },
+    {
+      "id": "dbdec62a-dcc5-4331-8f18-b15ad711b275",
+      "name": "UX Research Notes Recap",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz2raj"
+    },
+    {
+      "id": "dc658967-d3c2-4c42-a727-5b188f88c058",
+      "name": "NATE",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q414449"
+    },
+    {
+      "id": "21432a06-5931-42d4-bc1c-605736b69132",
+      "name": "FAKT FINDER",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q279318"
+    },
+    {
+      "id": "35eb7200-6cbb-4cce-b240-8f67404a6da0",
+      "name": "TISAX Supplier & Partner -Management",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "qxz4frx"
+    },
+    {
+      "id": "b05f0af1-d58a-4c18-b6ef-a6de3bad485f",
+      "name": "BON Annotator",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q436477"
+    },
+    {
+      "id": "222c114e-6090-4e9f-beb3-8495c2912d17",
+      "name": "AKV Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q351369"
+    },
+    {
+      "id": "c4d0ff71-76f4-487d-a74e-866c19049c76",
+      "name": "BRANDON AI - Tonality Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q418427"
+    },
+    {
+      "id": "884c8faa-fad4-40d5-825b-ded7bff0fb40",
+      "name": "Apache Kafka Expert",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q429890"
+    },
+    {
+      "id": "a5466ee2-4be5-4a34-a32d-71a0598ca156",
+      "name": "GAIA Manual",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q354209"
+    },
+    {
+      "id": "c48e93c4-fa5e-4b8d-b0be-5fab200522af",
+      "name": "Sales & Marketing Performance  FAQ's",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q294872"
+    },
+    {
+      "id": "7816e948-c8ba-47bc-be0b-2253599f0e37",
+      "name": "Agile Assistant App",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q549207"
+    },
+    {
+      "id": "bca1b5f0-0f69-4dbe-bba9-582faaa92cdf",
+      "name": "Tender Assistant",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q351369"
+    },
+    {
+      "id": "56387d9c-5160-4626-9507-da59e55a19ed",
+      "name": "RELA - Real Estate Legal Assistent",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q471672"
+    },
+    {
+      "id": "b9ba079b-1452-44cf-81d0-ff2a9cfb4c81",
+      "name": "Vitus",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q183059"
+    },
+    {
+      "id": "b77e5799-4dab-43fd-8f89-7f14d9ece32b",
+      "name": "Excel Genius",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q652698"
+    },
+    {
+      "id": "1fa92098-a2b4-4de2-acb3-bf37b308dde7",
+      "name": "CDH: Guidance and Data Discovery",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q626639"
+    },
+    {
+      "id": "9ad284a3-b462-4ed7-afad-e6efc962c804",
+      "name": "BMW / MINI Assistant AI-Chat",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q549093"
+    },
+    {
+      "id": "b22fea1a-9d53-47e7-ac9d-5e49c18eb8c4",
+      "name": "PARROT Text-to-X",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q460458"
+    },
+    {
+      "id": "32f95a58-46c0-4e25-ae9e-d17ecb0ee570",
+      "name": "Text Simplifier",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "00b2beff-e22c-43e6-9c89-e121c81c09f8",
+      "name": "Text Clustering Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "9e4bc087-68e1-4290-a7e7-13444407d8b5",
+      "name": "PolicyBot",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q414709"
+    },
+    {
+      "id": "66f5ef9f-4f38-4b23-9db5-8c343f5e6183",
+      "name": "Offer Analyst ",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q351369"
+    },
+    {
+      "id": "1bbe6f3c-35a0-4f11-82ff-e363615aaf3d",
+      "name": "CATIA Makro Programmer (TI-52)",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q652698"
+    },
+    {
+      "id": "f1a764a9-a279-4c91-8ca3-56511ce2c88b",
+      "name": "PEGWatch AI",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q652698"
+    },
+    {
+      "id": "7ba18844-4af9-4e6e-a027-6b1b0e747c77",
+      "name": "System Prompt Generator ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q351369"
+    },
+    {
+      "id": "ec55f3d1-6e7a-4dbf-b5fe-67b4c7ee93e2",
+      "name": "Factory GENius [Breakdown Reports]",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q638762"
+    },
+    {
+      "id": "a9ad1f46-8cbb-423c-a60a-0345f38659f5",
+      "name": "Assembly Manuals Verifier [PNW-2]",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q638762"
+    },
+    {
+      "id": "e32e9beb-908b-4a44-9f63-d2805534c18b",
+      "name": "Process FMEA Agent [Montage]",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q638762"
+    },
+    {
+      "id": "90edbeaf-e4c0-4f39-8a92-70cc528cf152",
+      "name": "T-Cube PDCA Knowledge Finder",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q523571"
+    },
+    {
+      "id": "6cf2d978-3db5-4f7f-b83c-c38c6ef38225",
+      "name": "CodingGenie",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q654456"
+    },
+    {
+      "id": "e497357b-f832-4c8b-a929-34d5c2c58954",
+      "name": "Logistics FAQ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q654456"
+    },
+    {
+      "id": "03e3a74c-e3f4-4704-bb72-aee5e8ca0a80",
+      "name": "Operation Manual - Vehicle Distribution",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q654456"
+    },
+    {
+      "id": "d49f9df9-65c6-4a2f-8aa6-f6b206e2e2c9",
+      "name": "Text Expander ",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "09399af3-eee8-4b3a-a958-5da8bfa47bc5",
+      "name": "Idea Companion",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "f3d1143c-2c94-4706-9507-6ada40c6c678",
+      "name": "Grammer Checker",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "60b3f0fb-0132-41da-918d-ccd9c1e22c5e",
+      "name": "Text Summarizer",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "d319722e-2142-4e35-b3c6-1f29c9d270b4",
+      "name": "JSON Formatter",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "63c7b776-68a3-49fe-a850-6e7d335dedda",
+      "name": "Keyword Extractor",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "7e789b81-ea89-4b5c-a9bd-8298cfb6e860",
+      "name": "Clustering Assistant",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q637601"
+    },
+    {
+      "id": "c140111b-b5bc-4b98-8a6d-28373ea02534",
+      "name": "BRANDON AI",
+      "description": "",
+      "type": "external_app",
+      "status": "public",
+      "author": "q514919"
+    },
+    {
+      "id": "9b697e78-8604-4b9d-9aa6-86ac7f604c8d",
+      "name": "Data Interpreter",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "q660811"
+    },
+    {
+      "id": "f165ecbc-08fe-47f7-9bb4-48cfa392f7f8",
+      "name": "GAIA",
+      "description": "",
+      "type": "chat_app",
+      "status": "public",
+      "author": "GAIA Platform Team"
+    }
+  ]
+}

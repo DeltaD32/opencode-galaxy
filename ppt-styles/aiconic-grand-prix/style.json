@@ -1,0 +1,1753 @@
+{
+  "slide_dimensions": {
+    "width_in": 13.333,
+    "height_in": 7.5,
+    "aspect_ratio": "16:9",
+    "width_emu": 12192000,
+    "height_emu": 6858000
+  },
+  "theme": {
+    "color_scheme": {
+      "dk1": {
+        "hex": "#000000",
+        "label": "Text/Dark 1 (primary text)",
+        "scheme_name": "BMW Group 21"
+      },
+      "lt1": {
+        "hex": "#FFFFFF",
+        "label": "Background/Light 1 (slide bg)",
+        "scheme_name": "BMW Group 21"
+      },
+      "dk2": {
+        "hex": "#035970",
+        "label": "Dark 2 (primary brand)",
+        "scheme_name": "BMW Group 21"
+      },
+      "lt2": {
+        "hex": "#92A2BD",
+        "label": "Light 2",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent1": {
+        "hex": "#548D9E",
+        "label": "Accent 1",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent2": {
+        "hex": "#85ACB9",
+        "label": "Accent 2",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent3": {
+        "hex": "#ABC4CF",
+        "label": "Accent 3",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent4": {
+        "hex": "#C8D7E0",
+        "label": "Accent 4",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent5": {
+        "hex": "#DEE5EC",
+        "label": "Accent 5",
+        "scheme_name": "BMW Group 21"
+      },
+      "accent6": {
+        "hex": "#E8EBF1",
+        "label": "Accent 6",
+        "scheme_name": "BMW Group 21"
+      },
+      "hlink": {
+        "hex": "#000000",
+        "label": "Hyperlink",
+        "scheme_name": "BMW Group 21"
+      },
+      "folHlink": {
+        "hex": "#000000",
+        "label": "Followed Hyperlink",
+        "scheme_name": "BMW Group 21"
+      }
+    },
+    "font_scheme": {
+      "scheme_name": "BMW Group 2021",
+      "major_latin": "BMWGroupTN Condensed",
+      "minor_latin": "BMWGroupTN Condensed",
+      "major_ea": "",
+      "minor_ea": "",
+      "resolved": {
+        "+mj-lt": "BMWGroupTN Condensed",
+        "+mn-lt": "BMWGroupTN Condensed",
+        "+mj-ea": "",
+        "+mn-ea": ""
+      }
+    },
+    "scheme_name": "BMW Group 21"
+  },
+  "tx_styles": {
+    "title": {
+      "1": {
+        "align": "l",
+        "space_before_pt": 0.0,
+        "space_after_pt": 0.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "none"
+        },
+        "default_run_props": {
+          "size_pt": 26.0,
+          "bold": false,
+          "cap": "all",
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      }
+    },
+    "body": {
+      "1": {
+        "align": "l",
+        "margin_left_emu": 190800,
+        "indent_emu": -190800,
+        "space_before_pt": 0.0,
+        "space_after_pt": 6.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "char",
+          "char": "§",
+          "font": "Wingdings",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      },
+      "2": {
+        "align": "l",
+        "margin_left_emu": 381600,
+        "indent_emu": -190800,
+        "space_before_pt": 0.0,
+        "space_after_pt": 6.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "char",
+          "char": "-",
+          "font": "BMW Group Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      },
+      "3": {
+        "align": "l",
+        "margin_left_emu": 572400,
+        "indent_emu": -190800,
+        "space_before_pt": 0.0,
+        "space_after_pt": 6.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "char",
+          "char": "-",
+          "font": "BMW Group Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      },
+      "4": {
+        "align": "l",
+        "margin_left_emu": 763200,
+        "indent_emu": -190800,
+        "space_before_pt": 0.0,
+        "space_after_pt": 6.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "char",
+          "char": "-",
+          "font": "BMW Group Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      },
+      "5": {
+        "align": "l",
+        "margin_left_emu": 954000,
+        "indent_emu": -190800,
+        "space_before_pt": 0.0,
+        "space_after_pt": 6.0,
+        "line_spacing": "100%",
+        "bullet": {
+          "type": "char",
+          "char": "-",
+          "font": "BMW Group Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#FFFFFF",
+          "color_scheme": "bg1"
+        }
+      },
+      "6": {
+        "align": "l",
+        "margin_left_emu": 2514600,
+        "indent_emu": -228600,
+        "space_before_pt": 5.0,
+        "line_spacing": "90%",
+        "bullet": {
+          "type": "char",
+          "char": "•",
+          "font": "Arial",
+          "color_hex": null,
+          "color_scheme": null
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#000000",
+          "color_scheme": "tx1"
+        }
+      },
+      "7": {
+        "align": "l",
+        "margin_left_emu": 2971800,
+        "indent_emu": -228600,
+        "space_before_pt": 5.0,
+        "line_spacing": "90%",
+        "bullet": {
+          "type": "char",
+          "char": "•",
+          "font": "Arial",
+          "color_hex": null,
+          "color_scheme": null
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#000000",
+          "color_scheme": "tx1"
+        }
+      },
+      "8": {
+        "align": "l",
+        "margin_left_emu": 3429000,
+        "indent_emu": -228600,
+        "space_before_pt": 5.0,
+        "line_spacing": "90%",
+        "bullet": {
+          "type": "char",
+          "char": "•",
+          "font": "Arial",
+          "color_hex": null,
+          "color_scheme": null
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#000000",
+          "color_scheme": "tx1"
+        }
+      },
+      "9": {
+        "align": "l",
+        "margin_left_emu": 3886200,
+        "indent_emu": -228600,
+        "space_before_pt": 5.0,
+        "line_spacing": "90%",
+        "bullet": {
+          "type": "char",
+          "char": "•",
+          "font": "Arial",
+          "color_hex": null,
+          "color_scheme": null
+        },
+        "default_run_props": {
+          "size_pt": 18.0,
+          "font": "BMWGroupTN Condensed",
+          "color_hex": "#000000",
+          "color_scheme": "tx1"
+        }
+      }
+    }
+  },
+  "master_background": {
+    "type": "inherited"
+  },
+  "master_shapes": [
+    {
+      "name": "Objekt 9",
+      "shape_type": "EMBEDDED_OLE_OBJECT (7)",
+      "left_in": 0.002,
+      "top_in": 0.002,
+      "width_in": 0.002,
+      "height_in": 0.002
+    },
+    {
+      "name": "Textplatzhalter 1",
+      "shape_type": "PLACEHOLDER (14)",
+      "left_in": 0.535,
+      "top_in": 1.546,
+      "width_in": 12.275,
+      "height_in": 5.353,
+      "text": "Click to edit text\nSecond level\nThird level\nForth level\nFifth level"
+    },
+    {
+      "name": "Titelplatzhalter 1",
+      "shape_type": "PLACEHOLDER (14)",
+      "left_in": 0.535,
+      "top_in": 0.38,
+      "width_in": 12.275,
+      "height_in": 0.438,
+      "text": "Click to edit Action Title. 26pt. Uppercase. Two lines max."
+    },
+    {
+      "name": "BMW Group Trennlinie",
+      "shape_type": "LINE (9)",
+      "left_in": -0.0,
+      "top_in": 7.188,
+      "width_in": 13.333,
+      "height_in": 0.0
+    },
+    {
+      "name": "SeitenzahlAU1",
+      "shape_type": "AUTO_SHAPE (1)",
+      "left_in": 12.4,
+      "top_in": 7.26,
+      "width_in": 0.41,
+      "height_in": 0.168,
+      "text": "- ‹#› -"
+    },
+    {
+      "name": "Textfeld 3",
+      "shape_type": "TEXT_BOX (17)",
+      "left_in": 6.164,
+      "top_in": 7.231,
+      "width_in": 1.036,
+      "height_in": 0.2,
+      "text": "CONFIDENTIAL"
+    },
+    {
+      "name": "FußzeileAU1",
+      "shape_type": "TEXT_BOX (17)",
+      "left_in": 0.535,
+      "top_in": 7.26,
+      "width_in": 1.501,
+      "height_in": 0.168,
+      "text": "Department | Date | Author"
+    }
+  ],
+  "layouts": [
+    {
+      "name": "M_Dark_Title | Full Picture",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": {
+        "hex": "#FFFFFF",
+        "scheme": null
+      },
+      "title_size_pt": 40.0,
+      "placeholder_count": 5,
+      "placeholders": [
+        {
+          "idx": 24,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 6",
+          "left_in": 0.626,
+          "top_in": 0.626,
+          "width_in": 1.203,
+          "height_in": 0.626
+        },
+        {
+          "idx": 23,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 4",
+          "left_in": 10.878,
+          "top_in": 0.626,
+          "width_in": 1.829,
+          "height_in": 0.626
+        },
+        {
+          "idx": 0,
+          "type": "CENTER_TITLE (3)",
+          "name": "Titel 1",
+          "left_in": 0.0,
+          "top_in": 4.158,
+          "width_in": 13.333,
+          "height_in": 1.545
+        },
+        {
+          "idx": 1,
+          "type": "SUBTITLE (4)",
+          "name": "Untertitel 2",
+          "left_in": 0.0,
+          "top_in": 5.809,
+          "width_in": 13.333,
+          "height_in": 0.496
+        },
+        {
+          "idx": 22,
+          "type": "BODY (2)",
+          "name": "Textplatzhalter 14",
+          "left_in": 10.507,
+          "top_in": 6.438,
+          "width_in": 2.826,
+          "height_in": 0.458
+        }
+      ]
+    },
+    {
+      "name": "GenAI_Dark_Title | Full Picture",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": {
+        "hex": "#FFFFFF",
+        "scheme": null
+      },
+      "title_size_pt": 40.0,
+      "placeholder_count": 6,
+      "placeholders": [
+        {
+          "idx": 21,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 8",
+          "left_in": 0.0,
+          "top_in": 0.0,
+          "width_in": 13.333,
+          "height_in": 7.5
+        },
+        {
+          "idx": 24,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 6",
+          "left_in": 0.626,
+          "top_in": 0.626,
+          "width_in": 1.203,
+          "height_in": 0.626
+        },
+        {
+          "idx": 23,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 4",
+          "left_in": 10.878,
+          "top_in": 0.626,
+          "width_in": 1.829,
+          "height_in": 0.626
+        },
+        {
+          "idx": 0,
+          "type": "CENTER_TITLE (3)",
+          "name": "Titel 1",
+          "left_in": 0.0,
+          "top_in": 4.158,
+          "width_in": 13.333,
+          "height_in": 1.545
+        },
+        {
+          "idx": 1,
+          "type": "SUBTITLE (4)",
+          "name": "Untertitel 2",
+          "left_in": 0.0,
+          "top_in": 5.809,
+          "width_in": 13.333,
+          "height_in": 0.496
+        },
+        {
+          "idx": 22,
+          "type": "BODY (2)",
+          "name": "Textplatzhalter 14",
+          "left_in": 10.507,
+          "top_in": 6.438,
+          "width_in": 2.826,
+          "height_in": 0.458
+        }
+      ]
+    },
+    {
+      "name": "1_GenAI_Dark_Title | Full Picture",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": {
+        "hex": "#FFFFFF",
+        "scheme": null
+      },
+      "title_size_pt": 40.0,
+      "placeholder_count": 5,
+      "placeholders": [
+        {
+          "idx": 24,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 6",
+          "left_in": 0.626,
+          "top_in": 0.626,
+          "width_in": 1.203,
+          "height_in": 0.626
+        },
+        {
+          "idx": 23,
+          "type": "ORG_CHART (11)",
+          "name": "SmartArt-Platzhalter 4",
+          "left_in": 10.878,
+          "top_in": 0.626,
+          "width_in": 1.829,
+          "height_in": 0.626
+        },
+        {
+          "idx": 0,
+          "type": "CENTER_TITLE (3)",
+          "name": "Titel 1",
+          "left_in": 0.0,
+          "top_in": 4.158,
+          "width_in": 13.333,
+          "height_in": 1.545
+        },
+        {
+          "idx": 1,
+          "type": "SUBTITLE (4)",
+          "name": "Untertitel 2",
+          "left_in": 0.0,
+          "top_in": 5.809,
+          "width_in": 13.333,
+          "height_in": 0.496
+        },
+        {
+          "idx": 22,
+          "type": "BODY (2)",
+          "name": "Textplatzhalter 14",
+          "left_in": 10.507,
+          "top_in": 6.438,
+          "width_in": 2.826,
+          "height_in": 0.458
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Divider | Full Area",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": {
+        "hex": "#FFFFFF",
+        "scheme": "bg1"
+      },
+      "title_size_pt": 40.0,
+      "placeholder_count": 2,
+      "placeholders": [
+        {
+          "idx": 11,
+          "type": "BODY (2)",
+          "name": "Textplatzhalter 6",
+          "left_in": 0.524,
+          "top_in": 1.555,
+          "width_in": 6.965,
+          "height_in": 1.251
+        },
+        {
+          "idx": 0,
+          "type": "CENTER_TITLE (3)",
+          "name": "Titel 1",
+          "left_in": 0.525,
+          "top_in": 2.806,
+          "width_in": 6.971,
+          "height_in": 2.02
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Grid | 2",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 1,
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Grid | 1",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 1,
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Gradient_Content | 1",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 2,
+      "placeholders": [
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 12.275,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | 1",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 2,
+      "placeholders": [
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 12.275,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "GENAI_Gradient_Content | 1",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 2,
+      "placeholders": [
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 12.275,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "1_GENAI_Gradient_Content | 1",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 0,
+      "placeholders": []
+    },
+    {
+      "name": "M_Dark_Content | 2",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 3,
+      "placeholders": [
+        {
+          "idx": 19,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 2",
+          "left_in": 6.909,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 5.353
+        },
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | 3",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 4,
+      "placeholders": [
+        {
+          "idx": 21,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 3",
+          "left_in": 8.876,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 5.353
+        },
+        {
+          "idx": 19,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 2",
+          "left_in": 4.705,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 5.353
+        },
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | 4",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 5,
+      "placeholders": [
+        {
+          "idx": 23,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 4",
+          "left_in": 9.918,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 5.353
+        },
+        {
+          "idx": 21,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 3",
+          "left_in": 6.791,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 5.353
+        },
+        {
+          "idx": 19,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 2",
+          "left_in": 3.663,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 5.353
+        },
+        {
+          "idx": 17,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | 2x2",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 5,
+      "placeholders": [
+        {
+          "idx": 13,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 4",
+          "left_in": 6.909,
+          "top_in": 4.34,
+          "width_in": 5.902,
+          "height_in": 2.559
+        },
+        {
+          "idx": 12,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 3",
+          "left_in": 0.535,
+          "top_in": 4.34,
+          "width_in": 5.902,
+          "height_in": 2.559
+        },
+        {
+          "idx": 11,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 2",
+          "left_in": 6.909,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 2.558
+        },
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 2.558
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | Picture Left",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 3,
+      "placeholders": [
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 6.907,
+          "top_in": 1.546,
+          "width_in": 5.903,
+          "height_in": 5.353
+        },
+        {
+          "idx": 12,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 1",
+          "left_in": 0.0,
+          "top_in": 1.546,
+          "width_in": 6.437,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | Picture Right",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 3,
+      "placeholders": [
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 5.903,
+          "height_in": 5.353
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        },
+        {
+          "idx": 12,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 3",
+          "left_in": 6.896,
+          "top_in": 1.546,
+          "width_in": 6.437,
+          "height_in": 5.353
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | Picture | 2",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 5,
+      "placeholders": [
+        {
+          "idx": 15,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 2",
+          "left_in": 6.909,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 2.558
+        },
+        {
+          "idx": 14,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 5.902,
+          "height_in": 2.558
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        },
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 4.34,
+          "width_in": 5.903,
+          "height_in": 2.559
+        },
+        {
+          "idx": 16,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 6.907,
+          "top_in": 4.34,
+          "width_in": 5.903,
+          "height_in": 2.559
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | Picture | 3",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 7,
+      "placeholders": [
+        {
+          "idx": 18,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 3",
+          "left_in": 8.876,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 2.456
+        },
+        {
+          "idx": 17,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 2",
+          "left_in": 4.705,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 2.456
+        },
+        {
+          "idx": 16,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 3.934,
+          "height_in": 2.456
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        },
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 4.239,
+          "width_in": 3.934,
+          "height_in": 2.66
+        },
+        {
+          "idx": 19,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 4.705,
+          "top_in": 4.239,
+          "width_in": 3.934,
+          "height_in": 2.66
+        },
+        {
+          "idx": 20,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 8.876,
+          "top_in": 4.239,
+          "width_in": 3.934,
+          "height_in": 2.66
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Content | Picture | 4",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 9,
+      "placeholders": [
+        {
+          "idx": 21,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 4",
+          "left_in": 9.918,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 2.456
+        },
+        {
+          "idx": 20,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 3",
+          "left_in": 6.791,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 2.456
+        },
+        {
+          "idx": 19,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 2",
+          "left_in": 3.663,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 2.456
+        },
+        {
+          "idx": 18,
+          "type": "PICTURE (18)",
+          "name": "Bildplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 1.546,
+          "width_in": 2.892,
+          "height_in": 2.456
+        },
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 12.275,
+          "height_in": 0.438
+        },
+        {
+          "idx": 10,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 0.535,
+          "top_in": 4.239,
+          "width_in": 2.892,
+          "height_in": 2.66
+        },
+        {
+          "idx": 22,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 3.663,
+          "top_in": 4.239,
+          "width_in": 2.892,
+          "height_in": 2.66
+        },
+        {
+          "idx": 23,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 6.791,
+          "top_in": 4.239,
+          "width_in": 2.892,
+          "height_in": 2.66
+        },
+        {
+          "idx": 24,
+          "type": "OBJECT (7)",
+          "name": "Inhaltsplatzhalter 1",
+          "left_in": 9.918,
+          "top_in": 4.239,
+          "width_in": 2.892,
+          "height_in": 2.66
+        }
+      ]
+    },
+    {
+      "name": "M_Dark_Key Note",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": true,
+      "title_color": {
+        "hex": "#FFFFFF",
+        "scheme": "bg1"
+      },
+      "title_size_pt": 40.0,
+      "placeholder_count": 1,
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Titel 1",
+          "left_in": 0.0,
+          "top_in": 1.545,
+          "width_in": 13.345,
+          "height_in": 1.585
+        }
+      ]
+    },
+    {
+      "name": "D. Four column green",
+      "background": {
+        "type": "inherited"
+      },
+      "is_dark": false,
+      "title_color": null,
+      "title_size_pt": null,
+      "placeholder_count": 3,
+      "placeholders": [
+        {
+          "idx": 0,
+          "type": "TITLE (1)",
+          "name": "Title 1",
+          "left_in": 0.535,
+          "top_in": 0.38,
+          "width_in": 8.86,
+          "height_in": 0.438
+        },
+        {
+          "idx": 11,
+          "type": "FOOTER (15)",
+          "name": "Footer Placeholder 4",
+          "left_in": 2.625,
+          "top_in": 7.26,
+          "width_in": 9.661,
+          "height_in": 0.168
+        },
+        {
+          "idx": 2,
+          "type": "DATE (16)",
+          "name": "Date Placeholder 2",
+          "left_in": 0.535,
+          "top_in": 7.26,
+          "width_in": 2.014,
+          "height_in": 0.168
+        }
+      ]
+    }
+  ],
+  "slide_backgrounds": [
+    {
+      "slide": 1,
+      "layout": "M_Dark_Key Note",
+      "background": {
+        "type": "inherited",
+        "inherited_from": "layout"
+      }
+    },
+    {
+      "slide": 2,
+      "layout": "M_Dark_Grid | 2",
+      "background": {
+        "type": "inherited",
+        "inherited_from": "layout"
+      }
+    },
+    {
+      "slide": 3,
+      "layout": "Diseño personalizado",
+      "background": {
+        "type": "inherited",
+        "inherited_from": "layout"
+      }
+    },
+    {
+      "slide": 4,
+      "layout": "M_Dark_Grid | 2",
+      "background": {
+        "type": "inherited",
+        "inherited_from": "layout"
+      }
+    },
+    {
+      "slide": 5,
+      "layout": "M_Gradient_Content | 1",
+      "background": {
+        "type": "inherited",
+        "inherited_from": "layout"
+      }
+    }
+  ],
+  "shape_fills": {
+    "hex_colors": {},
+    "scheme_colors": {},
+    "large_bg_shapes": []
+  },
+  "typography": {
+    "primary_font": "BMWGroupTN Condensed",
+    "title_font": "BMWGroupTN Condensed",
+    "title_size_pt": 26.0,
+    "title_size_max_pt": 40.0,
+    "title_cap": "all",
+    "title_color_hex": "#FFFFFF",
+    "title_color_scheme": "bg1",
+    "body_size_pt": 18.0,
+    "body_font": "BMWGroupTN Condensed",
+    "body_color_hex": "#FFFFFF",
+    "body_color_scheme": "bg1",
+    "footer_size_pt": 7.0,
+    "dominant_colors": [
+      "#F69954",
+      "#035970"
+    ],
+    "all_fonts": {
+      "BMWGroupTN Condensed": 211,
+      "BMW Group Condensed": 1
+    },
+    "all_sizes_pt": {
+      "12.0": 119,
+      "16.0": 45,
+      "14.0": 37,
+      "16.2": 4,
+      "10.0": 4,
+      "26.0": 3,
+      "8.0": 2,
+      "7.0": 1
+    },
+    "all_colors": {
+      "#FFFFFF": 116,
+      "#F69954": 61,
+      "#000000": 18,
+      "#035970": 15,
+      "#C00000": 1
+    }
+  },
+  "sample_text_styles": [
+    {
+      "text": "AIconic",
+      "font_name": null,
+      "size_pt": null,
+      "bold": null,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "GRAND PRIX:",
+      "font_name": null,
+      "size_pt": null,
+      "bold": null,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "Challenge to promote GenAI adoption in M",
+      "font_name": null,
+      "size_pt": null,
+      "bold": null,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "Warm",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "up",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Start –",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Light's",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "out & Go!",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Pitstop",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Turbo Charge",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Fastest Lap",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Final Lap",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Podium",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Overview of the",
+      "font_name": null,
+      "size_pt": null,
+      "bold": true,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "AIconic",
+      "font_name": null,
+      "size_pt": null,
+      "bold": true,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "Grand Prix",
+      "font_name": null,
+      "size_pt": null,
+      "bold": true,
+      "italic": null,
+      "color_hex": null,
+      "source": "slide"
+    },
+    {
+      "text": "Ein AI Multiplier wird die Teams unterstützen",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": ", um Sichtbarkeit und Glaubwürdigkeit zu gewinnen",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "13.11. |",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Prompting",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Erstellung nützlicher Prompts und Austausch über Best Practices",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "20.11 | Bookmark",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Personalisierung von erstellten Bookmarks in",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "AIconic",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "23.10. | Action Plan",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Definition der Lernziele für die kommenden Wochen und Teamrollen für die Challen",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "09.10. |",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Activation",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Session",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "Briefing HAL, CLE, CLQ, AI Multiplier",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": "30.10. |",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "AIconic",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Deep-Dive",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 14.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Verstehen der",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "AIconic",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "inklusive der gesamten Funktionen und Agenten",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 12.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "Die Challenge läuft über",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "5 Wochen",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#F69954",
+      "source": "slide"
+    },
+    {
+      "text": ", wobei",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": false,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    },
+    {
+      "text": "jeder",
+      "font_name": "BMWGroupTN Condensed",
+      "size_pt": 16.0,
+      "bold": true,
+      "italic": false,
+      "color_hex": "#FFFFFF",
+      "source": "slide"
+    }
+  ],
+  "extraction_stats": {
+    "slide_shape_records": 341,
+    "master_shape_records": 32,
+    "layout_shape_records": 1497,
+    "total_slides": 5,
+    "total_layouts": 21,
+    "theme_slots_found": 12,
+    "font_scheme_found": true,
+    "tx_styles_found": true
+  }
+}

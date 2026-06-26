@@ -1,0 +1,130 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Fetch MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup Fetch MCP Server"
+
+objective: |
+  Configure Fetch MCP server to enable AI agents to fetch and analyze web content
+  from URLs directly in GitHub Copilot Chat, with automatic proxy configuration
+  for BMW corporate network.
+
+prerequisites:
+  - Node.js installed (for npx command)
+  - VS Code 1.99+
+  - BMW proxy configured (if on corporate network)
+
+estimated_time: "3-5 minutes (including proxy configuration if needed)"
+
+server_definition:
+  server_key: "fetch"
+  default_scope: "global"
+  prerequisites: ["node", "npx"]
+  features: ["proxy_detection"]
+  mcp_config:
+    command: "npx"
+    args:
+      - "--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/"
+      - "mcp-fetch-server"
+    env:
+      DEFAULT_LIMIT: "50000"
+
+actions:
+  - "Ask user to choose configuration scope: 'global' (user-wide, applies to all workspaces) or 'project' (workspace-specific, stored in .vscode/mcp.json)"
+  - "Run automated setup script with chosen scope: `uv run scripts/setup-mcp.py --server fetch --scope [global|project]`"
+  - "Script will check Node.js installation, detect proxy configuration, create MCP config directory, and generate configuration with appropriate proxy settings"
+  - "If behind BMW proxy: Script automatically detects Proxydetox and configures HTTP_PROXY, HTTPS_PROXY, and NO_PROXY environment variables"
+  - "If proxy detection fails: User must manually verify proxy settings - run `uv run scripts/check-proxy-status.py` to diagnose proxy configuration"
+  - "Start MCP server: Open Command Palette (Ctrl+Shift+P / Cmd+Shift+P) → Run 'MCP: Open User Configuration' → Click 'Start' next to 'fetch' server → Wait for 'Running' status"
+  - "Verify setup: Test with natural language in Copilot Chat: 'Fetch and summarize https://example.com'"
+
+tools_used:
+  - setup-mcp.py --server fetch (unified setup script)
+  - Node.js and npx (for running mcp-fetch-server)
+  - check-proxy-status.py (for proxy diagnostics)
+  - VS Code Command Palette
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - Fetch MCP server configuration created in chosen scope location
+  - Node.js dependency verified
+  - Proxy environment variables configured if on BMW network
+  - MCP server status shows "Running" in VS Code
+  - AI agent can fetch web content via natural language queries in Copilot Chat
+  - DEFAULT_LIMIT set to 50000 characters for fetched content
+
+validation:
+  - "Run `node --version` to confirm Node.js is installed and accessible"
+  - "Run `npx --version` to verify npx is available"
+  - "Verify MCP config file exists at correct location (global: ~/.config/Code/User/globalStorage/mcp.json on Linux/macOS or %APPDATA%\\Code\\User\\globalStorage\\mcp.json on Windows; project: .vscode/mcp.json)"
+  - "Check mcp.json contains 'fetch' server entry with npx command, `--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/`, and mcp-fetch-server"
+  - "If on BMW network: Verify proxy environment variables in config (HTTP_PROXY, HTTPS_PROXY, NO_PROXY)"
+  - "MCP configuration panel shows 'fetch' server with 'Running' status"
+  - "Test in Copilot Chat: 'Fetch https://example.com' returns page content"
+
+configuration:
+  default_limit:
+    value: "50000"
+    description: "Maximum number of characters to fetch from a URL"
+    customization: "Can be changed in mcp.json env section to higher or lower values"
+
+  proxy_detection:
+    automatic: "Script detects Proxydetox on port 3128"
+    fallback: "If detection fails, run check-proxy-status.py for diagnostics"
+    bmw_standard: "http://localhost:3128 (Proxydetox)"
+    no_proxy: "127.0.0.1,localhost,.bmwgroup.net,.cloud.bmw,.bmw.cloud"
+
+usage_examples:
+  - "Fetch and summarize the content from https://modelcontextprotocol.io"
+  - "Get the text content from https://github.com/modelcontextprotocol/servers"
+  - "What are the latest features in https://code.visualstudio.com/updates"
+  - "Analyze the documentation at https://docs.python.org/3/library/urllib.html"
+
+troubleshooting:
+  - issue: "node: command not found or npx: command not found"
+    cause: "Node.js not installed or not in PATH"
+    solution: "Install Node.js: Linux: `curl -fsSL https://deb.nodesource.com/setup_lts.x | sudo -E bash - && sudo apt-get install -y nodejs`; macOS: `brew install node`; Windows: Download from https://nodejs.org/; After install, restart terminal and verify: `node --version && npx --version`"
+
+  - issue: "Fetch returns network errors or timeouts"
+    cause: "Proxy not configured or blocking requests"
+    solution: "Run proxy diagnostics: `uv run scripts/check-proxy-status.py`; If Proxydetox not running, follow setup/basic-environment/proxy-setup.md; Manually add proxy to mcp.json env section if auto-detection failed; Restart MCP server after config change"
+
+  - issue: "MCP server fails to start"
+    cause: "npx unable to download mcp-fetch-server package"
+    solution: "Test npx manually: `npx --registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/ mcp-fetch-server --version`; If behind proxy, verify HTTP_PROXY and HTTPS_PROXY in shell: `echo $HTTP_PROXY`; Configure npm proxy: `npm config set proxy http://localhost:3128 && npm config set https-proxy http://localhost:3128`; Verify the Nexus repository is reachable; Clear npx cache: `npx clear-npx-cache` and retry"
+
+  - issue: "Fetched content is truncated"
+    cause: "DEFAULT_LIMIT too low for large pages"
+    solution: "Open mcp.json, increase DEFAULT_LIMIT value in env section (e.g., '100000' or '200000'), save file, restart MCP server in VS Code MCP configuration panel"
+
+  - issue: "403 Forbidden or 401 Unauthorized errors"
+    cause: "Target website blocks requests or requires authentication"
+    solution: "Some websites block programmatic access; Try fetching with browser first to verify URL accessibility; For authenticated sites, Fetch MCP does not support authentication headers (limitation of basic mcp-fetch-server); Consider using alternative tools for authenticated content"
+
+  - issue: "SSL certificate verification errors"
+    cause: "Corporate proxy modifying SSL certificates"
+    solution: "This typically affects Node.js behind corporate proxies; Set environment variable in mcp.json: Add 'NODE_TLS_REJECT_UNAUTHORIZED': '0' to env section (WARNING: This disables SSL verification, use only on trusted networks); Better solution: Install corporate CA certificates in system trust store"
+
+security_best_practices:
+  - "Review fetched URLs: Only fetch from trusted sources to avoid malicious content"
+  - "Limit fetch size: Keep DEFAULT_LIMIT reasonable to prevent memory exhaustion"
+  - "Proxy security: Ensure proxy credentials are secured by Proxydetox"
+  - "SSL verification: Avoid disabling NODE_TLS_REJECT_UNAUTHORIZED unless absolutely necessary"
+  - "Network boundaries: Be aware that fetch operates through configured proxy and respects NO_PROXY settings"
+
+uninstall:
+  steps:
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete the 'fetch' entry from mcpServers"
+    - "Optional: Clear npx cache: `npx clear-npx-cache` (removes cached mcp-fetch-server package)"
+
+resources:
+  - name: "MCP Fetch Server Repository"
+    url: "https://github.com/modelcontextprotocol/servers/tree/main/src/fetch"
+  - name: "Model Context Protocol"
+    url: "https://modelcontextprotocol.io/"
+  - name: "Node.js Installation"
+    url: "https://nodejs.org/"
+  - name: "BMW Proxy Setup Guide"
+    url: "setup/basic-environment/proxy-setup.md"

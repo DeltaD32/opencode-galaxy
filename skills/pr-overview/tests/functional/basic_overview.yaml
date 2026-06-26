@@ -1,0 +1,9 @@
+name: "pr-overview: Basic PR Status Check"
+description: Test that pr-overview can fetch and display PR status for the current user
+test_type: functionality
+prompt: |
+  Can you show me an overview of my open pull requests? I need to see CI status, review status, and any pending reviews.
+validation_criteria:
+  - type: tool_called
+    value:
+      name: bash

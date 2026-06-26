@@ -1,0 +1,129 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Confluence MCP Server Setup - AI-Focused Configuration
+# For BMW ATC Confluence instance (remote HTTP endpoint)
+
+name: "Setup ATC Confluence MCP Server"
+
+objective: |
+  Configure ATC Confluence MCP server to enable AI agents to query and update Confluence
+  pages and spaces directly from GitHub Copilot Chat via the remote HTTP endpoint.
+
+prerequisites:
+  - Access to https://atc.bmwgroup.net/mcp
+  - Confluence Personal Access Token (PAT)
+
+estimated_time: "3-5 minutes (including PAT generation)"
+
+server_definition:
+  server_key: "confluence-atc"
+  default_scope: "global"
+  prerequisites: []
+  features: []
+  mcp_config:
+    type: "http"
+    url: "https://atc.bmwgroup.net/mcp"
+    headers:
+      X-Atlassian-Confluence-Personal-Token: "${input:confluence_token}"
+      X-Atlassian-Confluence-Url: "https://atc.bmwgroup.net/confluence"
+  inputs:
+    - type: "promptString"
+      id: "confluence_token"
+      description: "Confluence Personal Access Token"
+      password: true
+
+actions:
+  - "IMPORTANT: This reference is for the BMW ATC Confluence instance (https://atc.bmwgroup.net/confluence) using the remote HTTP endpoint. If the user did not specify which instance they want, ask them: 'Which Confluence instance would you like to set up — ATC or CodeCraft?' If the user wants the CodeCraft instance, use the reference file `setup-confluence-codecraft-mcp.yaml` instead."
+  - "Ask user to choose configuration scope: 'global' (user-wide) or 'project' (workspace-specific, recommended for team collaboration)"
+  - "Run installation script: `uv run scripts/setup-mcp.py --server confluence-atc --scope [global|project]`"
+  - "Wait for script to complete - it generates MCP config with the remote HTTP endpoint and merges with existing config"
+  - "Guide Confluence token generation: User navigates to https://atc.bmwgroup.net/confluence → Profile settings → Security → Create PAT with read/write permissions → Copy token"
+  - "CRITICAL: User must save the token securely - VS Code will prompt for it when starting the server"
+  - "Start MCP server: Open Command Palette → 'MCP: Open User Configuration' → Click 'Start' next to 'confluence-atc' → VS Code will prompt for token → Paste token into secure prompt → Wait for 'Running' status"
+  - "Verify setup: Test with `@confluence-atc help` in Copilot Chat - should list available Confluence commands"
+
+tools_used:
+  - setup-mcp.py --server confluence-atc (unified setup script)
+  - BMW ATC Confluence PAT generation UI
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - ATC Confluence MCP configuration created with remote HTTP endpoint
+  - Confluence PAT stored in mcp.json
+  - MCP server shows "Running" status in VS Code
+  - AI agent can query Confluence via @confluence-atc commands
+
+validation:
+  - "Check MCP config file contains 'confluence-atc' entry with url 'https://atc.bmwgroup.net/mcp'"
+  - "Verify headers include X-Atlassian-Confluence-Personal-Token and X-Atlassian-Confluence-Url"
+  - "MCP configuration panel shows 'confluence-atc' server with 'Running' status"
+  - "Test `@confluence-atc help` returns Confluence command list (search pages, get page content, create page, etc.)"
+  - "Test actual query: `@confluence-atc search pages in space [space-key]` returns results"
+
+configuration:
+  instance_url: "https://atc.bmwgroup.net/confluence"
+  mcp_endpoint: "https://atc.bmwgroup.net/mcp"
+
+  token_requirements:
+    generation_path: "https://atc.bmwgroup.net/confluence/users/viewmyprofile.action → Security → Personal Access Tokens"
+    permissions: "Read/write access to spaces and pages"
+    expiration: "90 days recommended"
+
+usage_examples:
+  - "@confluence-atc search pages in space DX containing 'documentation'"
+  - "@confluence-atc get page content for page 'Setup Guide'"
+  - "@confluence-atc list spaces"
+  - "@confluence-atc create page in space DX with title 'New Feature Doc'"
+  - "@confluence-atc update page 'Setup Guide' with new content"
+  - "@confluence-atc get page by ID 123456"
+  - "@confluence-atc search 'API documentation' in all spaces"
+  - "@confluence-atc list recent pages in space DX"
+
+confluence_specific_features:
+  page_operations:
+    - "Search pages by title, content, or space"
+    - "Get full page content including attachments"
+    - "Create new pages with formatted content"
+    - "Update existing pages (preserves version history)"
+  space_operations:
+    - "List all accessible spaces"
+    - "Get space details and permissions"
+    - "Search within specific spaces"
+  content_format:
+    - "Supports Confluence storage format (XHTML)"
+    - "Can work with wiki markup through conversion"
+    - "Handles macros and embedded content"
+
+troubleshooting:
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid or expired API token"
+    solution: "Regenerate PAT in Confluence instance, update mcp.json with new token, restart application, click 'Restart' in MCP configuration"
+
+  - issue: "Authentication errors after updating token"
+    cause: "MCP server needs restart to pick up new configuration"
+    solution: "Open Command Palette → 'MCP: Open User Configuration' → Click 'Restart' next to 'confluence-atc' server → Wait for 'Running' status"
+
+  - issue: "Cannot access certain spaces or pages"
+    cause: "Token user does not have permissions to space"
+    solution: "Verify space permissions in Confluence web UI; Request access from space administrator; Ensure PAT has read/write permissions"
+
+  - issue: "Network connectivity errors"
+    cause: "Cannot reach https://atc.bmwgroup.net/mcp"
+    solution: "Verify you are connected to the BMW network or VPN; Check proxy settings if applicable"
+
+  - issue: "Page content format issues"
+    cause: "Confluence uses storage format (XHTML) not plain text"
+    solution: "MCP server handles format conversion automatically; For manual operations, refer to Confluence Storage Format documentation"
+
+uninstall:
+  steps:
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete 'confluence-atc' entry from mcpServers"
+
+resources:
+  - name: "BMW ATC Confluence"
+    url: "https://atc.bmwgroup.net/confluence"
+  - name: "Confluence REST API Documentation"
+    url: "https://developer.atlassian.com/cloud/confluence/rest/v2/"
+  - name: "Confluence Storage Format"
+    url: "https://confluence.atlassian.com/doc/confluence-storage-format-790796544.html"

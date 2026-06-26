@@ -1,0 +1,285 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://bmw.ghe.com/DX/token-toms-toolbelt/schemas/setup-mcp.schema.json",
+  "title": "MCP Setup YAML",
+  "description": "Schema for AI-focused MCP setup YAML documents in setup/mcp-yaml/.",
+  "type": "object",
+  "required": [
+    "name",
+    "objective",
+    "prerequisites",
+    "estimated_time",
+    "actions"
+  ],
+  "properties": {
+    "name": {
+      "type": "string",
+      "minLength": 1
+    },
+    "objective": {
+      "type": "string",
+      "minLength": 1
+    },
+    "prerequisites": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "estimated_time": {
+      "type": "string",
+      "minLength": 1
+    },
+    "actions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "minItems": 1
+    },
+    "tools_used": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "expected_outcome": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "validation": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "usage_examples": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "security_best_practices": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "best_practices": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "notes": {
+      "$ref": "#/$defs/stringListOrString"
+    },
+    "configuration": {
+      "type": "object",
+      "description": "Optional configuration details and templates. Contents are intentionally flexible.",
+      "properties": {
+        "scope_options": {
+          "type": "object",
+          "properties": {
+            "global": {
+              "$ref": "#/$defs/scopeOption"
+            },
+            "project": {
+              "$ref": "#/$defs/scopeOption"
+            }
+          },
+          "additionalProperties": {
+            "$ref": "#/$defs/scopeOption"
+          }
+        }
+      },
+      "additionalProperties": true
+    },
+    "troubleshooting": {
+      "type": "array",
+      "items": {
+        "$ref": "#/$defs/troubleshootingItem"
+      }
+    },
+    "resources": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["name", "url"],
+        "properties": {
+          "name": {
+            "type": "string",
+            "minLength": 1
+          },
+          "url": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "additionalProperties": true
+      }
+    },
+    "uninstall": {
+      "type": "object",
+      "properties": {
+        "steps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      },
+      "additionalProperties": true
+    },
+    "support": {
+      "type": "object",
+      "description": "Support links and contact information.",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "server_definition": {
+      "type": "object",
+      "description": "Machine-readable server configuration used by the unified setup script (setup-mcp.py). This is the single source of truth for MCP config generation.",
+      "properties": {
+        "server_key": {
+          "type": "string",
+          "description": "Key used in mcpServers/servers section of mcp.json"
+        },
+        "default_scope": {
+          "type": "string",
+          "enum": ["global", "project"],
+          "description": "Default configuration scope"
+        },
+        "prerequisites": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "python",
+              "uv",
+              "node",
+              "npx",
+              "docker",
+              "docker_daemon",
+              "uvx"
+            ]
+          },
+          "description": "Prerequisite checks to run before setup"
+        },
+        "docker_image": {
+          "type": "string",
+          "description": "Docker image to pull before setup (null if not Docker-based)"
+        },
+        "features": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": ["proxy_detection", "wsl_detection"]
+          },
+          "description": "Special features/hooks to activate during setup"
+        },
+        "mcp_config": {
+          "type": "object",
+          "description": "The actual MCP server config to write into mcp.json servers section",
+          "additionalProperties": true
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "description": "VS Code input variable definitions for credential prompts"
+        },
+        "instances": {
+          "type": "object",
+          "description": "For multi-transport servers: map of instance name to instance-specific config (each entry has its own server_key, prerequisites, mcp_config, inputs, docker_image)",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "instance_selection": {
+          "type": "object",
+          "description": "For single-config servers with URL variants: instance selection with placeholder replacement",
+          "properties": {
+            "placeholder": {
+              "type": "string"
+            },
+            "prompt": {
+              "type": "string"
+            },
+            "options": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "allow_custom": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "$defs": {
+    "stringListOrString": {
+      "oneOf": [
+        {
+          "type": "string",
+          "minLength": 1
+        },
+        {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "minItems": 1
+        }
+      ]
+    },
+    "scopeOption": {
+      "type": "object",
+      "properties": {
+        "location": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location_linux_macos": {
+          "type": "string",
+          "minLength": 1
+        },
+        "location_windows": {
+          "type": "string",
+          "minLength": 1
+        },
+        "use_case": {
+          "type": "string",
+          "minLength": 1
+        },
+        "is_default": {
+          "type": "boolean"
+        },
+        "note": {
+          "type": "string"
+        }
+      },
+      "additionalProperties": true
+    },
+    "troubleshootingItem": {
+      "type": "object",
+      "required": ["issue", "cause", "solution"],
+      "properties": {
+        "issue": {
+          "type": "string",
+          "minLength": 1
+        },
+        "cause": {
+          "type": "string",
+          "minLength": 1
+        },
+        "solution": {
+          "type": "string",
+          "minLength": 1
+        }
+      },
+      "additionalProperties": true
+    }
+  },
+  "additionalProperties": true
+}

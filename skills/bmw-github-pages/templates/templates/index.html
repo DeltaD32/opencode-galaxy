@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{{site.name}} &mdash; {{site.subtitle}}</title>
+  <link rel="stylesheet" href="{{basePath}}/assets/styles.css">
+</head>
+<body>
+
+{{{header}}}
+
+<!-- Hero -->
+<section class="hero">
+  <div class="container">
+    <div class="hero-eyebrow">{{hero.eyebrow}}</div>
+    <h1>{{hero.heading}}</h1>
+    <p class="hero-tagline">{{hero.tagline}}</p>
+    {{#hero.cta}}
+    <a href="{{url}}" class="btn btn--primary mt-4">{{text}}</a>
+    {{/hero.cta}}
+  </div>
+</section>
+
+<!-- Stats -->
+{{#stats.length}}
+<section class="section section--dark">
+  <div class="container">
+    <div class="stats-row">
+      {{#stats}}
+      <div class="stat">
+        <div class="stat__number">{{number}}</div>
+        <div class="stat__label">{{label}}</div>
+      </div>
+      {{/stats}}
+    </div>
+  </div>
+</section>
+{{/stats.length}}
+
+<!-- Features -->
+{{#features.length}}
+<section id="features" class="section">
+  <div class="container">
+    <div class="section-header">
+      <h2 class="section-header__title">Features</h2>
+      <p class="section-header__subtitle">{{site.description}}</p>
+    </div>
+    <div class="feature-grid">
+      {{#features}}
+      <div class="feature-card">
+        <span class="feature-card__icon">{{{icon}}}</span>
+        <h3 class="feature-card__name">{{name}}</h3>
+        <p class="feature-card__description">{{description}}</p>
+      </div>
+      {{/features}}
+    </div>
+  </div>
+</section>
+{{/features.length}}
+
+{{{footer}}}
+
+</body>
+</html>

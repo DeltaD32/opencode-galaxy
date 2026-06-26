@@ -1,0 +1,48 @@
+---
+name: basic-pr-status
+description: "Verify skill correctly reports basic PR status information"
+skill: pr-overview
+
+trigger:
+  user_message: "Show me the status of my current PR"
+
+context:
+  git_status:
+    branch: "feature/add-auth"
+    clean_working_dir: true
+  current_pr:
+    number: 42
+    title: "Add authentication module"
+    state: "OPEN"
+    draft: false
+    reviews:
+      - state: "APPROVED"
+        author: "reviewer1"
+      - state: "CHANGES_REQUESTED"
+        author: "reviewer2"
+    status_checks:
+      state: "PENDING"
+      contexts:
+        - name: "CI / Build"
+          state: "SUCCESS"
+        - name: "CI / Test"
+          state: "PENDING"
+
+expected:
+  required_elements:
+    - "PR #42"
+    - "authentication"
+    - "review status"
+    - "CI status"
+    - "PENDING"
+  forbidden_elements:
+    - "error"
+    - "failed to fetch"
+  actions:
+    - type: command
+      pattern: "gh pr view"
+
+rubric:
+  - "Agent correctly identifies the PR number and title"
+  - "Agent summarizes review status from multiple reviewers"
+  - "Agent shows CI check status with pending items highlighted"

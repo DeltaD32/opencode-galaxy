@@ -1,0 +1,5 @@
+__pycache__/
+*.pyc
+tests/output/
+.pytest_cache/
+tests/assets-manifest.resolved.json

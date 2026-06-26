@@ -1,0 +1,130 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Jira MCP Server Setup - AI-Focused Configuration
+# For BMW CodeCraft Jira instance (Docker-based)
+
+name: "Setup CodeCraft Jira MCP Server"
+
+objective: |
+  Configure Jira MCP server to enable AI agents to query and update Jira issues
+  directly from GitHub Copilot Chat for the BMW CodeCraft instance.
+
+prerequisites:
+  - uvx installed
+  - Docker (Desktop or Docker-CE in WSL2)
+  - Access to BMW CodeCraft Jira instance
+  - Jira Personal Access Token (PAT)
+
+estimated_time: "5-7 minutes (including PAT generation)"
+
+server_definition:
+  server_key: "jira-codecraft"
+  default_scope: "global"
+  prerequisites: ["docker", "docker_daemon"]
+  docker_image: "nexus.bmwgroup.net/sooperset/mcp-atlassian:latest"
+  features: ["wsl_detection"]
+  mcp_config:
+    type: "stdio"
+    command: "docker"
+    args:
+      - "run"
+      - "--rm"
+      - "-i"
+      - "-e"
+      - "JIRA_URL=https://jira.cc.bmwgroup.net"
+      - "-e"
+      - "JIRA_PERSONAL_TOKEN=${input:jira_token}"
+      - "-e"
+      - "JIRA_SSL_VERIFY=false"
+      - "nexus.bmwgroup.net/sooperset/mcp-atlassian:latest"
+  inputs:
+    - type: "promptString"
+      id: "jira_token"
+      description: "Jira Personal Access Token"
+      password: true
+
+actions:
+  - "IMPORTANT: This reference is for the BMW CodeCraft Jira instance (https://jira.cc.bmwgroup.net) using Docker. If the user did not specify which instance they want, ask them: 'Which Jira instance would you like to set up — ATC or CodeCraft?' If the user wants the ATC instance, use the reference file `setup-jira-atc-mcp.yaml` instead."
+  - "Ask user to choose configuration scope: 'global' (user-wide) or 'project' (workspace-specific, recommended for team collaboration)"
+  - "Run installation script: `uv run scripts/setup-mcp.py --server jira-codecraft --scope [global|project]`"
+  - "Wait for script to complete - it checks prerequisites, pulls the Nexus-mirrored mcp-atlassian Docker image, generates MCP config with CodeCraft Jira URL, merges with existing config"
+  - "Guide Jira token generation: User navigates to https://jira.cc.bmwgroup.net → Profile settings → Security → Create PAT with read/write permissions → Copy token"
+  - "CRITICAL: User must save the token securely - VS Code will prompt for it when starting the server"
+  - "Start MCP server: Open Command Palette → 'MCP: Open User Configuration' → Click 'Start' next to 'jira-codecraft' → VS Code will prompt for token → Paste token into secure prompt → Wait for 'Running' status"
+  - "Verify setup: Test with `@jira-codecraft help` in Copilot Chat - should list available Jira commands"
+
+tools_used:
+  - uvx
+  - Docker (for the Nexus-mirrored mcp-atlassian image)
+  - setup-mcp.py --server jira-codecraft (unified setup script)
+  - BMW CodeCraft Jira PAT generation UI
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - Jira MCP configuration created with CodeCraft URL
+  - Docker image nexus.bmwgroup.net/sooperset/mcp-atlassian:latest pulled and available
+  - Jira PAT stored in mcp.json
+  - MCP server shows "Running" status in VS Code
+  - AI agent can query Jira via @jira-codecraft commands
+
+validation:
+  - "Run `docker images | grep sooperset/mcp-atlassian` to verify Docker image is available"
+  - "Check MCP config file contains 'jira-codecraft' entry with URL 'https://jira.cc.bmwgroup.net'"
+  - "Verify token is replaced (not placeholder value)"
+  - "MCP configuration panel shows 'jira-codecraft' server with 'Running' status"
+  - "Test `@jira-codecraft help` returns Jira command list (search issues, get issue details, update issues, etc.)"
+  - "Test actual query: `@jira-codecraft search issues in [project-key]` returns results"
+
+configuration:
+  instance_url: "https://jira.cc.bmwgroup.net"
+
+  ssl_verify: "Set to 'false' for internal BMW instances"
+
+  token_requirements:
+    generation_path: "https://jira.cc.bmwgroup.net/secure/ViewProfile.jspa → Personal Access Tokens"
+    permissions: "Read/write access to projects"
+    expiration: "90 days recommended"
+
+usage_examples:
+  - "@jira-codecraft search issues in DX assigned to me"
+  - "@jira-codecraft create issue in project DX with title 'Bug: Setup fails' and type Bug"
+  - "@jira-codecraft show issue DX-123"
+  - "@jira-codecraft update issue DX-123 set status to 'In Progress'"
+  - "@jira-codecraft add comment to DX-123 'Working on this now'"
+  - "@jira-codecraft list my open issues"
+  - "@jira-codecraft transition issue DX-123 to 'Done'"
+
+troubleshooting:
+  - issue: "Docker daemon is not running"
+    cause: "Docker not started"
+    solution: "Linux/macOS: `sudo systemctl start docker` or start Docker Desktop; Windows: Start Docker Desktop from Start Menu"
+
+  - issue: "401 Unauthorized or authentication errors"
+    cause: "Invalid or expired API token"
+    solution: "Regenerate PAT in Jira instance, update mcp.json with new token, restart application, click 'Restart' in MCP configuration"
+
+  - issue: "Cannot find module 'nexus.bmwgroup.net/sooperset/mcp-atlassian'"
+    cause: "Docker image not pulled"
+    solution: "Run `docker pull nexus.bmwgroup.net/sooperset/mcp-atlassian:latest`"
+
+  - issue: "Authentication errors after updating token"
+    cause: "MCP server needs restart to pick up new configuration"
+    solution: "Open Command Palette → 'MCP: Open User Configuration' → Click 'Restart' next to 'jira-codecraft' server → Wait for 'Running' status"
+
+  - issue: "WSL2 networking issues with Docker"
+    cause: "Host gateway not configured"
+    solution: "Ensure config includes: --add-host host.docker.internal:host-gateway in args array"
+
+uninstall:
+  steps:
+    - "Remove Docker image: `docker rmi nexus.bmwgroup.net/sooperset/mcp-atlassian:latest` (if Confluence not also installed)"
+    - "Open MCP configuration: MCP: Open User Configuration"
+    - "Delete 'jira-codecraft' entry from mcpServers"
+
+resources:
+  - name: "MCP Atlassian Repository"
+    url: "https://github.com/sooperset/mcp-atlassian"
+  - name: "BMW CodeCraft Jira"
+    url: "https://jira.cc.bmwgroup.net"
+  - name: "Jira REST API Documentation"
+    url: "https://developer.atlassian.com/cloud/jira/platform/rest/v3/"

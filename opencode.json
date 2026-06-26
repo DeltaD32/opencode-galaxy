@@ -1,0 +1,339 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "enabled_providers": [
+    "llm-api"
+  ],
+  "model": "llm-api/claude-sonnet-4-5",
+  "small_model": "llm-api/claude-haiku-4-5",
+  "default_agent": "request-orchestrator",
+  "provider": {
+    "llm-api": {
+      "npm": "@ai-sdk/openai-compatible",
+      "name": "LLM API",
+      "models": {
+        "claude-sonnet-4-5": {
+          "name": "claude-sonnet-4-5",
+          "options": {
+            "reasoningEffort": "medium",
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 3.3,
+            "cache_read": 0.33,
+            "cache_write": 4.125,
+            "output": 16.5
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+        "claude-haiku-4-5": {
+          "name": "claude-haiku-4-5",
+          "options": {
+            "reasoningEffort": "medium",
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 1.1,
+            "cache_read": 0.11,
+            "cache_write": 1.375,
+            "output": 5.5
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+        "claude-sonnet-4-6": {
+          "name": "claude-sonnet-4-6",
+          "options": {
+            "reasoningEffort": "medium",
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 3.3,
+            "cache_read": 0.33,
+            "cache_write": 4.125,
+            "output": 16.5
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+        "gpt-5.1": {
+          "name": "gpt-5.1",
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 1.38,
+            "cache_read": 0.14,
+            "output": 11.0
+          },
+          "limit": {
+            "context": 272000,
+            "output": 128000
+          }
+        },
+        "gpt-5.4": {
+          "name": "gpt-5.4",
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 2.76,
+            "cache_read": 0.28,
+            "output": 16.5
+          },
+          "limit": {
+            "context": 922000,
+            "output": 128000
+          }
+        },
+        "o3-mini": {
+          "name": "o3-mini",
+          "options": {
+            "reasoningEffort": "high"
+          },
+          "cost": {
+            "input": 1.1,
+            "output": 4.4
+          },
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          }
+        },
+        "gemini-3.5-flash": {
+          "name": "gemini-3.5-flash",
+          "cost": {
+            "input": 0.15,
+            "cache_read": 0.0375,
+            "output": 0.6
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 8192
+          }
+        },
+        "gemini-3.1-flash-lite": {
+          "name": "gemini-3.1-flash-lite",
+          "cost": {
+            "input": 0.075,
+            "cache_read": 0.01875,
+            "output": 0.3
+          },
+          "limit": {
+            "context": 1000000,
+            "output": 8192
+          }
+        },
+        "gpt-4o-mini": {
+          "name": "gpt-4o-mini",
+          "cost": {
+            "input": 0.165,
+            "cache_read": 0.017,
+            "output": 0.66
+          },
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          }
+        },
+        "gpt-5.2": {
+          "name": "gpt-5.2",
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 2.2,
+            "cache_read": 0.22,
+            "output": 13.2
+          },
+          "limit": {
+            "context": 922000,
+            "output": 128000
+          }
+        },
+        "claude-sonnet-4": {
+          "name": "claude-sonnet-4",
+          "options": {
+            "reasoningEffort": "medium",
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 3.3,
+            "cache_read": 0.33,
+            "cache_write": 4.125,
+            "output": 16.5
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+        "o4-mini": {
+          "name": "o4-mini",
+          "options": {
+            "reasoningEffort": "high"
+          },
+          "cost": {
+            "input": 1.65,
+            "output": 6.6
+          },
+          "limit": {
+            "context": 200000,
+            "output": 100000
+          }
+        },
+        "gemini-3.1-pro": {
+          "name": "gemini-3.1-pro:global",
+          "cost": {
+            "input": 1.25,
+            "cache_read": 0.3125,
+            "output": 5.0
+          },
+          "limit": {
+            "context": 2000000,
+            "output": 8192
+          }
+        },
+        "gpt-4o": {
+          "name": "gpt-4o",
+          "cost": {
+            "input": 2.75,
+            "cache_read": 0.28,
+            "output": 11.0
+          },
+          "limit": {
+            "context": 128000,
+            "output": 16384
+          }
+        }
+      },
+      "options": {
+        "baseURL": "https://api.gcp.cloud.bmw/llmapi/v1",
+        "headers": {
+          "Authorization": "Bearer {env:LLM_API_BEARER_TOKEN}",
+          "x-apikey": "{env:LLM_API_KEY}"
+        }
+      }
+    }
+  },
+  "plugin": [
+    "./plugins/config-backup.ts"
+  ],
+  "mcp": {
+    "jira-atc": {
+      "type": "remote",
+      "url": "https://atc.bmwgroup.net/mcp",
+      "enabled": false,
+      "headers": {
+        "X-Atlassian-Jira-Personal-Token": "{env:JIRA_ATC_PAT}",
+        "X-Atlassian-Jira-Url": "https://atc.bmwgroup.net/jira"
+      }
+    },
+    "confluence-atc": {
+      "type": "remote",
+      "url": "https://atc.bmwgroup.net/mcp",
+      "enabled": false,
+      "headers": {
+        "X-Atlassian-Confluence-Personal-Token": "{env:CONFLUENCE_ATC_PAT}",
+        "X-Atlassian-Confluence-Url": "https://atc.bmwgroup.net/confluence"
+      }
+    },
+    "memory": {
+      "type": "local",
+      "command": [
+        "/usr/local/bin/node",
+        "/Users/QTE2362/.npm/_npx/15b07286cbcc3329/node_modules/@modelcontextprotocol/server-memory/dist/index.js"
+      ]
+    },
+    "density-mcp": {
+      "type": "remote",
+      "url": "https://density.bmwgroup.net/mcp",
+      "enabled": true
+    },
+    "fetch": {
+      "type": "local",
+      "command": [
+        "npx",
+        "--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/",
+        "mcp-fetch-server"
+      ],
+      "environment": {
+        "DEFAULT_LIMIT": "50000"
+      },
+      "enabled": false
+    },
+    "grafana": {
+      "type": "local",
+      "command": [
+        "uvx",
+        "mcp-grafana"
+      ],
+      "environment": {
+        "GRAFANA_URL": "{env:GRAFANA_URL}",
+        "GRAFANA_SERVICE_ACCOUNT_TOKEN": "{env:GRAFANA_SERVICE_ACCOUNT_TOKEN}"
+      },
+      "enabled": false
+    },
+    "wiz": {
+      "type": "remote",
+      "url": "https://mcp.app.wiz.io/",
+      "enabled": false
+    },
+    "skills-mcp": {
+      "type": "remote",
+      "url": "https://skills.bmwgroup.net/mcp",
+      "enabled": true
+    },
+    "playwright": {
+      "type": "local",
+      "command": [
+        "npx",
+        "--registry=https://nexus.bmwgroup.net/repository/bmw_npm_repositories/",
+        "@playwright/mcp@latest"
+      ],
+      "enabled": false
+    }
+  }
+}

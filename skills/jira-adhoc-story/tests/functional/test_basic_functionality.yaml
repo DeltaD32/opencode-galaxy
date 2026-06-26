@@ -1,0 +1,25 @@
+name: "jira-adhoc-story: Create story for feature branch"
+description: "Verify skill can analyze a feature branch and create a Jira story"
+test_type: "functionality"
+
+prompt: |
+  I've completed some work on my current branch and need to create a Jira ticket to document it.
+  Can you create a story for this work?
+
+expected_outcomes:
+  - "Runs the analyze_branch.py script to extract branch information"
+  - "Analyzes commits to generate story content"
+  - "Uses Jira MCP tools to create the story"
+  - "Returns the created ticket key"
+
+validation_criteria:
+  - type: "tool_called"
+    value: "bash"
+  - type: "contains"
+    value: "analyze_branch.py"
+  - type: "tool_called"
+    value: "view"
+  - type: "regex"
+    value: "(summary|description|acceptance criteria)"
+  - type: "llm_judge"
+    value: "Response demonstrates analyzing the branch, generates appropriate story content (summary, description, acceptance criteria), and attempts to create a Jira ticket using MCP tools"

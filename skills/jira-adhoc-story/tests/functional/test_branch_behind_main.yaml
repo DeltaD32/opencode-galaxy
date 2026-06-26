@@ -1,0 +1,21 @@
+name: "jira-adhoc-story: Handle branch behind main"
+description: "Verify skill detects when branch is behind main and suggests rebase"
+test_type: "edge_case"
+
+prompt: |
+  Create a Jira story for my current work. My branch has a few commits but I haven't synced with main in a while.
+
+expected_outcomes:
+  - "Analyzes branch and detects it's behind main"
+  - "Creates the story successfully"
+  - "Suggests rebasing the branch"
+
+validation_criteria:
+  - type: "tool_called"
+    value: "bash"
+  - type: "contains"
+    value: "analyze_branch.py"
+  - type: "regex"
+    value: "(behind|rebase|sync)"
+  - type: "llm_judge"
+    value: "Response creates the Jira story and notifies user that the branch is behind main, suggesting a rebase"

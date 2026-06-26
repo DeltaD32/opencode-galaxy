@@ -1,0 +1,97 @@
+{
+  "site": {
+    "name": "My BMW Project",
+    "subtitle": "Project Subtitle",
+    "description": "A brief description of this project and its purpose.",
+    "tagline": "Innovation. Precision. Excellence.",
+    "organization": "BMW Group"
+  },
+  "pages": [
+    {
+      "id": "home",
+      "title": "Home",
+      "template": "index.html",
+      "output": "index.html",
+      "nav": true
+    },
+    {
+      "id": "about",
+      "title": "About",
+      "template": "about.html",
+      "output": "about.html",
+      "nav": true
+    },
+    {
+      "id": "contact",
+      "title": "Contact",
+      "template": "contact.html",
+      "output": "contact.html",
+      "nav": true
+    }
+  ],
+  "hero": {
+    "eyebrow": "BMW Group",
+    "heading": "Project Name",
+    "tagline": "A short, compelling tagline for your project.",
+    "cta": {
+      "text": "Learn More",
+      "url": "#features"
+    }
+  },
+  "features": [
+    {
+      "icon": "&#128640;",
+      "name": "Fast & Modern",
+      "description": "Built with modern web standards. Lightweight, fast, and responsive across all devices."
+    },
+    {
+      "icon": "&#127912;",
+      "name": "BMW Branded",
+      "description": "Follows the BMW 2025 design system with proper color tokens, typography, and spacing."
+    },
+    {
+      "icon": "&#9728;&#65039;",
+      "name": "Dark Mode",
+      "description": "Full dark mode support with system preference detection and manual toggle."
+    }
+  ],
+  "stats": [
+    { "number": "100%", "label": "Static" },
+    { "number": "0", "label": "Dependencies at Runtime" },
+    { "number": "<1s", "label": "Load Time" }
+  ],
+  "about": {
+    "intro": "This project is part of the BMW Group's digital transformation initiative. We leverage modern web technologies to deliver fast, accessible, and beautifully designed experiences.",
+    "sections": [
+      {
+        "title": "Our Mission",
+        "content": "To create exceptional digital experiences that embody BMW's commitment to quality, innovation, and precision engineering."
+      },
+      {
+        "title": "Technology",
+        "content": "This site is built as a static webapp using Mustache templating, BMW design tokens, and deployed automatically via GitHub Pages. Zero runtime dependencies, maximum performance."
+      },
+      {
+        "title": "Team",
+        "content": "Built and maintained by the BMW Group digital team. Contributions and feedback are welcome."
+      }
+    ]
+  },
+  "contact": {
+    "intro": "Have questions or feedback? We'd love to hear from you.",
+    "email": "team@example.com",
+    "team": [
+      { "name": "Project Lead", "role": "Lead", "email": "lead@example.com" },
+      { "name": "Developer", "role": "Engineering", "email": "dev@example.com" }
+    ]
+  },
+  "footer": {
+    "text": "BMW Group",
+    "links": [
+      { "text": "View on GitHub", "url": "#" }
+    ]
+  },
+  "repo": {
+    "url": ""
+  }
+}

@@ -1,0 +1,12 @@
+name: "git-commit-reorganization: Atomic Commit Creation"
+description: "Test that the skill can split a large commit into multiple atomic commits"
+test_type: "functionality"
+prompt: |
+  I have one large commit that changes both frontend components and backend API code. Can you help split this into separate atomic commits with proper conventional commit messages?
+validation_criteria:
+  - type: "regex"
+    value: "(git|commit)"
+  - type: "llm_judge"
+    value: "The response should demonstrate understanding of atomic commits and how to split large commits"
+  - type: "min_length"
+    value: 150

@@ -1,0 +1,9 @@
+name: "pr-creation: Basic PR Creation"
+description: Test that the skill can create a basic pull request with proper structure
+test_type: functionality
+prompt: |
+  I've finished my feature work on this branch. Can you help me create a pull request to merge it into main?
+validation_criteria:
+  - type: tool_called
+    value:
+      name: bash

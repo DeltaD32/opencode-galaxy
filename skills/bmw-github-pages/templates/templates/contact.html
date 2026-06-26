@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact &mdash; {{site.name}}</title>
+  <link rel="stylesheet" href="{{basePath}}/assets/styles.css">
+</head>
+<body>
+
+{{{header}}}
+
+<!-- Hero -->
+<section class="hero" style="padding: var(--space-12) 0;">
+  <div class="container" style="text-align: center;">
+    <div class="hero-eyebrow">Get in Touch</div>
+    <h1>Contact Us</h1>
+    <p class="hero-tagline" style="margin: var(--space-4) auto 0;">{{contact.intro}}</p>
+  </div>
+</section>
+
+<div class="content-page">
+
+  {{#contact.email}}
+  <div class="callout callout--info">
+    <div class="callout__title">Email</div>
+    <p>Reach us at <a href="mailto:{{contact.email}}">{{contact.email}}</a></p>
+  </div>
+  {{/contact.email}}
+
+  {{#contact.team.length}}
+  <h2>Team</h2>
+  <div class="bento-grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
+    {{#contact.team}}
+    <div class="bento-card" style="cursor: default;">
+      <div class="bento-card__body">
+        <h3 class="bento-card__name">{{name}}</h3>
+        <p class="bento-card__summary">{{role}}</p>
+        {{#email}}
+        <a href="mailto:{{email}}" class="btn btn--outline btn--sm">Email</a>
+        {{/email}}
+      </div>
+    </div>
+    {{/contact.team}}
+  </div>
+  {{/contact.team.length}}
+
+  <div class="callout callout--tip mt-8">
+    <div class="callout__title">Feedback Welcome</div>
+    <p>We value your feedback. If you have suggestions, feature requests, or bug reports, please open an issue on our GitHub repository.</p>
+  </div>
+
+</div>
+
+{{{footer}}}
+
+</body>
+</html>

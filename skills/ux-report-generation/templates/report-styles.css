@@ -1,0 +1,533 @@
+/*
+  report-styles.css — Density-styled CSS for all DesignOps evaluation reports
+  ─────────────────────────────────────────────────────────────────────────────
+  Source of truth for all report component styles.
+  Inline the full contents of this file inside a <style> tag in each generated report.
+  Do NOT reference this file externally — reports must be self-contained.
+*/
+
+@page { size: A4; margin: 1.5cm; }
+
+:root {
+  /* ── Density Primitive Color Tokens ─────────────────────── */
+  --color-red-100: #ffefef;
+  --color-red-200: #ffd4d4;
+  --color-red-600: #df001a;
+  --color-red-700: #aa0014;
+
+  --color-green-100: #e5fceb;
+  --color-green-200: #9ff7b7;
+  --color-green-600: #2a813f;
+  --color-green-700: #185f28;
+
+  --color-yellow-100: #fff7de;
+  --color-yellow-200: #ffe38e;
+  --color-yellow-700: #744b00;
+
+  --color-blue-100: #ecf3ff;
+  --color-blue-600: #0071c5;
+  --color-blue-700: #005499;
+
+  /* Ocean — action / interactive (Density color-surface-action-strong) */
+  --color-ocean-100: #e0f2ff;
+  --color-ocean-600: #037493;
+  --color-ocean-700: #035970;
+
+  --color-grey-100: #f5f6f6;
+  --color-cool-grey-200: #dcdee1;
+  --color-cool-grey-600: #69707a;
+  --color-cool-grey-900: #1f2328;
+
+  /* ── Density Semantic Surface Tokens ────────────────────── */
+  --color-surface-page:     var(--color-grey-100);
+  --color-surface-base:     #ffffff;
+  --color-surface-critical: var(--color-red-100);
+  --color-surface-positive: var(--color-green-100);
+  --color-surface-caution:  var(--color-yellow-100);
+  --color-surface-info:     var(--color-blue-100);
+  --color-surface-invert:   var(--color-cool-grey-900);
+
+  /* ── Density Semantic Border Tokens ─────────────────────── */
+  --color-border-neutral:  var(--color-cool-grey-200);
+  --color-border-critical: var(--color-red-200);
+  --color-border-positive: var(--color-green-200);
+  --color-border-caution:  var(--color-yellow-200);
+
+  /* ── Density Semantic Typography Tokens ─────────────────── */
+  --color-typography-base:     var(--color-cool-grey-900);
+  --color-typography-critical: var(--color-red-700);
+  --color-typography-positive: var(--color-green-700);
+  --color-typography-caution:  var(--color-yellow-700);
+
+  /* ── Report Semantic Aliases ─────────────────────────────── */
+  --severity-critical: var(--color-red-600);
+  --severity-high:     var(--color-red-600);
+  --severity-medium:   var(--color-yellow-700);
+  --severity-low:      var(--color-green-600);
+
+  --status-pass:    var(--color-green-700);
+  --status-partial: var(--color-yellow-700);
+  --status-fail:    var(--color-red-600);
+  --status-unknown: var(--color-cool-grey-600);
+
+  /* Action alias — Density color-surface-action-strong → ocean-600 */
+  --color-action: var(--color-ocean-600);
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  font-size: 14px; /* Density typography-size-regular */
+  line-height: 1.43; /* Density space-5x (20px) / 14px */
+  color: var(--color-typography-base);
+  background: var(--color-surface-page);
+}
+
+.container { max-width: 960px; margin: 0 auto; padding: 2rem; }
+
+/* ── Cover ─────────────────────────────────────────────────── */
+.cover {
+  background: var(--color-surface-invert);
+  color: #ffffff;
+  padding: 3rem 2.5rem;
+  border-radius: 2px; /* Density shape-radius-base */
+  margin-bottom: 2rem;
+  page-break-after: always;
+}
+/* BMWGroupTNCondensedPro-Medium is the Density brand font (typography-family-title).
+   It renders when Density font assets are available; system fonts are the fallback. */
+.cover h1 {
+  font-family: 'BMWGroupTNCondensedPro-Medium', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  font-size: 2rem;
+  margin-bottom: 0.4rem;
+  letter-spacing: -0.5px;
+}
+.cover .subtitle { font-size: 1.05rem; opacity: 0.8; margin-bottom: 2rem; }
+.cover .meta-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 0.8rem;
+  margin-top: 1.5rem;
+}
+.cover .meta-item {
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 2px;
+  padding: 0.75rem 1rem;
+}
+.cover .meta-item .label {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.6;
+}
+.cover .meta-item .value {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-top: 0.15rem;
+  word-break: break-word;
+  overflow-wrap: break-word;
+}
+
+/* ── Section headings ───────────────────────────────────────── */
+.section { margin: 2rem 0; }
+.section-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-typography-base);
+  margin-bottom: 1rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid var(--color-border-neutral);
+}
+
+/* ── Executive Summary ──────────────────────────────────────── */
+.executive-summary {
+  background: var(--color-surface-info);
+  border-left: 4px solid var(--color-action);
+  border-radius: 0 2px 2px 0;
+  padding: 1.2rem 1.5rem;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+.executive-summary h3 {
+  color: var(--color-action);
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+}
+
+/* ── Scorecard ──────────────────────────────────────────────── */
+.scorecard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  gap: 0.8rem;
+  margin-bottom: 1.5rem;
+}
+.score-box {
+  background: var(--color-surface-base);
+  border-radius: 2px;
+  padding: 1.2rem;
+  text-align: center;
+  border: 2px solid var(--color-border-neutral);
+}
+.score-box .count { font-size: 2.2rem; font-weight: 800; }
+.score-box .label {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  margin-top: 0.25rem;
+  color: var(--color-cool-grey-600);
+}
+.score-box.pass    { border-color: var(--status-pass); }
+.score-box.pass    .count { color: var(--status-pass); }
+.score-box.partial { border-color: var(--status-partial); }
+.score-box.partial .count { color: var(--status-partial); }
+.score-box.fail    { border-color: var(--status-fail); }
+.score-box.fail    .count { color: var(--status-fail); }
+.score-box.unknown { border-color: var(--status-unknown); }
+.score-box.unknown .count { color: var(--status-unknown); }
+
+/* ── Risk Banner ────────────────────────────────────────────── */
+.risk-banner {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem 1.5rem;
+  border-radius: 2px;
+  margin: 1.5rem 0;
+  color: #ffffff;
+}
+.risk-banner.critical { background: var(--severity-critical); }
+.risk-banner.high     { background: var(--severity-high); }
+.risk-banner.medium   { background: var(--color-yellow-700); }
+.risk-banner.low      { background: var(--severity-low); }
+.risk-banner .icon { font-size: 1.8rem; flex-shrink: 0; }
+.risk-banner .text .risk-title { font-size: 1.05rem; font-weight: 700; margin: 0 0 0.2rem; }
+.risk-banner .text p  { font-size: 0.9rem; opacity: 0.92; }
+
+/* ── Category / Finding cards ───────────────────────────────── */
+.category { margin: 2rem 0; page-break-inside: avoid; }
+.category-header {
+  background: var(--color-action);
+  color: #ffffff;
+  padding: 0.9rem 1.3rem;
+  border-radius: 2px 2px 0 0;
+}
+.category-header h3 { font-size: 1.1rem; }
+.category-header p  { font-size: 0.85rem; opacity: 0.85; margin-top: 0.2rem; }
+
+.finding {
+  background: var(--color-surface-base);
+  border: 1px solid var(--color-border-neutral);
+  margin-bottom: 0.5rem;
+  overflow: hidden;
+  page-break-inside: avoid;
+}
+.finding:last-child { border-radius: 0 0 2px 2px; }
+.finding + .finding:not(:last-child) { border-radius: 0; }
+.category > .finding:only-child { border-radius: 0 0 2px 2px; }
+
+.finding-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  padding: 0.9rem 1.3rem;
+  border-bottom: 1px solid var(--color-border-neutral);
+  background: var(--color-surface-page);
+}
+.finding-header h3 { font-size: 1rem; }
+.finding-badges { display: flex; gap: 0.4rem; flex-wrap: wrap; }
+
+.finding-body { padding: 1.3rem; }
+.finding-body p { margin-bottom: 0.75rem; font-size: 0.9rem; }
+
+.evidence {
+  background: var(--color-surface-info);
+  border-left: 4px solid var(--color-action);
+  border-radius: 0 2px 2px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.875rem;
+}
+.evidence strong { color: var(--color-action); }
+
+.recommendation {
+  background: var(--color-surface-positive);
+  border-left: 4px solid var(--status-pass);
+  border-radius: 0 2px 2px 0;
+  padding: 0.8rem 1rem;
+  margin: 0.8rem 0;
+  font-size: 0.875rem;
+}
+.recommendation strong { color: var(--status-pass); }
+
+/* ── Badges ─────────────────────────────────────────────────── */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 9999px; /* Density shape-radius-circle (pill) */
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  white-space: nowrap;
+}
+/* Status */
+.badge.pass    { background: var(--status-pass);    color: #ffffff; }
+.badge.partial { background: var(--status-partial); color: #ffffff; }
+.badge.fail    { background: var(--status-fail);    color: #ffffff; }
+.badge.unknown { background: var(--status-unknown); color: #ffffff; }
+/* Severity */
+.badge.critical { background: var(--severity-critical); color: #ffffff; }
+.badge.high     { background: var(--severity-high);     color: #ffffff; }
+.badge.medium   { background: var(--color-yellow-200);  color: var(--color-cool-grey-900); }
+.badge.low      { background: var(--severity-low);      color: #ffffff; }
+/* Effort */
+.badge.effort-s { background: var(--color-surface-info);     color: var(--color-blue-700);       border: 1px solid var(--color-blue-700); }
+.badge.effort-m { background: var(--color-surface-caution);  color: var(--color-yellow-700);     border: 1px solid var(--color-yellow-700); }
+.badge.effort-l { background: var(--color-surface-critical); color: var(--severity-critical);    border: 1px solid var(--severity-critical); }
+
+/* ── Screenshot block ───────────────────────────────────────── */
+.screenshot {
+  margin: 1rem 0;
+  border: 2px solid var(--color-border-neutral);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.screenshot img { width: 100%; display: block; }
+.screenshot-caption {
+  background: var(--color-surface-invert);
+  color: #ffffff;
+  padding: 0.4rem 0.8rem;
+  font-size: 0.75rem;
+}
+
+/* ── Jira Selection ─────────────────────────────────────────── */
+.jira-select {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-top: 0.75rem;
+  padding: 0.5rem 0;
+  border-top: 1px dashed var(--color-border-neutral);
+  font-size: 0.8rem;
+  color: var(--color-cool-grey-600);
+}
+.jira-select input[type="checkbox"] {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--color-action);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.jira-select label { cursor: pointer; user-select: none; }
+
+/* ── Jira Config Panel ──────────────────────────────────────── */
+.jira-config {
+  background: var(--color-surface-base);
+  border: 2px solid var(--color-action);
+  border-radius: 2px;
+  margin: 1.5rem 0;
+  overflow: hidden;
+}
+.jira-config-toggle {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.75rem 1.2rem;
+  background: var(--color-ocean-100);
+  cursor: pointer;
+  user-select: none;
+  border: none;
+  width: 100%;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-action);
+}
+.jira-config-toggle:hover { background: #cce8f4; }
+.jira-config-toggle .arrow { transition: transform 0.2s; }
+.jira-config-toggle[aria-expanded="true"] .arrow { transform: rotate(180deg); }
+.jira-config-body {
+  padding: 1rem 1.2rem;
+  display: none;
+}
+.jira-config-body.open { display: block; }
+.jira-config-body .field { margin-bottom: 0.75rem; }
+.jira-config-body .field label {
+  display: block;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: var(--color-cool-grey-600);
+  margin-bottom: 0.25rem;
+}
+.jira-config-body .field input,
+.jira-config-body .field select {
+  width: 100%;
+  max-width: 360px;
+  padding: 0.45rem 0.65rem;
+  border: 1px solid var(--color-border-neutral);
+  border-radius: 2px;
+  font-size: 0.875rem;
+  color: var(--color-typography-base);
+  background: var(--color-surface-base);
+}
+.jira-config-body .field input:focus,
+.jira-config-body .field select:focus {
+  outline: 2px solid var(--color-action);
+  outline-offset: 1px;
+}
+
+/* ── Floating Action Bar ────────────────────────────────────── */
+.jira-action-bar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background: var(--color-surface-invert);
+  color: #ffffff;
+  padding: 0.75rem 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  z-index: 1000;
+  transform: translateY(100%);
+  transition: transform 0.25s ease;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.15);
+}
+.jira-action-bar.visible { transform: translateY(0); }
+.jira-action-bar .count { font-size: 0.9rem; font-weight: 600; }
+.jira-action-bar .count span {
+  display: inline-block;
+  background: var(--color-action);
+  color: #ffffff;
+  padding: 0.1rem 0.55rem;
+  border-radius: 9999px;
+  font-size: 0.8rem;
+  margin: 0 0.2rem;
+}
+.jira-action-bar button {
+  padding: 0.5rem 1.2rem;
+  background: var(--color-action);
+  color: #ffffff;
+  border: none;
+  border-radius: 2px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  letter-spacing: 0.3px;
+}
+.jira-action-bar button:hover { background: var(--color-ocean-700); }
+.jira-action-bar button:disabled { opacity: 0.5; cursor: not-allowed; }
+.jira-action-bar .btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,0.3);
+  color: #ffffff;
+}
+.jira-action-bar .btn-secondary:hover { background: rgba(255,255,255,0.08); }
+
+/* ── Remediation Matrix ─────────────────────────────────────── */
+.matrix-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  margin-top: 0.75rem;
+}
+.matrix-table th {
+  background: var(--color-surface-invert);
+  color: #ffffff;
+  padding: 0.6rem 0.9rem;
+  text-align: left;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+.matrix-table td {
+  padding: 0.6rem 0.9rem;
+  border-bottom: 1px solid var(--color-border-neutral);
+  vertical-align: top;
+}
+.matrix-table tr:nth-child(even) td { background: var(--color-surface-page); }
+.matrix-table tr:last-child td { border-bottom: none; }
+
+.priority-tag {
+  display: inline-block;
+  padding: 0.15rem 0.5rem;
+  border-radius: 2px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+.priority-tag.p0 { background: var(--severity-critical); color: #ffffff; }
+.priority-tag.p1 { background: var(--severity-high);     color: #ffffff; }
+.priority-tag.p2 { background: var(--color-yellow-200);  color: var(--color-cool-grey-900); }
+.priority-tag.p3 { background: var(--color-cool-grey-200); color: var(--color-cool-grey-900); }
+
+/* ── Checklist ──────────────────────────────────────────────── */
+.checklist { list-style: none; margin-top: 0.75rem; }
+.checklist li {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--color-border-neutral);
+  font-size: 0.875rem;
+}
+.checklist li:last-child { border-bottom: none; }
+.checklist .check-icon { font-size: 1rem; flex-shrink: 0; }
+.checklist .check-icon.pass    { color: var(--status-pass); }
+.checklist .check-icon.partial { color: var(--status-partial); }
+.checklist .check-icon.fail    { color: var(--status-fail); }
+.checklist .check-icon.unknown { color: var(--status-unknown); }
+
+/* ── Methodology ────────────────────────────────────────────── */
+.methodology-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 0.8rem;
+  margin-top: 0.75rem;
+}
+.methodology-card {
+  background: var(--color-surface-base);
+  border: 1px solid var(--color-border-neutral);
+  border-radius: 2px;
+  padding: 1rem;
+}
+.methodology-card h5 { font-size: 0.85rem; color: var(--color-action); margin-bottom: 0.4rem; }
+.methodology-card p  { font-size: 0.8rem; color: var(--color-cool-grey-600); }
+
+/* ── Print ──────────────────────────────────────────────────── */
+@media print {
+  .jira-config, .jira-action-bar, .jira-select { display: none !important; }
+}
+
+/* ── Utility ────────────────────────────────────────────────── */
+.page-break { page-break-after: always; margin: 0; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+
+/* ── Skip Link ──────────────────────────────────────────────── */
+.skip-link {
+  position: absolute;
+  top: -100%;
+  left: 0;
+  background: var(--color-action);
+  color: #ffffff;
+  padding: 0.5rem 1rem;
+  text-decoration: none;
+  font-size: 0.875rem;
+  font-weight: 600;
+  z-index: 9999;
+  border-radius: 0 0 2px 0;
+}
+.skip-link:focus { top: 0; }
+
+/* ── Motion ─────────────────────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  .jira-action-bar { transition: none; }
+  .jira-config-toggle .arrow { transition: none; }
+}

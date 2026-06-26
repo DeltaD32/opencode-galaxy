@@ -1,0 +1,22 @@
+name: "jira-adhoc-story: Handle non-standard branch name"
+description: "Verify skill handles branches that don't follow feature/* or fix/* naming"
+test_type: "edge_case"
+
+prompt: |
+  I'm on a branch called "copilot/update-docs" and I need to create a Jira ticket for this work.
+
+expected_outcomes:
+  - "Analyzes the branch despite non-standard naming"
+  - "Warns about non-standard branch name"
+  - "Still generates appropriate story content"
+  - "Creates the story after user confirmation"
+
+validation_criteria:
+  - type: "tool_called"
+    value: "bash"
+  - type: "contains"
+    value: "analyze_branch.py"
+  - type: "regex"
+    value: "(other|non-standard|naming|pattern)"
+  - type: "llm_judge"
+    value: "Response acknowledges the non-standard branch name but proceeds to analyze commits and generate story content appropriately"

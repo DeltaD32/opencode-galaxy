@@ -1,0 +1,2250 @@
+{
+  "source": {
+    "host": "cc-github.bmwgroup.net",
+    "owner": "markusfidorra",
+    "repo": "bmw_sprueche",
+    "url": "https://cc-github.bmwgroup.net/markusfidorra/bmw_sprueche",
+    "files": ["README.md", "bmw_schulungen.md"]
+  },
+  "generated_at": "2026-03-30T18:46:10.888188+00:00",
+  "quotes": [
+    {
+      "id": "README:bmw-sprueche:001",
+      "text": "Wir müssen uns alignen wo der Ball liegt.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:002",
+      "text": "Das BMW-Immunsystem reagiert sehr empfindlich auf agile Werte und Prinzipien.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:003",
+      "text": "Mir ist wichtig, dass wir bei der Granularität die gleiche Flughöhe haben.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:004",
+      "text": "Am Geld kann es ja wohl nicht liegen, dann kann es nur noch die Kompetenz sein.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:005",
+      "text": "Brauchen wir hierfür ein AEP?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:006",
+      "text": "Wer ist dafür verantwortlich?!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:007",
+      "text": "Wer macht das und bis wann?!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:008",
+      "text": "Ohne Item mach ich nix!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:009",
+      "text": "Die Statistik ist der Kunde.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:010",
+      "text": "Damit haben wir die Performance Level in den Kontext des Features gebracht.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:011",
+      "text": "Go & See ist keine Einbahnstraße",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:012",
+      "text": "Es reicht nicht, keine Ideen zu haben, man muss auch unfaehig sein, diese umzusetzen!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:013",
+      "text": "Wir muessen das Thema  jetzt mit offenem Visier diskutieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:014",
+      "text": "Die Granularitaet des Themas reicht noch nicht aus",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:015",
+      "text": "Wir muessen im engen Schulterschluss agieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:016",
+      "text": "Ich nehm das Thema noch mal mit",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:017",
+      "text": "Das Thema hat jetzt Management-Attention",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:018",
+      "text": "Wir muessen das Thema jetzt tiefer legen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:019",
+      "text": "Wir muessen da jetzt mal lessons-learned machen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:020",
+      "text": "Wir haben die Wirkkette verstanden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:021",
+      "text": "Wir muessen die Querwirkungsfreiheit abtesten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:022",
+      "text": "Wir muessen jetzt unbedingt wieder auf Sicht fahren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:023",
+      "text": "Wir muessen die Kollegen zunaechst mal abholen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:024",
+      "text": "Wir muessen die Kollegen zunaechst aufschlauen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:025",
+      "text": "Ihr koennt dann als Wissensmultiplikator dienen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:026",
+      "text": "Das koennt ihr dann in einem bilateralen Gespraech klaeren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:027",
+      "text": "Wir muessen noch die Themenlandschaften zusammenfahren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:028",
+      "text": "Das Thema ist auf Kante genaeht",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:029",
+      "text": "Wir muessen maximale Kausalitaet erreichen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:030",
+      "text": "Wenn wir das Szenario so abfahren wie eben besprochen, muessen wir uns im Klaren sein, dass dann die Software mit heisser Nadel gestrickt aufs Fahrzeug geflasht wird.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:031",
+      "text": "Die Themen bitte nicht einfach so ueber den Zaun werfen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:032",
+      "text": "Der hohe Synergieanteil  eroeffnet hier sicherlich Moeglichkeiten das Ganze 'lean' zu fahren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:033",
+      "text": "Reines Commitment",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:034",
+      "text": "Bitte das Thema managementtauglich aufbereiten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:035",
+      "text": "Bitte dazu ein One-Pager erstellenl",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:036",
+      "text": "Da geh ich mit!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:037",
+      "text": "Das Thema muss noch mal auf die richtigen Gleise gesetzt werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:038",
+      "text": "Ich habe den Kollegen erst mal eingephast",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:039",
+      "text": "Die Excel-Liste muss zunaechst noch mal aufgerissen werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:040",
+      "text": "Ich bin da vollkommen bei dir!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:041",
+      "text": "Das Thema ist auf dem Standstreifen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:042",
+      "text": "Das Thema wird jetzt so gelebt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:043",
+      "text": "Das Thema ist eingetuetet",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:044",
+      "text": "Wir muessen die \"Attention\" jetzt nutzen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:045",
+      "text": "Das Thema fliegt nicht",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:046",
+      "text": "Das Thema hat zwei Knacker",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:047",
+      "text": "Das Thema bitte entsprechend clustern",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:048",
+      "text": "Das Fahrzeug dient der Inbetriebnahme als Schneepflug fuer die restlichen fuenf Fahrzeuge",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:049",
+      "text": "Taskforce auf DTM-Niveau",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:050",
+      "text": "Da kann ich also ganz frei floaten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:051",
+      "text": "Wir haben lessons-learned gehabt und den Kollegen entsprechend gebrieft, der ist also richtig abgeholt worden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:052",
+      "text": "Ich halte die Idee nicht fuer valide",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:053",
+      "text": "Das Thema muessen wir offline klaeren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:054",
+      "text": "Es gibt einen Prio-Pfad",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:055",
+      "text": "Das Thema muss ich uebersteuern",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:056",
+      "text": "Wir brauchen einen direkten Infopfad",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:057",
+      "text": "Wenn diese Aussage eine Bruecke waere, wuerde ich nicht drueber gehen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:058",
+      "text": "Wir brauchen eine Showstopper-Eskalationspyramide",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:059",
+      "text": "Das Thema sollte nochmals beleuchtet werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:060",
+      "text": "Wir muessen die Kuh jetzt vom Eis ziehen und auf die Lichtung schieben",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:061",
+      "text": "Dazu brauch ich einen kurzen Dreizeiler",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:062",
+      "text": "Durch meine Brille gesprochen passt das",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:063",
+      "text": "Wir muessen uns die Karten dazu jetzt offen auf den Tisch legen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:064",
+      "text": "Die Entscheidung wurde ganz unten, im Maschinenraum, nicht umgesetzt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:065",
+      "text": "Ich muss den Druck jetzt hier rauskriegen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:066",
+      "text": "Die Folie muss auf jeden Fall noch mit einem Fazit versehen werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:067",
+      "text": "Das Thema muss erneut aufgezeigt werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:068",
+      "text": "Das ist ein politisches Thema",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:069",
+      "text": "Die Terminschiene ist kritisch und muss konsolidiert werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:070",
+      "text": "Damit zerlegen wir die Absicherungskaskade",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:071",
+      "text": "Das Thema haben wir ueber front-loading eingespeist",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:072",
+      "text": "Mit reiner EA-Brille betrachtet sage ich...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:073",
+      "text": "In letzter Konsequenz...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:074",
+      "text": "Ich hab deswegen eine goldene Bruecke gebaut",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:075",
+      "text": "Wer das operative doing uebernimmt steht auf einem anderen Blatt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:076",
+      "text": "Wir brauchen einen offene-Punkte-Massnahmenplan",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:077",
+      "text": "Wir brauchen alle Keyplayer an einem Tisch",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:078",
+      "text": "Wir brauchen zu dem Thema eine gemeinsame Einflugschneise",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:079",
+      "text": "Das entspricht nicht der Politik der offenen Tuer",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:080",
+      "text": "Wir muessen auf den Zielkorridor scopen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:081",
+      "text": "Das Thema muss erst noch aufgebohrt werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:082",
+      "text": "Ich wuerde euch im lead dafuer sehen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:083",
+      "text": "Wir muessen zusehen, dass wir auf den gleichen Nenner kommen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:084",
+      "text": "Ich seh hier einen Benefit fuer uns",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:085",
+      "text": "Wir fahren hier kapamaessig auch auf Kammlinie",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:086",
+      "text": "Ich wuerde das Thema jetzt nicht so gross aufblasen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:087",
+      "text": "Die Kollegen haben hier den functional ownership",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:088",
+      "text": "Bitte dem Thema nachgelagert nachgehen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:089",
+      "text": "Der Kollege bekommt nichts auf die Strasse, der hat keine Traktion",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:090",
+      "text": "Wir duerfen keinen Showstopper haben",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:091",
+      "text": "Wir brauchen keine eMail-Flut generieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:092",
+      "text": "Wir dampfen so den Prozess ein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:093",
+      "text": "Ich sehe, um den Gap aufzuloesen, keine andere Moeglichkeit",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:094",
+      "text": "Zu dem Thema muessen wir einen Versuchsballon starten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:095",
+      "text": "Wir muessen das Thema wasserdicht aufziehen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:096",
+      "text": "Das ist eine minimale Prozessverbesserung um das Thema zu entzerren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:097",
+      "text": "Wir haben hier schon ein Henne-Ei-Problem",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:098",
+      "text": "Wir muessen von oben Druck auf den Kessel geben",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:099",
+      "text": "Da kommt ein rollendes Problem auf uns zu",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:100",
+      "text": "Bei dem Thema haben wir mehr Druck im Schuh",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:101",
+      "text": "Das haben wir aber so als single point of exchange abgesprochen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:102",
+      "text": "Das Thema ist Beginn der Landeanflugphase",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:103",
+      "text": "Das Thema kam ueber den Flurfunk rein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:104",
+      "text": "Ich moechte mich zum Thema onboarding mit dir unterhalten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:105",
+      "text": "Ich stell mir auf der Schiene eigentlich ein Sprachrohr vor",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:106",
+      "text": "Wir brauchen hier einen generischen Massnahmenplan",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:107",
+      "text": "Ich habe  technisch gesehen kein Hintergrundwissen darueber",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:108",
+      "text": "Da sehe ich jetzt nicht die grosse Affaere darin",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:109",
+      "text": "Wir fahren eine zweigleisige Abklaerung",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:110",
+      "text": "Wir muessen das Thema noch mal hoeher aufhaengen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:111",
+      "text": "Das Thema hat eine beschraenkte Kritikalitaet",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:112",
+      "text": "Ich will das Bauteil nicht ueber die kalte Kueche rauskriegen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:113",
+      "text": "Wir lassen das Thema auf der Lichtung",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:114",
+      "text": "Das Aufgezeigte ist ein generischer Testfallkatalog",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:115",
+      "text": "Wir brauchen bis Freitag einen root-cause um attention drauf zu kriegen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:116",
+      "text": "Wir schauen uns das Thema an, um den Finger drauf zu kriegen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:117",
+      "text": "Folgende Themen haben wir hier auf dem Radarschirm",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:118",
+      "text": "Das Thema muss man auf Teamleiterebene adressieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:119",
+      "text": "Wer ist hier der Hutfuehrer?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:120",
+      "text": "Ist mir egal wer dein Vater ist, solange ich hier angel geht hier keiner uebers Wasser!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:121",
+      "text": "Das Thema koennen wir nicht unter die Decke kehren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:122",
+      "text": "Das muessen wir unabhaengig von der weiteren Gremien-Rallye abarbeiten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:123",
+      "text": "Um nochmal in die Kerbe zu schlagen...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:124",
+      "text": "Den zweiten Handlungsstrang muesst ihr aufmachen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:125",
+      "text": "Die Kollegen befinden sich im Rosenkranz-Modus",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:126",
+      "text": "Wir machen da einen geistigen Haken dran",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:127",
+      "text": "Ich wuerde gerne die Faeden zusammenbringen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:128",
+      "text": "Das Ganze ist ein Uboot Projekt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:129",
+      "text": "Wir haben da diesbezueglich Geschwindigkeit aufgenommen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:130",
+      "text": "Wir haben da einen Mismatch in der Kommunikation",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:131",
+      "text": "Das Thema muessen wir Top-Down aufoktroyieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:132",
+      "text": "Den Kollegen bitte ganz sauber briefen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:133",
+      "text": "Jetzt kommen wir in ruhigeres Fahrwasser",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:134",
+      "text": "Es ist ein Handshake-Verfahren vereinbart",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:135",
+      "text": "Der Bugfix ist als running change moeglich",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:136",
+      "text": "Wo haben wir einen Exchange erreichbar",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:137",
+      "text": "Wir muessen die low-hanging-fruits ernten bevor sie uns davon schwimmen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:138",
+      "text": "Zu dem Thema muessen die Leitplanken gesetzt sein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:139",
+      "text": "Wenn die Standards nicht bekannt sind kann schnell der waste-of-time passieren.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:140",
+      "text": "Der Loesungsansatz muss pilotiert werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:141",
+      "text": "Das Fahrzeug wurde annektiert",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:142",
+      "text": "Zu dem Thema hab ich jetzt keine grauen Haare",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:143",
+      "text": "Das Thema ist genauso Prior wie das Andere",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:144",
+      "text": "Zu dem Thema habe ich keinen Schmerz",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:145",
+      "text": "Ein Tool ist ein Prozess, der in ein System gegossen wurde",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:146",
+      "text": "Die Schwierigkeit besteht ja im Workflow, die Anforderungen zu korrekt erfassen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:147",
+      "text": "Das Dokument liegt in einem Share-Point",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:148",
+      "text": "Damit geh ich d'Accord",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:149",
+      "text": "Zu dem Thema muessen wir uns zunaechst noch mal die Karten legen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:150",
+      "text": "Das Thema muss ich noch mal zurueckspiegeln",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:151",
+      "text": "Ich setze mir das Bild jetzt so on-the-fly zusammen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:152",
+      "text": "Wir haben das Thema nicht richtig durchgesteuert",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:153",
+      "text": "Zu dem Thema gibt es ein Analogon auf Getriebeseite",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:154",
+      "text": "Die Kollegen im Werk haben eigentlich immer ein paar Sachen auf stock",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:155",
+      "text": "Auf das Thema machen wir einen Knoten drauf",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:156",
+      "text": "Dazu kann ich keine Aussage machen, das waere im Trueben gefischt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:157",
+      "text": "Das Vorgehen waere Glaskugellesen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:158",
+      "text": "Wir haben folgendes Datum gestated",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:159",
+      "text": "Das Thema muss vom Prozess geklaert werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:160",
+      "text": "Der Applikationsstand auf dem Applikationssteuergeraet ist nur der Hosentraeger",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:161",
+      "text": "Helft mir bitte noch mal kurz aufs Pferd",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:162",
+      "text": "Bei dem Issue brauchen wir einen ganz neuen Approach",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:163",
+      "text": "Ich sag das jetzt so aus meiner Warte",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:164",
+      "text": "Sind wir da on Track?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:165",
+      "text": "Lasst uns doch fuer Morgen mal eine time-line definieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:166",
+      "text": "Wir drehen uns hier ums goldene Kalb - Und es muss jetzt mal zur Strecke gebracht werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:167",
+      "text": "Es gibt bereits eine Schattenplanung",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:168",
+      "text": "Achtet bitte darauf die Excel vollstaendig und wahrheitsgemaess zu befuellen damit wir da eine klare Linie fahren koennen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:169",
+      "text": "Wenn du mehr Moment brauchst auf dem Thema, dann lass es mich machen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:170",
+      "text": "Die Ressourcen muessen besser terminiert werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:171",
+      "text": "Ich hab da nur als Sandwich fungiert",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:172",
+      "text": "Ich bin da momentan am rudern",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:173",
+      "text": "Die Schlagzahl muss erhoeht werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:174",
+      "text": "Da gibt es dann ein 2-Tages-Q-Gate",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:175",
+      "text": "Wer hat bei euch die Faeden in der Hand?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:176",
+      "text": "Dafuer brauchen wir eine Roadmap",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:177",
+      "text": "Wir haben das Thema technisch durchgeknetet",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:178",
+      "text": "Das mag ich nicht auf der Fensterbank entscheiden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:179",
+      "text": "Das Ganze muessen wir aufs Projekt runtertailorn",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:180",
+      "text": "Es geht hier nur um einen Wasserstand",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:181",
+      "text": "Wir muessen jetzt mit Hosentraegern arbeiten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:182",
+      "text": "So einfach ist dieses Rad nicht zu drehen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:183",
+      "text": "Bisher haben die Kollegen mit der Peitsche gearbeitet",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:184",
+      "text": "Das Ganze gehen wir hemdsaermelig an",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:185",
+      "text": "Die Abteilung ist unser Sparringspartner",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:186",
+      "text": "Das wuerde ich so nicht machen, das waere ja cherry-picking...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:187",
+      "text": "Der Widerstand zu dem Thema broeckelt, wir sind mit Presslufthaemmern dabei die Mauer einzureissen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:188",
+      "text": "Zu dem Thema hat der Philipp eine staerkere Figur",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:189",
+      "text": "Das war dann auch der Tenor aus der Runde",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:190",
+      "text": "Irgendein Messknecht koennen wir uns schon anstellen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:191",
+      "text": "Wir muessen da definitiv nachsteuern",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:192",
+      "text": "Wir als Industrieschauspieler...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:193",
+      "text": "... .you name it. (zum wahllosen Einbau in Vortraege, idealer Anwendungspunkt: Aufzaehlungen)",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:194",
+      "text": "Das ist ein single point of contact",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:195",
+      "text": "Wir sehen uns in der Eskalationskaskade wieder",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:196",
+      "text": "Wir befinden uns in einer Situation wie beim Flugsimulator in letzter Sekunde \"Pull up, pull up, ...\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:197",
+      "text": "Die haben irgendwas aufgeschnappt und fangen jetzt an ihre Umwelt damit zu belasten...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:198",
+      "text": "Wir muessen das Werk vorspannen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:199",
+      "text": "Wir haben da einen Flaschenhals im Prozess",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:200",
+      "text": "Wenn das Ganze nicht gehandshaked wird...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:201",
+      "text": "Die Kollegen muessen da mit ins Boot",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:202",
+      "text": "Die verallradung eines Derivats",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:203",
+      "text": "Da muss ich tampering betreiben!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:204",
+      "text": "Wir muessen nur ein Blitzlicht ueber die wichtigsten Themen abgeben!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:205",
+      "text": "Das ist das einzige, was wir durch unserem Strohhalm sehen!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:206",
+      "text": "Ich habe bei dem Thema nur die Helikoptersicht!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:207",
+      "text": "Wir haben da keine Manoevriermasse mehr",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:208",
+      "text": "Das muesst ihr manifestieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:209",
+      "text": "Das Thema muessen wir noch mal aufbrechen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:210",
+      "text": "Wir gehen jetzt mal dahin und werden robust auftreten!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:211",
+      "text": "Wir haben dazu regelmaessig einen Tandemtermin mit Steyr!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:212",
+      "text": "Wir haben aber Softfacts die wir einsetzten koennen!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:213",
+      "text": "Jeder kriegt da mal seinen Stiefel ab, und zwar nicht nur zu Weihnachten!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:214",
+      "text": "Ich habe den Kollegen angepingt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:215",
+      "text": "Es gibt einen Kennzahlenkoffer",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:216",
+      "text": "Die Mitarbeiter haben nicht den noetigen Bums!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:217",
+      "text": "Herr Mueller moechte Ledernackenteams",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:218",
+      "text": "Ich bin da nicht so Deep-Diver-maessig drin",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:219",
+      "text": "Jetzt bring mich mal auf Ballhoehe",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:220",
+      "text": "Mir sind zu viele Leute auf der Bruecke und zu wenig im Maschinenraum!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:221",
+      "text": "Wir begeistern unsere Kunden durch Premium Qualitaet im Fzg, erzeugt durch konsequentes Leadership der E/E-Prozesskette",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:222",
+      "text": "Da kommen wir mit drei gekreuzten Daumen in die Endphase",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:223",
+      "text": "Die Kollegen muessen angewaermt werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:224",
+      "text": "Das kommt vom Management, da kann die Basis nichts dafuer",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:225",
+      "text": "Der Punkt ist nicht gruen, weil er gelb ist",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:226",
+      "text": "Ich habe noch keine rote Laterne gezeigt bekommen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:227",
+      "text": "Heute sind wir auf einem anderen Level geflogen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:228",
+      "text": "Wir sind anerkannter und verlaesslicher Player bei unseren Prozesspartnern",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:229",
+      "text": "Die Applikationsplanung ist ziemlich generisch",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:230",
+      "text": "Das ist ein zusaetzlicher Enabler",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:231",
+      "text": "Sie sollen quasi auch damit der Singlepoint of Truth sein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:232",
+      "text": "das Feature wurde disabled",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:233",
+      "text": "Ja weil wir da eine Massname definiert haben...  und wenn die nicht zieht, Hose runter",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:234",
+      "text": "Die Plug-In Queen der Fahrzeugpresse (F15PHEV Presseevent)",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:235",
+      "text": "Jetzt noch mal Befuellen und Schleife drueber!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:236",
+      "text": "Das Thema muss trennscharf sein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:237",
+      "text": "So uebern Zaun gekackt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:238",
+      "text": "Bei BMW gibt's eine Richtlinie: Jeder kuemmert sich um seinen eigenen Scheiss",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:239",
+      "text": "Ich merge das dann zusammen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:240",
+      "text": "Das ist die Putin-Funktion",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:241",
+      "text": "Eine Prise mirdochegal",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:242",
+      "text": "Der Kopf der Excel-Liste hat ein anderes look&feel",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:243",
+      "text": "Das Thema ist im Urschleim schief gegangen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:244",
+      "text": "QC ist eine menschliche Spielwiese",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:245",
+      "text": "Der Blumenstrauss der Themen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:246",
+      "text": "Das ist ein wertiges Thema fuer euch",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:247",
+      "text": "Die Loesung ist: Das Problem ist bekannt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:248",
+      "text": "Es handelt sich um einen anlauftauglichen BI-6",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:249",
+      "text": "Es handelt sich um ein temporaeres Applikationspflaster",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:250",
+      "text": "Anlaesslich des Anlasses",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:251",
+      "text": "Die Profitabilitaet ist hoch kritisch",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:252",
+      "text": "Das Verhalten ist sporadisch, bisher aber nur einmal aufgetreten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:253",
+      "text": "Der Applikationspolizist",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:254",
+      "text": "Das Fahrzeug ist ein Bielefeld-Derivat",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:255",
+      "text": "Dieses Thema koennen wir nicht stimulieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:256",
+      "text": "In einer allgemeinen negativen Grundstimmung wurden die EA-Massnahmen ohne Dank aufgenommen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:257",
+      "text": "Das koennen wir im Tooling vorhalten!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:258",
+      "text": "Das Thema muss erneut geknetet werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:259",
+      "text": "Messstelle war nicht Schuld am Motorschaden, er war die Folge einer 30minuetigen Fahrt ohne Kuehlwasser vor Start des DLs.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:260",
+      "text": "Wir haben uns diesbezueglich trilateral unterhalten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:261",
+      "text": "Einheitliche Massnahmen Summary",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:262",
+      "text": "Die erste Seite des Abteilungshandbuches ist ein Linkteppich",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:263",
+      "text": "Das Fahrzeug ist nicht in Aschheim sondern in Shanghai",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:264",
+      "text": "Wir muessen das System nochmal challengen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:265",
+      "text": "Im Zuge des Audits als \"early warning\" definieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:266",
+      "text": "Generischer Entwicklungsplan und \"Moments-Of-Truth (MOT)\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:267",
+      "text": "Motorausgeher wegen \"Fettbeule\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:268",
+      "text": "Das ist das \"golden-sample\" von EA-4",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:269",
+      "text": "bei uns gilt: \"One face to the costumer\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:270",
+      "text": "Damit auch ggf. fachliche Rueckfragen geklaert werden koennen, bitten wir darum, dass die geplanten",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:271",
+      "text": "Projektleiter/\"Brueckenkoepfe\" anwesend sind",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:272",
+      "text": "Wir muessen die Prozessmelodie erklingen lassen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:273",
+      "text": "Wir springen jetzt zusammen vom Sprungbrett",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:274",
+      "text": "Was sind deiner Meinung nach die Knackerpunkte?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:275",
+      "text": "Relativ hohe \"Re-open-Quote\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:276",
+      "text": "Das Thema hat definitiv Sprengstoffcharakter",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:277",
+      "text": "Du hast mich angelynct",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:278",
+      "text": "Geht dieser Kelch an uns vorueber?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:279",
+      "text": "Die hinteren Tueren sind in engen Parkluecken extern unpraktisch.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:280",
+      "text": "Diesen no-brainer wuerde ich vermeiden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:281",
+      "text": "Die Anwendung auf den Ordner war fuer mich eher ein Proof of Concept",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:282",
+      "text": "Die Loesung ist in die I-400 eingeflossen, aber das Problem noch nicht verstanden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:283",
+      "text": "Wir muessen das Ding russisch einfach kriegen: Fire and Forget!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:284",
+      "text": "Es macht kein Sinn ein Uhrwerk dahinten reinzukonstruieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:285",
+      "text": "Am Montag ist die Keynote",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:286",
+      "text": "Jetzt wird ein biologischer Prozess in Stand gesetzt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:287",
+      "text": "Der Grund-Slogan ist, die Baseline herauszufinden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:288",
+      "text": "Man muss viel tiefer in das Thema rein",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:289",
+      "text": "Jeder schiebt dem Anderen die Schuhe in die Tasche",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:290",
+      "text": "Ich wuerde dich gerne ueber die aktuellen Themen aufgleisen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:291",
+      "text": "AKS = Aktive Klemmensteuerung ;-)",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:292",
+      "text": "Leider wird der BYOD (bring your own device) Ansatz im Rahmen der BMW Philosophie im Umgang mit Endgeraeten nicht beruecksichtigt",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:293",
+      "text": "und in entsprechenden Vereinbarungen verankert",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:294",
+      "text": "Torkeltaster (Toggletaster)",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:295",
+      "text": "Das Full-Scope-Bild ist darzustellen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:296",
+      "text": "Die spezifische Testspezifikation ist nicht vorhanden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:297",
+      "text": "Diese Folie wirkt fuer mich wie ein Sehtest",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:298",
+      "text": "Ich hatte bereits einen \"are-we-ready\"-Termin",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:299",
+      "text": "Ein Potpourri an Massnahmen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:300",
+      "text": "\"I hear what you say\"-Ansatz",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:301",
+      "text": "Das Fahrzeug hat einen \"Captain's chair\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:302",
+      "text": "Da muss zunaechst noch cocooning betrieben werden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:303",
+      "text": "Ich moechte das Thema durchhirnen",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:304",
+      "text": "Ich wuerde das jetzt nicht verakademisieren",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:305",
+      "text": "Grobschematischer Plan",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:306",
+      "text": "Bitte die letzte Email als Wegweiser verwenden",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:307",
+      "text": "Glaskugellesen ist jetzt wichtig in allen Fachbereichen!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:308",
+      "text": "Das ist auch Florians Mindset und da hat er auch Recht",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:309",
+      "text": "Die Folie ist inhaltlich ja nicht falsch, wir brauchen hier nur eine andere Flughoehe",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:310",
+      "text": "Wie ist denn der \"state of the art\"?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:311",
+      "text": "Hier nochmal die Uebersicht fuer den \"Befreiungsschlag light\"",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:312",
+      "text": "Was sind hier die Quick-Wins?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:313",
+      "text": "Burn-Down QC Tickets",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:314",
+      "text": "So kommen wir nicht auf einen gruenen Nenner",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:315",
+      "text": "Zero-Slip-Through",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:316",
+      "text": "Etwas wurde foregecasted",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:317",
+      "text": "Entwicklung und Werke kanibalisieren sich",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:318",
+      "text": "Wie kann man das so blutleer angehen?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:319",
+      "text": "Das Thema schreit nach Wertigkeit",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:320",
+      "text": "Da müssen wir beide book-ends betrachten.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:321",
+      "text": "Hier sollten wir einen Deep-Dive machen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:322",
+      "text": "Das Thema braucht noch mehr Refinement.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:323",
+      "text": "Das sollten wir in einem separaten Termin nochmal tiefer legen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:324",
+      "text": "Das heißt jetzt nicht mehr pilotieren, das heißt jetzt take a bite!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:325",
+      "text": "The team needs to work like a snowplow.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:326",
+      "text": "In dieser Excelliste hat bewusst jeder reingeschrieben was er wusste, eventuell sogar doppelt. Somit sind wir dann eher auf der vollständigeren Seite.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:327",
+      "text": "Sprint Planning ist agiles Schrottwichteln",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:328",
+      "text": "Der gibt immer einen Melonenstatus ab im Bericht. Außen grün, innen rot.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:329",
+      "text": "Hier haben wir ein halbgelegtes Ei.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:330",
+      "text": "Wir müssen unseren Schrott mit deren Schrott verheiraten.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:331",
+      "text": "Here, you have to cast. Like a peasant.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:332",
+      "text": "Woher kommt es? -- Aus reasons unknown.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:333",
+      "text": "We have a pull request. We have to make it shiny.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:334",
+      "text": "We need to come to a point where a monorepo contains a single repository.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:335",
+      "text": "We accidentally uploaded some junk to Artifactory.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:336",
+      "text": "We need a kind of data-driven socializing.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:337",
+      "text": "This happens whenever we change something, deep in the darkness of our implementation.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:338",
+      "text": "It cannot get worse than it is now. Oh wait..",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:339",
+      "text": "Hast du schon den Constructor von dem Sh\\*t angeschaut?!",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:340",
+      "text": "I don't clean my appartment, but I clean my pull requests.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:341",
+      "text": "Wenn der Fahrer mit dem Pedal interagiert, ist es nicht nur ein mechanischer Berührungspunkt, sondern ein performatives Element.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:342",
+      "text": "Da müssen wir uns hineiniterieren.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:343",
+      "text": "Jetzt ist der Moment gekommen, an dem wir ganz einfach hart abexecuten müssen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:344",
+      "text": "Von der Logik her gilt es zunächst das Ticketing in 7/21 hoch zu fahren und das aktuelle Ticketniveu bis zum Abschluss der Feature Implementierung in der A430 zu halten so wie anschließen zur Weihnachtserprobung ab zu schmelzen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:345",
+      "text": "Das konvergiert gut zusammen wenn man von genügend weit weg draufschaut.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:346",
+      "text": "Wir müssen das Ohr auf die Schiene legen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:347",
+      "text": "Ausgeplant ist noch nicht umgesetzt.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:348",
+      "text": "Das muss ein Debugger machen kein Projektmanager.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:349",
+      "text": "Do we have any negative pain because of that?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:350",
+      "text": "Lobende Worte eines Line Managers wurden letztens im Supermarkt nicht als Zahlungsmittel akzeptiert.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:351",
+      "text": "Die Gespraeche haben noch nicht eine Tiefe erreicht um damit eine Zielfuehrung machen zu können.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:352",
+      "text": "We do not do Sackhüpfen-Entwicklung.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:353",
+      "text": "Put yourself on Klemme 31.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:354",
+      "text": "There are features that really need more than 1 integration, this is a Perlenschnur.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:355",
+      "text": "Das ist ein alter Trick. Lokales Abbranchen. Giftschranksoftware.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:356",
+      "text": "Wir sollten uns die Karten legen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:357",
+      "text": "Die App ist der Spiegel ins Backend.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:358",
+      "text": "Wir haben heute relativ breite Themen, sind also noch auf der linken Seite des V´s.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:359",
+      "text": "Wir müssen hier viel harmonisieren, sowohl die Inhouse Anforderungen als auch die Eigenheiten der externen Stellen.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:360",
+      "text": "Scrum ist wie ein Gehege. Ja, das ist eine gute Analogie.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:361",
+      "text": "Als Absprungbasis würde ich vorschlagen, dass...",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:362",
+      "text": "Ich argumentiere hier im Sachkontext.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:363",
+      "text": "Da müssen wir locker in der Hüfte sein.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:364",
+      "text": "Das schießen wir mal nach oben, und schauen, wo es wieder runterkommt.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:365",
+      "text": "Das ist ein PAL: Problem anderer Leute",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:366",
+      "text": "Lohnt es sich da jetzt schon, die zweite Raketenstufe zu zünden?",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:367",
+      "text": "Langzyklig werden die Features ausgeplant und kurzzyklig einer Implementierung zugeführt.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:368",
+      "text": "Damit sind wir dann schonmal im Lösungsraum.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:369",
+      "text": "Ich habe eben nur sehr verlustbehaftet zugehört.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:370",
+      "text": "Wir haben hier schon einige Nuggets, die werden dann zu einem Gesamterlebnis orchestiert.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:371",
+      "text": "Wir differenzieren uns darüber, dass wir den BMW-Kontext besonders gut kuratieren.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:372",
+      "text": "Das Problem möchte ich erst einmal abschichten.",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    },
+    {
+      "id": "README:bmw-sprueche:373",
+      "text": "Das müssen wir vom Ende her denken",
+      "source_file": "README.md",
+      "section": "bmw_sprueche"
+    }
+  ]
+}

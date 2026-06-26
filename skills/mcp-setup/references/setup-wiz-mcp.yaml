@@ -1,0 +1,166 @@
+# yaml-language-server: $schema=./setup-mcp.schema.json
+
+# Wiz MCP Server Setup - AI-Focused Configuration
+# Compressed format for AI agent execution
+
+name: "Setup Wiz MCP Server"
+
+objective: |
+  Configure Wiz MCP server to enable AI agents to query Wiz cloud security posture,
+  threats, vulnerabilities, and cost analysis directly from GitHub Copilot chat with
+  automated installation and configuration.
+
+prerequisites:
+  - GitHub Copilot license (request via https://atc.bmwgroup.net/do-it-yourself/copilot)
+  - Node.js (for proxy configuration)
+  - Wiz account with API access
+  - VS Code 1.99+
+
+estimated_time: "15 minutes (including GitHub authentication and Wiz authorization)"
+
+server_definition:
+  server_key: "wiz"
+  default_scope: "project"
+  prerequisites: []
+  mcp_config:
+    url: "https://mcp.app.wiz.io/"
+    type: "http"
+
+actions:
+  - "Ask user to choose configuration scope: 'project' (workspace-specific, DEFAULT for Wiz) or 'global' (user-wide)"
+  - "Run automated setup script: `uv run scripts/setup-mcp.py --server wiz` (defaults to project scope) or `uv run scripts/setup-mcp.py --server wiz --scope [global|project]`"
+  - "Script installs GitHub Copilot extension, GitHub MCP Server extension, creates MCP config in chosen scope, prepares proxy template"
+  - "MANUAL: Configure BMW proxy in VS Code Settings → Search 'proxy' → Set 'HTTP: Proxy' to 'http://rb-proxy-de1.de.bmw.corp:8080' and uncheck 'HTTP: Proxy Strict SSL'"
+  - "MANUAL: Sign in to GitHub Copilot → Click 'Signed out' button in bottom-left → Select 'Sign in to use AI Features' → Choose 'Continue with GitHub' → Use BMW-assigned GitHub Copilot credentials from ATC portal"
+  - "Verify GitHub Copilot sign-in: Run Command Palette → 'GitHub Copilot: Check Status' → Should show 'active and signed in'"
+  - "Verify MCP config exists: Project scope: `test -f .vscode/mcp.json`; Global scope: Check ~/.config/Code/User/globalStorage/mcp.json (Linux/macOS) or %APPDATA%\\Code\\User\\globalStorage\\mcp.json (Windows)"
+  - "MANUAL: Authorize Wiz MCP → After clicking 'Start' in MCP config, accept all authorization popups → Sign in to Wiz with BMW credentials → Grant permissions → Browser redirects with success message"
+  - "IMPORTANT: Warn the user that dismissing the OAuth authorization popup will prevent it from appearing again. If the popup was dismissed accidentally, the user must reload the VS Code window (Command Palette → 'Developer: Reload Window') and then restart the Wiz MCP server to re-trigger the OAuth flow."
+  - "Verify setup: Test with `Show account team contacts` in Copilot Chat - should list CSM/SA/TAM contacts"
+
+tools_used:
+  - setup-mcp.py --server wiz (unified setup script)
+  - VS Code Settings UI
+  - GitHub Copilot authentication flow
+  - Wiz OAuth authorization
+  - VS Code MCP configuration panel
+
+expected_outcome:
+  - GitHub Copilot extension installed and authenticated
+  - GitHub MCP Server extension installed
+  - BMW proxy configured in VS Code settings
+  - Wiz MCP configuration created in chosen scope (project default)
+  - Wiz OAuth authorization completed
+  - MCP server shows "Running" status
+  - AI agent can query Wiz via natural language in Copilot Chat
+
+validation:
+  - "Run `code --list-extensions | grep -i 'github.copilot'` to verify GitHub Copilot extension installed"
+  - "Run `code --list-extensions | grep -i 'github-mcp-server'` to verify GitHub MCP Server extension installed"
+  - "Check proxy settings in VS Code: Search 'proxy' in settings, verify http.proxy and http.proxyStrictSSL values"
+  - "Verify MCP config exists: Project: `test -f .vscode/mcp.json`; Global: check user globalStorage directory"
+  - "Check MCP config contains 'wiz' server with URL 'https://mcp.app.wiz.io/' and type 'http'"
+  - "Test Wiz queries in Copilot Chat: 'Show account team contacts' returns contact list"
+  - "Test additional queries: 'List open critical threats', 'List licenses', 'Show cost analysis by service'"
+
+configuration:
+  proxy_settings:
+    http_proxy: "http://rb-proxy-de1.de.bmw.corp:8080"
+    http_proxy_strict_ssl: false
+    location: "File → Preferences → Settings or Ctrl+,"
+
+  github_copilot_setup:
+    license_request_url: "https://atc.bmwgroup.net/do-it-yourself/copilot"
+    sign_in_location: "Bottom-left 'Signed out' button below AI Chat panel"
+    auth_flow: "Continue with GitHub → Use BMW-assigned credentials"
+
+wiz_tools_reference:
+  categories:
+    contacts: "Show account team contacts"
+    threats: "List open critical threats"
+    projects: "List projects with business impact HBI"
+    cost: "Show cost analysis by service"
+    identities: "Find identity containing 'admin'"
+    licenses: "List licenses"
+
+  quick_commands:
+    - task: "Find critical threats"
+      query: "List open critical threats"
+      tool: "mcp_wiz_get_threats"
+    - task: "Investigate specific threat"
+      query: "Drill into threat <uuid>"
+      tool: "mcp_wiz_get_threat_data_by_id"
+    - task: "Recent cloud events"
+      query: "Events last 1 hour grouped by actor.email"
+      tool: "mcp_wiz_get_cloud_events"
+    - task: "Attack path analysis"
+      query: "Graph search: public VM to PII datastore"
+      tool: "mcp_wiz_graph_search"
+    - task: "High-severity code issues"
+      query: "List HIGH SAST findings limit 10"
+      tool: "mcp_wiz_list_sast_findings"
+    - task: "Exposed sensitive data"
+      query: "Public PII datastores"
+      tool: "mcp_wiz_list_datastores"
+    - task: "End-of-life software"
+      query: "List EOL technologies limit 10"
+      tool: "mcp_wiz_list_hosted_technologies"
+    - task: "Vulnerable dependencies"
+      query: "List SBOM artifacts named log4j"
+      tool: "mcp_wiz_list_SBOM_by_name"
+    - task: "Cost optimization"
+      query: "Show cost analysis"
+      tool: "mcp_wiz_get_cost_analysis"
+
+  typical_workflows:
+    - name: "Daily Threat Triage"
+      steps: "List critical threats → Drill into threat IDs → Show related cloud events → Graph search attack path"
+    - name: "Data Exposure Review"
+      steps: "Public datastores → List data classifiers → Graph search access paths → Get posture issue details"
+    - name: "Patch Management"
+      steps: "List EOL technologies → Find SBOM vulnerable libs → List HIGH SAST findings → Schedule remediation"
+    - name: "Cost Optimization"
+      steps: "Show cost analysis → Get top 5 costly resources → List optimization opportunities → Map to ownership"
+
+  best_practices:
+    - "Start broad, then narrow: Use list tools first (e.g., list projects), then drill into specific IDs"
+    - "Limit initial results: Request 5-10 items first for performance (e.g., limit 10)"
+    - "Use precise time windows: For events/threats, specify ranges (e.g., last 24 hours, created today)"
+    - "Combine tools for context: Use graph_search + get_posture_issue_by_id for attack path confirmation"
+    - "Monthly reviews: Check EOL technologies and cost optimization opportunities regularly"
+
+troubleshooting:
+  - issue: "GitHub Copilot extension not found"
+    cause: "Extension installation failed or marketplace not accessible"
+    solution: "Retry with verbose logging: `code --install-extension GitHub.copilot --force --verbose`; Or manually download VSIX from marketplace and install: `code --install-extension /path/to/GitHub.copilot-<version>.vsix`"
+
+  - issue: "Cannot sign in to GitHub Copilot"
+    cause: "BMW proxy blocking GitHub authentication or missing Copilot license"
+    solution: "Verify proxy settings configured correctly; Check license at https://atc.bmwgroup.net/do-it-yourself/copilot; Sign out and retry with exact ATC portal credentials"
+
+  - issue: "401 Unauthorized when querying Wiz"
+    cause: "Wiz OAuth authorization not completed or token expired"
+    solution: "Restart MCP server: Open .vscode/mcp.json → Click 'Stop' then 'Start' → Complete authorization flow again; Check MCP server status: Command Palette → 'MCP: Show Server Status' → Verify 'wiz' shows 'Connected'"
+
+  - issue: "MCP server not starting"
+    cause: "Invalid JSON in mcp.json or network connectivity issue"
+    solution: "Validate JSON syntax: `cat .vscode/mcp.json | jq .`; Test network: `curl -I https://mcp.app.wiz.io/` (expect HTTP/2 200 or 301); Check logs for MCP errors"
+
+  - issue: "No MCP tools available in Copilot chat"
+    cause: "GitHub MCP Server extension not installed or MCP config not loaded"
+    solution: "Verify extension: `code --list-extensions | grep github-mcp-server`; If not found, install manually: Extensions view (Ctrl+Shift+X) → Filter by MCP Servers → Search @mcp github-mcp-server → Install io.github.github/github-mcp-server; Reload window: Command Palette → Reload Window"
+
+uninstall:
+  steps:
+    - "Remove workspace MCP config: `rm -f .vscode/mcp.json`"
+    - "Uninstall GitHub MCP Server extension (optional): `code --uninstall-extension io.github.github/github-mcp-server`"
+    - "Uninstall GitHub Copilot extension (optional): `code --uninstall-extension GitHub.copilot` (NOTE: removes all AI chat functionality)"
+    - "Remove proxy settings: Edit settings.json manually to remove http.proxy and http.proxyStrictSSL lines"
+
+resources:
+  - name: "GitHub Copilot Documentation"
+    url: "https://docs.github.com/copilot"
+  - name: "BMW GitHub Copilot License Request"
+    url: "https://atc.bmwgroup.net/do-it-yourself/copilot"
+  - name: "Wiz MCP Server API"
+    url: "https://mcp.app.wiz.io/docs"

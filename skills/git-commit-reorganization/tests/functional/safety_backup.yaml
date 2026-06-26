@@ -1,0 +1,9 @@
+name: "git-commit-reorganization: Safety Backup"
+description: Test that the skill properly creates safety backups before destructive operations
+test_type: functionality
+prompt: |
+  Before I reorganize my commits, I want to make sure we have a backup. Can you safely reorganize the last 5 commits on my current branch?
+validation_criteria:
+  - type: tool_called
+    value:
+      name: bash

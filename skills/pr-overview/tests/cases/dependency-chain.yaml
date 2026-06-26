@@ -1,0 +1,47 @@
+---
+name: dependency-chain-tracking
+description: "Verify skill identifies and reports PR dependency chains"
+skill: pr-overview
+
+trigger:
+  user_message: "What PRs are blocking my current PR?"
+
+context:
+  git_status:
+    branch: "feature/final-integration"
+    clean_working_dir: true
+  current_pr:
+    number: 50
+    title: "Final integration"
+    state: "OPEN"
+    body: "Depends on #48 and #49"
+  related_prs:
+    - number: 48
+      title: "API changes"
+      state: "OPEN"
+      status_checks:
+        state: "SUCCESS"
+    - number: 49
+      title: "Database migrations"
+      state: "MERGED"
+
+expected:
+  required_elements:
+    - "dependency"
+    - "#48"
+    - "#49"
+    - "merged"
+    - "blocking"
+  forbidden_elements:
+    - "no dependencies"
+  actions:
+    - type: command
+      pattern: "gh pr view"
+    - type: analysis
+      description: "Identifies dependency relationship from PR body"
+
+rubric:
+  - "Agent parses 'Depends on' references from PR body"
+  - "Agent checks status of each dependency PR"
+  - "Agent clearly indicates which dependencies are resolved vs blocking"
+  - "Agent suggests next steps if dependencies are blocking"

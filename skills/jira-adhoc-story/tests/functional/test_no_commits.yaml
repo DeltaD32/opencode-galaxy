@@ -1,0 +1,23 @@
+name: "jira-adhoc-story: Handle branch with no new commits"
+description: "Verify skill handles gracefully when branch has no commits to document"
+test_type: "error_handling"
+
+prompt: |
+  I want to create a Jira ticket for the work on my current branch.
+
+expected_outcomes:
+  - "Runs analyze_branch.py script"
+  - "Detects no new commits on the branch"
+  - "Informs user gracefully that there's nothing to document"
+
+validation_criteria:
+  - type: "tool_called"
+    value: "bash"
+  - type: "contains"
+    value: "analyze_branch.py"
+  - type: "regex"
+    value: "(no commits|no new commits|no changes|nothing to document)"
+  - type: "not_contains"
+    value: "Created story"
+  - type: "llm_judge"
+    value: "Response detects that the branch has no new commits and politely informs the user without attempting to create a ticket"

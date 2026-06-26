@@ -1,0 +1,16 @@
+name: "git-commit-reorganization: Basic Analysis"
+description: "Test that the skill can analyze messy commit history and propose a reorganization plan"
+test_type: "functionality"
+prompt: |
+  I have a branch with several WIP commits that need to be cleaned up. Can you analyze my commit history and suggest how to reorganize it into atomic commits with proper conventional commit messages?
+
+  Assume the branch has about 5-7 commits mixing feature work, tests, and documentation.
+validation_criteria:
+  - type: "contains"
+    value: "backup"
+  - type: "regex"
+    value: "(git|commit)"
+  - type: "llm_judge"
+    value: "The response should demonstrate understanding of commit analysis and reorganization planning"
+  - type: "min_length"
+    value: 200
