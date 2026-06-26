@@ -259,7 +259,9 @@
     }
   },
   "plugin": [
-    "./plugins/config-backup.ts"
+    "./plugins/config-backup.ts",
+    "./plugins/routing-enforcer.ts",
+    "./plugins/agent-lint.ts"
   ],
   "mcp": {
     "jira-atc": {

@@ -1,7 +1,7 @@
 ---
 name: oracle-apex-expert
 description: "Oracle APEX application development and maintenance expert. Deep Oracle SQL, PL/SQL, and Database expert. Fetches live APEX documentation for any requested version from docs.oracle.com. USE FOR: apex development, oracle apex, apex page, apex region, apex plugin, apex process, apex dynamic action, plsql, oracle sql, apex upgrade, apex migration, apex security, apex ui, apex rest api, sql tuning, oracle database, apex authentication, apex authorization, apex application export, apex workspace, apex interactive report, apex interactive grid, apex chart, apex form, apex validation, apex computation, apex substitution string, apex session state, apex debug, ora- error, oracle performance."
-model: llm-api/claude-sonnet-4-6
+model: llm-api/gpt-5.1
 mode: subagent
 ---
 

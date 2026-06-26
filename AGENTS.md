@@ -161,6 +161,7 @@ Key skills from TTT catalog include:
 - **Office 365**: `morning-briefing`, `office365-graph-secure`
 - **Agentic**: `bmw-tool-agent` — ReAct loop + **advisor-enhanced mode** (`bmw_advisor.py`); 7 named profiles (`speed`/`economy`/`balanced`/`claude`/`gpt`/`quality`/`deep`); 16-model catalogue with tier ratings; `recommend()` heuristic; `pick_profile()` interactive CLI; `RunStats` cost tracking. Basic mode for simple workflows; advisor mode for complex/high-stakes tasks.
 - **Routing Cache**: `routing-cache` — self-learning semantic routing cache at Priority 0.5; `text-embedding-3-small` + numpy cosine ≥ 0.82; syncs from `opencode.db`; records every live routing decision.
+- **Coordination**: `blackboard` — shared working file for multi-agent task coordination (Phase 4: hard gate check, dependency tracking, approval gates; Phase 4.6: `auto_archive_if_done()` moves done files to archive); `projects` — persistent project/blackboard/queue/decision/approval/dependency tracking in opencode.db (secretary only); Phase 4.6: `compress_sections()` soft-deletes raw analysis on done blackboards (keeps Execution Plan + Result); `mark_distillation_ready()` auto-fires on project completion; `distil_project()` calls BMW LLM API sonnet, writes PATTERN obs to agent-memory; `get_projects_pending_distillation()` for session-start prompts; `agent-memory` — per-agent self-learning knowledge graph; Phase 4.6: decay scoring (`0.5^(days/half_life)`; PATTERN half-life 2×); `reinforce()` resets decay clock; `get_decay_stats()` for galaxy; `recall()` sorted by decay score; each agent records `WORKED`/`AVOID`/`PATTERN` observations to `memory.jsonl` and recalls them at task start; survives session resets
 - **Utilities**: `ttt`, `mcp-setup`, `dor-jira-updater`, `bmw-wisdom`, `file-handoff`
 
 Before referencing any skill in an agent, verify it is in this list or confirm it
@@ -209,6 +210,26 @@ When creating a new custom agent, ALL of the following constraints apply:
 4. **Location** — agent files go in `~/.config/opencode/agents/`
 5. **Template** — use `~/.config/opencode/agent-template.md` as the starting point
 6. **Mode** — set `mode: primary` for user-facing agents, `mode: subagent` for internal helpers
+7. **No unsupported frontmatter fields** — OpenCode 1.17.5 does NOT support a `tools:` array
+   in agent frontmatter (schema error: "Expected object | undefined, got [...]"). Never add
+   `tools:`, `permissions:`, or any other array field to the `---` block unless confirmed
+   supported by the installed OpenCode version.
+
+### Mandatory validation after create or update
+
+After writing or modifying any agent file, run the official schema check:
+
+```bash
+/opt/homebrew/bin/opencode agent list 2>&1 | grep "Error:"
+# Expected: no output (zero errors)
+```
+
+The `agent-lint` plugin (registered in `opencode.json`) runs this automatically on every
+`agents/*.md` save and logs results to:
+- TUI log panel (Ctrl+L) — live feedback
+- `~/.local/share/opencode/agent-lint.log` — persistent log for review
+
+**Do not mark agent creation complete until `opencode agent list` returns no errors.**
 
 If any of the above constraints cannot be satisfied, refuse to create the agent and
 explain which constraint is blocking it.
@@ -500,12 +521,18 @@ cp ~/.config/opencode/opencode.json.hardcoded-backup-* ~/.config/opencode/openco
 
 ### OpenCode agents (`~/.config/opencode/agents/`) — all follow Rules 1–6
 
-| Agent file | Purpose | Key trigger phrases |
-|---|---|---|
-| `jirri-data-analyst.md` | JIRRI RPA cost-savings calculation auditor; Python/stdlib script expert | JIRRI, cost savings, MB1B, LT01, jirri_cost_savings.py |
-| `uipath-rpa-expert.md` | UiPath Dispatcher/Worker documentation generator; XAML analyzer | uipath, rpa, dispatcher, worker, xaml, bot |
-| `oracle-apex-expert.md` | Oracle APEX development + maintenance; Oracle SQL/PL/SQL expert; fetches live docs from docs.oracle.com | apex, oracle apex, plsql, oracle sql, ora- error, apex page, apex plugin |
-| `opencode-dev-expert.md` | OpenCode version upgrades, wrapper maintenance, skill/plugin lifecycle, MCP setup, auth changes, config repo work | opencode upgrade, new opencode version, brew upgrade opencode, wrapper script, opencode broken, skill install, plugin update, mcp setup, opencode config, opencode development |
+| Agent file | Model | Purpose | Key trigger phrases |
+|---|---|---|---|
+| `request-orchestrator.md` | `claude-haiku-4-5` | Default router; mandatory delegation; P2.5 secretary escalation; session-start distillation prompt check — surfaces pending projects, handles `distil <name>` / `skip` / `never <name>` replies | All requests |
+| `secretary.md` | `claude-sonnet-4-6` | Routing oracle + stateful project coordinator; bash tool (restricted: python3/sqlite3 + blackboard reads only); uses `projects` skill for opencode.db access; 6 output modes: routing/project-lookup/bb-register/queue-advance/progress-report/conflict-resolution | Invoked internally by orchestrator only |
+| `programming-expert.md` | `gpt-5.1` | Full-stack software dev: Angular, React, Python, embedded C/C++, code review, testing, BMW LLM API agents | write code, fix bug, implement, refactor, angular, react, python, typescript, unit test, code review, debug, api integration, agentic workflow |
+| `design-expert.md` | `claude-sonnet-4-6` | UI/UX design: BMW Density system, Figma, accessibility (WCAG 2.1 AA), UX review, presentations, visual design | ux review, figma, design system, density, wireframe, prototype, accessibility, wcag, a11y, bmw branding, component design, poster, infographic |
+| `project-manager.md` | `o4-mini` | Agile PM: Jira, Confluence, sprint health, PI planning, PR triage, release notes, backlog, DoR compliance | sprint planning, backlog, jira, jira story, acceptance criteria, dor, pr overview, release notes, roadmap, retrospective, capacity planning |
+| `jirri-data-analyst.md` | `o3-mini` | JIRRI RPA cost-savings calculation auditor; Python/stdlib script expert | JIRRI, cost savings, MB1B, LT01, jirri_cost_savings.py |
+| `uipath-rpa-expert.md` | `claude-sonnet-4-6` | UiPath Dispatcher/Worker documentation generator; XAML analyzer | uipath, rpa, dispatcher, worker, xaml, bot |
+| `oracle-apex-expert.md` | `gpt-5.1` | Oracle APEX development + maintenance; Oracle SQL/PL/SQL expert; fetches live docs from docs.oracle.com | apex, oracle apex, plsql, oracle sql, ora- error, apex page, apex plugin |
+| `opencode-dev-expert.md` | `gpt-5.2` | OpenCode version upgrades, wrapper maintenance, skill/plugin lifecycle, MCP setup, auth changes, config repo work | opencode upgrade, new opencode version, brew upgrade opencode, wrapper script, opencode broken, skill install, plugin update, mcp setup, opencode config, opencode development |
+| `worker.md` | `claude-haiku-4-5` | Mechanical executor — only agent with unrestricted bash/edit/write; reads blackboard Execution Plan and applies changes exactly as specified; writes Execution Result; Step 7 calls `auto_archive_if_done()`; Step 8 records execution learnings to agent-memory | read blackboard, execute plan, apply changes, worker agent |
 
 ### Copilot agents (`~/.copilot/agents/`) — mirror of OpenCode custom agents for GitHub Copilot
 
@@ -519,21 +546,21 @@ cp ~/.config/opencode/opencode.json.hardcoded-backup-* ~/.config/opencode/openco
 
 ### UX / Design skill routing (OpenCode only)
 
-The following installed skills are available for UI/UX work. Custom agents invoke them directly — no separate agent handoff required.
+All design and UX requests route through `design-expert`, which owns and orchestrates all design skills. The table below is a reference for `design-expert` itself and other agents that need to sub-delegate design work.
 
-| Skill | When to invoke |
-|---|---|
-| `ux-reviewer` | UX/usability review of any UI (APEX page, web app, bot UI) |
-| `ux-report-generation` | Formal evaluation report wrapping UX review findings |
-| `frontend-design` | Polished HTML/CSS/React prototype or dashboard |
-| `canvas-design` | Poster, infographic, or static visual design artifact |
-| `figma-generate-design` | Full page or screen built in Figma from code or description |
-| `figma-generate-diagram` | Architecture, ER, or flow diagram in FigJam |
-| `figma-implement-design` | Production code generated from a Figma design file |
-| `figma-use` | Any write operation on a Figma canvas (MANDATORY prerequisite) |
-| `figma-create-new-file` | Create a new blank Figma or FigJam file |
-| `figma-use-figjam` | FigJam-specific canvas operations |
-| `figma-implement-make` | Production code from Figma Make prototype |
+| Skill | Owned by | When to invoke |
+|---|---|---|
+| `ux-reviewer` | `design-expert` | UX/usability review of any UI |
+| `ux-report-generation` | `design-expert` | Formal evaluation report wrapping UX review findings |
+| `frontend-design` | `design-expert` / `programming-expert` | Polished HTML/CSS/React prototype or dashboard |
+| `canvas-design` | `design-expert` | Poster, infographic, or static visual design artifact |
+| `figma-generate-design` | `design-expert` | Full page or screen built in Figma from code or description |
+| `figma-generate-diagram` | `design-expert` | Architecture, ER, or flow diagram in FigJam |
+| `figma-implement-design` | `design-expert` → `programming-expert` | Production code generated from a Figma design file |
+| `figma-use` | `design-expert` | Any write operation on a Figma canvas (MANDATORY prerequisite) |
+| `figma-create-new-file` | `design-expert` | Create a new blank Figma or FigJam file |
+| `figma-use-figjam` | `design-expert` | FigJam-specific canvas operations |
+| `figma-implement-make` | `design-expert` → `programming-expert` | Production code from Figma Make prototype |
 
 ### Cross-agent communication rules
 
@@ -544,6 +571,31 @@ The following installed skills are available for UI/UX work. Custom agents invok
 
 | From | To | Trigger |
 |---|---|---|
+| `request-orchestrator` | `secretary` | Request is ambiguous — keywords match 2+ agents, or P1 vs P2 is unclear |
+| `request-orchestrator` | `secretary` | Before blackboard creation — "Check project context for: <task>" (Mode 2) |
+| `request-orchestrator` | `secretary` | After blackboard created — "Register blackboard at <path> ..." (Mode 3) |
+| `request-orchestrator` | `secretary` | After each specialist completes — "Advance queue for <bid>" (Mode 4) |
+| `request-orchestrator` | `secretary` | After worker completes — "Record result for <bid> status: <done|blocked>" (Mode 4b) |
+| `request-orchestrator` | `secretary` | User asks "where are we?", "status", "continue", "resume" — "Project status for: <query>" (Mode 5) |
+| `secretary` | *(returns to orchestrator)* | Always — secretary never delegates, only recommends or records |
+| `programming-expert` | `design-expert` | Implementation requires UX review, Figma work, or BMW CI design guidance |
+| `programming-expert` | `project-manager` | Work needs Jira ticket, sprint allocation, or PR triage |
+| `programming-expert` | `aaa-security-fixer` | GHAS / Wiz security finding in code |
+| `programming-expert` | `oracle-apex-expert` | Code touches Oracle APEX UI or needs PL/SQL |
+| `programming-expert` | `uipath-rpa-expert` | Code needs to interface with a UiPath bot |
+| `programming-expert` | `opencode-dev-expert` | OpenCode config or skill change needed |
+| `design-expert` | `programming-expert` | Design needs to be implemented as Angular/React code |
+| `design-expert` | `project-manager` | Design deliverables need sprint/PI allocation |
+| `design-expert` | `opencode-dev-expert` | OpenCode config or skill change needed for design tooling |
+| `project-manager` | `programming-expert` | Story requires software implementation |
+| `project-manager` | `design-expert` | Story requires UI/UX design |
+| `project-manager` | `jirri-data-analyst` | JIRRI cost savings analysis needed for a story |
+| `project-manager` | `oracle-apex-expert` | APEX features need PI backlog or sprint planning |
+| `project-manager` | `uipath-rpa-expert` | RPA automation needs sprint planning |
+| `project-manager` | `aaa-security-fixer` | Security findings need sprint allocation |
+| `project-manager` | `agile-master-catalyst-coaching` | Team needs agile coaching |
+| `project-manager` | `agile-master-pi-planning` | PI-level planning needed |
+| `project-manager` | `dor-agent` | DoR pipeline run needed |
 | `oracle-apex-expert` | `jirri-data-analyst` | SQL result sets needing statistical analysis or cost calculations |
 | `oracle-apex-expert` | `uipath-rpa-expert` | APEX page/workflow needs UiPath automation or bot documentation |
 | `oracle-apex-expert` | `presentation-builder` | APEX/DB findings or architecture docs → slide deck |
@@ -551,7 +603,7 @@ The following installed skills are available for UI/UX work. Custom agents invok
 | `oracle-apex-expert` | `agile-master-pi-planning` | APEX features need PI backlog, capacity planning, sprint health |
 | `oracle-apex-expert` | `agile-master-catalyst-coaching` | Team needs coaching on APEX adoption or tech debt conversations |
 | `oracle-apex-expert` | `dor-agent` | APEX user stories need DoR compliance or Jira field population |
-| `oracle-apex-expert` | `token-tom` | Request outside Oracle/APEX/SQL domain |
+| `oracle-apex-expert` | `request-orchestrator` | Request outside Oracle/APEX/SQL domain |
 | `uipath-rpa-expert` | `oracle-apex-expert` | Bot touches Oracle APEX UI or needs Oracle SQL/PL/SQL |
 | `uipath-rpa-expert` | `jirri-data-analyst` | Bot output data needs statistical analysis or Python post-processing |
 | `uipath-rpa-expert` | `presentation-builder` | Bot architecture, flow diagrams, or run metrics → slide deck |
@@ -565,11 +617,13 @@ The following installed skills are available for UI/UX work. Custom agents invok
 | `jirri-data-analyst` | `agile-master-pi-planning` | JIRRI analysis results inform PI planning decisions |
 | `jirri-data-analyst` | `agile-master-catalyst-coaching` | Findings reveal process inefficiencies needing team coaching |
 | `jirri-data-analyst` | `dor-agent` | Analysis results become Jira stories needing DoR compliance |
-| Any custom agent | `token-tom` | Request is outside the custom agent's domain; needs routing |
+| Any custom agent | `request-orchestrator` | Request is outside the custom agent's domain; needs re-routing |
 | Any TTT/custom agent | `oracle-apex-expert` | Oracle DB queries, PL/SQL blocks, or APEX page config needed |
 | Any agent | `opencode-dev-expert` | OpenCode upgrade, version bump, wrapper fix, skill lifecycle, MCP setup, config repo changes |
 | `opencode-dev-expert` | `aaa-security-fixer` | Upgrade introduces a security finding or CVE |
 | `opencode-dev-expert` | `agile-master-pi-planning` | Upgrade needs PI-level planning or sprint capacity |
+| `request-orchestrator` | `worker` | Blackboard Execution Plan is ready for execution (status: awaiting-approval approved, or auto-proceed for low-risk) |
+| `worker` | `request-orchestrator` | Execution complete (status: done) or blocked (status: blocked) — result written to blackboard |
 
 ---
 

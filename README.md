@@ -3,7 +3,7 @@
 > **⚠️ BMW INTERNAL USE ONLY**  
 > This configuration is **exclusively designed for BMW internal infrastructure** and requires access to BMW corporate networks, authentication systems, and internal APIs. It will not work outside the BMW environment.
 
-Enterprise-grade OpenCode configuration optimized for BMW's internal LLM API gateway with automated OAuth2 authentication, a rich library of 58+ skills, 3 custom agents, 8 slash-command prompts, and a self-learning routing system.
+Enterprise-grade OpenCode configuration optimized for BMW's internal LLM API gateway with automated OAuth2 authentication, a rich library of 58+ skills, 9 custom agents, 8 slash-command prompts, and a self-learning routing system.
 
 ---
 
@@ -507,10 +507,18 @@ ls ~/.opencode/skills/<skill-name>/
 | `morning-briefing` | Daily agenda + email summary from Office 365 |
 | `office365-graph-secure` | Microsoft Graph access (token-file secure pattern) |
 
+### Coordination
+
+| Skill | When to Use |
+|---|---|
+| `blackboard` | Shared working file for multi-agent task coordination. Specialists write analysis + diffs; orchestrator assembles Execution Plan; worker executes (with Phase 4 hard gate check). Phase 4.6: `auto_archive_if_done()` moves completed blackboard files to archive; blocked files stay in `/tmp` for diagnosis. |
+| `projects` | Persistent project and blackboard coordination via `opencode.db`. Tracks project lifecycle, specialist handoff queues, architectural decisions, conflicts, **dependency chains**, and **approval gates** across sessions. Phase 4.6: `compress_sections()` soft-deletes raw specialist analysis on done blackboards (keeps Execution Plan + Result); `distil_project()` extracts PATTERN learnings via BMW LLM API sonnet on project completion. Used exclusively by the secretary agent. |
+| `agent-memory` | Per-agent self-learning memory stored in the memory MCP knowledge graph. Each agent maintains its own namespace with `WORKED` / `AVOID` / `PATTERN` observations. Phase 4.6: **decay scoring** — observations fade over time (`0.5^(days/half_life)`; PATTERN half-life = 120 days, 2× longer than WORKED/AVOID); `reinforce()` resets the decay clock; `recall()` returns freshest observations first; `get_decay_stats()` exposes per-agent freshness for galaxy visualisation. Survives session resets. |
+
 ### Agentic / Orchestration
 
 | Skill | When to Use |
-|-------|-------------|
+|---|---|
 | `bmw-tool-agent` | Build ReAct agents that call BMW internal APIs as tools |
 | `gaia-tools` | Call BMW GAIA Tools/Chatbots via Apigee gateway |
 | `routing-cache` | Self-learning routing cache — imports `routing_cache` module directly (no code generation) |
@@ -578,14 +586,42 @@ ls ~/.opencode/prompts/
 
 ## Custom Agents
 
-Three production-ready custom agents are included in `~/.config/opencode/agents/`. All follow AGENTS.md security rules (provider lockdown + skills lockdown).
+Nine production-ready custom agents are included in `~/.config/opencode/agents/`. All follow AGENTS.md security rules (provider lockdown + skills lockdown). The orchestrator **always delegates** to a specialist agent when one matches — it never handles specialist work inline (prevents context compaction loops).
 
-| Agent | Purpose | Trigger Keywords |
-|-------|---------|-----------------|
-| **request-orchestrator** | **Default agent** — smart router that picks skills, agents, or GAIA apps | All requests |
-| **oracle-apex-expert** | Oracle APEX development, PL/SQL, ORA- errors, ORDS | `apex`, `oracle`, `plsql`, `ora-`, `apex page` |
-| **uipath-rpa-expert** | UiPath Dispatcher/Worker docs, XAML analysis, bot flows | `uipath`, `rpa`, `dispatcher`, `worker`, `xaml`, `bot` |
-| **jirri-data-analyst** | JIRRI RPA cost-savings audit, Python stdlib analysis | `jirri`, `cost savings`, `mb1b`, `lt01` |
+| Agent | Model | Purpose | Trigger Keywords |
+|-------|-------|---------|-----------------|
+| **request-orchestrator** | `claude-haiku-4-5` | **Default agent** — smart router; mandatory delegation; P2.5 secretary escalation; session-start distillation prompt check (surfaces completed projects pending PATTERN extraction) | All requests |
+| **secretary** | `claude-sonnet-4-6` | Routing oracle + **stateful project coordinator** — resolves ambiguous routing (P2.5) AND manages project/blackboard lifecycle in opencode.db; **6 output modes** (incl. Mode 6: formal conflict resolution); bash tool (restricted: python3/sqlite3 only) | Internal only |
+| **programming-expert** | `gpt-5.1` | Full-stack dev: Angular, React, Python, embedded C/C++, code review, BMW LLM API agents | `write code`, `fix bug`, `angular`, `react`, `python`, `typescript`, `unit test`, `code review`, `debug`, `api integration`, `agentic workflow` |
+| **design-expert** | `claude-sonnet-4-6` | UI/UX: BMW Density system, Figma, WCAG accessibility, UX review, presentations, visual design | `ux review`, `figma`, `density`, `wireframe`, `prototype`, `accessibility`, `wcag`, `bmw branding`, `poster`, `infographic` |
+| **project-manager** | `o4-mini` | Agile PM: Jira, Confluence, sprint health, PI planning, PR triage, backlog, DoR compliance | `sprint planning`, `backlog`, `jira story`, `pr triage`, `release notes`, `roadmap`, `retrospective`, `capacity planning` |
+| **oracle-apex-expert** | `gpt-5.1` | Oracle APEX development, PL/SQL, ORA- errors, ORDS | `apex`, `oracle`, `plsql`, `ora-`, `apex page` |
+| **uipath-rpa-expert** | `claude-sonnet-4-6` | UiPath Dispatcher/Worker docs, XAML analysis, bot flows | `uipath`, `rpa`, `dispatcher`, `worker`, `xaml`, `bot` |
+| **jirri-data-analyst** | `o3-mini` | JIRRI RPA cost-savings audit, Python stdlib analysis | `jirri`, `cost savings`, `mb1b`, `lt01` |
+| **opencode-dev-expert** | `gpt-5.2` | OpenCode upgrades, wrapper maintenance, skill/plugin lifecycle, MCP setup | `opencode upgrade`, `opencode broken`, `skill install`, `mcp setup`, `opencode config` |
+| **worker** | `claude-haiku-4-5` | Mechanical executor — reads blackboard Execution Plan, runs **Step 0 hard gate check** (`is_gate_open`), applies changes exactly, records execution learnings to agent-memory; only agent with unrestricted bash/edit/write | `read blackboard`, `execute plan`, `apply changes`, `worker agent` |
+
+### Delegation Architecture
+
+The orchestrator uses **mandatory delegation** — as soon as a request matches a specialist agent, it hands off immediately via the `task` tool without attempting any inline work. For ambiguous requests that don't cleanly match one agent, it escalates to the `secretary` routing oracle (P2.5) before deciding. This keeps each agent's context focused and prevents compaction loops in long sessions.
+
+```
+User request
+     │
+     ▼
+request-orchestrator (claude-haiku-4-5)
+     │  P1: trivial → answer directly
+     │  P2: clear match → delegate immediately
+     │  P2.5: ambiguous → consult secretary ──────────────┐
+     │  P3+: skill / GAIA / TTT                           │
+     ▼                                              secretary (claude-sonnet-4-6)
+programming-expert   design-expert   project-manager      │  returns: ROUTE TO / REASON
+  (gpt-5.1)       (claude-sonnet-4-6)  (o4-mini)    ◄────┘  CONFIDENCE / CLARIFYING Q
+     │                    │                │
+     └────────────────────┴────────────────┘
+               sub-delegate to each other as needed
+               route out-of-scope back to orchestrator
+```
 
 ### Creating a Custom Agent
 
@@ -595,6 +631,7 @@ cp ~/.config/opencode/agent-template.md ~/.config/opencode/agents/my-agent.md
 
 # Edit it (must use llm-api/* models only — Rule 1)
 # Add to AGENTS.md Rule 7 table when done
+# Add trigger keywords to request-orchestrator.md handoff table
 ```
 
 All agents are also mirrored to `~/.copilot/agents/` for GitHub Copilot compatibility.

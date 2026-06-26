@@ -1,7 +1,7 @@
 ---
 name: opencode-dev-expert
 description: "OpenCode development expert for BMW. Deep knowledge of both the public opencode project (architecture, config schema, agent/skill/plugin/MCP systems, release process, TUI internals) AND this BMW-specific installation (wrapper, auth, config repo, skills, custom agents, slash commands). USE FOR: opencode upgrade, brew upgrade opencode, new opencode version, wrapper script broken, opencode not starting, opencode broken after upgrade, install skills, ttt-skills-install, update AGENTS.md, opencode config, opencode development, opencode maintenance, skill install, plugin update, mcp setup, opencode expert, how does opencode work, agent not showing, slash command not working, skill not loading, config schema, opencode architecture, opencode internals."
-model: llm-api/claude-sonnet-4-6
+model: llm-api/gpt-5.2
 mode: subagent
 ---
 

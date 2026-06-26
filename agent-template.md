@@ -81,13 +81,28 @@ mode: subagent
        ttt skills install <namespace/name> --agent-type opencode --global
      Then verify: ls ~/.opencode/skills/
 
-  4. CREDENTIALS: never put raw tokens or keys in this file.
-     Store secrets in ~/.config/opencode/.env and reference as {env:VAR_NAME}
+   4. CREDENTIALS: never put raw tokens or keys in this file.
+      Store secrets in ~/.config/opencode/.env and reference as {env:VAR_NAME}
 
-  5. LOCATION: save this file to ~/.config/opencode/agents/<your-agent-name>.md
+   5. LOCATION: save this file to ~/.config/opencode/agents/<your-agent-name>.md
 
-  6. MCPs: do not add MCP entries to opencode.json manually.
-     Use: ttt-mcp-add <namespace/name>
+   6. MCPs: do not add MCP entries to opencode.json manually.
+      Use: ttt-mcp-add <namespace/name>
+
+   7. UNSUPPORTED FRONTMATTER FIELDS:
+      OpenCode 1.17.5 does NOT accept array values in the --- YAML block.
+      These fields will cause a startup validation error and prevent ALL agents loading:
+        ❌  tools:          (array of tool names — not supported)
+        ❌  permissions:    (array of permissions — not supported)
+      The valid frontmatter fields are: name, description, model, mode  (all scalar strings)
+
+   8. MANDATORY POST-SAVE VALIDATION:
+      After saving this file, ALWAYS run:
+        /opt/homebrew/bin/opencode agent list 2>&1 | grep "Error:"
+      Expected output: (nothing)
+      If you see any Error: lines, fix them before proceeding.
+      The agent-lint plugin also runs this check automatically and logs to:
+        ~/.local/share/opencode/agent-lint.log
 
      Currently enabled MCPs in opencode.json:
        memory          — local, knowledge graph (pre-approved exception)
