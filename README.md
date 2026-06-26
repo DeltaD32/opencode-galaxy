@@ -359,7 +359,7 @@ MCP servers extend OpenCode with tools for external systems. Only `memory` is en
 
 | MCP | Purpose | Type |
 |-----|---------|------|
-| **memory** | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`, invoked via direct node path for reliability) | Local |
+| **memory** | Persistent knowledge graph across sessions (`@modelcontextprotocol/server-memory`, invoked via direct node path for reliability). **Do not use `read_graph`** — prefer `memory-semantic-search` → `memory_open_nodes()` for targeted reads. | Local |
 
 ### Available (Disabled by Default)
 
@@ -490,6 +490,7 @@ ls ~/.opencode/skills/<skill-name>/
 | Skill | When to Use |
 |-------|-------------|
 | `rag` | Embed docs + cosine search + rerank + answer (no external DB) |
+| `memory-semantic-search` | Semantic overlay for the memory MCP: ANN-search entity text → returns entity names for targeted `memory_open_nodes` lookups (use instead of `read_graph`) |
 | `pdf-chat` | Chat with a local PDF via Claude (base64, max 10 MB) |
 
 ### Web Research
@@ -709,9 +710,9 @@ To explore GAIA apps yourself:
 
 The orchestrator includes a **semantic routing cache** that learns which skill handles each type of request. After a few sessions, common requests are routed instantly without any catalog lookup.
 
-- **Technology:** `text-embedding-3-small` + numpy cosine similarity
+- **Technology:** `text-embedding-3-small` + `hnswlib` (HNSW ANN, cosine space) with numpy fallback
 - **Threshold:** ≥ 0.82 cosine similarity = cache hit (skip routing pipeline)
-- **Storage:** `~/.opencode/skills/routing-cache/cache/` (persistent numpy index)
+- **Storage:** `~/.opencode/skills/routing-cache/cache/` (`routing.bin` HNSW index + `index.npy` fallback)
 - **Learning:** Every routing decision is recorded and synced from `opencode.db`
 - **Module:** `~/.opencode/skills/routing-cache/routing_cache.py` — imported directly, no bash generation
 
@@ -1023,6 +1024,9 @@ This configuration enforces BMW security policies defined in `AGENTS.md`:
 | Manual token updates | Every 2 hours | Never | **Fully automated** |
 | Available models | 3 | 14 | **367% more choice** |
 | Available skills | 0 | 58+ | **Full specialist library** |
+
+Additional infra optimisations:
+- Routing cache now uses `hnswlib` (HNSW ANN) for sub-linear lookup and avoids cold-loading the full numpy matrix on every query.
 
 ### Skill Invocation Architecture
 

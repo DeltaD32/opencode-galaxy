@@ -11,6 +11,7 @@ Self-learning loop:
 
 Storage layout (~/.opencode/skills/routing-cache/cache/):
   index.npy      — float32 matrix (N, 1536) of embedded prompts
+  routing.bin    — hnswlib index (ANN) built from index.npy (preferred)
   records.jsonl  — newline-delimited JSON: {prompt, skill, source, ts}
   meta.json      — {version, count, last_updated}
 """
@@ -24,9 +25,15 @@ import ssl
 import time
 import urllib.request
 from datetime import datetime
-from typing import Optional
+from typing import Optional, Tuple
 
 import numpy as np
+
+# Optional ANN acceleration.
+try:
+    import hnswlib  # type: ignore
+except Exception:  # pragma: no cover
+    hnswlib = None
 
 # ── Config ────────────────────────────────────────────────────────────────────
 EMBED_MODEL   = "openai/text-embedding-3-small"
@@ -34,10 +41,21 @@ THRESHOLD     = 0.82      # cosine similarity required for a cache hit
 MIN_PROMPT_LEN = 12       # ignore single-word / noise prompts
 CACHE_DIR     = pathlib.Path.home() / ".opencode/skills/routing-cache/cache"
 INDEX_FILE    = CACHE_DIR / "index.npy"
+HNSW_FILE     = CACHE_DIR / "routing.bin"
 RECORDS_FILE  = CACHE_DIR / "records.jsonl"
 META_FILE     = CACHE_DIR / "meta.json"
 DB_PATH       = pathlib.Path.home() / ".local/share/opencode/opencode.db"
 VERSION       = 1
+
+# HNSW parameters (cosine space)
+HNSW_M = 16
+HNSW_EF_CONSTRUCTION = 200
+HNSW_EF_SEARCH = 64
+
+# Module-level state to avoid cold-loading on every query.
+_RECORDS: Optional[list[dict]] = None
+_MATRIX: Optional[np.ndarray] = None
+_HNSW: Optional[object] = None
 
 # ── BMW LLM API helpers ───────────────────────────────────────────────────────
 def _ssl_ctx() -> Optional[ssl.SSLContext]:
@@ -78,13 +96,85 @@ def _ensure_cache_dir() -> None:
     CACHE_DIR.mkdir(parents=True, exist_ok=True)
 
 
+def _normalize(v: np.ndarray) -> np.ndarray:
+    """L2-normalize a vector or matrix along last axis."""
+    denom = np.linalg.norm(v, axis=-1, keepdims=True) + 1e-10
+    return (v / denom).astype(np.float32, copy=False)
+
+
+def _load_records() -> list[dict]:
+    global _RECORDS
+    if _RECORDS is not None:
+        return _RECORDS
+    if RECORDS_FILE.exists():
+        _RECORDS = [json.loads(l) for l in RECORDS_FILE.read_text().splitlines() if l.strip()]
+    else:
+        _RECORDS = []
+    return _RECORDS
+
+
+def _load_matrix() -> np.ndarray:
+    global _MATRIX
+    if _MATRIX is not None:
+        return _MATRIX
+    if INDEX_FILE.exists():
+        _MATRIX = np.load(str(INDEX_FILE))
+    else:
+        _MATRIX = np.empty((0, 1536), dtype=np.float32)
+    return _MATRIX
+
+
+def _hnsw_available() -> bool:
+    return hnswlib is not None
+
+
+def _hnsw_build_from_matrix(matrix: np.ndarray) -> object:
+    """Build a fresh HNSW index from embeddings matrix and persist it."""
+    _ensure_cache_dir()
+    dim = int(matrix.shape[1]) if matrix.ndim == 2 else 1536
+    idx = hnswlib.Index(space="cosine", dim=dim)  # type: ignore[union-attr]
+    count = int(matrix.shape[0])
+    max_elements = max(1024, count + 1024)
+    idx.init_index(max_elements=max_elements, ef_construction=HNSW_EF_CONSTRUCTION, M=HNSW_M)
+    idx.set_ef(HNSW_EF_SEARCH)
+    if count:
+        ids = np.arange(count, dtype=np.int64)
+        idx.add_items(_normalize(matrix), ids)
+    idx.save_index(str(HNSW_FILE))
+    return idx
+
+
+def _hnsw_load_or_migrate() -> Optional[object]:
+    """Load HNSW index if present; otherwise migrate from index.npy if possible."""
+    global _HNSW
+    if _HNSW is not None:
+        return _HNSW
+    if not _hnsw_available():
+        return None
+
+    records = _load_records()
+    count = len(records)
+
+    if HNSW_FILE.exists():
+        idx = hnswlib.Index(space="cosine", dim=1536)  # type: ignore[union-attr]
+        idx.load_index(str(HNSW_FILE), max_elements=max(1024, count + 1024))
+        idx.set_ef(HNSW_EF_SEARCH)
+        _HNSW = idx
+        return _HNSW
+
+    # Migration path: build from existing .npy if it matches records.
+    if INDEX_FILE.exists() and count:
+        matrix = _load_matrix()
+        if matrix.shape[0] == count:
+            _HNSW = _hnsw_build_from_matrix(matrix)
+            return _HNSW
+
+    return None
+
+
 def _load_index() -> tuple[np.ndarray, list[dict]]:
-    """Load the on-disk index. Returns (matrix, records). Both empty if cold cache."""
-    if INDEX_FILE.exists() and RECORDS_FILE.exists():
-        matrix  = np.load(str(INDEX_FILE))
-        records = [json.loads(l) for l in RECORDS_FILE.read_text().splitlines() if l.strip()]
-        return matrix, records
-    return np.empty((0, 1536), dtype=np.float32), []
+    """Legacy helper for the numpy fallback path."""
+    return _load_matrix(), _load_records()
 
 
 def _save_index(matrix: np.ndarray, records: list[dict]) -> None:
@@ -97,6 +187,19 @@ def _save_index(matrix: np.ndarray, records: list[dict]) -> None:
         "last_updated": datetime.utcnow().isoformat(),
     }, indent=2))
 
+    # Keep module cache coherent.
+    global _MATRIX, _RECORDS
+    _MATRIX = matrix
+    _RECORDS = records
+
+
+def _hnsw_ensure_capacity(idx: object, needed_count: int) -> None:
+    """Resize HNSW index if out of capacity."""
+    cur_max = int(idx.get_max_elements())  # type: ignore[attr-defined]
+    if needed_count <= cur_max:
+        return
+    idx.resize_index(max(needed_count, cur_max * 2))  # type: ignore[attr-defined]
+
 
 def _cosine_search(
     query_vec: np.ndarray,
@@ -105,12 +208,25 @@ def _cosine_search(
     """Return (best_index, best_score). Returns (-1, 0.0) on empty matrix."""
     if matrix.shape[0] == 0:
         return -1, 0.0
-    q = query_vec / (np.linalg.norm(query_vec) + 1e-10)
-    norms  = np.linalg.norm(matrix, axis=1, keepdims=True) + 1e-10
-    normed = matrix / norms
+    q = _normalize(query_vec)
+    normed = _normalize(matrix)
     scores = normed @ q
     best   = int(np.argmax(scores))
     return best, float(scores[best])
+
+
+def _ann_search(query_vec: np.ndarray, k: int = 1) -> Tuple[int, float]:
+    """Return (best_index, best_score) using HNSW; (-1, 0.0) if unavailable."""
+    idx = _hnsw_load_or_migrate()
+    if idx is None:
+        return -1, 0.0
+    if len(_load_records()) == 0:
+        return -1, 0.0
+    q = _normalize(query_vec.reshape(1, -1))
+    labels, distances = idx.knn_query(q, k=k)  # type: ignore[attr-defined]
+    best_label = int(labels[0][0])
+    best_dist = float(distances[0][0])
+    return best_label, 1.0 - best_dist
 
 
 # ── DB extraction ─────────────────────────────────────────────────────────────
@@ -189,7 +305,7 @@ def sync_from_db() -> int:
     Call once per session start (fast if nothing new).
     """
     _ensure_cache_dir()
-    matrix, records = _load_index()
+    records = _load_records()
     known = {r["prompt"] for r in records}
 
     new_pairs = extract_db_pairs(known)
@@ -199,9 +315,20 @@ def sync_from_db() -> int:
     new_texts   = [p["prompt"] for p in new_pairs]
     new_vectors = _embed(new_texts)
 
-    matrix  = np.vstack([matrix, new_vectors]) if matrix.shape[0] > 0 else new_vectors
-    records = records + new_pairs
+    # Persist to numpy fallback storage.
+    matrix = _load_matrix()
+    matrix = np.vstack([matrix, new_vectors]) if matrix.shape[0] > 0 else new_vectors
+    records.extend(new_pairs)
     _save_index(matrix, records)
+
+    # Update HNSW (if available).
+    idx = _hnsw_load_or_migrate()
+    if idx is not None:
+        start = matrix.shape[0] - new_vectors.shape[0]
+        ids = np.arange(start, start + new_vectors.shape[0], dtype=np.int64)
+        _hnsw_ensure_capacity(idx, int(ids[-1]) + 1)
+        idx.add_items(_normalize(new_vectors), ids)  # type: ignore[attr-defined]
+        idx.save_index(str(HNSW_FILE))  # type: ignore[attr-defined]
     return len(new_pairs)
 
 
@@ -216,12 +343,16 @@ def route_cached(prompt: str) -> Optional[dict]:
     if len(prompt.strip()) < MIN_PROMPT_LEN:
         return None
 
-    matrix, records = _load_index()
-    if matrix.shape[0] == 0:
-        return None
-
     q_vec = _embed([prompt])[0]
-    idx, score = _cosine_search(q_vec, matrix)
+    records = _load_records()
+
+    # Prefer ANN; gracefully fall back to numpy.
+    idx, score = _ann_search(q_vec)
+    if idx == -1:
+        matrix = _load_matrix()
+        if matrix.shape[0] == 0:
+            return None
+        idx, score = _cosine_search(q_vec, matrix)
 
     if score >= THRESHOLD:
         rec = records[idx]
@@ -243,13 +374,15 @@ def record_routing(prompt: str, skill: str, source: str = "live") -> None:
         return
 
     _ensure_cache_dir()
-    matrix, records = _load_index()
+    records = _load_records()
     known = {r["prompt"] for r in records}
 
     if prompt in known:
         return  # already indexed
 
-    vec    = _embed([prompt])[0]
+    vec = _embed([prompt])[0]
+    matrix = _load_matrix()
+    new_id = int(matrix.shape[0])
     matrix = np.vstack([matrix, vec[np.newaxis]]) if matrix.shape[0] > 0 else vec[np.newaxis]
     records.append({
         "prompt": prompt,
@@ -259,6 +392,13 @@ def record_routing(prompt: str, skill: str, source: str = "live") -> None:
     })
     _save_index(matrix, records)
 
+    # Update ANN index too (persist after each addition).
+    idx = _hnsw_load_or_migrate()
+    if idx is not None:
+        _hnsw_ensure_capacity(idx, new_id + 1)
+        idx.add_items(_normalize(vec.reshape(1, -1)), np.array([new_id], dtype=np.int64))  # type: ignore[attr-defined]
+        idx.save_index(str(HNSW_FILE))  # type: ignore[attr-defined]
+
 
 def cache_stats() -> dict:
     """Return cache statistics."""
@@ -266,4 +406,9 @@ def cache_stats() -> dict:
         meta = json.loads(META_FILE.read_text())
     else:
         meta = {"version": VERSION, "count": 0, "last_updated": "never"}
+    meta.update({
+        "hnsw_available": _hnsw_available(),
+        "hnsw_file": str(HNSW_FILE),
+        "hnsw_present": HNSW_FILE.exists(),
+    })
     return meta

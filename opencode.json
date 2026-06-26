@@ -85,7 +85,7 @@
             "output": 16.5
           },
           "limit": {
-            "context": 200000,
+            "context": 1000000,
             "output": 64000
           }
         },
@@ -100,7 +100,7 @@
             "output": 11.0
           },
           "limit": {
-            "context": 272000,
+            "context": 400000,
             "output": 128000
           }
         },
@@ -115,7 +115,7 @@
             "output": 16.5
           },
           "limit": {
-            "context": 922000,
+            "context": 1050000,
             "output": 128000
           }
         },
@@ -180,7 +180,7 @@
             "output": 13.2
           },
           "limit": {
-            "context": 922000,
+            "context": 400000,
             "output": 128000
           }
         },

@@ -825,6 +825,15 @@ When wrapping up a major enhancement (after README sync, Rule 10), the agent sho
 
 ---
 
+## Rule 13 — Memory MCP Search Protocol (ENFORCING)
+
+- **Never call `read_graph`.** Always use `memory_search_nodes` or `memory_open_nodes`.
+- **GPT-model agents:** pre-fetch memory once at session start and cache results in context (no per-turn memory calls).
+
+See: `~/.config/opencode/memory-search-protocol.md`
+
+---
+
 ## Restore Instructions
 
 If this configuration needs to be restored:
