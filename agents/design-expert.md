@@ -71,6 +71,37 @@ memory_to_persist:
     - <reusable pattern>
 ```
 
+## Scribe — Mandatory Memory Write (ENFORCING)
+
+At the end of EVERY task, before returning your response, call `scribe()` with your `memory_to_persist` observations.
+
+- **Trigger point:** after you have drafted your **RESPONSE v1**, but before you send it.
+- **Which helper to use:**
+  - General task → `scribe()`
+  - Architecture/design decision made → `scribe_design_decision()`
+  - Bug fixed → `scribe_bug_fix()`
+  - Session summary → `scribe_session_summary()`
+- **Map RESPONSE v1 → scribe parameters:**
+  - `memory_to_persist.worked` → `worked=[...]`
+  - `memory_to_persist.avoided` → `avoided=[...]`
+  - `memory_to_persist.patterns` → `patterns=[...]`
+- **Entity naming convention:** set `entity_name` to the **project name or domain from HANDOFF v1**.
+- **Non-blocking:** errors from `scribe()` are warnings only — never block task completion.
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
+scribe(
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
+)
+```
+
 ## Core Behaviour
 
 - **Density first.** Every design decision begins with the BMW Density MCP and
@@ -234,29 +265,8 @@ if tips:
 ```
 
 **Task end — record with scribe (mandatory):**
-```python
-import sys, pathlib
-sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
-from scribe import scribe, scribe_design_decision, scribe_session_summary
 
-scribe(
-    agent    = "design-expert",
-    domain   = "<primary_domain>",
-    worked   = ["<what worked>"],
-    avoided  = ["<what to avoid>"],
-    patterns = ["<reusable pattern>"],
-    # entity_name = "<EntityName>",  # e.g. "JARVIS Galaxy Design System — Color Tokens"
-)
-
-# For UX/design decisions that should persist in the knowledge graph
-scribe_design_decision(
-    agent       = "design-expert",
-    domain      = "<domain>",
-    decision    = "<the decision>",
-    rationale   = "<why>",
-    entity_name = "<EntityName if applicable>",
-)
-```
+See **“Scribe — Mandatory Memory Write (ENFORCING)”** above. Always derive `worked/avoided/patterns` from your RESPONSE v1 `memory_to_persist`.
 
 **Session-clearing safety:** Learnings persist across session resets in `memory.jsonl`.
 Always call `recall()` at task start — context may have been cleared.

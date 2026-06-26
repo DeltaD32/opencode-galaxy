@@ -27,6 +27,41 @@ You are the **default entry point** for all OpenCode requests. Your job is to ro
 
 ---
 
+## Scribe — Session-End Summary (ENFORCING)
+
+After all delegation is resolved and before returning the final output to the user, write a session-end memory note.
+
+- Use `scribe_session_summary()` to summarise:
+  - What you routed (agents/skills)
+  - Any routing patterns that emerged (cache hits, repeated ambiguity, new skills discovered)
+- Non-blocking: scribe failures are warnings only — never block task completion.
+
+**Copy/paste snippet (identical across agents):**
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
+scribe(
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
+)
+```
+
+**Session-end summary example:**
+```python
+scribe_session_summary(
+    agent       = "request-orchestrator",
+    domain      = "<project or session scope>",
+    summary     = "Routed 3 tasks: programming-expert (2), design-expert (1). Cache hits=1. New pattern: ambiguous 'diagram' requests need explicit figjam vs mermaid clarification.",
+    entity_name = "<project name or domain>",
+)
+```
+
 ## Prompt Awareness (Priority 0)
 
 **Installed slash commands** are full workflow prompts that the user can invoke directly. When a request matches a prompt's purpose, **proactively suggest it** instead of handling the task yourself.

@@ -920,6 +920,63 @@ See: `~/.config/opencode/memory-search-protocol.md`
 
 ---
 
+## Rule 14 — Scribe Mandatory Task-End Write (ENFORCING)
+
+Every agent **must** call `scribe()` at the end of every task — before returning the final response. This is non-negotiable. Scribe writes to **both** memory layers atomically in one call:
+
+| Layer | Store | Purpose |
+|---|---|---|
+| 1 | `agent_memory` (WORKED/AVOID/PATTERN) | Fast per-agent recall at task-start |
+| 2 | Memory MCP knowledge graph | Structured facts, Galaxy panel, cross-agent |
+
+**Invocation (copy-paste snippet — identical across all agents):**
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
+scribe(
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
+)
+```
+
+**Which helper to use:**
+
+| Situation | Helper |
+|---|---|
+| General task completion | `scribe()` |
+| Architecture/design decision made | `scribe_design_decision()` |
+| Bug fixed | `scribe_bug_fix()` |
+| Session summary (orchestrator / end of session) | `scribe_session_summary()` |
+
+**Trigger points by agent type:**
+
+| Agent | When scribe fires |
+|---|---|
+| Specialist agents | After drafting RESPONSE v1, before sending |
+| Worker | After writing `## Execution Result` to blackboard |
+| Orchestrator | At session-end after all delegation is resolved |
+| Secretary | After recording decisions/conflicts to opencode.db |
+
+**Non-blocking:** scribe errors are warnings only — **never block task completion**.
+
+**RESPONSE v1 → scribe parameter mapping:**
+- `memory_to_persist.worked` → `worked=[...]`
+- `memory_to_persist.avoided` → `avoided=[...]`
+- `memory_to_persist.patterns` → `patterns=[...]`
+
+**Entity naming convention** (follow `memory-schema.md`):
+- Project work: `<ProjectName> Project` e.g. `apex-fixer Project`
+- Patterns: `<Feature> Patterns` e.g. `Angular Signals Patterns`
+- Decisions: domain string from HANDOFF v1
+
+---
+
 ## Restore Instructions
 
 If this configuration needs to be restored:

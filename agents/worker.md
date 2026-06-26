@@ -178,17 +178,14 @@ Skipping it is the same class of violation as skipping the gate check.
 ```python
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
-from scribe import scribe
-
-# ALWAYS call scribe() — even clean executions record a session note
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
 scribe(
-    agent   = "worker",
-    domain  = "<task_domain>",           # e.g. "Angular component", "blackboard execution"
-    worked  = ["<what made this clean>"] if all_passed else [],
-    avoided = [f"Step N failed: <root cause>"] if not all_passed else [],
-    patterns= ["<reusable technique>"] if notable_technique else [],
-    # entity_name is optional — set it if a named graph entity should be updated
-    # entity_name = "<EntityName>",
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
 )
 ```
 
@@ -198,6 +195,14 @@ scribe(
 - A failure with a clear root cause → `avoided` (always)
 - A trivial 1-step execution with nothing unusual → still call `scribe()` with empty lists
   (the call itself records the domain was touched, costs ~1ms)
+
+**Worker-specific trigger point:** Scribe fires **AFTER writing `## Execution Result`**.
+Use `scribe()` with:
+- `agent="worker"`
+- `domain=<task description>`
+- `worked` = what was executed cleanly
+- `avoided` = what was blocked / failed (include step + root cause)
+- `patterns` = reusable execution patterns
 
 ---
 

@@ -68,6 +68,37 @@ memory_to_persist:
     - <reusable pattern>
 ```
 
+## Scribe — Mandatory Memory Write (ENFORCING)
+
+At the end of EVERY task, before returning your response, call `scribe()` with your `memory_to_persist` observations.
+
+- **Trigger point:** after you have drafted your **RESPONSE v1**, but before you send it.
+- **Which helper to use:**
+  - General task → `scribe()`
+  - Architecture/design decision made → `scribe_design_decision()`
+  - Bug fixed → `scribe_bug_fix()`
+  - Session summary → `scribe_session_summary()`
+- **Map RESPONSE v1 → scribe parameters:**
+  - `memory_to_persist.worked` → `worked=[...]`
+  - `memory_to_persist.avoided` → `avoided=[...]`
+  - `memory_to_persist.patterns` → `patterns=[...]`
+- **Entity naming convention:** set `entity_name` to the **project name or domain from HANDOFF v1**.
+- **Non-blocking:** errors from `scribe()` are warnings only — never block task completion.
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
+scribe(
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
+)
+```
+
 ## Core Behaviour
 
 - **Read before writing.** Always inspect the current codebase with `ls`, `read`, or
@@ -184,30 +215,8 @@ if tips:
 ```
 
 **Task end — record with scribe (mandatory):**
-```python
-import sys, pathlib
-sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
-from scribe import scribe, scribe_bug_fix, scribe_design_decision
 
-# General completion — writes to agent_memory AND optionally updates a graph entity
-scribe(
-    agent    = "programming-expert",
-    domain   = "<primary_domain>",
-    worked   = ["<specific technique that worked>"],
-    avoided  = ["<specific pitfall>"],
-    patterns = ["<reusable pattern for next time>"],
-    # entity_name = "<EntityName>",  # set this to also update a named graph entity
-)
-
-# Bug fix shorthand
-scribe_bug_fix(
-    agent   = "programming-expert",
-    domain  = "<domain>",
-    bug     = "<what broke>",
-    fix     = "<what fixed it>",
-    entity_name = "<EntityName if applicable>",
-)
-```
+See **“Scribe — Mandatory Memory Write (ENFORCING)”** above. Always derive `worked/avoided/patterns` from your RESPONSE v1 `memory_to_persist`.
 
 **Session-clearing safety:** Your learnings persist across session resets in `memory.jsonl`.
 Always call `recall()` at task start — context may have been cleared since your last invocation.
@@ -225,7 +234,7 @@ Always call `recall()` at task start — context may have been cleared since you
 7. **Review** — load `ai4do-fe-code-review` or `python-data-quality` for a self-review pass.
 8. **Accessibility** — for any UI, load `ai4do-fe-accessibility` and flag issues.
 9. **Commit-ready** — use `git-commit-reorganization` if multiple logical concerns exist.
-10. **Record learnings** — call `learn()` with what worked, what to avoid, any reusable pattern.
+10. **Record learnings** — call `scribe()` with what worked, what to avoid, any reusable pattern.
 
 ## Workflow: Code Review
 

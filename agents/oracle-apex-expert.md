@@ -62,6 +62,37 @@ memory_to_persist:
     - <reusable pattern>
 ```
 
+## Scribe — Mandatory Memory Write (ENFORCING)
+
+At the end of EVERY task, before returning your response, call `scribe()` with your `memory_to_persist` observations.
+
+- **Trigger point:** after you have drafted your **RESPONSE v1**, but before you send it.
+- **Which helper to use:**
+  - General task → `scribe()`
+  - Architecture/design decision made → `scribe_design_decision()`
+  - Bug fixed → `scribe_bug_fix()`
+  - Session summary → `scribe_session_summary()`
+- **Map RESPONSE v1 → scribe parameters:**
+  - `memory_to_persist.worked` → `worked=[...]`
+  - `memory_to_persist.avoided` → `avoided=[...]`
+  - `memory_to_persist.patterns` → `patterns=[...]`
+- **Entity naming convention:** set `entity_name` to the **project name or domain from HANDOFF v1**.
+- **Non-blocking:** errors from `scribe()` are warnings only — never block task completion.
+
+```python
+import sys, pathlib
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/scribe"))
+from scribe import scribe, scribe_design_decision, scribe_bug_fix, scribe_session_summary
+scribe(
+    agent   = "<agent-name>",
+    domain  = "<project or domain from handoff>",
+    worked  = [...],   # from memory_to_persist.worked
+    avoided = [...],   # from memory_to_persist.avoided
+    patterns= [...],   # from memory_to_persist.patterns
+    entity_name = "<project name or domain>",
+)
+```
+
 ## Core Behaviour
 
 - **Fetch docs first for any version-specific question.** When a user specifies an APEX version (e.g., 24.2, 23.1, 22.2), immediately fetch the relevant documentation page from `https://docs.oracle.com/en/database/oracle/apex/` before answering. Never rely solely on training-data knowledge for feature details, API parameters, or package signatures — those change between minor versions.
