@@ -1,0 +1,14 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+
+# Virtualenv
+.venv/
+
+# Secrets — never commit
+.env
+
+# Runtime state (SQLite blackboard + memory live here)
+.jarvis/
+*.db
