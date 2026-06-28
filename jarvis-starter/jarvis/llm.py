@@ -12,6 +12,7 @@ Select the backend with `JARVIS_LLM_PROVIDER` (default `ollama` for home use):
 from __future__ import annotations
 import os, time
 from . import llm_providers as providers
+from . import profile
 
 # Back-compat constant (selection actually happens per call, honouring env changes).
 DEFAULT_MODEL = os.environ.get("JARVIS_MODEL", providers.default_model())
@@ -21,6 +22,7 @@ def complete(messages, tools=None, model=None, max_retries=4):
     """One completion call against the configured provider. Returns the assistant
     message object (`.content`, `.tool_calls`). Retries with backoff on errors."""
     provider = providers.provider_name()
+    profile.enforce_provider(provider)  # home mode: refuse cloud before any network
     chosen = model or providers.default_model(provider)
     delay = 1.0
     for attempt in range(max_retries):

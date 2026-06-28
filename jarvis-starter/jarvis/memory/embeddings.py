@@ -60,6 +60,8 @@ class BmwEngine:
 def from_env() -> object:
     """Select engine via JARVIS_EMBED_ENGINE (default 'local' in prod, 'hash' if fastembed absent)."""
     choice = os.environ.get("JARVIS_EMBED_ENGINE", "local")
+    from ..profile import enforce_embed
+    enforce_embed(choice)  # home mode: refuse the cloud (bmw) embedding engine
     if choice == "hash":
         return HashEngine()
     if choice == "bmw":

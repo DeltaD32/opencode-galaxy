@@ -13,11 +13,15 @@ import os
 from urllib.parse import urlparse
 
 # Gateway + localhost (ollama 11434, lmstudio 1234 — ports are not part of host matching).
-DEFAULT_ALLOW = {"api.gcp.cloud.bmw", "localhost", "127.0.0.1", "::1"}
+GATEWAY_HOST = "api.gcp.cloud.bmw"
+LOCAL_HOSTS = {"localhost", "127.0.0.1", "::1"}
+DEFAULT_ALLOW = {GATEWAY_HOST} | LOCAL_HOSTS
 
 
 def allowlist() -> set[str]:
-    hosts = set(DEFAULT_ALLOW)
+    from . import profile  # lazy import avoids any load-order coupling
+    # Home profile is local-only: the gateway host is dropped entirely.
+    hosts = set(LOCAL_HOSTS) if profile.is_home() else set(DEFAULT_ALLOW)
     extra = os.environ.get("JARVIS_EGRESS_ALLOW", "")
     hosts |= {h.strip().lower() for h in extra.split(",") if h.strip()}
     return hosts
