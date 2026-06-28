@@ -30,28 +30,46 @@ class MockTTS:
         return text.encode("utf-8")  # stand-in for audio bytes
 
 
-class FasterWhisperSTT:  # pragma: no cover — requires the optional dep + a model
+class FasterWhisperSTT:  # pragma: no cover — exercised only with the optional dep + model
+    """Local, offline STT via faster-whisper. Model from WHISPER_MODEL (default 'base');
+    first use downloads it once to the HF cache, then runs fully on-device."""
     name = "faster-whisper"
+
     def __init__(self):
         try:
-            import faster_whisper  # noqa: F401
+            from faster_whisper import WhisperModel
         except ImportError as e:
             raise RuntimeError("STT_ENGINE=faster-whisper needs `pip install faster-whisper`") from e
+        size = os.environ.get("WHISPER_MODEL", "base")
+        self._model = WhisperModel(size, device="cpu", compute_type="int8")
 
     def transcribe(self, audio: bytes) -> str:
-        raise NotImplementedError("wire faster-whisper transcription here")
+        import io
+        # faster-whisper decodes wav/webm/mp3 from a binary stream via PyAV.
+        segments, _info = self._model.transcribe(io.BytesIO(audio))
+        return "".join(seg.text for seg in segments).strip()
 
 
-class PiperTTS:  # pragma: no cover — requires the optional dep + a voice
+class PiperTTS:  # pragma: no cover — exercised only with the optional dep + a voice
+    """Local, offline TTS via Piper. Voice .onnx path from PIPER_VOICE; returns WAV bytes."""
     name = "piper"
+
     def __init__(self):
         try:
-            import piper  # noqa: F401
+            from piper.voice import PiperVoice
         except ImportError as e:
             raise RuntimeError("TTS_ENGINE=piper needs `pip install piper-tts`") from e
+        model = os.environ.get("PIPER_VOICE")
+        if not model:
+            raise RuntimeError("TTS_ENGINE=piper needs PIPER_VOICE=/path/to/voice.onnx")
+        self._voice = PiperVoice.load(model)
 
     def synthesize(self, text: str) -> bytes:
-        raise NotImplementedError("wire Piper synthesis here")
+        import io, wave
+        buf = io.BytesIO()
+        with wave.open(buf, "wb") as wav:
+            self._voice.synthesize(text, wav)
+        return buf.getvalue()
 
 
 _STT = {"mock": MockSTT, "faster-whisper": FasterWhisperSTT}
