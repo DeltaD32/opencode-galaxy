@@ -84,3 +84,15 @@ def _bash(args, ctx: ToolContext):
     out = subprocess.run(args["command"], shell=True, cwd=ctx.repo_root,
                          capture_output=True, text=True, timeout=30)
     return (out.stdout + out.stderr)[:8000]
+
+
+@tool("http_get", "Fetch a URL over HTTP(S). Egress is default-deny: only allow-listed hosts.",
+      {"type": "object", "properties": {"url": {"type": "string"}}, "required": ["url"]})
+def _http_get(args, ctx: ToolContext):
+    # Enforce the egress allowlist at the fetch point. A denied host raises
+    # PermissionError, which dispatch() returns to the model (never escalates).
+    from . import egress
+    import urllib.request
+    egress.check(args["url"])
+    with urllib.request.urlopen(args["url"], timeout=15) as resp:  # noqa: S310 (host allow-listed)
+        return resp.read(8000).decode("utf-8", "replace")

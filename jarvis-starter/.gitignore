@@ -12,3 +12,6 @@ __pycache__/
 # Runtime state (SQLite blackboard + memory live here)
 .jarvis/
 *.db
+
+# Generated artifacts
+manifest.json
