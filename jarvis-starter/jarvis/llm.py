@@ -1,43 +1,35 @@
-"""LLM client over the BMW LLM API (OpenAI-compatible chat/completions).
+"""LLM client — provider-swappable so JARVIS runs at home or on the gateway.
 
-Verified against the stored docs:
-  base_url = https://api.gcp.cloud.bmw/llmapi/v1
-  auth     = Authorization: Bearer $LLM_API_BEARER_TOKEN  (+ LLM_API_KEY)
-  tool use = OpenAI function-calling (tools[], msg.tool_calls, role:'tool')
-  models   = provider/model  (default: anthropic/claude-sonnet-4-6)
+Select the backend with `JARVIS_LLM_PROVIDER` (default `ollama` for home use):
+  ollama | lmstudio  → local, OpenAI-compatible (no key)
+  bmw                → BMW gateway, OpenAI-compatible (bearer token)
+  anthropic          → Claude public API (Messages API; adapted)
+
+`complete()` keeps a stable surface — it returns an assistant message with
+`.content` and `.tool_calls` — so the agent runtime loop is provider-agnostic.
   NOTE: no streaming inside the tool loop (tool_call ids need complete responses).
 """
 from __future__ import annotations
 import os, time
+from . import llm_providers as providers
 
-DEFAULT_MODEL = os.environ.get("JARVIS_MODEL", "anthropic/claude-sonnet-4-6")
-BASE_URL = os.environ.get("LLM_API_BASE_URL", "https://api.gcp.cloud.bmw/llmapi/v1")
-
-
-def _client():
-    from openai import OpenAI  # imported lazily so tests can run without the package
-    headers = {}
-    tok = os.environ.get("LLM_API_BEARER_TOKEN")
-    if tok:
-        headers["Authorization"] = f"Bearer {tok}"
-    return OpenAI(base_url=BASE_URL, api_key=os.environ.get("LLM_API_KEY", "unused"),
-                  default_headers=headers or None)
+# Back-compat constant (selection actually happens per call, honouring env changes).
+DEFAULT_MODEL = os.environ.get("JARVIS_MODEL", providers.default_model())
 
 
 def complete(messages, tools=None, model=None, max_retries=4):
-    """One chat/completions call. Returns the assistant message object
-    (has .content and .tool_calls). Retries with backoff on transient errors."""
-    model = model or DEFAULT_MODEL
-    client = _client()
+    """One completion call against the configured provider. Returns the assistant
+    message object (`.content`, `.tool_calls`). Retries with backoff on errors."""
+    provider = providers.provider_name()
+    chosen = model or providers.default_model(provider)
     delay = 1.0
     for attempt in range(max_retries):
         try:
-            resp = client.chat.completions.create(
-                model=model, messages=messages,
-                tools=tools or None,
-            )
-            return resp.choices[0].message
-        except Exception as e:  # noqa: BLE001 — narrow in production (RateLimit/APIError)
+            if provider == "anthropic":
+                return providers.complete_anthropic(messages, tools, chosen)
+            compat = provider if provider in providers.OPENAI_COMPAT else providers.DEFAULT_PROVIDER
+            return providers.complete_openai(compat, messages, tools, chosen)
+        except Exception:  # noqa: BLE001 — narrow in production (RateLimit/APIError)
             if attempt == max_retries - 1:
                 raise
             time.sleep(delay)
