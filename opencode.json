@@ -6,13 +6,89 @@
   "model": "llm-api/claude-sonnet-4-5",
   "small_model": "llm-api/claude-haiku-4-5",
   "default_agent": "request-orchestrator",
+  "attachment": {
+    "image": {
+      "max_width": 2000,
+      "max_height": 2000,
+      "max_base64_bytes": 5242880
+    }
+  },
   "provider": {
     "llm-api": {
       "npm": "@ai-sdk/openai-compatible",
       "name": "LLM API",
       "models": {
+
+        "claude-haiku-4-5": {
+          "name": "claude-haiku-4-5",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 1.1,
+            "cache_read": 0.11,
+            "cache_write": 1.375,
+            "output": 5.5
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+
+        "claude-sonnet-4": {
+          "name": "claude-sonnet-4",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium",
+            "integrations": {
+              "anthropic-auto-cache": {
+                "enabled": true,
+                "breakpoints": {
+                  "system": true,
+                  "messages": false,
+                  "tools": true
+                }
+              }
+            }
+          },
+          "cost": {
+            "input": 3.0,
+            "cache_read": 0.3,
+            "cache_write": 3.75,
+            "output": 15.0
+          },
+          "limit": {
+            "context": 200000,
+            "output": 64000
+          }
+        },
+
         "claude-sonnet-4-5": {
           "name": "claude-sonnet-4-5",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "options": {
             "reasoningEffort": "medium",
             "integrations": {
@@ -37,33 +113,14 @@
             "output": 64000
           }
         },
-        "claude-haiku-4-5": {
-          "name": "claude-haiku-4-5",
-          "options": {
-            "integrations": {
-              "anthropic-auto-cache": {
-                "enabled": true,
-                "breakpoints": {
-                  "system": true,
-                  "messages": false,
-                  "tools": true
-                }
-              }
-            }
-          },
-          "cost": {
-            "input": 1.1,
-            "cache_read": 0.11,
-            "cache_write": 1.375,
-            "output": 5.5
-          },
-          "limit": {
-            "context": 200000,
-            "output": 64000
-          }
-        },
+
         "claude-sonnet-4-6": {
           "name": "claude-sonnet-4-6",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "options": {
             "reasoningEffort": "medium",
             "integrations": {
@@ -91,56 +148,88 @@
             "output": 64000
           }
         },
-        "gpt-5.1": {
-          "name": "gpt-5.1",
-          "options": {
-            "reasoningEffort": "medium"
+
+        "gpt-4.1": {
+          "name": "gpt-4.1",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
           },
           "cost": {
-            "input": 1.38,
-            "cache_read": 0.14,
+            "input": 2.2,
+            "cache_read": 0.6,
+            "output": 8.8
+          },
+          "limit": {
+            "context": 1047576,
+            "output": 32768
+          }
+        },
+
+        "gpt-4.1-mini": {
+          "name": "gpt-4.1-mini",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "cost": {
+            "input": 0.4,
+            "cache_read": 0.1,
+            "output": 1.8
+          },
+          "limit": {
+            "context": 1047576,
+            "output": 32768
+          }
+        },
+
+        "gpt-4.1-nano": {
+          "name": "gpt-4.1-nano",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "cost": {
+            "input": 0.1,
+            "output": 0.4
+          },
+          "limit": {
+            "context": 1047576,
+            "output": 32768
+          }
+        },
+
+        "gpt-4o": {
+          "name": "gpt-4o",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "cost": {
+            "input": 2.8,
+            "cache_read": 1.4,
             "output": 11.0
           },
           "limit": {
-            "context": 400000,
-            "output": 128000
-          }
-        },
-        "gpt-5.4": {
-          "name": "gpt-5.4",
-          "options": {
-            "reasoningEffort": "medium"
-          },
-          "cost": {
-            "input": 2.76,
-            "cache_read": 0.28,
-            "output": 16.5
-          },
-          "limit": {
-            "context": 1050000,
-            "output": 128000
-          }
-        },
-        "o3-mini": {
-          "name": "o3-mini",
-          "options": {
-            "reasoningEffort": "high"
-          },
-          "cost": {
-            "input": 1.1,
-            "output": 4.4
-          },
-          "limit": {
-            "context": 200000,
-            "output": 100000
+            "context": 128000,
+            "output": 16384
           }
         },
 
         "gpt-4o-mini": {
           "name": "gpt-4o-mini",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "cost": {
             "input": 0.165,
-            "cache_read": 0.017,
+            "cache_read": 0.083,
             "output": 0.66
           },
           "limit": {
@@ -148,55 +237,268 @@
             "output": 16384
           }
         },
-        "gpt-5.2:global": {
-          "name": "gpt-5.2:global",
+
+        "gpt-5": {
+          "name": "gpt-5",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "options": {
             "reasoningEffort": "medium"
           },
           "cost": {
-            "input": 2.2,
-            "cache_read": 0.22,
-            "output": 13.2
+            "input": 1.4,
+            "cache_read": 0.1,
+            "output": 11.0
           },
           "limit": {
             "context": 400000,
             "output": 128000
           }
         },
-        "claude-sonnet-4": {
-          "name": "claude-sonnet-4",
+
+        "gpt-5-mini": {
+          "name": "gpt-5-mini",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "options": {
-            "reasoningEffort": "medium",
-            "integrations": {
-              "anthropic-auto-cache": {
-                "enabled": true,
-                "breakpoints": {
-                  "system": true,
-                  "messages": false,
-                  "tools": true
-                }
-              }
-            }
+            "reasoningEffort": "medium"
           },
           "cost": {
-            "input": 3.3,
-            "cache_read": 0.33,
-            "cache_write": 4.125,
+            "input": 0.3,
+            "output": 2.2
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5-mini:global": {
+          "name": "gpt-5-mini:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 0.3,
+            "output": 2.0
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5-nano": {
+          "name": "gpt-5-nano",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 0.1,
+            "output": 0.4
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5-nano:global": {
+          "name": "gpt-5-nano:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 0.1,
+            "output": 0.4
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.1": {
+          "name": "gpt-5.1",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 1.4,
+            "cache_read": 0.1,
+            "output": 11.0
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.1:global": {
+          "name": "gpt-5.1:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 1.2,
+            "cache_read": 0.1,
+            "output": 10.0
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.2:global": {
+          "name": "gpt-5.2:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 1.8,
+            "cache_read": 0.2,
+            "output": 14.0
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.4": {
+          "name": "gpt-5.4",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 2.8,
+            "cache_read": 0.3,
             "output": 16.5
           },
           "limit": {
-            "context": 200000,
-            "output": 64000
+            "context": 1050000,
+            "output": 128000
           }
         },
-        "o4-mini": {
-          "name": "o4-mini",
+
+        "gpt-5.4:global": {
+          "name": "gpt-5.4:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 2.5,
+            "cache_read": 0.3,
+            "output": 15.0
+          },
+          "limit": {
+            "context": 1050000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.4-mini:global": {
+          "name": "gpt-5.4-mini:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 0.8,
+            "cache_read": 0.1,
+            "output": 4.5
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "gpt-5.4-nano:global": {
+          "name": "gpt-5.4-nano:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 0.2,
+            "output": 1.2
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
+        "o3": {
+          "name": "o3",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
           "options": {
             "reasoningEffort": "high"
           },
           "cost": {
-            "input": 1.65,
-            "output": 6.6
+            "input": 2.2,
+            "cache_read": 0.6,
+            "output": 8.8
           },
           "limit": {
             "context": 200000,
@@ -204,70 +506,47 @@
           }
         },
 
-        "gpt-4o": {
-          "name": "gpt-4o",
-          "cost": {
-            "input": 2.75,
-            "cache_read": 0.28,
-            "output": 11.0
+        "o3-mini": {
+          "name": "o3-mini",
+          "modalities": {
+            "input": ["text"],
+            "output": ["text"]
           },
-          "limit": {
-            "context": 128000,
-            "output": 16384
-          }
-        },
-
-        "gpt-5-mini": {
-          "name": "gpt-5-mini",
+          "options": {
+            "reasoningEffort": "high"
+          },
           "cost": {
-            "input": 0.55,
-            "cache_read": 0.055,
-            "output": 2.2
+            "input": 1.2,
+            "cache_read": 0.6,
+            "output": 4.8
           },
           "limit": {
             "context": 200000,
-            "output": 16384
+            "output": 100000
           }
         },
 
-        "gpt-5-mini:global": {
-          "name": "gpt-5-mini:global",
+        "o4-mini": {
+          "name": "o4-mini",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "high"
+          },
           "cost": {
-            "input": 0.55,
-            "cache_read": 0.055,
-            "output": 2.2
+            "input": 1.2,
+            "cache_read": 0.3,
+            "output": 4.8
           },
           "limit": {
             "context": 200000,
-            "output": 16384
-          }
-        },
-
-        "gpt-5.4-mini:global": {
-          "name": "gpt-5.4-mini:global",
-          "cost": {
-            "input": 0.55,
-            "cache_read": 0.055,
-            "output": 2.2
-          },
-          "limit": {
-            "context": 400000,
-            "output": 16384
-          }
-        },
-
-        "gpt-5-nano": {
-          "name": "gpt-5-nano",
-          "cost": {
-            "input": 0.11,
-            "cache_read": 0.011,
-            "output": 0.44
-          },
-          "limit": {
-            "context": 200000,
-            "output": 16384
+            "output": 100000
           }
         }
+
       },
       "options": {
         "baseURL": "https://api.gcp.cloud.bmw/llmapi/v1",

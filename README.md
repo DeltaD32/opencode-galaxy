@@ -322,33 +322,55 @@ ttt skills list --page-size 5
 
 ## Models Available
 
-All models are accessed via the `llm-api/*` provider (BMW internal LLM API gateway):
+All models are accessed via the `llm-api/*` provider (BMW internal LLM API gateway).
+All 25 models are confirmed present in the `/v1/models` endpoint (audited 2026-06-30).
 
-| Model ID | Provider | Context | Best For |
-|----------|----------|---------|----------|
-| `llm-api/claude-sonnet-4-6` | Anthropic | 200K | **Default** — balanced quality & speed |
-| `llm-api/claude-sonnet-4-5` | Anthropic | 200K | Stable baseline |
-| `llm-api/claude-haiku-4-5` | Anthropic | 200K | Fast, cost-effective |
-| `llm-api/claude-sonnet-4` | Anthropic | 200K | Previous generation |
-| `llm-api/gpt-5.4` | OpenAI | 922K | Huge context window |
-| `llm-api/gpt-5.2` | OpenAI | 922K | Large context |
-| `llm-api/gpt-5.1` | OpenAI | 272K | Standard GPT-5 |
-| `llm-api/gpt-4o` | OpenAI | 128K | GPT-4 Optimized |
-| `llm-api/gpt-4o-mini` | OpenAI | 128K | Cheap + fast (GPT-4 generation) |
-| `llm-api/gpt-5-mini` | OpenAI | 200K | **Fast + cheap (GPT-5 quality)** — good for routing |
-| `llm-api/gpt-5-mini:global` | OpenAI | 200K | GPT-5 mini, global deployment |
-| `llm-api/gpt-5.4-mini:global` | OpenAI | 400K | GPT-5.4 mini — larger context |
-| `llm-api/gpt-5-nano` | OpenAI | 200K | Ultra-cheap, simple tasks only |
-| `llm-api/o4-mini` | OpenAI | 200K | Complex reasoning |
-| `llm-api/o3-mini` | OpenAI | 200K | Reasoning tasks |
-| `llm-api/gemini-3.5-flash` | Google | 1M | Blazing fast |
-| `llm-api/gemini-3.1-flash-lite` | Google | 1M | Most cost-effective |
-| `llm-api/gemini-3.1-pro` | Google | 2M | Largest context window |
+> ⚠️ **Gemini models removed:** `gemini-3.5-flash`, `gemini-3.1-flash-lite`, `gemini-3.1-pro` are NOT
+> in the BMW LLM API catalogue. Do not use them — they return model-not-found errors.
+
+> ⚠️ **Vision note:** All Anthropic models on BMW LLM API require **base64 `data:image/...;base64,...` URLs** for
+> image inputs. HTTP/HTTPS image URLs are rejected. OpenCode handles this automatically via the `attachment` config.
+
+### Anthropic (via AWS Bedrock — EU data residency)
+
+| Model ID | Vision | Reasoning | Structured | Context | $/M in | $/M out | Notes |
+|----------|--------|-----------|------------|---------|--------|---------|-------|
+| `llm-api/claude-sonnet-4-6` | ✅ | ✅ adaptive | ✅ | 1000K | $3.30 | $16.50 | **Best Anthropic** — 1M context |
+| `llm-api/claude-sonnet-4-5` | ✅ | ✅ | ✅ | 200K | $3.30 | $16.50 | Stable baseline |
+| `llm-api/claude-haiku-4-5` | ✅ | ✅ | ✅ | 200K | $1.10 | $5.50 | Fast, cost-effective |
+| `llm-api/claude-sonnet-4` | ✅ | ✅ | ❌ | 200K | $3.00 | $15.00 | Previous generation |
+
+### OpenAI (via Azure OpenAI — EU data residency)
+
+| Model ID | Vision | Reasoning | Parallel Tools | Context | $/M in | $/M out | Notes |
+|----------|--------|-----------|----------------|---------|--------|---------|-------|
+| `llm-api/gpt-5.4` | ✅ | ✅ | ✅ | 1050K | $2.80 | $16.50 | Largest context GPT-5 |
+| `llm-api/gpt-5.4:global` | ✅ | ✅ | ✅ | 1050K | $2.50 | $15.00 | Global deployment |
+| `llm-api/gpt-5.1` | ✅ | ✅ | ✅ | 400K | $1.40 | $11.00 | **Best balanced GPT-5** |
+| `llm-api/gpt-5.1:global` | ✅ | ✅ | ✅ | 400K | $1.20 | $10.00 | Global deployment |
+| `llm-api/gpt-5.2:global` | ✅ | ✅ | ✅ | 400K | $1.80 | $14.00 | Global deployment |
+| `llm-api/gpt-5` | ✅ | ✅ | ✅ | 400K | $1.40 | $11.00 | |
+| `llm-api/gpt-5:global` | ✅ | ✅ | ✅ | 400K | $1.20 | $10.00 | Global deployment |
+| `llm-api/gpt-5-mini` | ✅ | ✅ | ✅ | 400K | $0.30 | $2.20 | **Fast + cheap (GPT-5 quality)** |
+| `llm-api/gpt-5-mini:global` | ✅ | ✅ | ✅ | 400K | $0.30 | $2.00 | Global deployment |
+| `llm-api/gpt-5.4-mini:global` | ✅ | ✅ | ✅ | 400K | $0.80 | $4.50 | |
+| `llm-api/gpt-5-nano` | ✅ | ✅ | ✅ | 400K | $0.10 | $0.40 | Ultra-cheap |
+| `llm-api/gpt-5-nano:global` | ✅ | ✅ | ✅ | 400K | $0.10 | $0.40 | Global deployment |
+| `llm-api/gpt-5.4-nano:global` | ✅ | ✅ | ✅ | 400K | $0.20 | $1.20 | |
+| `llm-api/gpt-4.1` | ✅ | ❌ | ✅ | 1047K | $2.20 | $8.80 | 1M context, no reasoning |
+| `llm-api/gpt-4.1-mini` | ✅ | ❌ | ✅ | 1047K | $0.40 | $1.80 | |
+| `llm-api/gpt-4.1-nano` | ✅ | ❌ | ✅ | 1047K | $0.10 | $0.40 | |
+| `llm-api/gpt-4o` | ✅ | ❌ | ✅ | 128K | $2.80 | $11.00 | GPT-4 generation |
+| `llm-api/gpt-4o-mini` | ✅ | ❌ | ✅ | 128K | $0.17 | $0.66 | Cheap + fast |
+| `llm-api/o3` | ✅ | ✅ | ❌ | 200K | $2.20 | $8.80 | No parallel tools |
+| `llm-api/o3-mini` | ❌ | ✅ | ❌ | 200K | $1.20 | $4.80 | Text-only, no vision |
+| `llm-api/o4-mini` | ✅ | ✅ | ❌ | 200K | $1.20 | $4.80 | No parallel tools |
 
 ```bash
 # Override model for a specific request
-opencode run "analyse this 500-page document" --model llm-api/gemini-3.1-pro
+opencode run "analyse this 500-page document" --model llm-api/gpt-5.4
 opencode run "quick rename task" --model llm-api/claude-haiku-4-5
+opencode run "vision task" --model llm-api/claude-sonnet-4-6
 ```
 
 > **Rule 1 (AGENTS.md):** All custom agents must use `llm-api/*` or `ollama/*` only. Never configure `anthropic/`, `openai/`, or `google/` directly.
@@ -823,6 +845,7 @@ print(f'[routing-cache] +{n} new pairs → {s[\"count\"]} total entries')
 | `agents/` | Custom agent definitions (request-orchestrator, oracle-apex, uipath-rpa, jirri) |
 | `skills/` | Config-managed skills (symlinked from TTT installations) |
 | `plugins/` | Plugin config files |
+| `.github/workflows/sync-upstream-rebase-into-atc.yml` | **Automation:** upstream → ATC rebase sync — force-update `automation/upstream-rebase` then open PR into `main` |
 | `ppt-styles/` | PPT style registry cache |
 | `load-secrets.sh` | Loads credentials from macOS Keychain into env vars (macOS only) |
 | `WINDOWS-SETUP.md` | Windows gap analysis, open questions (resolved), and implementation plan |
@@ -833,6 +856,37 @@ print(f'[routing-cache] +{n} new pairs → {s[\"count\"]} total entries')
 | `.gitignore` | Prevents secrets and generated files from being committed |
 | `ai4devops_catalog.md` | BMW AI4DevOps skills catalog reference |
 | `available-models-reference.json` | Full model capabilities reference |
+
+---
+
+## Repo Automation (GitHub Actions)
+
+This repo contains GitHub Actions workflows under `.github/workflows/`.
+
+### Sync upstream → ATC (rebase + PR)
+
+Workflow: `.github/workflows/sync-upstream-rebase-into-atc.yml`
+
+What it does:
+- Fetches an **upstream repo/branch** (default: `https://github.com/DeltaD32/opencode-galaxy.git` / `main`)
+- Creates/updates an ATC **sync branch** (default: `automation/upstream-rebase`) by rebasing the ATC base branch (default: `main`) onto upstream
+- Opens (or reuses) a PR in **this repo** from `sync_branch` → `atc_base_branch`
+
+How to run:
+1. Go to **Actions → “Sync upstream → ATC (rebase + PR)” → Run workflow**
+2. Optionally override inputs:
+   - `upstream_repo_url` (default shown above)
+   - `upstream_branch` (default: `main`)
+   - `atc_base_branch` (default: `main`)
+   - `sync_branch` (default: `automation/upstream-rebase`)
+
+Scheduled runs:
+- Configure repo variables `UPSTREAM_REPO_URL` (optional) and `UPSTREAM_BRANCH` (optional)
+- Optionally set `ATC_BASE_BRANCH` as a repo variable if you want to PR into a non-`main` base
+
+Safety notes:
+- The sync branch is force-updated with `--force-with-lease`.
+- If upstream introduces conflicts, the workflow will fail and you must resolve locally, then push to the sync branch.
 
 ---
 

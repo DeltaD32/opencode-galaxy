@@ -209,10 +209,19 @@ Each step lists the **file(s)** it touches and **why it's ordered there**. Steps
 | 5.2 | Status-query + thousand-foot-summary intents | voice/intent layer (near `VoiceController.tsx`) | "What's agent X doing?" / "Are we on track?" → read board (`specialist_queue` + `blackboards`) → speak. May spotlight a planet. |
 | 5.3 | Scope-amend + interrupt | intent layer + `abortSession` (exists) | "Also add Y" → route to orchestrator as a new ticket; voice barge-in → `abortSession()`. |
 
+### Phase 6 — Memory architecture *(new; depends on orchestration + blackboard contracts)*
+| # | Step | File(s) | Note |
+|---|---|---|---|
+| 6.1 | Stand up memory v2 daemon/store | `skills/memory-daemon/` | Local-first memory store with SQLite + vector index; deterministic placement. |
+| 6.2 | Route memory writes/recall through daemon | `skills/agent-memory/`, `memory-schema.md` | Keep old APIs as shims; do not let agents choose entity placement. |
+| 6.3 | Add tiering + migration | `skills/memory-daemon/` | Hot/warm/cold tiers, decay, and consolidation for scale. |
+| 6.4 | Add optional cloud fallback | `skills/memory-daemon/` | Make replication opt-in and preserve local-only paths structurally. |
+
 ### Backend track *(verify, in parallel — but mostly already confirmed)*
 - ✅ Governance loop, schema, and status strings are **verified** (`docs/PROJECTS-DB-AGENT-BRIEFING.md`). No change needed for the galaxy to read real data.
 - 🟡 **G3/G6 runtime check:** confirm the orchestrator is actually calling `sync_blackboard_sections()` *and* populating `specialist_queue` (`enqueue_specialists` / `advance_queue`) during real runs — the schema supports it; verify it's wired in live sessions.
 - 🟡 **G7 sync discipline:** ensure every status transition calls **both** `mark_status()` (file) and `update_blackboard_status()` (DB), since the galaxy reads the DB.
+- 🟡 **Memory path check:** if memory v2 lands, verify all scribe / recall paths are routed through the daemon and that `memory.jsonl` is only a backward-compatibility fallback during migration.
 
 ### Housekeeping *(any time)*
 - Remove unused `3d-force-graph` dep · env-var the `/Users/QTE2362/...` paths · dedupe `jarvisThemeTokens.css` ≡ `observatory.css` · fix stale-closure deps in `GalaxyView`.

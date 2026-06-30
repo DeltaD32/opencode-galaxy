@@ -601,12 +601,14 @@ dep_result = check_dependencies(blackboard_db_id)
 if not dep_result["ready"]:
     blocked_ids = ", ".join(dep_result["blocking"])
     from blackboard import append_section, mark_status
+    from projects import update_blackboard_status
     append_section(
         file_path, "request-orchestrator", "Execution Plan",
         f"BLOCKED ON: {blocked_ids}\n\nThis task depends on blackboards that are not yet done. "
         f"Worker will halt until dependencies resolve."
     )
-    mark_status(file_path, "blocked")
+    mark_status(file_path, "blocked")                  # file
+    update_blackboard_status(blackboard_db_id, "blocked")  # DB — G7 sync
     # Tell the user clearly:
     print(f"Task is blocked — waiting for: {blocked_ids}")
     # Stop — do not proceed to Step 5
@@ -621,7 +623,7 @@ After the Execution Plan is written, determine the risk level and route accordin
 ```python
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/projects"))
-from projects import set_approval_required, approve_blackboard
+from projects import set_approval_required, approve_blackboard, update_blackboard_status
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/blackboard"))
 from blackboard import request_approval, get_approval_summary, mark_status
 
@@ -647,17 +649,20 @@ if is_high_stakes:
     # [Wait for user response]
     # On 'approved':
     approve_blackboard(blackboard_db_id, "user")
-    mark_status(file_path, "executing")
+    mark_status(file_path, "executing")                        # file
+    update_blackboard_status(blackboard_db_id, "executing")   # DB — G7 sync
     # Delegate to worker (Step 6)
     # On 'cancel':
     # mark_status(file_path, "blocked")
+    # update_blackboard_status(blackboard_db_id, "blocked")   # DB — G7 sync
     # Tell user: "Execution cancelled. Blackboard at <path> is now blocked."
     # Stop.
 
 else:
     # --- LOW-RISK PATH ---
     approve_blackboard(blackboard_db_id, "auto")
-    mark_status(file_path, "executing")
+    mark_status(file_path, "executing")                        # file
+    update_blackboard_status(blackboard_db_id, "executing")   # DB — G7 sync
     # Proceed to Step 6 immediately — no user wait
 
 **Step 6 — Delegate to worker**

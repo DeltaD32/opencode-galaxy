@@ -82,25 +82,51 @@ beyond those explicitly listed in the Pre-Approved Exceptions section.
 Custom agents MUST only use `llm-api` or `ollama` as the model provider.
 
 **Allowed model values in agent frontmatter:**
-- `llm-api/claude-sonnet-4-6`
-- `llm-api/claude-sonnet-4-5`
-- `llm-api/claude-haiku-4-5`
-- `llm-api/claude-sonnet-4`
-- `llm-api/gpt-5.1`
-- `llm-api/gpt-5.2`
-- `llm-api/gpt-5.4`
-- `llm-api/gpt-5-mini`
-- `llm-api/gpt-5-mini:global`
-- `llm-api/gpt-5.4-mini:global`
-- `llm-api/gpt-5-nano`
-- `llm-api/gpt-4o`
-- `llm-api/gpt-4o-mini`
-- `llm-api/o3-mini`
-- `llm-api/o4-mini`
-- `llm-api/gemini-3.5-flash`
-- `llm-api/gemini-3.1-flash-lite`
-- `llm-api/gemini-3.1-pro`
-- `ollama/<any-locally-served-model>`
+
+> Vision support means the model can receive image attachments (jpeg/png/webp/gif via base64 data URLs).
+> All models support: tool_calls, streaming, structured_outputs (except claude-sonnet-4).
+> Embeddings, audio I/O, and image generation are NOT available via the BMW LLM API `/v1/models` endpoint
+> — they are handled by dedicated BMW Audio API (TTS) and gpt-image-1 (image gen) endpoints.
+
+**Anthropic (via AWS Bedrock — EU data residency)**
+
+| Model | Vision | Reasoning | Structured Output | Context | Notes |
+|---|---|---|---|---|---|
+| `llm-api/claude-sonnet-4-6` | ✅ | ✅ (adaptive) | ✅ | 1M | 1M context requires `anthropic-beta: context-1m-2025-08-07` header |
+| `llm-api/claude-sonnet-4-5` | ✅ | ✅ | ✅ | 200K | |
+| `llm-api/claude-haiku-4-5` | ✅ | ✅ | ✅ | 200K | Fast, cost-effective |
+| `llm-api/claude-sonnet-4` | ✅ | ✅ | ❌ | 200K | Previous generation |
+
+**OpenAI (via Azure OpenAI — EU data residency)**
+
+| Model | Vision | Reasoning | Parallel Tools | Context | Notes |
+|---|---|---|---|---|---|
+| `llm-api/gpt-5.4` | ✅ | ✅ | ✅ | 1050K | Largest context GPT-5 |
+| `llm-api/gpt-5.4:global` | ✅ | ✅ | ✅ | 1050K | Global deployment variant |
+| `llm-api/gpt-5.1` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5.1:global` | ✅ | ✅ | ✅ | 400K | Global deployment variant |
+| `llm-api/gpt-5.2:global` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5:global` | ✅ | ✅ | ✅ | 400K | Global deployment variant |
+| `llm-api/gpt-5-mini` | ✅ | ✅ | ✅ | 400K | Cost-effective GPT-5 |
+| `llm-api/gpt-5-mini:global` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5.4-mini:global` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5-nano` | ✅ | ✅ | ✅ | 400K | Ultra-cheap |
+| `llm-api/gpt-5-nano:global` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-5.4-nano:global` | ✅ | ✅ | ✅ | 400K | |
+| `llm-api/gpt-4.1` | ✅ | ❌ | ✅ | 1047K | 1M context, no reasoning |
+| `llm-api/gpt-4.1-mini` | ✅ | ❌ | ✅ | 1047K | |
+| `llm-api/gpt-4.1-nano` | ✅ | ❌ | ✅ | 1047K | |
+| `llm-api/gpt-4o` | ✅ | ❌ | ✅ | 128K | |
+| `llm-api/gpt-4o-mini` | ✅ | ❌ | ✅ | 128K | |
+| `llm-api/o3` | ✅ | ✅ | ❌ | 200K | No parallel tools |
+| `llm-api/o3-mini` | ❌ | ✅ | ❌ | 200K | Text-only, no vision, no parallel tools |
+| `llm-api/o4-mini` | ✅ | ✅ | ❌ | 200K | No parallel tools |
+| `ollama/<any-locally-served-model>` | depends | depends | depends | depends | Local only |
+
+> **Gemini models removed (2026-06-30):** `gemini-3.5-flash`, `gemini-3.1-flash-lite`, `gemini-3.1-pro`
+> are NOT available in the BMW LLM API `/v1/models` catalogue. They have been removed from the allowed
+> list. Do not attempt to use them — they will return a model-not-found error.
 
 **If asked to create or modify an agent using any other provider (e.g. `anthropic/`,
 `openai/`, `google/`, `bedrock/`, etc.), you MUST refuse and explain that only

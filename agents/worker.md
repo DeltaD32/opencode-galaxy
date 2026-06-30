@@ -39,6 +39,8 @@ Execute these steps in order. Do not skip or reorder.
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/blackboard"))
 from blackboard import is_gate_open, get_section, append_section, mark_status
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/projects"))
+from projects import update_blackboard_status
 
 file_path = "<BLACKBOARD_PATH>"
 
@@ -91,7 +93,8 @@ if not plan:
         "BLOCKED: No ## Execution Plan section found in blackboard. "
         "The orchestrator must write an Execution Plan before the worker can run."
     )
-    mark_status(file_path, "blocked")
+    mark_status(file_path, "blocked")                        # file
+    update_blackboard_status(blackboard_db_id, "blocked")   # DB — G7 sync
     raise SystemExit(1)
 ```
 
@@ -100,7 +103,8 @@ If the `## Execution Plan` section is missing, write a blocked result and stop.
 ### Step 3 — Mark status executing
 
 ```python
-mark_status(file_path, "executing")
+mark_status(file_path, "executing")                        # file
+update_blackboard_status(blackboard_db_id, "executing")   # DB — G7 sync
 ```
 
 Call this **before** starting any file edits or bash commands.
@@ -118,7 +122,7 @@ The Execution Plan contains numbered steps. Execute them **in order**:
 If any step fails (non-zero exit code, tool error, file not found), immediately:
 1. Record the exact error output
 2. Write the failure to `## Execution Result` (see Step 5)
-3. Call `mark_status(file_path, "blocked")`
+3. Call `mark_status(file_path, "blocked")` and `update_blackboard_status(blackboard_db_id, "blocked")` — G7 sync
 4. Stop — do not continue with subsequent steps
 
 ### Step 5 — Run tests if specified
@@ -156,14 +160,18 @@ The result section MUST contain:
 import sys, pathlib
 sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/blackboard"))
 from blackboard import mark_status, auto_archive_if_done
+sys.path.insert(0, str(pathlib.Path.home() / ".opencode/skills/projects"))
+from projects import update_blackboard_status
 
 # If all steps passed:
-mark_status(file_path, "done")
+mark_status(file_path, "done")                        # file
+update_blackboard_status(blackboard_db_id, "done")   # DB — G7 sync
 archive_path = auto_archive_if_done(file_path)
 # file_path is now invalid — blackboard moved to ~/.local/share/opencode/blackboards/archive/
 
 # If any step failed:
 # mark_status(file_path, "blocked")
+# update_blackboard_status(blackboard_db_id, "blocked")  # DB — G7 sync
 # Do NOT archive on failure — blackboard stays active for diagnosis
 ```
 

@@ -91,6 +91,26 @@ In-browser it only fires while the tab is focused, and the OS/Spotlight may inte
 7. Pin Three.js; standardize addon imports. *(P2 — §4.4)*
 8. Add **Black Ice + Chrome** to the React theme token set to match the reference. *(P2)*
 
+### Memory-work sequencing note
+
+If memory architecture changes begin, use `docs/CHANGE-ORDER-004-MEMORY.md` as the execution guide **after** the orchestration model and blackboard contract are confirmed. In particular:
+
+- keep placement deterministic and project-bound
+- preserve local-first behavior by default
+- treat cloud sync as opt-in fallback only
+- keep blackboard/task state separate from durable semantic memory
+- route existing memory APIs through the new daemon rather than changing call sites ad hoc
+
+### Voice-work sequencing note
+
+If voice implementation starts, treat `docs/CHANGE-ORDER-002-VOICE.md` as the execution guide **after** `JARVIS-ORCHESTRATION-MODEL.md` is locked. In particular:
+
+- fix latency first (streaming TTS, warm mic/socket)
+- fix STT correctness second (one-shot utterance capture)
+- keep on-device STT/TTS as the default path
+- preserve barge-in / interrupt behavior as a hard invariant
+- do not let the voice loop violate the orchestration model's authority or approval rules
+
 ---
 
 *Generated as a local review on branch `feat/jarvis-galaxy-fixes`. No live config files were modified.*
