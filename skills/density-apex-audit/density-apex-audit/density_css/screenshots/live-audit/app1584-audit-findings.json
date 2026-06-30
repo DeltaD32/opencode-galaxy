@@ -1,0 +1,37 @@
+[
+  {
+    "severity": "major",
+    "label": "PARTIAL TOKEN LOADING",
+    "detail": "Only 12/13 tokens have values. Missing: ['--ds-color-action-primary']"
+  },
+  {
+    "severity": "critical",
+    "label": "USER MENU BUTTON NOT FOUND",
+    "detail": "No element with both [data-menu] and [aria-haspopup] found. This is required by density-dark-mode.js watchForMenu(). May indicate the APEX app is not using Universal Theme nav bar, or the user avatar nav item has a different structure."
+  },
+  {
+    "severity": "critical",
+    "label": "DARK TOGGLE NOT INJECTED",
+    "detail": "density-dark-mode.js did not inject #ds-dark-mode-toggle-item after menu open. Likely cause: JS file not loaded in this app, or ul[role='group'] selector not matching the APEX version's menu structure."
+  },
+  {
+    "severity": "critical",
+    "label": "DARK TOGGLE CLICK HANDLER FAILED",
+    "detail": "JS click on #ds-dark-mode-toggle-item did not toggle body.ds-dark. Check the click event listener in density-dark-mode.js."
+  },
+  {
+    "severity": "major",
+    "label": "LOCALSTORAGE NOT SET",
+    "detail": "Expected 'on', got None. Dark mode will not persist across pages."
+  },
+  {
+    "severity": "major",
+    "label": "DARK MODE NOT PERSISTED AFTER RELOAD",
+    "detail": "body.ds-dark not present after reload. applyPreference() in density-dark-mode.js may not be firing early enough, or the JS file is not loaded on this page."
+  },
+  {
+    "severity": "minor",
+    "label": "IR TABLE NOT LOCATABLE",
+    "detail": "Could not find .a-IRR-table on pages 1, 2, or via card nav. Try navigating manually to the Interactive Report page."
+  }
+]

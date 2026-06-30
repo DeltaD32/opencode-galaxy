@@ -102,7 +102,7 @@ security add-generic-password -U -s com.bmw.opencode -a llm_api_key -w "YOUR_API
 security add-generic-password -U -s com.bmw.opencode -a bmw_client_id -w "YOUR_CLIENT_ID"
 security add-generic-password -U -s com.bmw.opencode -a bmw_client_secret -w "YOUR_CLIENT_SECRET"
 
-# 4. Make wrapper script executable — symlink replaces Homebrew binary (no alias needed)
+# 4. Make wrapper script executable — wrapper replaces Homebrew binary (no alias needed)
 chmod +x ~/bin/opencode-bmw
 ln -sf ~/bin/opencode-bmw /opt/homebrew/bin/opencode
 
@@ -264,6 +264,9 @@ ln -sf ~/bin/opencode-bmw /opt/homebrew/bin/opencode
 # Verify the symlink is in place
 ls -la /opt/homebrew/bin/opencode
 # Expected: lrwxr-xr-x  opencode -> /Users/<you>/bin/opencode-bmw
+
+# NOTE: `brew upgrade opencode` commonly overwrites this symlink back to the Homebrew keg.
+# If startup refresh stops working after an upgrade, re-run the ln -sf command above.
 ```
 
 **Windows (WSL2):**

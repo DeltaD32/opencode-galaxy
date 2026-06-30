@@ -1,0 +1,62 @@
+[
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ds-color-surface-base is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ds-color-surface-page is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ds-color-typography-base is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ds-color-border-action-strong is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ut-header-background-color is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "MISSING TOKEN",
+    "detail": "--ut-body-background-color is empty \u2014 CSS file may not be loaded"
+  },
+  {
+    "label": "USER MENU NOT FOUND",
+    "detail": "Cannot locate [data-menu][aria-haspopup='menu'] \u2014 dark mode injection will fail"
+  },
+  {
+    "label": "DARK TOGGLE NOT INJECTED YET",
+    "detail": "Toggle not in DOM yet \u2014 will test after clicking menu"
+  },
+  {
+    "label": "USER MENU CLICK FAILED",
+    "detail": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"[data-menu][aria-haspopup=\\\"menu\\\"]\").first\n"
+  },
+  {
+    "label": "MISSING ARIA LABELS",
+    "detail": "22 of 46 interactive elements lack accessible labels. Samples: [{'tag': 'INPUT', 'id': 'pFlowId', 'classes': ''}, {'tag': 'INPUT', 'id': 'pFlowStepId', 'classes': ''}, {'tag': 'INPUT', 'id': 'pInstance', 'classes': ''}, {'tag': 'INPUT', 'id': 'pPageSubmissionId', 'classes': ''}, {'tag': 'INPUT', 'id': 'pRequest', 'classes': ''}]"
+  },
+  {
+    "label": "IR NAVIGATION FAILED",
+    "detail": "Locator.click: Timeout 8000ms exceeded.\nCall log:\n  - waiting for locator(\"text=Interactive Report\").first\n"
+  },
+  {
+    "label": "IR TABLE NOT FOUND",
+    "detail": "Could not locate .a-IRR-table \u2014 selector may need updating for this APEX version"
+  },
+  {
+    "label": "DARK MODE TOGGLE ERROR",
+    "detail": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"#ds-dark-mode-toggle-item\").first\n"
+  },
+  {
+    "label": "DARK MODE NOT PERSISTED",
+    "detail": "body.ds-dark lost after reload \u2014 localStorage key 'ds-dark-mode' may not be set or is being cleared"
+  },
+  {
+    "label": "ARIA IR PAGE",
+    "detail": "18 elements without labels on IR page"
+  }
+]

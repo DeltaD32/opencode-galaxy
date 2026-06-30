@@ -1,0 +1,154 @@
+[
+  {
+    "severity": "info",
+    "label": "AUDIT SCOPE",
+    "detail": "Feedback modal / About dropdown items / Help page \u2014 Density compliance"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Home baseline",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/00-home.png"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Feedback modal opened (outer)",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/01-feedback-dialog.png"
+  },
+  {
+    "severity": "info",
+    "label": "FEEDBACK OUTER DIALOG",
+    "detail": "{\"label\": \"feedback-outer-dialog\", \"dialogBg\": \"rgb(255, 255, 255)\", \"dialogBorder\": \"rgb(193, 197, 203)\", \"dialogShadow\": \"rgba(0, 0, 0, 0.2) 0px 0px 2px 0px, rgba(0, 0, 0, 0.1) 0px 1\", \"titlebarBg\": \"rgb(255, 255, 255)\", \"titleColor\": \"rgb(31, 35, 40)\", \"dsTokenBase\": \"#ffffff\", \"overlayBg\": \"rgba(31, 35, 40, 0.3)\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "FEEDBACK DIALOG BG",
+    "detail": "Dialog bg=rgb(255, 255, 255) \u2713 matches ds-color-surface-base"
+  },
+  {
+    "severity": "pass",
+    "label": "FEEDBACK TITLEBAR BG",
+    "detail": "Titlebar bg=rgb(255, 255, 255) \u2713"
+  },
+  {
+    "severity": "info",
+    "label": "FEEDBACK IFRAME RAW",
+    "detail": "{\"label\": \"feedback-iframe\", \"title\": \"Feedback\", \"bodyBg\": \"rgb(255, 255, 255)\", \"bodyColor\": \"rgb(31, 35, 40)\", \"bodyClass\": \"t-Dialog-page t-Dialog-page--standard t-PageTemplate--dialog apex-side-nav apex-icons-fontapex apex-theme-vita js-ready \", \"hasDsDark\": false, \"surfacePage\": \"#f5f6f6\", \"surfaceBase\": \"#ffffff\", \"densityCSS\": [\"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-dark-mode.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-theme-standalone.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-overrides.css\"], \"allCSS\": [\"https://apextw10.bmwgroup.net/i/app_ui/css/Core.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/app_ui/css/Theme-Standard.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/libraries/font-apex/2.4/css/font-apex.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/themes/theme_42/24.2/css/Core.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/themes/theme_42/24.2/css/Vita.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-dark-mode.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-theme-standalone.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-overrides.css\"], \"tokensResolved\": 5, \"tokensTotal\": 5, \"hasAPEX\": true}"
+  },
+  {
+    "severity": "pass",
+    "label": "FEEDBACK DENSITY CSS IN IFRAME",
+    "detail": "All 3 Density sheets loaded inside feedback iframe \u2713"
+  },
+  {
+    "severity": "pass",
+    "label": "FEEDBACK TOKENS IN IFRAME",
+    "detail": "All 5 spot-check tokens resolve inside feedback iframe \u2713"
+  },
+  {
+    "severity": "major",
+    "label": "FEEDBACK BODY BG WHITE",
+    "detail": "iframe body bg=pure white. Density tokens load but body bg rule not applying. Root cause: dialog pages use .t-Dialog-page body class, not .t-PageBody \u2014 density-apex-overrides.css body selector doesn't cover .t-Dialog-page. Fix: add '.t-Dialog-page { background-color: var(--ds-color-surface-page) !important; }' to density-apex-overrides.css"
+  },
+  {
+    "severity": "info",
+    "label": "FEEDBACK IFRAME BODY CLASS",
+    "detail": "t-Dialog-page t-Dialog-page--standard t-PageTemplate--dialog apex-side-nav apex-icons-fontapex apex-"
+  },
+  {
+    "severity": "info",
+    "label": "FEEDBACK PAGE TYPE",
+    "detail": "Dialog page (.t-Dialog-page) \u2014 NOT .t-PageBody. This is why the body bg override misses."
+  },
+  {
+    "severity": "minor",
+    "label": "FEEDBACK DARK MODE",
+    "detail": "ds-dark not in iframe \u2014 dark mode JS runs in parent frame only. density-dark-mode.js needs to run inside dialog iframes too, or the dark class needs to be applied to the iframe body on toggle."
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Feedback iframe content",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/01b-feedback-iframe-content.png"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "About dropdown opened",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/02-about-dropdown.png"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT MENU ITEMS",
+    "detail": "[\"Page Help\", \"About Page\"]"
+  },
+  {
+    "severity": "minor",
+    "label": "ABOUT DROPDOWN BG",
+    "detail": "bg=rgba(0, 0, 0, 0), expected surface-base=#ffffff"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT DROPDOWN STYLES",
+    "detail": "{\"bg\": \"rgba(0, 0, 0, 0)\", \"color\": \"rgb(31, 35, 40)\", \"border\": \"0px none rgb(31, 35, 40)\", \"shadow\": \"none\", \"dsTokenBase\": \"#ffffff\"}"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "About \u203a Page Help",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/02-about-page-help.png"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT-PAGE HELP-STATE",
+    "detail": "{\"itemText\": \"Page Help\", \"url\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=11208437088336\", \"hasDialog\": true, \"hasIframe\": true, \"iframeSrc\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/help?p10051_page_id=1&session=11208437088336&cs=3l0mebgEgk7CKy3DumS0cHq7Qd_GpAVAEChpJltws7ALVLU2PPLokpm5DnNhnEsiG1GloPRyM3lxVzMKt2GlNwQ&dialogCs=JJwzwYIpyg26FwfDE8UFFvUowFosn8CQIxWalr5B6IbTDxTLZG1RQfmv-TbJp69sx6PrwvqgkBx1kIlJFHwdag\", \"dialogBg\": \"rgb(255, 255, 255)\", \"titlebarBg\": \"rgb(255, 255, 255)\", \"bodyBg\": \"rgb(245, 246, 246)\"}"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT-PAGE HELP-IFRAME",
+    "detail": "{\"label\": \"about-page-help\", \"title\": \"Help\", \"bodyBg\": \"rgb(255, 255, 255)\", \"bodyColor\": \"rgb(31, 35, 40)\", \"bodyClass\": \"t-Dialog-page t-Dialog-page--standard t-PageTemplate--dialog apex-side-nav apex-icons-fontapex apex-theme-vita js-ready \", \"hasDsDark\": false, \"surfacePage\": \"#f5f6f6\", \"surfaceBase\": \"#ffffff\", \"densityCSS\": [\"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-dark-mode.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-theme-standalone.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-overrides.css\"], \"allCSS\": [\"https://apextw10.bmwgroup.net/i/app_ui/css/Core.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/app_ui/css/Theme-Standard.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/libraries/font-apex/2.4/css/font-apex.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/themes/theme_42/24.2/css/Core.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/i/themes/theme_42/24.2/css/Vita.min.css?v=24.2.12\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-dark-mode.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-theme-standalone.css\", \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v89/css/density-apex-overrides.css\"], \"tokensResolved\": 5, \"tokensTotal\": 5, \"hasAPEX\": true}"
+  },
+  {
+    "severity": "pass",
+    "label": "ABOUT-PAGE HELP-CSS",
+    "detail": "All 3 Density sheets in iframe \u2713"
+  },
+  {
+    "severity": "pass",
+    "label": "ABOUT-PAGE HELP-TOKENS",
+    "detail": "All 5 tokens resolve \u2713"
+  },
+  {
+    "severity": "major",
+    "label": "ABOUT-PAGE HELP-BODY-BG-WHITE",
+    "detail": "bg=white. Page class=t-Dialog-page t-Dialog-page--standard t-PageTemplate--dialog. Fix: add body class selector override (see density-apex-overrides.css fix)"
+  },
+  {
+    "severity": "minor",
+    "label": "ABOUT-PAGE HELP-DARK-MODE",
+    "detail": "ds-dark not in iframe \u2014 dark mode JS doesn't propagate into dialog iframes"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "About \u203a Page Help iframe content",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/02-about-page-help-iframe.png"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "About \u203a About Page",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/modal-audit/02-about-about-page.png"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT-ABOUT PAGE-STATE",
+    "detail": "{\"itemText\": \"About Page\", \"url\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/about?clear=10050&session=11208437088336&cs=3oR2diemMbpZoi9h1dTbWgVzTNd8gLFbmDj1EOKn4lamZapcYI50LcP_s3FCWWTNMVRfcwpWsHyUbQpRvDkMCqQ\", \"hasDialog\": false, \"hasIframe\": false, \"iframeSrc\": null, \"dialogBg\": \"n/a\", \"titlebarBg\": \"n/a\", \"bodyBg\": \"rgb(245, 246, 246)\"}"
+  },
+  {
+    "severity": "info",
+    "label": "ABOUT-ABOUT PAGE-ERROR",
+    "detail": "name 'token_check_page' is not defined"
+  }
+]

@@ -1,0 +1,1096 @@
+/*
+ * ================================================================
+ * BMW DENSITY — DARK MODE TOKEN OVERRIDES
+ * ================================================================
+ * Activated by adding class 'ds-dark' to <body>.
+ * Toggled via density-dark-mode.js which injects a menu item
+ * into the APEX user menu dropdown.
+ *
+ * Token values sourced from:
+ *   @bmw-ds/components density-styles/styles/scss/variables/_dark.scss
+ * ================================================================
+ */
+
+/* ── DARK MODE ACTIVATION ───────────────────────────────────────
+   All dark overrides are scoped to body.ds-dark so they only
+   apply when the user has toggled dark mode on.
+   The overrides redeclare the same --ds-* and --ut-* variables,
+   so every element that uses var(--ds-*) or var(--ut-*) switches.
+────────────────────────────────────────────────────────────────── */
+
+body.ds-dark {
+  /* ── --ut-* VARIABLE OVERRIDES FOR DARK MODE ─────────────── */
+  /* These are the same variables overridden in the overrides file,
+     but flipped to dark values so APEX's own components switch too. */
+  --ut-header-background-color:     var(--ds-color-surface-base);
+  --ut-header-text-color:           var(--ds-color-typography-base);
+  --ut-header-menubar-background-color:          var(--ds-color-surface-base);
+  --ut-header-menubar-item-text-color:           var(--ds-color-typography-neutral);
+  --ut-header-menubar-item-current-background-color: var(--ds-color-surface-action-mild);
+  --ut-header-menubar-item-current-text-color:   var(--ds-color-typography-action);
+  --ut-header-menubar-item-hover-background-color: var(--ds-color-surface-neutral-hover);
+  --ut-header-menubar-item-hover-text-color:     var(--ds-color-typography-base);
+  --ut-body-nav-background-color:   var(--ds-color-surface-base);
+  --ut-body-nav-text-color:         var(--ds-color-typography-neutral);
+  --ut-navtabs-background-color:    var(--ds-color-surface-base);
+  --ut-navtabs-text-color:          var(--ds-color-typography-neutral);
+  --ut-navtabs-item-active-background-color: var(--ds-color-surface-action-mild);
+  --ut-navtabs-item-hover-background-color:  var(--ds-color-surface-neutral-hover);
+  --ut-body-title-background-color: var(--ds-color-surface-base);
+  --ut-body-title-text-color:       var(--ds-color-typography-base);
+  --ut-breadcrumb-item-text-color:  var(--ds-color-typography-neutral);
+  --ut-breadcrumb-item-active-text-color: var(--ds-color-typography-base);
+  --ut-footer-background-color:     var(--ds-color-surface-base);
+  --ut-footer-border-color:         var(--ds-color-border-neutral);
+  --ut-body-background-color:       var(--ds-color-surface-page);
+  --ut-body-text-color:             var(--ds-color-typography-base);
+  --ut-body-sidebar-background-color: var(--ds-color-surface-base);
+  --ut-body-sidebar-text-color:     var(--ds-color-typography-base);
+  --ut-body-actions-background-color: var(--ds-color-surface-base);
+  --ut-body-actions-text-color:     var(--ds-color-typography-base);
+  --ut-component-text-default-color:   var(--ds-color-typography-base);
+  --ut-component-text-title-color:     var(--ds-color-typography-base);
+  --ut-component-text-subtitle-color:  var(--ds-color-typography-neutral);
+  --ut-component-text-muted-color:     var(--ds-color-typography-neutral);
+  --ut-region-header-background-color: var(--ds-color-surface-base);
+  --ut-region-header-text-color:       var(--ds-color-typography-base);
+  --ut-region-background-color:        var(--ds-color-surface-base);
+  --ut-region-text-color:              var(--ds-color-typography-base);
+  --ut-field-label-text-color:      var(--ds-color-typography-neutral);
+  --ut-focus-outline-color:         var(--ds-color-border-action-strong);
+  --ut-link-text-color:             var(--ds-color-typography-action);
+  --ut-palette-primary:             var(--ds-color-surface-action-strong);
+  --ut-palette-primary-contrast:    var(--ds-color-typography-invert);
+  --ut-report-cell-border-color:    var(--ds-color-border-neutral);
+  --ut-report-cell-hover-background-color: var(--ds-color-surface-neutral-hover);
+  --ut-report-header-background-color: var(--ds-color-surface-base);
+
+  /* ── SURFACE TOKENS ──────────────────────────────────────── */
+  --ds-color-surface-page:                   #0b0d10;
+  --ds-color-surface-base:                   #1f2328;
+  --ds-color-surface-neutral:                #353a41;
+  --ds-color-surface-neutral-hover:          #4e545d;
+  --ds-color-surface-neutral-mild:           #4e545d;
+  --ds-color-surface-neutral-medium:         #858d98;
+  --ds-color-surface-neutral-strong:         #c1c5cb;
+  --ds-color-surface-action:                 #024051;
+  --ds-color-surface-action-mild:            #035970;
+  --ds-color-surface-action-strong:          #3ccaff;
+  --ds-color-surface-action-strong-hover:    #a8dfff;
+  --ds-color-surface-action-strong-active:   #a8dfff;
+  --ds-color-surface-backdrop:               rgba(78, 84, 93, 0.7);
+  --ds-color-surface-transparent:            rgba(255, 255, 255, 0);
+  --ds-color-surface-disabled:               rgba(245, 246, 246, 0.1);
+  --ds-color-surface-invert:                 #f2f3f4;
+  --ds-color-surface-positive:               #084114;
+  --ds-color-surface-positive-mild:          #185f28;
+  --ds-color-surface-positive-strong:        #6de28f;
+  --ds-color-surface-caution:                #523000;
+  --ds-color-surface-caution-mild:           #744b00;
+  --ds-color-surface-caution-strong:         #f6c800;
+  --ds-color-surface-critical:               #79010d;
+  --ds-color-surface-critical-mild:          #aa0014;
+  --ds-color-surface-critical-strong:        #ffb0b0;
+  --ds-color-surface-critical-strong-hover:  #ffd4d4;
+  --ds-color-surface-critical-strong-active: #ffd4d4;
+  --ds-color-surface-info:                   #00396f;
+  --ds-color-surface-info-mild:              #005499;
+  --ds-color-surface-info-strong:            #9ec7ff;
+  --ds-color-surface-table-header-sticky:    #1f2328;
+
+  /* ── TYPOGRAPHY TOKENS ───────────────────────────────────── */
+  --ds-color-typography-base:          #f2f3f4;
+  --ds-color-typography-action:        #3ccaff;
+  --ds-color-typography-action-hover:  #a8dfff;
+  --ds-color-typography-action-active: #a8dfff;
+  --ds-color-typography-neutral:       #dcdee1;
+  --ds-color-typography-positive:      #9ff7b7;
+  --ds-color-typography-caution:       #ffe38e;
+  --ds-color-typography-critical:      #ffb0b0;
+  --ds-color-typography-info:          #cbdfff;
+  --ds-color-typography-disabled:      rgba(242, 243, 244, 0.3);
+  --ds-color-typography-invert:        #1f2328;
+
+  /* ── BORDER TOKENS ───────────────────────────────────────── */
+  --ds-color-border-base:               #353a41;
+  --ds-color-border-neutral:            #4e545d;
+  --ds-color-border-neutral-mild:       #4e545d;
+  --ds-color-border-neutral-medium:     #858d98;
+  --ds-color-border-neutral-strong:     #c1c5cb;
+  --ds-color-border-action:             #035970;
+  --ds-color-border-action-mild:        #037493;
+  --ds-color-border-action-strong:      #3ccaff;
+  --ds-color-border-action-strong-hover: #a8dfff;
+  --ds-color-border-action-strong-active: #a8dfff;
+  --ds-color-border-positive:           #185f28;
+  --ds-color-border-positive-mild:      #f6c800;
+  --ds-color-border-positive-strong:    #9ff7b7;
+  --ds-color-border-caution:            #744b00;
+  --ds-color-border-caution-mild:       #f6c800;
+  --ds-color-border-caution-strong:     #ffe38e;
+  --ds-color-border-critical:           #aa0014;
+  --ds-color-border-critical-mild:      #df001a;
+  --ds-color-border-critical-strong:    #ffb0b0;
+  --ds-color-border-critical-strong-hover:  #ffd4d4;
+  --ds-color-border-critical-strong-active: #ffd4d4;
+  --ds-color-border-info:               #005499;
+  --ds-color-border-info-mild:          #0071c5;
+  --ds-color-border-info-strong:        #cbdfff;
+  --ds-color-border-disabled:           rgba(245, 246, 246, 0.1);
+  --ds-color-border-transparent:        rgba(255, 255, 255, 0);
+
+  /* ── ICON TOKENS ─────────────────────────────────────────── */
+  --ds-color-icon-base:           #f2f3f4;
+  --ds-color-icon-neutral:        #dcdee1;
+  --ds-color-icon-action:         #3ccaff;
+  --ds-color-icon-action-hover:   #a8dfff;
+  --ds-color-icon-action-active:  #a8dfff;
+  --ds-color-icon-positive:       #9ff7b7;
+  --ds-color-icon-caution:        #ffe38e;
+  --ds-color-icon-critical:       #ffb0b0;
+  --ds-color-icon-info:           #cbdfff;
+  --ds-color-icon-disabled:       rgba(242, 243, 244, 0.3);
+  --ds-color-icon-invert:         #1f2328;
+}
+
+
+/* ================================================================
+   APEX-SPECIFIC DARK MODE OVERRIDES
+   APEX hardcodes colours in its own stylesheet on top of ours,
+   so we need !important overrides here just as in the main
+   overrides file — but only when body.ds-dark is active.
+   ================================================================ */
+
+/* Page & body */
+body.ds-dark,
+body.ds-dark .t-PageBody,
+body.ds-dark .t-Body {
+  background: var(--ds-color-surface-page) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Header */
+body.ds-dark .t-Header,
+body.ds-dark .t-Header-navBar,
+body.ds-dark .t-Header-branding {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-Header .a-MenuBar {
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+body.ds-dark .t-Header-logo-link,
+body.ds-dark .t-Header .a-MenuBar-label {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Nav sidebar */
+body.ds-dark .t-Body-nav,
+body.ds-dark .t-PageBody--leftNav .t-Body-nav {
+  background-color: var(--ds-color-surface-base) !important;
+  border-right-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content,
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content .a-Icon,
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content .fa,
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-label,
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-toggle {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-current,
+body.ds-dark .t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-selected {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-left-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* Regions */
+body.ds-dark .t-Region {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-Region-header {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-Region-title,
+body.ds-dark .t-Region h2.t-Region-title,
+body.ds-dark .t-Region-header .t-Region-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .t-Region-body {
+  color: var(--ds-color-typography-base) !important;
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* Buttons */
+body.ds-dark .t-Button--hot {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: transparent !important;
+}
+
+body.ds-dark .t-Button:not(.t-Button--hot):not(.t-Button--danger):not(.t-Button--noUI):not(.t-Button--simple):not(.t-Button--header):not(.t-Button--navBar):not(.t-Button--headerTree) {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border: 1px solid var(--ds-color-border-action) !important;
+}
+
+body.ds-dark .t-Button.t-Button--header,
+body.ds-dark .t-Button.t-Button--navBar,
+body.ds-dark .t-Button.t-Button--headerTree,
+body.ds-dark .t-Header .t-Button {
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-Button:disabled,
+body.ds-dark .t-Button[disabled] {
+  background-color: var(--ds-color-surface-disabled) !important;
+  color: var(--ds-color-typography-disabled) !important;
+  border-color: var(--ds-color-border-disabled) !important;
+}
+
+/* Forms */
+body.ds-dark input[type="text"],
+body.ds-dark input[type="password"],
+body.ds-dark input[type="email"],
+body.ds-dark input[type="number"],
+body.ds-dark input[type="search"],
+body.ds-dark select,
+body.ds-dark textarea,
+body.ds-dark .apex-item-text,
+body.ds-dark .apex-item-select,
+body.ds-dark .apex-item-textarea {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark .t-Form-label,
+body.ds-dark label {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* Alerts */
+body.ds-dark .t-Alert--colorBG.t-Alert--success {
+  background-color: var(--ds-color-surface-positive) !important;
+  border-color: var(--ds-color-border-positive) !important;
+  color: var(--ds-color-typography-positive) !important;
+}
+
+body.ds-dark .t-Alert--colorBG.t-Alert--warning {
+  background-color: var(--ds-color-surface-caution) !important;
+  border-color: var(--ds-color-border-caution) !important;
+  color: var(--ds-color-typography-caution) !important;
+}
+
+body.ds-dark .t-Alert--colorBG.t-Alert--danger {
+  background-color: var(--ds-color-surface-critical) !important;
+  border-color: var(--ds-color-border-critical-strong) !important;
+  color: var(--ds-color-typography-critical) !important;
+}
+
+/* IR Table */
+body.ds-dark .a-IRR-table th {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-bottom-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark .a-IRR-table td {
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .a-IRR-table tr:hover td {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* jQuery UI / dialogs — outer window */
+body.ds-dark .ui-widget-content {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .ui-dialog .ui-dialog-titlebar {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .ui-dialog .ui-dialog-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .ui-widget-overlay {
+  background-color: var(--ds-color-surface-backdrop) !important;
+  opacity: 1 !important;
+}
+
+/* Close button dark mode */
+body.ds-dark .ui-dialog-titlebar-close {
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .ui-dialog-titlebar-close:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* ── Dialog iframe pages (.t-Dialog-page) in dark mode ──────────
+   When the user toggles dark mode, density-dark-mode.js applies
+   ds-dark to the <body> of dialog iframes. These rules ensure all
+   dialog page surfaces — body bg, regions, buttons, form inputs,
+   button pane — follow the Density dark tokens.
+   ──────────────────────────────────────────────────────────────── */
+
+body.ds-dark.t-Dialog-page,
+body.ds-dark.t-Dialog-page .t-Body,
+body.ds-dark.t-Dialog-page .t-PageBody {
+  background-color: var(--ds-color-surface-page) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Dialog-body,
+body.ds-dark.t-Dialog-page .t-Region,
+body.ds-dark.t-Dialog-page .t-Region-body {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Region-header {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Region-title,
+body.ds-dark.t-Dialog-page .t-Region h2 {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Dialog-footer,
+body.ds-dark.t-Dialog-page .t-ButtonRegion,
+body.ds-dark.t-Dialog-page .t-ButtonRegion--dialogRegion,
+body.ds-dark.t-Dialog-page .t-ButtonRegion .t-Region-body {
+  background-color: var(--ds-color-surface-base) !important;
+  border-top-color: var(--ds-color-border-neutral) !important;
+}
+
+/* ── Radio / smiley feedback selector (u-radio labels) ──────────
+   APEX hardcodes rgb(248,248,248) on .u-radio label tiles.
+   In dark mode this stays light — override to dark surface-neutral. */
+body.ds-dark.t-Dialog-page .u-radio,
+body.ds-dark .u-radio {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark.t-Dialog-page .u-radio:hover,
+body.ds-dark .u-radio:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Selected/active radio tile */
+body.ds-dark.t-Dialog-page input[type="radio"]:checked + .u-radio,
+body.ds-dark.t-Dialog-page .u-radio.is-checked,
+body.ds-dark.t-Dialog-page .apex-item-option input:checked ~ .u-radio,
+body.ds-dark .apex-item-option input:checked ~ .u-radio {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* ── Textarea in dark dialog ─────────────────────────────────────
+   APEX dialog textarea uses rgba(0,0,0,0) bg → inherits white from
+   body in light mode, stays transparent in dark (shows dark body
+   through — acceptable, but explicit is better). */
+body.ds-dark.t-Dialog-page textarea.apex-item-textarea,
+body.ds-dark.t-Dialog-page textarea {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark.t-Dialog-page textarea:focus {
+  border-color: var(--ds-color-border-action-strong) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Form-label,
+body.ds-dark.t-Dialog-page .apex-item-label {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark.t-Dialog-page .apex-item-text,
+body.ds-dark.t-Dialog-page .apex-item-select,
+body.ds-dark.t-Dialog-page .apex-item-textarea,
+body.ds-dark.t-Dialog-page input[type="text"],
+body.ds-dark.t-Dialog-page input[type="email"],
+body.ds-dark.t-Dialog-page textarea,
+body.ds-dark.t-Dialog-page select {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Button--hot {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: transparent !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Button--hot:hover {
+  background-color: var(--ds-color-surface-action-strong-hover) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Button:not(.t-Button--hot):not(.t-Button--danger) {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border: 1px solid var(--ds-color-border-action) !important;
+}
+
+body.ds-dark.t-Dialog-page .t-Button:not(.t-Button--hot):not(.t-Button--danger):hover {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* About / NavigationBar dropdown dark mode */
+body.ds-dark .t-NavigationBar-menu,
+body.ds-dark .t-NavigationBar-menu.a-Menu {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* User menu dropdown — dark mode itself */
+body.ds-dark .t-NavigationBar-menu .a-Menu-content,
+body.ds-dark .t-Header-userMenu .a-Menu-content,
+body.ds-dark .t-Header .a-Menu-content {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-NavigationBar-menu .a-Menu-item .a-Menu-label,
+body.ds-dark .t-NavigationBar-menu.a-Menu .a-Menu-item a {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .t-NavigationBar-menu .a-Menu-item.is-focused,
+body.ds-dark .t-NavigationBar-menu .a-Menu-item.is-expanded {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* ── CARDS ────────────────────────────────────────────────────── */
+body.ds-dark .t-Cards .t-Card {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* .t-Card-wrap is an <a> anchor that fills the whole card.
+   APEX hardcodes white; we must explicitly override it in dark. */
+body.ds-dark .t-Cards .t-Card-wrap,
+body.ds-dark .t-Card .t-Card-wrap {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Card icon circle — APEX uses hardcoded #309fdb blue.
+   Keep action-strong in dark mode (it updates with dark tokens). */
+body.ds-dark .t-Cards .t-Card-icon,
+body.ds-dark .t-Card .t-Card-icon {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+}
+
+/* Card icon inner span (Font Apex icon) */
+body.ds-dark .t-Cards .t-Card-icon .t-Icon,
+body.ds-dark .t-Card .t-Card-icon .t-Icon {
+  color: var(--ds-color-typography-invert) !important;
+}
+
+body.ds-dark .t-Cards .t-Card-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .t-Cards .t-Card-subTitle,
+body.ds-dark .t-Cards .t-Card-subtitle,
+body.ds-dark .t-Cards .t-Card-body,
+body.ds-dark .t-Cards .t-Card-misc {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-Cards .t-Card-titleWrap {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* ── DATE PICKER (Gantt and any date form items) ─────────────── */
+/* .a-DatePicker-calendarContainer stuck white in dark mode */
+body.ds-dark .a-DatePicker-calendarContainer,
+body.ds-dark .a-DatePicker,
+body.ds-dark .a-DatePicker-header,
+body.ds-dark .a-DatePicker-calendar {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .a-DatePicker-day,
+body.ds-dark .a-DatePicker-weekday {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .a-DatePicker-day:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+body.ds-dark .a-DatePicker-day.is-selected,
+body.ds-dark .a-DatePicker-day.is-active {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+}
+
+body.ds-dark .a-DatePicker-day.is-today {
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+body.ds-dark .a-DatePicker-nav,
+body.ds-dark .a-DatePicker-navBtn {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .a-DatePicker-navBtn:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Page title area — text was inheriting browser default black */
+body.ds-dark .t-Body-title {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Page title text elements inside the title bar */
+body.ds-dark .t-PageTitle-text,
+body.ds-dark .t-Body-title h1,
+body.ds-dark .t-Body-title h2,
+body.ds-dark .t-Body-title h3,
+body.ds-dark .t-Body-title .t-Region-title,
+body.ds-dark .t-Body-title span {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Breadcrumb — was inheriting black */
+body.ds-dark .t-BreadcrumbRegion,
+body.ds-dark .t-Breadcrumb,
+body.ds-dark .t-Breadcrumb li,
+body.ds-dark .t-BreadcrumbRegion .t-Breadcrumb-item,
+body.ds-dark .t-BreadcrumbRegion .t-Breadcrumb-item span {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-BreadcrumbRegion a,
+body.ds-dark .t-Breadcrumb a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* Footer — background set by APEX via --ut-footer-background-color which resolves to #f2f2f2 */
+body.ds-dark .t-Footer {
+  background-color: var(--ds-color-surface-base) !important;
+  border-top: 1px solid var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-Footer a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* Body content area background — some APEX templates set this separately */
+body.ds-dark .t-Body-contentInner,
+body.ds-dark .t-Body-content,
+body.ds-dark .t-Body-main {
+  background-color: var(--ds-color-surface-page) !important;
+}
+
+/* Side column */
+body.ds-dark .t-Body-side,
+body.ds-dark .t-Body-actions {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* AVP List (attribute/value pairs used in detail regions) */
+body.ds-dark .t-AVPList-label {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .t-AVPList-value {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Search results */
+body.ds-dark .t-Region .t-SearchResults-desc {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .t-Region .t-SearchResults-date,
+body.ds-dark .t-Region .t-SearchResults-misc {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* Link list items */
+body.ds-dark .t-LinksList-item a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+body.ds-dark .t-LinksList-item.is-current > a {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Inline text / body copy that inherits browser default */
+body.ds-dark .t-Region-body,
+body.ds-dark .t-Region-body p,
+body.ds-dark .t-Region-body li,
+body.ds-dark .t-Region-body span,
+body.ds-dark .t-Region-body div {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* IR controls bar text */
+body.ds-dark .a-IRR-controlsBar,
+body.ds-dark .a-IRR-button,
+body.ds-dark .a-IRR-toolbar {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .a-IRR-reportSummary,
+body.ds-dark .a-IRR-controlsLabel {
+  color: var(--ds-color-typography-neutral) !important;
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* Select2 / chosen dropdowns */
+body.ds-dark .select2-container--default .select2-selection--single {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .select2-dropdown {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark .select2-results__option {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .select2-results__option--highlighted {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Popover / tooltip */
+body.ds-dark .ui-tooltip {
+  background-color: var(--ds-color-surface-invert) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Links */
+body.ds-dark a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* ── DARK MODE TOGGLE BUTTON STYLING ─────────────────────────
+   The toggle button injected into the user menu by the JS.
+────────────────────────────────────────────────────────────── */
+
+/* The injected toggle item in the user menu */
+#ds-dark-mode-toggle-item {
+  cursor: pointer;
+}
+
+#ds-dark-mode-toggle-item .a-Menu-label {
+  display: flex !important;
+  align-items: center !important;
+  gap: 8px !important;
+  cursor: pointer !important;
+  user-select: none !important;
+}
+
+/* The toggle switch track */
+.ds-dark-toggle-switch {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 32px;
+  height: 18px;
+  border-radius: 9999px;
+  background-color: var(--ds-color-surface-neutral-medium);
+  border: 1px solid var(--ds-color-border-neutral-medium);
+  position: relative;
+  transition: background-color 133ms cubic-bezier(0, 0, 0.2, 1),
+              border-color 133ms cubic-bezier(0, 0, 0.2, 1);
+  pointer-events: none;
+}
+
+.ds-dark-toggle-switch::after {
+  content: '';
+  position: absolute;
+  left: 2px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background-color: #ffffff;
+  transition: left 133ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+/* Active state — switch moves right, track turns Density action */
+body.ds-dark .ds-dark-toggle-switch {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  border-color: var(--ds-color-surface-action-strong) !important;
+}
+
+body.ds-dark .ds-dark-toggle-switch::after {
+  left: 16px;
+  background-color: var(--ds-color-typography-invert);
+}
+
+
+/* ================================================================
+   SECTION 15 — REPORTING COMPONENT DARK MODE OVERRIDES
+   All elements confirmed stuck in light mode via live audit of
+   Sample Reporting app (Interactive Report, Interactive Grid,
+   Faceted Search, Cards, Classic Report pages).
+   ================================================================ */
+
+/* ── INTERACTIVE REPORT outer wrapper ───────────────────────── */
+body.ds-dark .a-IRR {
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* ── IRR column header borders (hardcoded #e6e6e6 / #858d98) ─── */
+body.ds-dark .a-IRR-table th,
+body.ds-dark .a-IRR-header th {
+  border-right-color: var(--ds-color-border-neutral) !important;
+  border-bottom-color: var(--ds-color-border-neutral-medium) !important;
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .a-IRR-table td {
+  border-right-color: var(--ds-color-border-neutral) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* IRR sort widget (popup) */
+body.ds-dark .a-IRR-sortWidget,
+body.ds-dark .a-IRR-sortWidget-help {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* ── INTERACTIVE GRID (a-GV / a-IG) ─────────────────────────── */
+body.ds-dark .a-IG,
+body.ds-dark .a-IG-header,
+body.ds-dark .a-GV-hdr,
+body.ds-dark .a-GV-hdr--fixed,
+body.ds-dark .a-GV-footer {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .a-GV-header th,
+body.ds-dark .a-GV-header-cell,
+body.ds-dark .a-GV-table th,
+body.ds-dark .a-GV-frozen {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .a-GV-cell,
+body.ds-dark .a-GV-table td {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Selected row / cell in IG */
+body.ds-dark .a-GV-table tr.is-selected td,
+body.ds-dark .a-GV-table td.is-selected {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* IG toolbar buttons (a-Button = APEX's generic button class in grid) */
+body.ds-dark .a-Button,
+body.ds-dark .a-Toolbar-item .a-Button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: var(--ds-color-border-action) !important;
+}
+
+/* IG expand/collapse & page buttons */
+body.ds-dark .a-GV-expandCollapse,
+body.ds-dark .a-GV-pageButton {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Date picker trigger button */
+body.ds-dark .ui-datepicker-trigger.a-Button,
+body.ds-dark .ui-datepicker-trigger {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Row selector */
+body.ds-dark .u-selector {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+body.ds-dark .u-selector.is-selected {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* Floating drag handle */
+body.ds-dark .a-GV-floatingItem {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* jQuery UI button widget (used in IG and date pickers) */
+body.ds-dark .ui-button,
+body.ds-dark .ui-widget-content .ui-button,
+body.ds-dark .ui-corner-all.ui-button {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* ── FACETED SEARCH toggle button ───────────────────────────── */
+body.ds-dark .a-FS-toggle {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .a-FS-toggle:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* ── a-CardView (reporting card layout) ─────────────────────── */
+body.ds-dark .a-CardView {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .a-CardView-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.ds-dark .a-CardView-body,
+body.ds-dark .a-CardView-subtitle {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .a-CardView-button {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .a-CardView-button:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* ── Footer "Back to top" button ────────────────────────────── */
+body.ds-dark .t-Footer-topButton {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.ds-dark .t-Footer-topButton:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   SECTION 16 — MAP REGION DARK MODE (MapLibre GL JS)
+   All elements confirmed stuck in light mode via live audit of
+   Sample Maps app (Clickable Map, Circle Search, Map & Report,
+   Nearest Neighbor, Search & Show, Faceted Search pages).
+   ================================================================ */
+
+/* ── MapLibre control group (zoom/compass/draw buttons) ─────── */
+/* The control group panel: white -> dark surface */
+body.ds-dark .maplibregl-ctrl-group {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* Buttons: icon SVGs use fill='currentColor' — override color to white */
+body.ds-dark .maplibregl-ctrl-group button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .maplibregl-ctrl-group button:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Icon span inherits button color */
+body.ds-dark .maplibregl-ctrl-icon {
+  color: inherit !important;
+}
+
+/* Dividers between buttons */
+body.ds-dark .maplibregl-ctrl-group button + button {
+  border-top-color: var(--ds-color-border-neutral) !important;
+}
+
+/* ── MapLibre scale bar ──────────────────────────────────────── */
+/* Semi-transparent dark bg, light text, light border */
+body.ds-dark .maplibregl-ctrl-scale {
+  background-color: rgba(31, 35, 40, 0.75) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* ── MapLibre attribution ────────────────────────────────────── */
+body.ds-dark .maplibregl-ctrl-attrib {
+  background-color: rgba(31, 35, 40, 0.65) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .maplibregl-ctrl-attrib-button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .maplibregl-ctrl-attrib a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* ── MapLibre popup content ──────────────────────────────────── */
+/* The white popup card on feature click — must go dark */
+body.ds-dark .maplibregl-popup-content {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  box-shadow: var(--ds-elevation-overlay) !important;
+}
+
+body.ds-dark .maplibregl-popup-close-button {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .maplibregl-popup-close-button:hover {
+  color: var(--ds-color-typography-base) !important;
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Popup tip/arrow — must match dark popup bg */
+body.ds-dark .maplibregl-popup-anchor-top .maplibregl-popup-tip,
+body.ds-dark .maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+body.ds-dark .maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+  border-bottom-color: var(--ds-color-surface-base) !important;
+}
+
+body.ds-dark .maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+body.ds-dark .maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+body.ds-dark .maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+  border-top-color: var(--ds-color-surface-base) !important;
+}
+
+body.ds-dark .maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: var(--ds-color-surface-base) !important;
+}
+
+body.ds-dark .maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: var(--ds-color-surface-base) !important;
+}
+
+/* ── APEX dialog footer (marker click callout) ───────────────── */
+/* .t-ButtonRegion--dialogRegion is consistently stuck white
+   on all map pages — this covers it fully */
+body.ds-dark .t-ButtonRegion--dialogRegion {
+  background-color: var(--ds-color-surface-base) !important;
+  border-top-color: var(--ds-color-border-neutral) !important;
+}
+
+/* ── APEX Map legend ─────────────────────────────────────────── */
+body.ds-dark .a-MapRegion-legendLabel {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body.ds-dark .a-MapRegion-legendItem:hover .a-MapRegion-legendLabel {
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   SECTION 99 — APEX DEVELOPER TOOLBAR ISOLATION (DARK MODE)
+   Mirror of the same block in density-apex-overrides.css.
+   Dark mode must not re-colour the dev toolbar — it always keeps
+   its own APEX green/cyan palette regardless of body.ds-dark.
+   ================================================================ */
+
+/* Dark mode: body.ds-dark .a-Button loads after APEX's devtoolbar
+   rules and would win the cascade — explicitly restore APEX values. */
+body.ds-dark #apexDevToolbar {
+  background-color: var(--a-dev-toolbar-background-color)     !important;
+  color:            var(--a-dev-toolbar-text-color)            !important;
+  display:          block                                      !important;
+  visibility:       visible                                    !important;
+}
+
+body.ds-dark #apexDevToolbar .a-Button {
+  background-color: var(--a-dev-toolbar-button-background-color, transparent) !important;
+  color:            var(--a-dev-toolbar-button-text-color)                     !important;
+  border-color:     var(--a-dev-toolbar-button-border-color, var(--a-dev-toolbar-button-text-color)) !important;
+  font-weight:      revert !important;
+  border-radius:    revert !important;
+}
+
+body.ds-dark #apexDevToolbar .a-Button:hover,
+body.ds-dark #apexDevToolbar .a-Button:focus,
+body.ds-dark #apexDevToolbar .a-Button:active,
+body.ds-dark #apexDevToolbar .a-Button.is-active {
+  background-color: var(--a-dev-toolbar-button-active-background-color, transparent) !important;
+  color:            var(--a-dev-toolbar-button-active-text-color, var(--a-dev-toolbar-button-text-color)) !important;
+}

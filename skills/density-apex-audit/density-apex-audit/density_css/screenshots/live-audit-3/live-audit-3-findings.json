@@ -1,0 +1,91 @@
+[
+  {
+    "severity": "info",
+    "label": "LANDING URL",
+    "detail": "https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmwgroup.net:443/auth/oauth2/realms/root/realms/intranetb2x/authorize?response_type%3Dcode%26client_id%3D625cc74a-ec82-4d7d-9966-2635d6f870e4%26scope%3Dopenid%2520profile%2520email%26redirect_uri%3Dhttps://apextw10.bmwgroup.net/ords/apex_authentication.callback%26state%3DJ9nEHIWFid1pm3LMkMOKOMafwdQk63MFVXry3c8dalG2B1sHI7wRxqAfB43v4gizLy_-lv7D5Tv_w4MkWHNItF5Q8TnUpe6nCqzhrmF8xET-yx6fmSEsGfavpkaqwnRrHhDiW5MPDIvqK287LQgspybA-8vRhTqrz_x1NanjrC6TsZgh3leX12h94iCra-ZzrKtPsR1UCo6jWeG4MNKuIw#login/"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Landing state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-3/01-landing.png"
+  },
+  {
+    "severity": "pass",
+    "label": "SESSION VALID",
+    "detail": "App home loaded at https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmwgroup.net:443/auth/oauth2/realms/root/realms/intranetb2x/authorize?response_type%3Dcode%26client_id%3D625cc74a-ec82-4d7d-9966-2635d6f870e4%26scope%3Dopenid%2520profile%2520email%26redirect_uri%3Dhttps://apextw10.bmwgroup.net/ords/apex_authentication.callback%26state%3DJ9nEHIWFid1pm3LMkMOKOMafwdQk63MFVXry3c8dalG2B1sHI7wRxqAfB43v4gizLy_-lv7D5Tv_w4MkWHNItF5Q8TnUpe6nCqzhrmF8xET-yx6fmSEsGfavpkaqwnRrHhDiW5MPDIvqK287LQgspybA-8vRhTqrz_x1NanjrC6TsZgh3leX12h94iCra-ZzrKtPsR1UCo6jWeG4MNKuIw#login/"
+  },
+  {
+    "severity": "critical",
+    "label": "DENSITY CSS MISSING",
+    "detail": "No density-*.css in <link> tags. All CSS: "
+  },
+  {
+    "severity": "critical",
+    "label": "DENSITY JS MISSING",
+    "detail": "No density-*.js in <script src>. All JS: https://emea.int.alpha.sso.bmwgroup.com/auth/js/SanitizeUrl/sanitize-url.min.js, https://emea.int.alpha.sso.bmwgroup.com/auth/js/DomPurify/purify.min.js, https://emea.int.alpha.sso.bmwgroup.com/auth/js/saml2-write.js"
+  },
+  {
+    "severity": "critical",
+    "label": "EMPTY DENSITY TOKENS",
+    "detail": "6 empty: ['surface-base', 'surface-page', 'typography-base', 'border-action-strong', 'ut-header-bg', 'ut-body-bg']. Filled: {}"
+  },
+  {
+    "severity": "major",
+    "label": "HEADER PRESENT",
+    "detail": ".t-Header: False. Computed bg: NOT FOUND"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Header state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-3/02-header-state.png"
+  },
+  {
+    "severity": "critical",
+    "label": "USER MENU BTN NOT FOUND",
+    "detail": "No [data-menu] el. navBtns: []"
+  },
+  {
+    "severity": "major",
+    "label": "DARK MODE TOGGLE INJECTED",
+    "detail": "{\"found\": false}"
+  },
+  {
+    "severity": "info",
+    "label": "DARK MODE MANUAL INJECT COMPUTED",
+    "detail": "{\"bodyBg\": \"rgba(0, 0, 0, 0)\", \"bodyColor\": \"rgb(0, 0, 0)\", \"surfacePage\": \"\", \"surfaceBase\": \"\", \"headerBg\": \"N/A\", \"regionBg\": \"N/A\"}"
+  },
+  {
+    "severity": "major",
+    "label": "DARK BG ACTUALLY DARK",
+    "detail": "body bg: rgba(0, 0, 0, 0). Expected near rgb(11,13,16). Verdict: NOT DARK \u2014 tokens may resolve but body background is not overriding"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "After manual dark inject",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-3/04-dark-mode-manual.png"
+  },
+  {
+    "severity": "major",
+    "label": "DARK MODE PERSISTED AFTER RELOAD",
+    "detail": "URL: https://emea.int.alpha.sso.bmwgroup.com/auth/XUI/?realm=/alpha&spEntityID=https://saml20-intranetb2x-int-sp.sso.bmwgroup.com&goto=https://emea.int.alpha.sso.bmwgroup.com:443/auth/saml2/continue/metaAlias/alpha/saml-saml20-alpha-int-idp?secondVisitUrl%3D/auth/SSORedirect/metaAlias/alpha/saml-saml20-alpha-int-idp?ReqID%253Ds28a826ee6cd59666dea6c8a2a6895407646f73c9a&AMAuthCookie=#login/. hasDsClass: False, ls: on, scriptPresent: False"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "After reload",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-3/05-after-reload.png"
+  },
+  {
+    "severity": "info",
+    "label": "HEADER BTN BORDER STYLE",
+    "detail": "{\"found\": false}"
+  },
+  {
+    "severity": "info",
+    "label": "DOM STRUCTURE SUMMARY",
+    "detail": "{\"title\": \"WEB-EAM Next\", \"bodyClasses\": \"\", \"hasTRegion\": false, \"hasTCards\": false, \"hasIR\": false, \"hasLeftNav\": false, \"dataMenuCount\": 0, \"navBarBtnCount\": 0}"
+  }
+]

@@ -1,0 +1,170 @@
+[
+  {
+    "severity": "info",
+    "label": "TARGET URL",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=14477119155105"
+  },
+  {
+    "severity": "info",
+    "label": "LANDED URL",
+    "detail": "https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmwgroup.net:443/auth/oauth2/realms/root/realms/intranetb2x/authorize?response_type%3Dcode%26client_id%3D625cc74a-ec82-4d7d-9966-2635d6f870e4%26scope%3Dopenid%2520profile%2520email%26redirect_uri%3Dhttps://apextw10.bmwgroup.net/ords/apex_authentication.callback%26state%3DbKfAhqkxR4r9EghZRgAqHc5g1q1SOCTYAZgxxI663L41lgk54sgFjY850VfoCk9E6PCk9JXY9CxDCdWiHvQQWRRgWSizjaRe1-UJEIjepNc2CYvJmLPdTJ984Cx2HHYR0K-x42IyguW9ZFaaHQecMghHzUXz23F8y5Hwnv7MaJ5Sox1b0sRhbaY-fOGki1cUpOzBSTQtw7RBfpoXCYhLig#login/"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Landing state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/01-landing.png"
+  },
+  {
+    "severity": "critical",
+    "label": "SSO REDIRECT",
+    "detail": "BMW SSO detected \u2014 browser is open. Please log in. Waiting up to 120 seconds..."
+  },
+  {
+    "severity": "critical",
+    "label": "POST-LOGIN URL",
+    "detail": "https://emea.int.alpha.sso.bmwgroup.com/auth/SSORedirect/metaAlias/alpha/saml-saml20-alpha-int-idp?SAMLRequest=nZTRjtowEEV/JfJ7EicskLUAiQVVRdrtpoS2Ut%2BMM4ClxE49zi79%2BzoGSqQWVPUtGl/PGd9rZ4K8rho2b%2B1BreFHC2iDY10pZH5hSlqjmOYokSleAzIrWDF/eWZpRFljtNVCVySYI4KxUquFVtjWYAowb1LAl/XzlBysbZDFMXeQUEbb%2Bn1vdNtECqyvxR39sjGuwfJ5JTnGUlnDnWibHuNumpSGvVL3HWJDgqWbWSre0a8sqIFHThHxqjnwCFFfuULXJ25RvK6hlAaE7WH9Dg8Mz1Rf8TxZOuAHbQR4x6ZkxysEEqyWU4LpcPhAR49AH0uRleWIpg%2BQjl3hkWZDnmUJHWTjjA62To85R5RvcO2A2MJKoeXKTklK01FIR%2BGAbpKMJWOWJt9JkJ/9fpKqlGp/P5ztSYTs42aTh/lrsSHBVzDobXICMpt0x2MebHqh32/LL0mT2cXrm9n8Yfsk7iFP/IZ9cozVMteVFD%2BDeVXp94UBbq/WOL9rbm%2BPlUSJr8gy3HkpaxU2IOROQkmCIu8In1tedQVzvSP/PjeJL8Oe3wiUPn93aS0c7X%2BYFyx03XAjsUsDjlzYSx79xovK7VjDbna3qWCi07ny08s3htZotU8opWe3/9rwtHbjPL9X%2B7%2BF2S8%3D&SigAlg=http://www.w3.org/2001/04/xmldsig-more%23rsa-sha256&Signature=k42Ta7Ac57GbvYqItk6cqpOxwr9VrHQKZL8P/JaB%2B46K2/sGCH0WC8B93yMNgwL9uT1tBA8e9nN8D198B/Q0WuRu9rkwBgFhR9Xhz4JXu7kGZyyQAxQeTUToPFu/C4D7fG5bbLsNKMfDuVJ9vEz7QTglOAvzq2HUkM5VLOPHAbYqy20ihSKOEfHZlkVDbbA8dXB0RLz4btVFBE0849dEqPUUdRfwXzCOQwXbK5KFzY/kKoy3TXmuN0/htdRnabRkEcWNu2GZk80ZHOM/wg1IX5KQOL3NPqI4yVHPxH64H5K8EyIqoxi5m1jN6yZCi2am75b5X6O6SedMAjd6nIFWZg%3D%3D"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Post-login state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/02-post-login.png"
+  },
+  {
+    "severity": "info",
+    "label": "DOM STRUCTURE",
+    "detail": "{\"title\": \"Supplier Contact Database - Next\", \"bodyClasses\": \"t-PageBody t-PageBody--hideLeft t-PageBody--hideActions t-PageTemplate--standard apex-side-nav apex-icons-fontapex apex-theme-vita js-ready js-navCollapsed--hidden js-navCollapsed t-PageBody--leftNav a-pwaPush--available\", \"hasTHeader\": true, \"hasLeftNav\": true, \"hasTCards\": false, \"hasIR\": false, \"apexVersion\": \"unknown\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY CSS FOUND",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v87/css/density-apex-theme-standalone.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v87/css/density-apex-overrides.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v87/css/density-dark-mode.css"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY JS FOUND",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v87/css/density-dark-mode.js"
+  },
+  {
+    "severity": "major",
+    "label": "DENSITY TOKENS PARTIAL",
+    "detail": "2/6 resolved. Missing: --ds-color-brand-primary, --ds-color-text-primary, --ds-color-border-default, --ds-spacing-base"
+  },
+  {
+    "severity": "pass",
+    "label": "TOKEN COMPLETENESS",
+    "detail": "261 of 261 Density tokens from reference CSS resolved on live page (100%)"
+  },
+  {
+    "severity": "pass",
+    "label": "HEADER BG OVERRIDDEN",
+    "detail": "Header bg=rgb(255, 255, 255) (not APEX blue \u2014 Density override active)"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Header state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/03-header.png"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "User menu opened",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/04-user-menu-open.png"
+  },
+  {
+    "severity": "major",
+    "label": "DARK MODE TOGGLE MISSING",
+    "detail": "#ds-dark-mode-toggle-item not found \u2014 density-dark-mode.js may not be running"
+  },
+  {
+    "severity": "info",
+    "label": "LOCALSTORAGE DS-DARK-MODE",
+    "detail": "None"
+  },
+  {
+    "severity": "info",
+    "label": "DARK MODE COMPUTED STYLES",
+    "detail": "{\"bodyBg\": \"rgb(11, 13, 16)\", \"bodyColor\": \"rgb(242, 243, 244)\", \"hasDsClass\": true, \"headerBg\": \"rgb(31, 35, 40)\", \"regionBg\": \"N/A\", \"surfacePage\": \"#f5f6f6\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "DARK BG IS DARK",
+    "detail": "Body bg: rgb(11, 13, 16) \u2014 matches ds-color-surface-page dark value"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Dark mode injected",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/05-dark-mode.png"
+  },
+  {
+    "severity": "info",
+    "label": "POST-RELOAD DARK CHECK",
+    "detail": "{\"hasDsClass\": true, \"ls\": \"on\", \"url\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=10910226307014\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "DARK MODE PERSISTS ACROSS RELOAD",
+    "detail": "body.ds-dark present immediately after reload \u2014 FOUC risk low"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "After reload dark check",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/06-after-reload.png"
+  },
+  {
+    "severity": "info",
+    "label": "NAV LINKS",
+    "detail": "[{\"text\": \"Install App\", \"href\": \"https://apextw10.bmwgroup.net/ords/#action$a-pwa-install\"}, {\"text\": \"Feedback\", \"href\": \"https://apextw10.bmwgroup.net/ords/#action$a-dialog-open?url=%2Fords%2Fr%2Fws_mn_digi_test%2Fsupplier-contact-database-next%2Ffeedback%3Fp10040_page_id%3D1%26clear%3DRP%2C10040%26session%3D10910226307014%26cs%3D3fVRBZHdYuldDYGBHavQHCRl6DwSKYuNju8qfD4lsJT5iKjcmREBqD6x_1L-k2WmsGURYNMwW8t3wT7VlZYgtKA%26dialogCs%3DOg9m0-63BZLzIlq7RJfCM4EfbdRFQ4SKMBguRpzTDe-LEkkblgMnQKQrwY0R3qsMwrjXam6QEk3ZzrWYUU_EzA&appId=1817&pageId=10040&tmpl=MODAL_DIALOG&title=Feedback&h=auto&w=480&mxw=960&isModal=true&dlgCls=&pageCls=&trgEl=apex.gPageContext%24\"}, {\"text\": \"Home\", \"href\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=10910226307014\"}, {\"text\": \"Administration\", \"href\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/administration?session=10910226307014\"}]"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Navigated to: Feedback",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/ir-01-nav-page.png"
+  },
+  {
+    "severity": "info",
+    "label": "NO IR ON NAV PAGE",
+    "detail": "Navigated to Feedback but no IR found \u2014 may be a form/dashboard page"
+  },
+  {
+    "severity": "minor",
+    "label": "IR PAGE NOT AUDITED",
+    "detail": "Could not reach an IR page \u2014 IR-specific Density checks skipped"
+  },
+  {
+    "severity": "info",
+    "label": "A11Y SPOT CHECK",
+    "detail": "total=18 interactive, missing labels=16"
+  },
+  {
+    "severity": "major",
+    "label": "ARIA LABELS MISSING",
+    "detail": "16 of 18 interactive elements missing accessible labels (89%). Sample: [{\"tag\": \"A\", \"cls\": \"\", \"id\": \"t_Body_skipToContent\", \"type\": \"\"}, {\"tag\": \"A\", \"cls\": \"t-Header-logo-link\", \"id\": \"\", \"type\": \"\"}, {\"tag\": \"A\", \"cls\": \"t-Button t-Button--icon t-Button--header t-Button--navBar\", \"id\": \"\", \"type\": \"\"}, {\"tag\": \"A\", \"cls\": \"t-Button t-Button--icon t-Button--header t-Button--navBar\", \"id\": \"\", \"type\": \"\"}, {\"tag\": \"BUTTON\", \"cls\": \"t-Button t-Button--icon t-Button t-Button--header t-Button--\", \"id\": \"L1855851048950529356\", \"type\": \"button\"}]"
+  },
+  {
+    "severity": "pass",
+    "label": "FOCUS RING RULE PRESENT",
+    "detail": ":focus-visible with outline found in stylesheets"
+  },
+  {
+    "severity": "info",
+    "label": "COLOUR CONTRAST SAMPLES",
+    "detail": "bodyBg=rgb(245, 246, 246), bodyColor=rgb(31, 35, 40)"
+  },
+  {
+    "severity": "pass",
+    "label": "BODY BG CORRECT",
+    "detail": "Body background = rgb(245, 246, 246) \u2014 matches Density surface-page #f5f6f6 \u2713"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Final audit state (light mode)",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-5/07-final.png"
+  }
+]

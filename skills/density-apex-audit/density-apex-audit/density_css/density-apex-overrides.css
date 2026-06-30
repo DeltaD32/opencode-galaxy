@@ -1,0 +1,1326 @@
+/*
+ * ================================================================
+ * BMW DENSITY — APEX UNIVERSAL THEME OVERRIDES
+ * ================================================================
+ * WHY THIS FILE EXISTS
+ *   APEX Universal Theme 42 compiles ALL colours as hardcoded hex
+ *   values (no CSS custom properties). It loads its own stylesheet
+ *   AFTER any file you add via User Interface Attributes → CSS,
+ *   so our rules always lose on specificity ties.
+ *
+ *   This file wins by using !important on every structural rule
+ *   that APEX hardcodes. Values still come from Density --ds-*
+ *   tokens defined in density-apex-theme-standalone.css.
+ *
+ * LOAD ORDER (User Interface Attributes → CSS → File URLs):
+ *   1. density-apex-theme-standalone.css   ← defines --ds-* tokens
+ *   2. density-apex-overrides.css          ← this file, forces wins
+ *
+ * APEX SELECTORS TARGETED (verified from Vita.min.css source):
+ *   - Page / body background
+ *   - Left nav (.t-PageBody--leftNav .t-Body-nav)
+ *   - Top header bar (.t-Header-branding, .t-Header .a-MenuBar)
+ *   - TreeNav rows / states
+ *   - Regions (.t-Region, .t-Region-header, .t-Region-body)
+ *   - Buttons (.t-Button, .a-Button, .t-Button--hot)
+ *   - Alerts / messages
+ *   - Interactive Report
+ * ================================================================
+ */
+
+
+/* ================================================================
+   --ut-* VARIABLE OVERRIDES
+   APEX Core.min.css defines --ut-* variables in :root that control
+   text colours for the header, nav, and body areas. These are set
+   to white (#fff) for the Vita dark-blue header theme. We override
+   them here so they use Density tokens regardless of Vita styles.
+   This is the correct place — not !important rules — because the
+   variables cascade naturally to all child elements.
+   ================================================================ */
+
+:root {
+  /* Header — Vita sets #056ac8 bg / #fff text. We use Density base. */
+  --ut-header-background-color:     var(--ds-color-surface-base);
+  --ut-header-text-color:           var(--ds-color-typography-base);
+  --ut-header-menubar-background-color:          var(--ds-color-surface-base);
+  --ut-header-menubar-item-text-color:           var(--ds-color-typography-neutral);
+  --ut-header-menubar-item-current-background-color: var(--ds-color-surface-action-mild);
+  --ut-header-menubar-item-current-text-color:   var(--ds-color-typography-action);
+  --ut-header-menubar-item-hover-background-color: var(--ds-color-surface-neutral-hover);
+  --ut-header-menubar-item-hover-text-color:     var(--ds-color-typography-base);
+
+  /* Nav sidebar — Vita sets #2e3439 bg / #fff text. We use Density base. */
+  --ut-body-nav-background-color:   var(--ds-color-surface-base);
+  --ut-body-nav-text-color:         var(--ds-color-typography-neutral);
+  --ut-navtabs-background-color:    var(--ds-color-surface-base);
+  --ut-navtabs-text-color:          var(--ds-color-typography-neutral);
+  --ut-navtabs-item-active-background-color: var(--ds-color-surface-action-mild);
+  --ut-navtabs-item-hover-background-color:  var(--ds-color-surface-neutral-hover);
+
+  /* Body title bar — Vita sets #000 text which is fine, but ensure it uses token */
+  --ut-body-title-background-color: var(--ds-color-surface-base);
+  --ut-body-title-text-color:       var(--ds-color-typography-base);
+  --ut-breadcrumb-item-text-color:  var(--ds-color-typography-neutral);
+  --ut-breadcrumb-item-active-text-color: var(--ds-color-typography-base);
+
+  /* Footer — Vita sets #f2f2f2 bg. Use Density surface-base. */
+  --ut-footer-background-color:     var(--ds-color-surface-base);
+  --ut-footer-border-color:         var(--ds-color-border-neutral);
+
+  /* Body backgrounds */
+  --ut-body-background-color:       var(--ds-color-surface-page);
+  --ut-body-text-color:             var(--ds-color-typography-base);
+  --ut-body-sidebar-background-color: var(--ds-color-surface-base);
+  --ut-body-sidebar-text-color:     var(--ds-color-typography-base);
+  --ut-body-actions-background-color: var(--ds-color-surface-base);
+  --ut-body-actions-text-color:     var(--ds-color-typography-base);
+
+  /* Component text colours */
+  --ut-component-text-default-color:   var(--ds-color-typography-base);
+  --ut-component-text-title-color:     var(--ds-color-typography-base);
+  --ut-component-text-subtitle-color:  var(--ds-color-typography-neutral);
+  --ut-component-text-muted-color:     var(--ds-color-typography-neutral);
+
+  /* Region text */
+  --ut-region-header-background-color: var(--ds-color-surface-base);
+  --ut-region-header-text-color:       var(--ds-color-typography-base);
+  --ut-region-background-color:        var(--ds-color-surface-base);
+  --ut-region-text-color:              var(--ds-color-typography-base);
+
+  /* Field label */
+  --ut-field-label-text-color:      var(--ds-color-typography-neutral);
+
+  /* Focus */
+  --ut-focus-outline-color:         var(--ds-color-border-action-strong);
+  --ut-link-text-color:             var(--ds-color-typography-action);
+  --ut-palette-primary:             var(--ds-color-surface-action-strong);
+  --ut-palette-primary-contrast:    var(--ds-color-typography-invert);
+  --ut-palette-primary-text:        var(--ds-color-typography-action);
+}
+
+
+/* ================================================================
+   PAGE BODY & BACKGROUND
+   APEX sets: body { background: gradient over #fff }
+   ================================================================ */
+
+body,
+.t-PageBody,
+.t-Body {
+  background: var(--ds-color-surface-page) !important;
+  color: var(--ds-color-typography-base) !important;
+  font-family: var(--ds-typography-family-system) !important;
+}
+
+.t-PageBody--login,
+.t-PageBody--login .t-Body {
+  background-color: var(--ds-color-surface-page) !important;
+}
+
+/* ================================================================
+   DIALOG & MODAL PAGES  (.t-Dialog-page)
+   ─────────────────────────────────────────────────────────────────
+   APEX renders modal dialogs (Feedback, Help, About sub-pages) as
+   full HTML documents inside a <iframe> embedded in a jQuery UI
+   dialog. The <body> of those documents carries the class
+   "t-Dialog-page" — NOT ".t-PageBody". Because the iframe is a
+   separate browsing context, the parent window's selectors do NOT
+   reach inside it. However, all three Density CSS files ARE loaded
+   inside the iframe (they are referenced at the application level
+   via User Interface Attributes), so selectors targeting
+   "body.t-Dialog-page" DO apply inside the iframe.
+
+   Fixes:
+     • Body background — was white (#fff); now uses surface-page
+     • Dialog page content padding area background
+     • Button-pane (Cancel / Submit row) background
+     • APEX t-Dialog-body wrapper background
+     • Form region backgrounds inside dialogs
+     • "Submit Feedback" hot button and "Cancel" outline button —
+       APEX renders these with its own .t-Button--hot class but
+       inside .t-Dialog-body, which wasn't getting the overrides
+       because the Vita theme adds specificity.
+     • Help close button (.ui-dialog-titlebar-close) — Vita renders
+       it with a blue border (#007cc3) that we override to Density.
+   ================================================================ */
+
+/* Body background of dialog iframe documents */
+body.t-Dialog-page,
+body.t-Dialog-page .t-Body,
+body.t-Dialog-page .t-PageBody {
+  background-color: var(--ds-color-surface-page) !important;
+  color: var(--ds-color-typography-base) !important;
+  font-family: var(--ds-typography-family-system) !important;
+}
+
+/* Dialog content scroll area */
+body.t-Dialog-page .t-Dialog-body,
+body.t-Dialog-page .t-Dialog-body .t-Region,
+body.t-Dialog-page .t-Region {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body.t-Dialog-page .t-Region-header {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+body.t-Dialog-page .t-Region-body {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Button pane (footer row with Cancel / Submit)
+   APEX Vita sets .t-ButtonRegion { background-color: #fff } with high
+   specificity via .t-Dialog .t-ButtonRegion. We must match that depth. */
+body.t-Dialog-page .t-Dialog-footer,
+body.t-Dialog-page .t-ButtonRegion,
+body.t-Dialog-page .t-ButtonRegion--dialogRegion,
+body.t-Dialog-page .t-ButtonRegion .t-Region-body,
+.t-Dialog-page .t-ButtonRegion {
+  background-color: var(--ds-color-surface-base) !important;
+  border-top: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+/* ── Radio / smiley feedback selector (u-radio labels) ──────────
+   APEX hardcodes rgb(248,248,248) on .u-radio label tiles —
+   slightly off-white that doesn't match Density surface-neutral.
+   Light mode: use surface-neutral for consistency. */
+body.t-Dialog-page .u-radio {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+body.t-Dialog-page .u-radio:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+body.t-Dialog-page .apex-item-option input:checked ~ .u-radio {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* Form labels inside dialog */
+body.t-Dialog-page .t-Form-label,
+body.t-Dialog-page .apex-item-label {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* Form inputs inside dialog */
+body.t-Dialog-page .apex-item-text,
+body.t-Dialog-page .apex-item-select,
+body.t-Dialog-page .apex-item-textarea,
+body.t-Dialog-page input[type="text"],
+body.t-Dialog-page input[type="email"],
+body.t-Dialog-page textarea,
+body.t-Dialog-page select {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  border: 1px solid var(--ds-color-border-neutral-medium) !important;
+}
+
+body.t-Dialog-page .apex-item-text:focus,
+body.t-Dialog-page .apex-item-select:focus,
+body.t-Dialog-page .apex-item-textarea:focus,
+body.t-Dialog-page textarea:focus,
+body.t-Dialog-page select:focus {
+  border-color: var(--ds-color-border-action-strong) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) !important;
+}
+
+/* Emoji / smiley rating buttons (Feedback page "Experience" selector) */
+body.t-Dialog-page .t-Button--hot,
+body.t-Dialog-page .apex-button-group .t-Button--hot {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: transparent !important;
+}
+
+body.t-Dialog-page .t-Button--hot:hover {
+  background-color: var(--ds-color-surface-action-strong-hover) !important;
+}
+
+/* Standard button in dialog (Cancel etc.) */
+body.t-Dialog-page .t-Button:not(.t-Button--hot):not(.t-Button--danger) {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border: 1px solid var(--ds-color-border-action) !important;
+}
+
+body.t-Dialog-page .t-Button:not(.t-Button--hot):not(.t-Button--danger):hover {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* ── jQuery UI dialog close button (the × in top-right corner) ──
+   APEX Vita sets: border: 1px solid #007cc3 (blue) on
+   .ui-dialog-titlebar-close. We reset it to a ghost Density style.
+   Applies to the OUTER dialog (parent window context) AND to any
+   dialog rendered inside an iframe. */
+.ui-dialog-titlebar-close,
+body .ui-dialog-titlebar-close {
+  background-color: transparent !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-radius: 2px !important;
+}
+
+.ui-dialog-titlebar-close:hover,
+body .ui-dialog-titlebar-close:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+.ui-dialog-titlebar-close .ui-icon,
+body .ui-dialog-titlebar-close .ui-icon {
+  /* Prevent jQueryUI's sprite background overriding the × icon */
+  background-image: none !important;
+  text-indent: 0 !important;
+}
+
+/* ── About dropdown menu container bg ───────────────────────────
+   The "About" nav bar button opens a .t-NavigationBar-menu with
+   class a-Menu. The menu's outer container can inherit transparent
+   bg from the nav bar. Force surface-base so it is always opaque. */
+.t-NavigationBar-menu,
+.t-NavigationBar-menu.a-Menu {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+
+/* ================================================================
+   TOP HEADER BAR
+   APEX sets:
+     .t-Header-branding { background-color: #2578cf }
+     .t-Header .a-MenuBar { background-color: #164678 }
+     .t-Header-logo-link, .t-Header .t-Button--header { color: #fff }
+   ================================================================ */
+
+.t-Header,
+.t-Header-navBar,
+.t-Header-branding {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-navigation) !important;
+}
+
+.t-Header .a-MenuBar {
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+.t-Header-logo-link,
+.t-Header .t-Button--header,
+.t-Header .t-Button--header.t-Button--header,
+.t-Header .a-MenuBar-label {
+  color: var(--ds-color-typography-base) !important;
+}
+
+.t-Header .t-Button--header:hover,
+.t-Header .a-MenuBar-item:hover .a-MenuBar-label,
+.t-Header .a-MenuBar-item.is-focused .a-MenuBar-label {
+  color: var(--ds-color-typography-action) !important;
+}
+
+.t-Header .a-MenuBar-item.is-focused,
+.t-Header .a-MenuBar-item:hover,
+.t-Header .a-MenuBar-item.a-Menu--current {
+  background-color: var(--ds-color-surface-action-mild) !important;
+}
+
+.t-Header .a-MenuBar-item.is-expanded {
+  background-color: var(--ds-color-surface-action-mild) !important;
+}
+
+.t-Header .a-Menu-content,
+.t-Header-userMenu .a-Menu-content,
+.t-NavigationBar-menu .a-Menu-content {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+.t-Header .a-Menu .a-Menu-item,
+.t-NavigationBar-menu .a-Menu-item .a-Menu-label,
+.t-NavigationBar-menu.a-Menu .a-Menu-item a {
+  color: var(--ds-color-typography-base) !important;
+}
+
+.t-Header .a-Menu .a-Menu-item.is-expanded,
+.t-Header .a-Menu .a-Menu-item.is-focused,
+.t-Header-userMenu .a-Menu-item.is-expanded,
+.t-Header-userMenu .a-Menu-item.is-focused,
+.t-NavigationBar-menu .a-Menu-item.is-expanded,
+.t-NavigationBar-menu .a-Menu-item.is-focused {
+  background-color: var(--ds-color-surface-action-mild) !important;
+}
+
+
+/* ================================================================
+   LEFT NAVIGATION BAR
+   APEX sets:
+     .t-PageBody--leftNav .t-Body-nav { background-color: #19528e }
+   TreeNav rows all have blue backgrounds with white text.
+   ================================================================ */
+
+.t-Body-nav,
+.t-PageBody--leftNav .t-Body-nav,
+.apex-side-nav .t-Body-nav {
+  background-color: var(--ds-color-surface-base) !important;
+  border-right: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-navigation) !important;
+}
+
+/* All TreeNav rows — reset the blue backgrounds */
+.t-TreeNav .a-TreeView-node--topLevel ul,
+.t-TreeNav .a-TreeView-node--topLevel.is-collapsible > .a-TreeView-row,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* TreeNav all text to base colour (APEX sets white) */
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content .a-Icon,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content .fa,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-label,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-current,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-current--top,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-selected,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-toggle {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+/* TreeNav hover state (APEX: #267bd3 blue) */
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-hover,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-hover + .a-TreeView-toggle:hover,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-hover .a-Icon,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-hover .fa {
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* TreeNav active/selected state (APEX: #2373c6 blue) */
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-current,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-current--top.is-selected,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-row.is-selected {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-left: 3px solid var(--ds-color-border-action-strong) !important;
+}
+
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-current .a-Icon,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-content.is-current--top .a-Icon,
+.t-TreeNav .a-TreeView-node--topLevel .a-TreeView-toggle:hover {
+  color: var(--ds-color-typography-action) !important;
+}
+
+
+/* ================================================================
+   REGIONS
+   APEX sets:
+     .t-Region { background-color: #fff; border: 1px solid rgba(0,0,0,.05) }
+     .t-Region-header { background-color: #fcfcfc; border-bottom: 1px solid #e2e2e2 }
+     .t-Region h2.t-Region-title { color: #3d3d3d }
+     .t-Region-body { color: #404040 }
+   ================================================================ */
+
+.t-Region {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-base) !important;
+}
+
+.t-Region-header {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+.t-Region-title,
+.t-Region h2.t-Region-title,
+.t-Region-header .t-Button--noUI,
+.t-Region-header .t-Region-title {
+  color: var(--ds-color-typography-base) !important;
+  font-family: var(--ds-typography-family-brand) !important;
+  font-size: var(--ds-typography-size-title-sm) !important;
+  text-transform: var(--ds-typography-transform-title-sm) !important;
+}
+
+.t-Region-body {
+  color: var(--ds-color-typography-base) !important;
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* noBorder variant */
+.t-Region--noBorder > .t-Region-header {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+.t-Region--noBorder > .t-Region-header .t-Region-title,
+.t-Region--noBorder > .t-Region-header .t-Button--noUI {
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   BUTTONS
+   APEX sets:
+     .a-Button, .t-Button { background-color: #f8f8f8; color: #383838; border: 1px solid }
+     .t-Button--hot { ← no background set in Vita, defined elsewhere }
+   ================================================================ */
+
+.t-Button,
+.a-Button {
+  font-family: var(--ds-typography-family-system) !important;
+  font-size: var(--ds-typography-size-04) !important;
+  font-weight: 600 !important;
+  border-radius: 2px !important;
+}
+
+/* Default/outline button — explicitly exclude ALL header/nav button variants */
+.t-Button:not(.t-Button--hot):not(.t-Button--danger):not(.t-Button--noUI):not(.t-Button--simple):not(.t-Button--header):not(.t-Button--navBar):not(.t-Button--headerTree) {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border: 1px solid var(--ds-color-border-action) !important;
+}
+
+.t-Button:not(.t-Button--hot):not(.t-Button--danger):not(.t-Button--noUI):not(.t-Button--simple):not(.t-Button--header):not(.t-Button--navBar):not(.t-Button--headerTree):hover {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* Hot / primary button */
+.t-Button--hot {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: transparent !important;
+}
+
+.t-Button--hot:hover {
+  background-color: var(--ds-color-surface-action-strong-hover) !important;
+}
+
+.t-Button--hot:active {
+  background-color: var(--ds-color-surface-action-strong-active) !important;
+}
+
+/* Danger button */
+.t-Button--danger {
+  background-color: var(--ds-color-surface-critical-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: transparent !important;
+}
+
+.t-Button--danger:hover {
+  background-color: var(--ds-color-surface-critical-strong-hover) !important;
+}
+
+/* Ghost / noUI buttons */
+.t-Button--noUI,
+.t-Button--simple {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: transparent !important;
+  box-shadow: none !important;
+}
+
+.t-Button--noUI:hover,
+.t-Button--simple:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Disabled */
+.t-Button:disabled,
+.t-Button[disabled],
+.a-Button:disabled,
+.a-Button[disabled] {
+  background-color: var(--ds-color-surface-disabled) !important;
+  color: var(--ds-color-typography-disabled) !important;
+  border-color: var(--ds-color-border-disabled) !important;
+  opacity: 1 !important;
+  cursor: not-allowed !important;
+}
+
+/* Header buttons — ALL header/navBar buttons must be ghost (transparent border) */
+/* Bug fix: our outline button rule was leaking --ds-color-border-action (#a8dfff) onto
+   header icon buttons (.t-Button--header, .t-Button--navBar). They are ghost buttons
+   and must have transparent borders at all times. */
+.t-Button.t-Button--header,
+.t-Button.t-Button--navBar,
+.t-Button.t-Button--headerTree,
+.t-Header .t-Button,
+.t-Header-branding .t-Button,
+.t-Header-navBar .t-Button {
+  background-color: transparent !important;
+  border: 1px solid transparent !important;
+  box-shadow: none !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.t-Button.t-Button--header:hover,
+.t-Button.t-Button--navBar:hover,
+.t-Button.t-Button--headerTree:hover,
+.t-Header .t-Button:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  border: 1px solid transparent !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   ALERTS & MESSAGES
+   APEX sets signal colours via .t-Alert--colorBG variants
+   ================================================================ */
+
+.t-Alert--colorBG.t-Alert--success {
+  background-color: var(--ds-color-surface-positive) !important;
+  border-color: var(--ds-color-border-positive) !important;
+}
+
+.t-Alert--colorBG.t-Alert--success h2,
+.t-Alert--colorBG.t-Alert--success h3,
+.t-Alert--colorBG.t-Alert--success .t-Alert-title {
+  color: var(--ds-color-typography-positive) !important;
+}
+
+.t-Alert--colorBG.t-Alert--warning {
+  background-color: var(--ds-color-surface-caution) !important;
+  border-color: var(--ds-color-border-caution) !important;
+}
+
+.t-Alert--colorBG.t-Alert--warning h2,
+.t-Alert--colorBG.t-Alert--warning h3,
+.t-Alert--colorBG.t-Alert--warning .t-Alert-title {
+  color: var(--ds-color-typography-caution) !important;
+}
+
+.t-Alert--colorBG.t-Alert--danger {
+  background-color: var(--ds-color-surface-critical) !important;
+  border-color: var(--ds-color-border-critical-strong) !important;
+}
+
+.t-Alert--colorBG.t-Alert--danger h2,
+.t-Alert--colorBG.t-Alert--danger h3,
+.t-Alert--colorBG.t-Alert--danger .t-Alert-title {
+  color: var(--ds-color-typography-critical) !important;
+}
+
+
+/* ================================================================
+   INTERACTIVE REPORT
+   APEX sets row hover: .a-IRR-table tr:hover td { background: #f9f9f9 }
+   Table cell borders: border-left/top: 1px solid #f2f2f2
+   ================================================================ */
+
+.a-IRR-table tr:hover td {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+.a-IRR-table td {
+  border-left-color: var(--ds-color-border-neutral) !important;
+  border-top-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+.a-IRR-table th {
+  color: var(--ds-color-typography-neutral) !important;
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+.a-IRR-search-field:focus {
+  border-color: var(--ds-color-border-action-strong) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) !important;
+}
+
+.a-IRR-headerLink:focus {
+  box-shadow: 0 0 0 2px var(--ds-color-border-action-strong) inset !important;
+}
+
+/* IR sort widget (appears as a blue panel in Vita) */
+body .a-IRR-sortWidget-rows,
+body .a-IRR-sortWidget-row {
+  background: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+body .a-IRR-sortWidget-row:hover {
+  background-color: var(--ds-color-surface-action-strong-hover) !important;
+}
+
+body .a-IRR-button.a-IRR-sortWidget-button {
+  color: var(--ds-color-typography-invert) !important;
+  background-color: var(--ds-color-surface-action-strong) !important;
+}
+
+body .a-IRR-button.a-IRR-sortWidget-button:hover {
+  background-color: var(--ds-color-surface-action-strong-hover) !important;
+}
+
+.a-IRR-sortWidget-search > .a-IRR-sortWidget-searchField {
+  color: var(--ds-color-typography-invert) !important;
+  background: var(--ds-color-surface-action-strong) !important;
+}
+
+.a-IRR-button.a-IRR-button--pagination:hover {
+  background-color: var(--ds-color-surface-action-strong) !important;
+}
+
+
+/* ================================================================
+   JQUERY UI WIDGETS (datepicker, dialog)
+   APEX sets hardcoded values prefixed with `body .ui-`
+   ================================================================ */
+
+body .ui-widget-content {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-widget-content a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+body .ui-widget-header {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-widget-overlay {
+  background: var(--ds-color-surface-backdrop) !important;
+  opacity: 1 !important;
+}
+
+body .ui-dialog .ui-dialog-titlebar {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+body .ui-dialog .ui-dialog-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-dialog .ui-dialog-content,
+.t-Dialog-page,
+body .ui-dialog .ui-widget-content {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-dialog .ui-dialog-buttonpane {
+  border-top-color: var(--ds-color-border-neutral) !important;
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* Datepicker selected day */
+body .ui-datepicker td a.ui-state-default.ui-state-active,
+body .ui-datepicker td span.ui-state-default.ui-state-active {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+}
+
+body .ui-datepicker td a.ui-state-default.ui-state-hover,
+body .ui-datepicker td span.ui-state-default.ui-state-hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+body .ui-datepicker td a.ui-state-default,
+body .ui-datepicker td span.ui-state-default {
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-datepicker th {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+body .ui-datepicker:focus,
+body .ui-datepicker td a.ui-state-default:focus {
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) inset !important;
+}
+
+/* jQuery UI focus/hover states */
+body .ui-state-default,
+body .ui-widget-content .ui-state-default {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-neutral) inset !important;
+}
+
+body .ui-state-hover,
+body .ui-widget-content .ui-state-hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-state-active,
+body .ui-widget-content .ui-state-active {
+  background-color: var(--ds-color-surface-neutral-mild) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+body .ui-state-focus,
+body .ui-widget-content .ui-state-focus {
+  background-color: var(--ds-color-surface-base) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) inset,
+              0 0 1px 2px rgba(2, 116, 147, 0.25) !important;
+}
+
+
+/* ================================================================
+   FORMS & INPUTS
+   APEX overrides our inputs with its own form styling
+   ================================================================ */
+
+.apex-item-text,
+.apex-item-select,
+.apex-item-textarea,
+.u-TF-item--text,
+.u-TF-item--select,
+.t-Form-inputText,
+input[type="text"].apex-item-text,
+input[type="password"].apex-item-text,
+input[type="email"].apex-item-text,
+input[type="number"].apex-item-text,
+textarea.apex-item-textarea,
+select.apex-item-select {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  border: 1px solid var(--ds-color-border-neutral-medium) !important;
+  border-radius: 2px !important;
+  font-family: var(--ds-typography-family-system) !important;
+  font-size: var(--ds-typography-size-04) !important;
+}
+
+.apex-item-text:focus,
+.apex-item-select:focus,
+.apex-item-textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="email"]:focus,
+input[type="number"]:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--ds-color-border-action-strong) !important;
+  box-shadow: 0 0 0 1px var(--ds-color-border-action-strong) !important;
+  outline: none !important;
+}
+
+.t-Form-label,
+.apex-item-label {
+  color: var(--ds-color-typography-neutral) !important;
+  font-size: var(--ds-typography-size-label) !important;
+  font-weight: var(--ds-typography-weight-label) !important;
+  font-family: var(--ds-typography-family-system) !important;
+}
+
+
+/* ================================================================
+   CARDS
+   ================================================================ */
+
+.t-Cards .t-Card {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-base) !important;
+}
+
+.t-Cards .t-Card:hover {
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* .t-Card-wrap is the <a> anchor that fills the whole card —
+   APEX gives it a white background by default; match parent card. */
+.t-Cards .t-Card-wrap {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* Card icon circle — APEX uses a hardcoded #309fdb blue.
+   Replace with Density action-strong token. */
+.t-Cards .t-Card-icon,
+.t-Card .t-Card-icon {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+}
+
+.t-Cards .t-Card-title {
+  color: var(--ds-color-typography-base) !important;
+  font-family: var(--ds-typography-family-brand) !important;
+}
+
+.t-Cards .t-Card-subTitle,
+.t-Cards .t-Card-subtitle {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.t-Cards .t-Card-body {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.t-Cards .t-Card-misc {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+
+/* ================================================================
+   LINKS
+   ================================================================ */
+
+a,
+.t-Body a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+a:hover,
+.t-Body a:hover {
+  color: var(--ds-color-typography-action-hover) !important;
+}
+
+body .ui-widget-content a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+
+/* ================================================================
+   FOCUS RINGS — standardise across all interactive elements
+   ================================================================ */
+
+:focus-visible {
+  outline: 2px solid var(--ds-color-border-action-strong) !important;
+  outline-offset: 2px !important;
+}
+
+
+/* ================================================================
+   REPORT PERCENT CHART (shown in IR)
+   APEX sets hardcoded blue: #2578cf
+   ================================================================ */
+
+.a-Report-percentChart-fill {
+  background-color: var(--ds-color-surface-action-strong) !important;
+}
+
+.a-Report-percentChart {
+  background-color: var(--ds-color-surface-neutral) !important;
+}
+
+
+/* ================================================================
+   BODY TITLE / PAGE HEADER AREA
+   ================================================================ */
+
+.t-Body-title {
+  background-color: var(--ds-color-surface-base) !important;
+  border-bottom: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+.t-PageTitle-text,
+.t-Body-title .t-Region-title {
+  color: var(--ds-color-typography-base) !important;
+  font-family: var(--ds-typography-family-brand) !important;
+}
+
+
+/* ================================================================
+   APEX BADGE (notification counter on nav items)
+   APEX doesn't style these with Density so we own it fully
+   ================================================================ */
+
+.t-Button--navBar .t-Button-badge {
+  background-color: var(--ds-color-surface-critical-strong) !important;
+  color: var(--ds-color-typography-invert) !important;
+  border-radius: 999px !important;
+}
+
+
+/* ================================================================
+   SECTION 15 — REPORTING COMPONENT OVERRIDES
+   Sources confirmed from live audit of Sample Reporting app
+   ================================================================ */
+
+/* ── INTERACTIVE REPORT (a-IRR) ──────────────────────────────── */
+
+/* APEX hardcodes #e6e6e6 (rgb(230,230,230)) as the column separator
+   and #858d98 (rgb(133,141,152)) as the column header bottom border.
+   These don't respond to any UT variable — must be overridden. */
+.a-IRR-table th,
+.a-IRR-header th {
+  border-right-color: var(--ds-color-border-neutral) !important;
+  border-bottom-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+.a-IRR-table td {
+  border-right-color: var(--ds-color-border-neutral) !important;
+  border-bottom-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Actions button (search bar) */
+.a-IRR-button--actions {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* Interactive Report row action icons (edit/view/link). APEX hardcodes
+   blue/grey colours on .fa and .a-Icon in the action column; these
+   overrides ensure they follow Density icon tokens in both light and
+   dark modes. */
+.a-IRR-table td .fa,
+.a-IRR-table td .a-Icon,
+.a-IRR-table td .t-Icon {
+  color: var(--ds-color-icon-action) !important;
+}
+
+body.ds-dark .a-IRR-table td .fa,
+body.ds-dark .a-IRR-table td .a-Icon,
+body.ds-dark .a-IRR-table td .t-Icon {
+  color: var(--ds-color-icon-action) !important;
+}
+
+/* ── INTERACTIVE GRID (a-GV / a-IG) ─────────────────────────── */
+
+/* Grid header cells — APEX hardcodes #e6e6e6 for column borders */
+.a-GV-header th,
+.a-GV-header-cell,
+.a-GV-cell,
+.a-GV-table th,
+.a-GV-table td {
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Frozen columns get same bg as regular cells */
+.a-GV-frozen {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Toolbar buttons (a-Button class used in IG toolbar) */
+.a-Button,
+.a-Toolbar-item .a-Button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: var(--ds-color-border-action) !important;
+}
+
+.a-Button:hover {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* IG selected row / cell highlight */
+.a-GV-table tr.is-selected td,
+.a-GV-table td.is-selected,
+.a-GV-row.is-selected .a-GV-cell {
+  background-color: var(--ds-color-surface-action-mild) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* ── FACETED SEARCH (a-FS) ───────────────────────────────────── */
+
+/* .a-FS-toggle is the show/hide toggle button for each facet group.
+   APEX hardcodes rgb(248,248,248) bg and rgb(57,57,57) text. */
+.a-FS-toggle {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+.a-FS-toggle:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Clear-all and more-options links */
+.a-FS-clearButton,
+.a-FS-toggleOverflow {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* ── a-CardView (reporting card layout — different from t-Card) ─ */
+
+/* .a-CardView is the container used by the Cards report type.
+   Different from .t-Card (which is a navigation/icon card). */
+.a-CardView {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+.a-CardView-title {
+  color: var(--ds-color-typography-base) !important;
+}
+
+.a-CardView-body,
+.a-CardView-subtitle {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.a-CardView-button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-action) !important;
+  border-color: var(--ds-color-border-action) !important;
+}
+
+.a-CardView-button:hover {
+  background-color: var(--ds-color-surface-action-mild) !important;
+}
+
+/* ── FOOTER TOP BUTTON (.t-Footer-topButton "Back to top") ────── */
+
+/* APEX hardcodes rgb(248,248,248) bg on this scroll-to-top button */
+.t-Footer-topButton {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+.t-Footer-topButton:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* ── IRR SORT WIDGET (column sort popup) ─────────────────────── */
+
+/* .a-IRR-sortWidget is the popup that appears when clicking
+   column sort arrows. APEX hardcodes white bg. */
+.a-IRR-sortWidget,
+.a-IRR-sortWidget-help {
+  background-color: var(--ds-color-surface-base) !important;
+  border: 1px solid var(--ds-color-border-neutral) !important;
+  color: var(--ds-color-typography-base) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* ── IRR OUTER WRAPPER (a-IRR container) ─────────────────────── */
+
+/* .a-IRR is the outermost wrapper of every interactive report.
+   APEX sets background: #fff on it explicitly. */
+.a-IRR {
+  background-color: var(--ds-color-surface-base) !important;
+}
+
+/* ── INTERACTIVE GRID OUTER WRAPPER ──────────────────────────── */
+
+.a-IG,
+.a-IG-header,
+.a-GV-hdr,
+.a-GV-footer {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Expand/collapse and page buttons in IG footer */
+.a-GV-expandCollapse,
+.a-GV-pageButton {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+.a-GV-expandCollapse:hover,
+.a-GV-pageButton:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+/* Date picker trigger button in IG rows */
+.ui-datepicker-trigger.a-Button {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Row selector checkbox/span */
+.u-selector {
+  background-color: var(--ds-color-surface-base) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+}
+
+.u-selector.is-selected {
+  background-color: var(--ds-color-surface-action-strong) !important;
+  border-color: var(--ds-color-border-action-strong) !important;
+}
+
+/* Floating item in IG (drag column reorder handle) */
+.a-GV-floatingItem {
+  background-color: var(--ds-color-surface-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* UI button widget (jQuery UI buttons used inside IG / date pickers) */
+.ui-button,
+.ui-widget-content .ui-button {
+  background-color: var(--ds-color-surface-neutral) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  border-color: var(--ds-color-border-neutral) !important;
+}
+
+.ui-button:hover,
+.ui-widget-content .ui-button:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   SECTION 16 — MAP REGION (MapLibre GL JS) OVERRIDES
+   APEX Map Region uses MapLibre GL JS 4.6.0.
+   Classes confirmed from live audit of Sample Maps app.
+   ================================================================ */
+
+/* ── MapLibre control group (zoom/compass/draw button panel) ─── */
+
+/* .maplibregl-ctrl-group is the white panel that holds zoom +/-
+   and compass buttons. Styled by maplibre-gl-apex.css with #fff.
+   In light mode: clean surface card. */
+.maplibregl-ctrl-group {
+  background-color: var(--ds-color-surface-base) !important;
+  border-radius: var(--ds-border-radius-small, 4px) !important;
+  box-shadow: var(--ds-elevation-component) !important;
+}
+
+/* Buttons inside ctrl group — icons use fill='currentColor' SVG */
+.maplibregl-ctrl-group button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-base) !important;
+}
+
+.maplibregl-ctrl-group button:hover {
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Divider between stacked buttons */
+.maplibregl-ctrl-group button + button {
+  border-top-color: var(--ds-color-border-neutral) !important;
+}
+
+/* Icon span — inherits color, drives currentColor SVG fill */
+.maplibregl-ctrl-icon {
+  color: inherit !important;
+}
+
+/* ── MapLibre scale bar ──────────────────────────────────────── */
+.maplibregl-ctrl-scale {
+  background-color: rgba(255, 255, 255, 0.75) !important;
+  border-color: var(--ds-color-border-neutral-medium) !important;
+  color: var(--ds-color-typography-neutral) !important;
+  font-size: 10px !important;
+}
+
+/* ── MapLibre attribution ────────────────────────────────────── */
+.maplibregl-ctrl-attrib {
+  background-color: rgba(255, 255, 255, 0.5) !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.maplibregl-ctrl-attrib-button {
+  background-color: transparent !important;
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.maplibregl-ctrl-attrib a {
+  color: var(--ds-color-typography-action) !important;
+}
+
+/* ── MapLibre popup content ──────────────────────────────────── */
+/* Appears on map feature click; MapLibre hardcodes background:#fff */
+.maplibregl-popup-content {
+  background-color: var(--ds-color-surface-base) !important;
+  color: var(--ds-color-typography-base) !important;
+  border-radius: var(--ds-border-radius-small, 4px) !important;
+  box-shadow: var(--ds-elevation-overlay) !important;
+  padding: 12px 16px !important;
+}
+
+.maplibregl-popup-close-button {
+  color: var(--ds-color-typography-neutral) !important;
+  background-color: transparent !important;
+}
+
+.maplibregl-popup-close-button:hover {
+  color: var(--ds-color-typography-base) !important;
+  background-color: var(--ds-color-surface-neutral-hover) !important;
+}
+
+/* Popup tip/arrow — color must match popup bg */
+.maplibregl-popup-anchor-top .maplibregl-popup-tip,
+.maplibregl-popup-anchor-top-left .maplibregl-popup-tip,
+.maplibregl-popup-anchor-top-right .maplibregl-popup-tip {
+  border-bottom-color: var(--ds-color-surface-base) !important;
+}
+
+.maplibregl-popup-anchor-bottom .maplibregl-popup-tip,
+.maplibregl-popup-anchor-bottom-left .maplibregl-popup-tip,
+.maplibregl-popup-anchor-bottom-right .maplibregl-popup-tip {
+  border-top-color: var(--ds-color-surface-base) !important;
+}
+
+.maplibregl-popup-anchor-left .maplibregl-popup-tip {
+  border-right-color: var(--ds-color-surface-base) !important;
+}
+
+.maplibregl-popup-anchor-right .maplibregl-popup-tip {
+  border-left-color: var(--ds-color-surface-base) !important;
+}
+
+/* ── APEX dialog footer (marker click callout) ───────────────── */
+/* .t-ButtonRegion--dialogRegion is the OK/Cancel footer inside
+   the APEX callout popup that opens on map marker click. */
+.t-ButtonRegion--dialogRegion {
+  background-color: var(--ds-color-surface-base) !important;
+  border-top: 1px solid var(--ds-color-border-neutral) !important;
+}
+
+/* ── APEX Map Region legend ──────────────────────────────────── */
+.a-MapRegion-legendLabel {
+  color: var(--ds-color-typography-neutral) !important;
+}
+
+.a-MapRegion-legendItem:hover .a-MapRegion-legendLabel {
+  color: var(--ds-color-typography-base) !important;
+}
+
+
+/* ================================================================
+   SECTION 99 — APEX DEVELOPER TOOLBAR ISOLATION
+   The developer toolbar (#apexDevToolbar / .a-DevToolbar) must be
+   completely unaffected by all our overrides. It uses the same
+   generic class names (.a-Button, .a-Icon, .u-selector etc.) but
+   has its own APEX-managed theming (green bar, teal/cyan text).
+
+   Analysis (confirmed via live specificity test):
+   - Light mode: APEX's .a-Button.a-Button--devToolbar (2-class rule)
+     already beats our .a-Button (1-class rule) — zero bleed in light.
+   - Dark mode: body.ds-dark .a-Button has same specificity as APEX's
+     rule but loads later, so it wins. We must undo that here.
+   - The bar background is set via CSS custom property
+     --a-dev-toolbar-background-color on .a-DevToolbar — not affected
+     by any of our rules.
+
+   Strategy: only override properties we actually set; use the APEX
+   CSS variable values directly so we're explicit and don't over-strip.
+   ================================================================ */
+
+/* Light mode: our .a-Button rule loses to APEX's 2-class rule, so
+   nothing to fix. Defensive reset only for safety. */
+#apexDevToolbar .a-Button {
+  color:         var(--a-dev-toolbar-button-text-color)       !important;
+  border-color:  var(--a-dev-toolbar-button-border-color, var(--a-dev-toolbar-button-text-color)) !important;
+  font-weight:   revert                                        !important;
+  border-radius: revert                                        !important;
+}
+
+/* Ensure the bar itself is always visible regardless of dark toggle */
+#apexDevToolbar {
+  display:    block   !important;
+  visibility: visible !important;
+}

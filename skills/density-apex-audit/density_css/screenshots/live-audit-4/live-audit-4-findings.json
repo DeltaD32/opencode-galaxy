@@ -1,0 +1,149 @@
+[
+  {
+    "severity": "info",
+    "label": "TARGET URL",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=20438873799964"
+  },
+  {
+    "severity": "info",
+    "label": "LANDED URL",
+    "detail": "https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmwgroup.net:443/auth/oauth2/realms/root/re"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Landing state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/01-landing.png"
+  },
+  {
+    "severity": "critical",
+    "label": "SESSION NOT AUTHENTICATED",
+    "detail": "BMW SSO redirect intercepted. Headed browser is open \u2014 please log in manually. Script will wait 90 seconds for navigation back to the APEX app."
+  },
+  {
+    "severity": "pass",
+    "label": "POST-LOGIN URL",
+    "detail": "https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmwgroup.net:443/auth/oauth2/realms/root/re"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Post-login state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/02-post-login.png"
+  },
+  {
+    "severity": "info",
+    "label": "DOM STRUCTURE",
+    "detail": "{\"title\": \"Supplier Contact Database - Next\", \"bodyClasses\": \"t-PageBody t-PageBody--hideLeft t-PageBody--hideActions t-PageTemplate--standard apex-side-nav apex-icons-fontapex apex-theme-vita js-ready js-navCollapsed--hidden js-navCollapsed t-PageBody--leftNav a-pwaPush--available\", \"hasTHeader\": true, \"hasLeftNav\": true, \"hasTRegion\": false, \"hasTCards\": false, \"hasIR\": false, \"dataMenuCount\": 2, \"navBarBtnCount\": 4, \"apexVersion\": \"unknown\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY CSS FOUND",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v83/css/density-dark-mode.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v83/css/density-apex-theme-standalone.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v83/css/density-apex-overrides.css"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY JS FOUND",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/files/static/v83/css/density-dark-mode.js"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY TOKENS LOADED",
+    "detail": "All 6 tokens have values. surface-base=#ffffff"
+  },
+  {
+    "severity": "pass",
+    "label": "HEADER BG OVERRIDDEN",
+    "detail": "Header bg=rgb(255, 255, 255) (not APEX blue \u2014 Density override active)"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Header state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/03-header.png"
+  },
+  {
+    "severity": "info",
+    "label": "USER MENU BTN",
+    "detail": "{\"found\": true, \"tag\": \"BUTTON\", \"menuId\": \"menu_L1855851048950529356\", \"classes\": \"t-Button t-Button--icon t-Button t-Button--header t-Button--navBar\"}"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "User menu opened",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/04-user-menu-open.png"
+  },
+  {
+    "severity": "pass",
+    "label": "DARK MODE TOGGLE INJECTED",
+    "detail": "#ds-dark-mode-toggle-item present in menu \u2014 JS injection working"
+  },
+  {
+    "severity": "info",
+    "label": "TOGGLE SWITCH STYLE",
+    "detail": "{\"bg\": \"rgb(193, 197, 203)\", \"width\": \"32px\", \"height\": \"18px\"}"
+  },
+  {
+    "severity": "info",
+    "label": "LOCALSTORAGE DS-DARK-MODE",
+    "detail": "None"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "After manual ds-dark inject",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/05-dark-mode-manual.png"
+  },
+  {
+    "severity": "info",
+    "label": "DARK MODE COMPUTED STYLES",
+    "detail": "{\"bodyBg\": \"rgb(11, 13, 16)\", \"bodyColor\": \"rgb(242, 243, 244)\", \"hasDsClass\": true, \"headerBg\": \"rgb(31, 35, 40)\", \"regionBg\": \"N/A\", \"surfacePage\": \"#0b0d10\"}"
+  },
+  {
+    "severity": "pass",
+    "label": "DARK BG IS DARK",
+    "detail": "Body bg: rgb(11, 13, 16) \u2014 matches ds-color-surface-page dark value"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "After reload with dark pref",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/06-after-reload.png"
+  },
+  {
+    "severity": "info",
+    "label": "POST-RELOAD DARK CHECK",
+    "detail": "{\"hasDsClass\": true, \"ls\": \"on\", \"url\": \"https://apextw10.bmwgroup.net/ords/r/ws_mn_digi_test/supplier-contact-database-next/home?session=13766020277169\", \"scriptPresent\": true}"
+  },
+  {
+    "severity": "pass",
+    "label": "DARK MODE PERSISTS ACROSS RELOAD",
+    "detail": "body.ds-dark present immediately after reload \u2014 FOUC risk low if applyPreference() runs early"
+  },
+  {
+    "severity": "info",
+    "label": "NO IR LINK FOUND",
+    "detail": "Could not auto-navigate to a report page from home"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Final audit state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/08-final.png"
+  },
+  {
+    "severity": "info",
+    "label": "A11Y SPOT CHECK",
+    "detail": "{\"totalInteractive\": 29, \"missingLabel\": 12, \"focusVisibleRulePresent\": true}"
+  },
+  {
+    "severity": "major",
+    "label": "ARIA LABELS MISSING",
+    "detail": "12 of 29 interactive elements missing accessible labels"
+  },
+  {
+    "severity": "pass",
+    "label": "FOCUS RING RULE PRESENT",
+    "detail": ":focus-visible with outline found in stylesheets"
+  }
+]

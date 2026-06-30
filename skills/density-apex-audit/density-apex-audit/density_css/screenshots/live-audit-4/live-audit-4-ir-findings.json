@@ -1,0 +1,54 @@
+[
+  {
+    "severity": "critical",
+    "label": "SSO REDIRECT",
+    "detail": "Browser opened. Please log in. Waiting 90s..."
+  },
+  {
+    "severity": "pass",
+    "label": "POST-LOGIN",
+    "detail": "https://auth-i.bmwgroup.net/auth/XUI/?realm=/intranetb2x&goto=https://auth-i.bmw"
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Home page",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/ir-01-home.png"
+  },
+  {
+    "severity": "info",
+    "label": "NAV LINKS",
+    "detail": "[]"
+  },
+  {
+    "severity": "info",
+    "label": "HEADER NAV BUTTON STYLES",
+    "detail": "[]"
+  },
+  {
+    "severity": "info",
+    "label": "MENU OPEN FOR TOGGLE CHECK FAILED",
+    "detail": "Locator.click: Timeout 5000ms exceeded.\nCall log:\n  - waiting for locator(\"[data"
+  },
+  {
+    "severity": "info",
+    "label": "ELEMENTS MISSING A11Y LABELS",
+    "detail": "[{\"tag\": \"INPUT\", \"cls\": \"form-control input-lg\", \"id\": \"idToken2\", \"type\": \"text\"}, {\"tag\": \"INPUT\", \"cls\": \"btn btn-lg btn-block btn-uppercase btn-primary\", \"id\": \"idToken3_0\", \"type\": \"submit\"}, {\"tag\": \"INPUT\", \"cls\": \"btn btn-lg btn-block btn-uppercase btn-default\", \"id\": \"idToken3_1\", \"type\": \"submit\"}]"
+  },
+  {
+    "severity": "info",
+    "label": "COLOUR CONTRAST SAMPLES",
+    "detail": "{\"bodyBg\": \"rgb(255, 255, 255)\", \"bodyColor\": \"rgb(42, 47, 50)\", \"btnColor\": \"N/A\", \"btnBg\": \"N/A\", \"titleColor\": \"N/A\", \"linkColor\": \"N/A\"}"
+  },
+  {
+    "severity": "minor",
+    "label": "BODY BG IS WHITE",
+    "detail": "Body background = pure white. Expected Density surface-page (#f5f6f6). Check density-apex-theme-standalone.css is providing --ds-color-surface-page correctly."
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Final IR audit state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-4/ir-05-final.png"
+  }
+]

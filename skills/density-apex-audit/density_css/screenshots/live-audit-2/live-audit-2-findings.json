@@ -1,0 +1,83 @@
+[
+  {
+    "severity": "critical",
+    "label": "SESSION NOT AUTHENTICATED",
+    "detail": "Browser landed on login page instead of app home. URL: https://apextw10.bmwgroup.net/ords/r/ws_mn_mx_test/sample-reporting/login. Profile cookies may not have been preserved. Manual re-login required."
+  },
+  {
+    "severity": "info",
+    "label": "SCREENSHOT",
+    "detail": "Login fallback state",
+    "screenshot": "/Users/QTE2362/Desktop/density-apex-howto/screenshots/live-audit-2/01-01-login-fallback.png"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY TOKENS LOADED",
+    "detail": "All 10 checked tokens have values. Sample: #ffffff"
+  },
+  {
+    "severity": "pass",
+    "label": "DENSITY CSS FILES FOUND",
+    "detail": "https://apextw10.bmwgroup.net/ords/r/ws_mn_mx_test/files/static/v196/css/density-apex-theme-standalone.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_mx_test/files/static/v196/css/density-apex-overrides.css, https://apextw10.bmwgroup.net/ords/r/ws_mn_mx_test/files/static/v196/css/density-dark-mode.css"
+  },
+  {
+    "severity": "major",
+    "label": "HEADER NOT FOUND",
+    "detail": "No .t-Header or .t-Header-branding element in DOM"
+  },
+  {
+    "severity": "info",
+    "label": "LEFT NAV NOT PRESENT",
+    "detail": "App may not use left nav layout on this page"
+  },
+  {
+    "severity": "critical",
+    "label": "USER MENU BUTTON NOT FOUND",
+    "detail": "No [data-menu][aria-haspopup] element found. data-menu elements in DOM: []. density-dark-mode.js watchForMenu() will silently fail. Fix: Update the selector to match the actual APEX nav bar structure."
+  },
+  {
+    "severity": "critical",
+    "label": "USER MENU COULD NOT BE OPENED",
+    "detail": "All user menu click selectors timed out. dark mode toggle injection cannot be verified."
+  },
+  {
+    "severity": "critical",
+    "label": "DARK MODE TOGGLE NOT INJECTED",
+    "detail": "#ds-dark-mode-toggle-item not in DOM after menu open. Possible causes: (1) density-dark-mode.js not loaded in this app, (2) ul[role=\"group\"] selector does not match APEX menu structure, (3) MutationObserver is firing before injection completes. Menu open element found: false. Menu HTML: null"
+  },
+  {
+    "severity": "info",
+    "label": "MENU ITEM STRUCTURE",
+    "detail": "Menu items found: []"
+  },
+  {
+    "severity": "info",
+    "label": "DARK MODE MANUAL JS TEST",
+    "detail": "Manual body.ds-dark injection: {\"hasDsClass\":true,\"lsVal\":\"on\"}"
+  },
+  {
+    "severity": "major",
+    "label": "DARK MODE NOT PERSISTED",
+    "detail": "body.ds-dark NOT present after reload. localStorage: on. density-dark-mode.js script tag present: true. applyPreference() may not be running early enough, or the JS file is not loaded."
+  },
+  {
+    "severity": "info",
+    "label": "NO IR LINK IN NAV",
+    "detail": "Could not locate an Interactive Report navigation link. Check app pages manually."
+  },
+  {
+    "severity": "major",
+    "label": "BACKEND SESSION NOT AUTHENTICATED",
+    "detail": "App Builder redirected to login. URL: https://apextw10.bmwgroup.net/ords/f?p=4550:1:6698125192545:"
+  },
+  {
+    "severity": "pass",
+    "label": "ARIA LABELS OK",
+    "detail": "All 14 interactive elements have accessible labels"
+  },
+  {
+    "severity": "pass",
+    "label": "FOCUS RING RULE PRESENT",
+    "detail": ":focus-visible with outline found in loaded stylesheets"
+  }
+]

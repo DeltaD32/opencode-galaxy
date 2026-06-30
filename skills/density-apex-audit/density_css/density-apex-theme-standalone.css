@@ -1,0 +1,1991 @@
+/*
+ * ================================================================
+ * BMW DENSITY → ORACLE APEX UNIVERSAL THEME STYLE
+ * STANDALONE EDITION — all Density tokens embedded, no external
+ * dependency on density.css or @bmw-ds/components npm package.
+ * ================================================================
+ * Density version   : v11.x (tokens extracted 2026-06-29)
+ * APEX target       : 24.2 (compatible with 22.x+)
+ * Author            : Generated via Density MCP + npm source
+ *
+ * SINGLE FILE — upload only this file to APEX.
+ * Register it under:
+ *   Shared Components → User Interface → Themes
+ *   → Universal Theme - 42 → Styles tab → [Your Style]
+ *   → File URLs field:
+ *       #APP_FILES#density-apex-theme-standalone.css
+ *   OR for workspace-level deployment:
+ *       #WORKSPACE_FILES#css/density-apex-theme-standalone.css
+ *
+ * SECTIONS IN THIS FILE
+ *   0.  Density Token Definitions  ← ALL --ds-* values live here
+ *   1.  CSS Custom Property Bridge  (UT vars → DS tokens)
+ *   2.  Base Reset & Body
+ *   3.  Typography
+ *   4.  Buttons  (all 6 Density variants)
+ *   5.  Focus Rings
+ *   6.  Form Inputs & Labels
+ *   7.  Regions & Boxes
+ *   8.  Navigation
+ *   9.  Alerts & Messages
+ *   10. Interactive Reports & Tables
+ *   11. Modals & Dialogs
+ *   12. Breadcrumbs
+ *   13. Tabs
+ *   14. Tags
+ *   15. Badges
+ *   16. Toast Notifications
+ *   17. Datepicker (jQuery UI)
+ *   18. Motion & Transitions
+ *   19. Icons
+ *   20. Utility Classes
+ *   21. APEX-specific Overrides
+ * ================================================================
+ */
+
+
+/* ================================================================
+   0. DENSITY TOKEN DEFINITIONS
+   All --ds-* CSS custom properties. Extracted from:
+   @bmw-ds/components → density-styles/density-tokens/dist/scss/_variables.scss
+   and the semantic alias layer on top.
+   Light theme values only (dark theme overrides use .ds-dark class).
+   ================================================================ */
+
+/* ── BMW Brand Font ─────────────────────────────────────────── */
+@font-face {
+  font-family: 'BMWGroupTNCondensedPro-Medium';
+  src: local('BMWGroupTNCondensedPro-Medium');
+  font-weight: 500;
+  font-style: normal;
+}
+
+:root {
+
+  /* ── PRIMITIVE COLOR PALETTE ────────────────────────────────
+     Raw colour values — do not use these directly in APEX.
+     Reference the semantic tokens below instead.
+  ──────────────────────────────────────────────────────────── */
+  --ds-color-white: #ffffff;
+  --ds-color-black: #000000;
+  --ds-color-white-alpha-00: rgba(255, 255, 255, 0);
+  --ds-color-white-alpha-05: rgba(255, 255, 255, 0.05);
+  --ds-color-white-alpha-20: rgba(255, 255, 255, 0.2);
+  --ds-color-black-alpha-02: rgba(0, 0, 0, 0.02);
+  --ds-color-black-alpha-50: rgba(0, 0, 0, 0.5);
+
+  /* Cool Grey (neutral base palette) */
+  --ds-color-cool-grey-100: #f2f3f4;
+  --ds-color-cool-grey-100-alpha-10: rgba(242, 243, 244, 0.1);
+  --ds-color-cool-grey-100-alpha-20: rgba(242, 243, 244, 0.2);
+  --ds-color-cool-grey-100-alpha-30: rgba(242, 243, 244, 0.3);
+  --ds-color-cool-grey-200: #dcdee1;
+  --ds-color-cool-grey-300: #c1c5cb;
+  --ds-color-cool-grey-400: #a2aab4;
+  --ds-color-cool-grey-500: #858d98;
+  --ds-color-cool-grey-600: #69707a;
+  --ds-color-cool-grey-700: #4e545d;
+  --ds-color-cool-grey-700-alpha-20: rgba(78, 84, 93, 0.2);
+  --ds-color-cool-grey-700-alpha-70: rgba(78, 84, 93, 0.7);
+  --ds-color-cool-grey-800: #353a41;
+  --ds-color-cool-grey-800-alpha-10: rgba(53, 58, 65, 0.1);
+  --ds-color-cool-grey-800-alpha-20: rgba(53, 58, 65, 0.2);
+  --ds-color-cool-grey-900: #1f2328;
+  --ds-color-cool-grey-900-alpha-30: rgba(31, 35, 40, 0.3);
+  --ds-color-cool-grey-950: #0b0d10;
+
+  /* Grey (warm neutral) */
+  --ds-color-grey-100: #f5f6f6;
+  --ds-color-grey-100-alpha-10: rgba(245, 246, 246, 0.1);
+  --ds-color-grey-200: #e0e2e3;
+  --ds-color-grey-300: #c6c8cb;
+  --ds-color-grey-400: #a9abaf;
+  --ds-color-grey-500: #8c8e91;
+  --ds-color-grey-600: #707173;
+  --ds-color-grey-700: #555658;
+  --ds-color-grey-800: #3d3e3e;
+  --ds-color-grey-900: #282828;
+  --ds-color-grey-900-alpha-10: rgba(41, 41, 41, 0.1);
+  --ds-color-grey-950: #161616;
+  --ds-color-grey-950-alpha-05: rgba(22, 22, 22, 0.05);
+
+  /* Ocean (action / brand colour) */
+  --ds-color-ocean-100: #e0f2ff;
+  --ds-color-ocean-200: #a8dfff;
+  --ds-color-ocean-300: #3ccaff;
+  --ds-color-ocean-400: #00aede;
+  --ds-color-ocean-400-alpha-30: rgba(2, 145, 183, 0.3);
+  --ds-color-ocean-500: #0291b7;
+  --ds-color-ocean-600: #037493;
+  --ds-color-ocean-700: #035970;
+  --ds-color-ocean-800: #024051;
+  --ds-color-ocean-900: #012935;
+  --ds-color-ocean-950: #00131a;
+
+  /* Green (positive signal) */
+  --ds-color-green-100: #e5fceb;
+  --ds-color-green-200: #9ff7b7;
+  --ds-color-green-300: #6de28f;
+  --ds-color-green-400: #55c474;
+  --ds-color-green-500: #3ea359;
+  --ds-color-green-600: #2a813f;
+  --ds-color-green-700: #185f28;
+  --ds-color-green-800: #084114;
+  --ds-color-green-900: #002704;
+  --ds-color-green-950: #000f01;
+
+  /* Yellow (caution signal) */
+  --ds-color-yellow-100: #fff7de;
+  --ds-color-yellow-200: #ffe38e;
+  --ds-color-yellow-300: #f6c800;
+  --ds-color-yellow-300-alpha-30: rgba(248, 202, 0, 0.3);
+  --ds-color-yellow-400: #daaa00;
+  --ds-color-yellow-500: #ba8900;
+  --ds-color-yellow-600: #976900;
+  --ds-color-yellow-700: #744b00;
+  --ds-color-yellow-800: #523000;
+  --ds-color-yellow-900: #341a00;
+  --ds-color-yellow-950: #170700;
+
+  /* Red (critical signal) */
+  --ds-color-red-100: #ffefef;
+  --ds-color-red-200: #ffd4d4;
+  --ds-color-red-300: #ffb0b0;
+  --ds-color-red-400: #ff8485;
+  --ds-color-red-500: #ff454a;
+  --ds-color-red-600: #df001a;
+  --ds-color-red-600-alpha-30: rgba(223, 0, 26, 0.3);
+  --ds-color-red-700: #aa0014;
+  --ds-color-red-800: #79010d;
+  --ds-color-red-900: #4b0308;
+  --ds-color-red-950: #200102;
+
+  /* Blue (info signal) */
+  --ds-color-blue-100: #ecf3ff;
+  --ds-color-blue-200: #cbdfff;
+  --ds-color-blue-300: #9ec7ff;
+  --ds-color-blue-400: #62acff;
+  --ds-color-blue-500: #008ff0;
+  --ds-color-blue-600: #0071c5;
+  --ds-color-blue-700: #005499;
+  --ds-color-blue-800: #00396f;
+  --ds-color-blue-900: #002248;
+  --ds-color-blue-950: #000b20;
+
+  /* ── SPACING TOKENS ──────────────────────────────────────── */
+  --ds-space-0x:  0px;
+  --ds-space-05x: 2px;
+  --ds-space-1x:  4px;
+  --ds-space-2x:  8px;
+  --ds-space-3x:  12px;
+  --ds-space-4x:  16px;
+  --ds-space-5x:  20px;
+  --ds-space-6x:  24px;
+  --ds-space-7x:  28px;
+  --ds-space-8x:  32px;
+  --ds-space-9x:  36px;
+  --ds-space-10x: 40px;
+  --ds-space-11x: 44px;
+  --ds-space-12x: 48px;
+  --ds-space-13x: 52px;
+  --ds-space-14x: 56px;
+  --ds-space-15x: 60px;
+  --ds-space-16x: 64px;
+  --ds-space-17x: 68px;
+  --ds-space-18x: 72px;
+
+  /* ── TYPOGRAPHY PRIMITIVE TOKENS ────────────────────────── */
+  /* Font families */
+  --ds-typography-family-brand:  BMWGroupTNCondensedPro-Medium, 'BMW Group TN Condensed Pro Medium', 'Arial Narrow', sans-serif;
+  --ds-typography-family-system: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+  --ds-typography-family-mono:   SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace;
+
+  /* Font sizes (numeric scale — 01=10px through 16=59px) */
+  --ds-typography-size-01: 10px;
+  --ds-typography-size-02: 11px;
+  --ds-typography-size-03: 12px;
+  --ds-typography-size-04: 14px;
+  --ds-typography-size-05: 16px;
+  --ds-typography-size-06: 18px;
+  --ds-typography-size-07: 20px;
+  --ds-typography-size-08: 23px;
+  --ds-typography-size-09: 26px;
+  --ds-typography-size-10: 29px;
+  --ds-typography-size-11: 33px;
+  --ds-typography-size-12: 37px;
+
+  /* Font sizes (semantic aliases — mapped from numeric scale) */
+  --ds-typography-size-smallprint: var(--ds-typography-size-02); /* 11px */
+  --ds-typography-size-label:      var(--ds-typography-size-03); /* 12px */
+  --ds-typography-size-regular:    var(--ds-typography-size-04); /* 14px */
+  --ds-typography-size-paragraph:  var(--ds-typography-size-05); /* 16px */
+  --ds-typography-size-title-xs:   var(--ds-typography-size-05); /* 16px */
+  --ds-typography-size-title-sm:   var(--ds-typography-size-07); /* 20px */
+  --ds-typography-size-title-md:   var(--ds-typography-size-09); /* 26px */
+  --ds-typography-size-title-lg:   var(--ds-typography-size-11); /* 33px */
+
+  /* Line heights */
+  --ds-typography-line-height-smallprint: 1.4;
+  --ds-typography-line-height-label:      1.4;
+  --ds-typography-line-height-regular:    1.5;
+  --ds-typography-line-height-paragraph:  1.6;
+  --ds-typography-line-height-title-xs:   1.3;
+  --ds-typography-line-height-title-sm:   1.3;
+  --ds-typography-line-height-title-md:   1.2;
+  --ds-typography-line-height-title-lg:   1.1;
+
+  /* Font weights */
+  --ds-typography-weight-smallprint: 400;
+  --ds-typography-weight-label:      500;
+  --ds-typography-weight-regular:    400;
+  --ds-typography-weight-paragraph:  400;
+  --ds-typography-weight-title-xs:   500;
+  --ds-typography-weight-title-sm:   500;
+  --ds-typography-weight-title-md:   500;
+  --ds-typography-weight-title-lg:   500;
+
+  /* Text transforms */
+  --ds-typography-transform-title-xs: none;
+  --ds-typography-transform-title-sm: none;
+  --ds-typography-transform-title-md: none;
+  --ds-typography-transform-title-lg: uppercase;
+
+  /* ── ELEVATION TOKENS ──────────────────────────────────── */
+  --ds-elevation-0:            0;
+  --ds-elevation-1:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 1px 3px 0px rgba(0,0,0,0.20);
+  --ds-elevation-2:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 2px 4px 0px rgba(0,0,0,0.16);
+  --ds-elevation-3:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 2px 4px 0px rgba(0,0,0,0.12), 0px 4px 8px 0px rgba(0,0,0,0.12);
+  --ds-elevation-4:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 4px 8px 0px rgba(0,0,0,0.12), 0px 8px 16px 0px rgba(0,0,0,0.12);
+  --ds-elevation-5:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 4px 8px 0px rgba(0,0,0,0.10), 0px 8px 16px 0px rgba(0,0,0,0.10), 0px 12px 32px 0px rgba(0,0,0,0.10);
+  --ds-elevation-6:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 8px 16px 0px rgba(0,0,0,0.10), 0px 12px 32px 0px rgba(0,0,0,0.10), 0px 16px 40px 0px rgba(0,0,0,0.10);
+  --ds-elevation-7:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 12px 32px 0px rgba(0,0,0,0.10), 0px 16px 40px 0px rgba(0,0,0,0.10), 0px 20px 48px 0px rgba(0,0,0,0.10);
+  --ds-elevation-8:            0px 0px 2px 0px rgba(0,0,0,0.20), 0px 16px 40px 0px rgba(0,0,0,0.10), 0px 20px 48px 0px rgba(0,0,0,0.10), 0px 24px 56px 0px rgba(0,0,0,0.10);
+
+  /* Semantic elevation aliases */
+  --ds-elevation-none:         var(--ds-elevation-0);
+  --ds-elevation-base:         var(--ds-elevation-1);
+  --ds-elevation-component:    var(--ds-elevation-3);
+  --ds-elevation-temporary:    var(--ds-elevation-4);
+  --ds-elevation-navigation:   var(--ds-elevation-2);
+  --ds-elevation-notification: var(--ds-elevation-5);
+  --ds-elevation-modal:        var(--ds-elevation-7);
+
+  /* ── MOTION TOKENS ──────────────────────────────────────── */
+  --ds-motion-duration-rapid:    88ms;
+  --ds-motion-duration-quick:    133ms;
+  --ds-motion-duration-standard: 200ms;
+  --ds-motion-duration-slow:     300ms;
+
+  --ds-motion-timing-entrance: cubic-bezier(0, 0, 0.2, 1);      /* ease-out */
+  --ds-motion-timing-exit:     cubic-bezier(0.4, 0.15, 1, 1);   /* ease-in  */
+  --ds-motion-timing-standard: cubic-bezier(0.4, 0.15, 0.2, 1); /* ease-in-out */
+
+  /* ── ICON SIZE TOKENS ───────────────────────────────────── */
+  --ds-icon-size-xs: 16px;
+  --ds-icon-size-sm: 20px;
+  --ds-icon-size-md: 24px;
+  --ds-icon-size-lg: 32px;
+
+  /* ── SEMANTIC COLOR TOKENS — LIGHT THEME ────────────────── */
+  /* Surface */
+  --ds-color-surface-page:                   var(--ds-color-grey-100);
+  --ds-color-surface-base:                   var(--ds-color-white);
+  --ds-color-surface-neutral:                var(--ds-color-cool-grey-100);
+  --ds-color-surface-neutral-hover:          var(--ds-color-grey-200);
+  --ds-color-surface-neutral-mild:           var(--ds-color-cool-grey-100);
+  --ds-color-surface-neutral-medium:         var(--ds-color-cool-grey-300);
+  --ds-color-surface-neutral-strong:         var(--ds-color-cool-grey-700);
+  --ds-color-surface-action:                 var(--ds-color-ocean-100);
+  --ds-color-surface-action-mild:            var(--ds-color-ocean-100);
+  --ds-color-surface-action-strong:          var(--ds-color-ocean-600);
+  --ds-color-surface-action-strong-hover:    var(--ds-color-ocean-700);
+  --ds-color-surface-action-strong-active:   var(--ds-color-ocean-800);
+  --ds-color-surface-backdrop:               var(--ds-color-cool-grey-900-alpha-30);
+  --ds-color-surface-transparent:            var(--ds-color-white-alpha-00);
+  --ds-color-surface-disabled:               var(--ds-color-grey-950-alpha-05);
+  --ds-color-surface-invert:                 var(--ds-color-cool-grey-900);
+  --ds-color-surface-positive:               var(--ds-color-green-100);
+  --ds-color-surface-positive-mild:          var(--ds-color-green-100);
+  --ds-color-surface-positive-strong:        var(--ds-color-green-600);
+  --ds-color-surface-caution:                var(--ds-color-yellow-100);
+  --ds-color-surface-caution-mild:           var(--ds-color-yellow-100);
+  --ds-color-surface-caution-strong:         var(--ds-color-yellow-400);
+  --ds-color-surface-critical:               var(--ds-color-red-100);
+  --ds-color-surface-critical-mild:          var(--ds-color-red-100);
+  --ds-color-surface-critical-strong:        var(--ds-color-red-700);
+  --ds-color-surface-critical-strong-hover:  var(--ds-color-red-800);
+  --ds-color-surface-critical-strong-active: var(--ds-color-red-900);
+  --ds-color-surface-info:                   var(--ds-color-blue-100);
+  --ds-color-surface-info-mild:              var(--ds-color-blue-100);
+  --ds-color-surface-info-strong:            var(--ds-color-blue-700);
+  --ds-color-surface-table-header-sticky:    var(--ds-color-surface-page);
+
+  /* Typography */
+  --ds-color-typography-base:           var(--ds-color-cool-grey-900);
+  --ds-color-typography-action:         var(--ds-color-ocean-600);
+  --ds-color-typography-action-hover:   var(--ds-color-ocean-700);
+  --ds-color-typography-action-active:  var(--ds-color-ocean-800);
+  --ds-color-typography-neutral:        var(--ds-color-cool-grey-600);
+  --ds-color-typography-positive:       var(--ds-color-green-700);
+  --ds-color-typography-caution:        var(--ds-color-yellow-700);
+  --ds-color-typography-critical:       var(--ds-color-red-700);
+  --ds-color-typography-info:           var(--ds-color-blue-700);
+  --ds-color-typography-disabled:       var(--ds-color-cool-grey-800-alpha-20);
+  --ds-color-typography-invert:         var(--ds-color-white);
+
+  /* Border */
+  --ds-color-border-base:               var(--ds-color-cool-grey-200);
+  --ds-color-border-neutral:            var(--ds-color-cool-grey-300);
+  --ds-color-border-neutral-mild:       var(--ds-color-cool-grey-300);
+  --ds-color-border-neutral-medium:     var(--ds-color-cool-grey-500);
+  --ds-color-border-neutral-strong:     var(--ds-color-cool-grey-700);
+  --ds-color-border-action:             var(--ds-color-ocean-200);
+  --ds-color-border-action-mild:        var(--ds-color-ocean-300);
+  --ds-color-border-action-strong:      var(--ds-color-ocean-600);
+  --ds-color-border-action-strong-hover: var(--ds-color-ocean-700);
+  --ds-color-border-action-strong-active: var(--ds-color-ocean-700);
+  --ds-color-border-positive:           var(--ds-color-green-300);
+  --ds-color-border-positive-mild:      var(--ds-color-green-300);
+  --ds-color-border-positive-strong:    var(--ds-color-green-600);
+  --ds-color-border-caution:            var(--ds-color-yellow-200);
+  --ds-color-border-caution-mild:       var(--ds-color-yellow-300);
+  --ds-color-border-caution-strong:     var(--ds-color-yellow-400);
+  --ds-color-border-critical:           var(--ds-color-red-200);
+  --ds-color-border-critical-mild:      var(--ds-color-red-300);
+  --ds-color-border-critical-strong:    var(--ds-color-red-700);
+  --ds-color-border-critical-strong-hover:  var(--ds-color-red-800);
+  --ds-color-border-critical-strong-active: var(--ds-color-red-800);
+  --ds-color-border-info:               var(--ds-color-blue-200);
+  --ds-color-border-info-mild:          var(--ds-color-blue-300);
+  --ds-color-border-info-strong:        var(--ds-color-blue-700);
+  --ds-color-border-disabled:           var(--ds-color-grey-900-alpha-10);
+  --ds-color-border-transparent:        var(--ds-color-white-alpha-00);
+
+  /* Icon */
+  --ds-color-icon-base:           var(--ds-color-cool-grey-900);
+  --ds-color-icon-neutral:        var(--ds-color-cool-grey-600);
+  --ds-color-icon-action:         var(--ds-color-ocean-600);
+  --ds-color-icon-action-hover:   var(--ds-color-ocean-700);
+  --ds-color-icon-action-active:  var(--ds-color-ocean-800);
+  --ds-color-icon-positive:       var(--ds-color-green-700);
+  --ds-color-icon-caution:        var(--ds-color-yellow-700);
+  --ds-color-icon-critical:       var(--ds-color-red-700);
+  --ds-color-icon-info:           var(--ds-color-blue-700);
+  --ds-color-icon-disabled:       var(--ds-color-cool-grey-800-alpha-20);
+  --ds-color-icon-invert:         var(--ds-color-white);
+
+  /* Table misc */
+  --ds-font-feature-settings-table: tnum;
+}
+
+
+/* ================================================================
+   1. CSS CUSTOM PROPERTY BRIDGE
+   Maps APEX Universal Theme variables to Density --ds-* tokens.
+   This single block gives ~80% coverage automatically across
+   every APEX page, component and template.
+   ================================================================ */
+
+:root {
+
+  /* ── PAGE & SURFACE BACKGROUNDS ────────────────────────── */
+  --ut-page-background:              var(--ds-color-surface-page);
+  --ut-region-background:            var(--ds-color-surface-base);
+  --ut-region-header-background:     var(--ds-color-surface-base);
+  --ut-body-background:              var(--ds-color-surface-page);
+
+  /* ── BASE TYPOGRAPHY ────────────────────────────────────── */
+  --ut-base-font-family:             var(--ds-typography-family-system);
+  --ut-base-font-size:               var(--ds-typography-size-04); /* 14px */
+  --ut-base-line-height:             var(--ds-typography-line-height-regular);
+  --ut-base-font-color:              var(--ds-color-typography-base);
+  --ut-muted-font-color:             var(--ds-color-typography-neutral);
+  --ut-link-font-color:              var(--ds-color-typography-action);
+  --ut-link-hover-font-color:        var(--ds-color-typography-action-hover);
+  --ut-link-active-font-color:       var(--ds-color-typography-action-active);
+
+  /* ── HEADINGS ────────────────────────────────────────────── */
+  --ut-heading-font-family:          var(--ds-typography-family-brand);
+  --ut-h1-font-size:                 var(--ds-typography-size-title-lg);
+  --ut-h2-font-size:                 var(--ds-typography-size-title-md);
+  --ut-h3-font-size:                 var(--ds-typography-size-title-sm);
+  --ut-h4-font-size:                 var(--ds-typography-size-title-xs);
+
+  /* ── BUTTONS ─────────────────────────────────────────────── */
+  --ut-hot-button-background:        var(--ds-color-surface-action-strong);
+  --ut-hot-button-hover-background:  var(--ds-color-surface-action-strong-hover);
+  --ut-hot-button-text-color:        var(--ds-color-typography-invert);
+  --ut-hot-button-border-color:      transparent;
+
+  --ut-button-background:            transparent;
+  --ut-button-hover-background:      var(--ds-color-surface-action-mild);
+  --ut-button-text-color:            var(--ds-color-typography-action);
+  --ut-button-border-color:          var(--ds-color-border-action);
+
+  /* ── BORDERS ─────────────────────────────────────────────── */
+  --ut-region-border-color:          var(--ds-color-border-neutral);
+  --ut-form-input-border-color:      var(--ds-color-border-neutral-medium);
+  --ut-form-input-focus-border:      var(--ds-color-border-action-strong);
+
+  /* ── FORM INPUTS ─────────────────────────────────────────── */
+  --ut-form-input-background:        var(--ds-color-surface-base);
+  --ut-form-label-color:             var(--ds-color-typography-neutral);
+
+  /* ── SIGNAL COLORS ───────────────────────────────────────── */
+  --ut-success-background:           var(--ds-color-surface-positive);
+  --ut-success-border-color:         var(--ds-color-border-positive);
+  --ut-success-text-color:           var(--ds-color-typography-positive);
+
+  --ut-warning-background:           var(--ds-color-surface-caution);
+  --ut-warning-border-color:         var(--ds-color-border-caution);
+  --ut-warning-text-color:           var(--ds-color-typography-caution);
+
+  --ut-error-background:             var(--ds-color-surface-critical);
+  --ut-error-border-color:           var(--ds-color-border-critical-strong);
+  --ut-error-text-color:             var(--ds-color-typography-critical);
+
+  --ut-info-background:              var(--ds-color-surface-info);
+  --ut-info-border-color:            var(--ds-color-border-info);
+  --ut-info-text-color:              var(--ds-color-typography-info);
+
+  /* ── NAVIGATION ──────────────────────────────────────────── */
+  --ut-nav-bar-background:           var(--ds-color-surface-base);
+  --ut-nav-bar-border-color:         var(--ds-color-border-neutral);
+  --ut-nav-bar-item-color:           var(--ds-color-typography-neutral);
+  --ut-nav-bar-item-hover-bg:        var(--ds-color-surface-neutral-hover);
+  --ut-nav-bar-item-active-bg:       var(--ds-color-surface-action-mild);
+  --ut-nav-bar-item-active-color:    var(--ds-color-typography-action);
+
+  /* ── ELEVATION / SHADOWS ─────────────────────────────────── */
+  --ut-region-shadow:                var(--ds-elevation-base);
+  --ut-dialog-shadow:                var(--ds-elevation-modal);
+  --ut-popup-shadow:                 var(--ds-elevation-component);
+
+  /* ── SPACING ─────────────────────────────────────────────── */
+  --ut-region-padding:               var(--ds-space-6x);  /* 24px */
+  --ut-form-group-margin:            var(--ds-space-4x);  /* 16px */
+
+  /* ── INTERACTIVE REPORT ──────────────────────────────────── */
+  --ut-report-header-background:     var(--ds-color-surface-base);
+  --ut-report-header-color:          var(--ds-color-typography-neutral);
+  --ut-report-border-color:          var(--ds-color-border-neutral);
+  --ut-report-row-hover-bg:          var(--ds-color-surface-neutral-hover);
+  --ut-report-row-odd-bg:            var(--ds-color-surface-neutral);
+}
+
+
+/* ================================================================
+   2. BASE RESET & BODY
+   ================================================================ */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body,
+.t-PageBody {
+  background-color: var(--ds-color-surface-page);
+  color:            var(--ds-color-typography-base);
+  font-family:      var(--ds-typography-family-system);
+  font-size:        var(--ds-typography-size-04); /* 14px */
+  line-height:      var(--ds-typography-line-height-regular);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  color:           var(--ds-color-typography-action);
+  text-decoration: none;
+  transition:
+    color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+a:hover  { color: var(--ds-color-typography-action-hover); }
+a:active { color: var(--ds-color-typography-action-active); }
+
+
+/* ================================================================
+   3. TYPOGRAPHY
+   ================================================================ */
+
+h1, .title-lg {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-lg);
+  line-height:    var(--ds-typography-line-height-title-lg);
+  font-weight:    var(--ds-typography-weight-title-lg);
+  text-transform: var(--ds-typography-transform-title-lg);
+  color:          var(--ds-color-typography-base);
+}
+
+h2, .title-md {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-md);
+  line-height:    var(--ds-typography-line-height-title-md);
+  font-weight:    var(--ds-typography-weight-title-md);
+  text-transform: var(--ds-typography-transform-title-md);
+  color:          var(--ds-color-typography-base);
+}
+
+h3, .title-sm {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-sm);
+  line-height:    var(--ds-typography-line-height-title-sm);
+  font-weight:    var(--ds-typography-weight-title-sm);
+  text-transform: var(--ds-typography-transform-title-sm);
+  color:          var(--ds-color-typography-base);
+}
+
+h4, h5, h6, .title-xs {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-xs);
+  line-height:    var(--ds-typography-line-height-title-xs);
+  font-weight:    var(--ds-typography-weight-title-xs);
+  text-transform: var(--ds-typography-transform-title-xs);
+  color:          var(--ds-color-typography-base);
+}
+
+p, .text-paragraph {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-paragraph);
+  line-height: var(--ds-typography-line-height-paragraph);
+  font-weight: var(--ds-typography-weight-paragraph);
+  color:       var(--ds-color-typography-base);
+}
+
+.text-regular {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-regular);
+  line-height: var(--ds-typography-line-height-regular);
+  font-weight: var(--ds-typography-weight-regular);
+}
+
+.text-label, label {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-label);
+  line-height: var(--ds-typography-line-height-label);
+  font-weight: var(--ds-typography-weight-label);
+  color:       var(--ds-color-typography-neutral);
+}
+
+.text-smallprint {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-smallprint);
+  line-height: var(--ds-typography-line-height-smallprint);
+  font-weight: var(--ds-typography-weight-smallprint);
+  color:       var(--ds-color-typography-neutral);
+}
+
+code, pre, .t-MonospaceFont {
+  font-family: var(--ds-typography-family-mono);
+  font-size:   var(--ds-typography-size-03); /* 12px */
+}
+
+.t-Region-title,
+.t-PageTitle-text {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-sm);
+  line-height:    var(--ds-typography-line-height-title-sm);
+  color:          var(--ds-color-typography-base);
+  text-transform: var(--ds-typography-transform-title-sm);
+}
+
+
+/* ================================================================
+   4. BUTTONS
+   ================================================================ */
+
+.t-Button,
+.t-Button--hot,
+.a-Button,
+.apex-button {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  gap:             var(--ds-space-2x);
+  font-family:     var(--ds-typography-family-system);
+  font-size:       var(--ds-typography-size-04);
+  font-weight:     600;
+  line-height:     1;
+  border-radius:   2px;
+  padding:         var(--ds-space-2x) var(--ds-space-4x);
+  cursor:          pointer;
+  border:          1px solid transparent;
+  text-decoration: none;
+  white-space:     nowrap;
+  transition:
+    background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    border-color     var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    color            var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    box-shadow       var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+
+/* PRIMARY */
+.t-Button--hot,
+.apex-button-primary {
+  background-color: var(--ds-color-surface-action-strong);
+  color:            var(--ds-color-typography-invert);
+  border-color:     transparent;
+}
+.t-Button--hot:hover,
+.apex-button-primary:hover {
+  background-color: var(--ds-color-surface-action-strong-hover);
+}
+.t-Button--hot:active,
+.apex-button-primary:active {
+  background-color: var(--ds-color-surface-action-strong-active);
+}
+
+/* OUTLINE */
+.t-Button:not(.t-Button--hot):not(.t-Button--simple):not(.t-Button--noLabel):not(.t-Button--danger) {
+  background-color: transparent;
+  color:            var(--ds-color-typography-action);
+  border-color:     var(--ds-color-border-action);
+}
+.t-Button:not(.t-Button--hot):not(.t-Button--simple):not(.t-Button--noLabel):not(.t-Button--danger):hover {
+  background-color: var(--ds-color-surface-action-mild);
+  border-color:     var(--ds-color-border-action-strong);
+}
+.t-Button:not(.t-Button--hot):not(.t-Button--simple):not(.t-Button--noLabel):not(.t-Button--danger):active {
+  background-color: var(--ds-color-surface-action-mild);
+  border-color:     var(--ds-color-border-action-strong);
+}
+
+/* GHOST */
+.t-Button--simple,
+.t-Button--noLabel,
+.apex-button-ghost {
+  background-color: transparent;
+  color:            var(--ds-color-typography-action);
+  border-color:     transparent;
+}
+.t-Button--simple:hover,
+.t-Button--noLabel:hover,
+.apex-button-ghost:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+}
+
+/* GHOST-MUTED */
+.apex-button-ghost-muted {
+  background-color: transparent;
+  color:            var(--ds-color-typography-neutral);
+  border-color:     transparent;
+}
+.apex-button-ghost-muted:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+  color:            var(--ds-color-typography-base);
+}
+
+/* DESTRUCTIVE */
+.t-Button--danger,
+.apex-button-danger,
+.apex-button-destructive {
+  background-color: var(--ds-color-surface-critical-strong);
+  color:            var(--ds-color-typography-invert);
+  border-color:     transparent;
+}
+.t-Button--danger:hover,
+.apex-button-danger:hover,
+.apex-button-destructive:hover {
+  background-color: var(--ds-color-surface-critical-strong-hover);
+}
+.t-Button--danger:active,
+.apex-button-destructive:active {
+  background-color: var(--ds-color-surface-critical-strong-active);
+}
+
+/* OUTLINE-DESTRUCTIVE */
+.apex-button-outline-destructive {
+  background-color: transparent;
+  color:            var(--ds-color-typography-critical);
+  border-color:     var(--ds-color-border-critical);
+}
+.apex-button-outline-destructive:hover {
+  background-color: var(--ds-color-surface-critical);
+  border-color:     var(--ds-color-border-critical-strong);
+}
+
+/* GHOST-DESTRUCTIVE */
+.apex-button-ghost-destructive {
+  background-color: transparent;
+  color:            var(--ds-color-typography-critical);
+  border-color:     transparent;
+}
+.apex-button-ghost-destructive:hover {
+  background-color: var(--ds-color-surface-critical);
+}
+
+/* DISABLED */
+.t-Button:disabled,
+.t-Button--hot:disabled,
+.a-Button:disabled,
+.apex-button:disabled,
+.t-Button[disabled],
+.t-Button--hot[disabled] {
+  background-color: var(--ds-color-surface-disabled) !important;
+  border-color:     var(--ds-color-border-disabled) !important;
+  color:            var(--ds-color-typography-disabled) !important;
+  cursor:           not-allowed;
+  pointer-events:   none;
+  opacity:          1;
+}
+
+/* SIZE VARIANTS */
+.t-Button--small,
+.apex-button-sm {
+  padding:   var(--ds-space-1x) var(--ds-space-3x);
+  font-size: var(--ds-typography-size-03);
+}
+.t-Button--large,
+.apex-button-lg {
+  padding:   var(--ds-space-3x) var(--ds-space-5x);
+  font-size: var(--ds-typography-size-05);
+}
+
+
+/* ================================================================
+   5. FOCUS RINGS
+   ================================================================ */
+
+:focus-visible {
+  outline:        2px solid var(--ds-color-border-action-strong);
+  outline-offset: 2px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+.apex-item-text:focus,
+.apex-item-select:focus,
+.apex-item-textarea:focus,
+input[type="text"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="search"]:focus,
+select:focus,
+textarea:focus {
+  outline:      none;
+  border-color: var(--ds-color-border-action-strong) !important;
+  box-shadow:   0 0 0 1px var(--ds-color-border-action-strong);
+}
+
+
+/* ================================================================
+   6. FORM INPUTS & LABELS
+   ================================================================ */
+
+.t-Form-label,
+.apex-item-label,
+label {
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-label);
+  font-weight:   var(--ds-typography-weight-label);
+  color:         var(--ds-color-typography-neutral);
+  margin-bottom: var(--ds-space-1x);
+  display:       block;
+}
+
+.t-Form-required {
+  color: var(--ds-color-typography-critical);
+}
+
+.apex-item-text,
+.apex-item-select,
+.apex-item-textarea,
+input[type="text"],
+input[type="number"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="date"],
+input[type="time"],
+select,
+textarea {
+  font-family:      var(--ds-typography-family-system);
+  font-size:        var(--ds-typography-size-04);
+  color:            var(--ds-color-typography-base);
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral-medium);
+  border-radius:    2px;
+  padding:          var(--ds-space-2x) var(--ds-space-3x);
+  width:            100%;
+  transition:
+    border-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    box-shadow   var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: var(--ds-color-typography-neutral);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled,
+.apex-item-text:disabled,
+.apex-item-select:disabled,
+.apex-item-textarea:disabled {
+  background-color: var(--ds-color-surface-disabled);
+  border-color:     var(--ds-color-border-disabled);
+  color:            var(--ds-color-typography-disabled);
+  cursor:           not-allowed;
+}
+
+.t-Form-itemWrapper.apex-page-item-error input,
+.t-Form-itemWrapper.apex-page-item-error select,
+.t-Form-itemWrapper.apex-page-item-error textarea,
+.apex-item-error {
+  border-color: var(--ds-color-border-critical-strong) !important;
+  box-shadow:   0 0 0 1px var(--ds-color-border-critical-strong);
+}
+
+.t-Form-itemHelpText,
+.apex-item-inline-error {
+  font-size:  var(--ds-typography-size-03);
+  margin-top: var(--ds-space-1x);
+}
+.apex-item-inline-error {
+  color: var(--ds-color-typography-critical);
+}
+.t-Form-itemHelpText {
+  color: var(--ds-color-typography-neutral);
+}
+
+.t-Form-fieldContainer,
+.apex-item-wrapper {
+  margin-bottom: var(--ds-space-4x);
+}
+
+
+/* ================================================================
+   7. REGIONS & BOXES
+   ================================================================ */
+
+.t-Region {
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral);
+  border-radius:    2px;
+  box-shadow:       var(--ds-elevation-base);
+  overflow:         hidden;
+}
+
+.t-Region-header {
+  padding:          var(--ds-space-4x) var(--ds-space-6x);
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  background-color: var(--ds-color-surface-base);
+}
+
+.t-Region-title {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-sm);
+  color:          var(--ds-color-typography-base);
+  text-transform: var(--ds-typography-transform-title-sm);
+  margin:         0;
+}
+
+.t-Region-body {
+  padding: var(--ds-space-6x);
+}
+
+.t-Region-footer {
+  padding:          var(--ds-space-4x) var(--ds-space-6x);
+  border-top:       1px solid var(--ds-color-border-neutral);
+  background-color: var(--ds-color-surface-base);
+  display:          flex;
+  justify-content:  flex-end;
+  gap:              var(--ds-space-3x);
+}
+
+/* Box surface tones */
+.ds-box--surface-default  { background-color: var(--ds-color-surface-base); }
+.ds-box--surface-neutral  { background-color: var(--ds-color-surface-neutral); }
+.ds-box--surface-positive { background-color: var(--ds-color-surface-positive); }
+.ds-box--surface-caution  { background-color: var(--ds-color-surface-caution); }
+.ds-box--surface-critical { background-color: var(--ds-color-surface-critical); }
+.ds-box--surface-info     { background-color: var(--ds-color-surface-info); }
+.ds-box--surface-invert   { background-color: var(--ds-color-surface-invert); }
+.ds-box--surface-ghost    { background-color: var(--ds-color-surface-transparent); }
+
+/* Box accent bar tones */
+.ds-box--accent-primary  { border-left: 4px solid var(--ds-color-border-action-strong); }
+.ds-box--accent-positive { border-left: 4px solid var(--ds-color-border-positive-strong); }
+.ds-box--accent-caution  { border-left: 4px solid var(--ds-color-border-caution-strong); }
+.ds-box--accent-critical { border-left: 4px solid var(--ds-color-border-critical-strong); }
+.ds-box--accent-info     { border-left: 4px solid var(--ds-color-border-info-strong); }
+.ds-box--accent-neutral  { border-left: 4px solid var(--ds-color-border-neutral-strong); }
+
+/* Box elevation variants */
+.ds-box--elevation-none         { box-shadow: var(--ds-elevation-none); }
+.ds-box--elevation-base         { box-shadow: var(--ds-elevation-base); }
+.ds-box--elevation-component    { box-shadow: var(--ds-elevation-component); }
+.ds-box--elevation-temporary    { box-shadow: var(--ds-elevation-temporary); }
+.ds-box--elevation-navigation   { box-shadow: var(--ds-elevation-navigation); }
+.ds-box--elevation-notification { box-shadow: var(--ds-elevation-notification); }
+.ds-box--elevation-modal        { box-shadow: var(--ds-elevation-modal); }
+
+.ds-box--with-border { border: 1px solid var(--ds-color-border-neutral); }
+.ds-box--scrollable  { overflow-y: auto; }
+
+.ds-box--detach-header .t-Region-header,
+.ds-box--detach-footer .t-Region-footer {
+  position:         sticky;
+  z-index:          1;
+  background-color: var(--ds-color-surface-base);
+}
+.ds-box--detach-header .t-Region-header { top: 0; }
+.ds-box--detach-footer .t-Region-footer { bottom: 0; }
+
+
+/* ================================================================
+   8. NAVIGATION
+   ================================================================ */
+
+.t-TreeNav,
+.t-Body-nav {
+  background-color: var(--ds-color-surface-base);
+  border-right:     1px solid var(--ds-color-border-neutral);
+  box-shadow:       var(--ds-elevation-navigation);
+}
+
+.t-TreeNav .t-TreeNav-label,
+.t-TreeNav .t-TreeNav-wrap {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-04);
+  color:       var(--ds-color-typography-neutral);
+  padding:     var(--ds-space-2x) var(--ds-space-4x);
+  transition:  background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-standard);
+}
+
+.t-TreeNav .t-TreeNav-item > .t-TreeNav-row:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+  cursor: pointer;
+}
+
+.t-TreeNav .t-TreeNav-item--current > .t-TreeNav-row,
+.t-TreeNav .t-TreeNav-item--current > .t-TreeNav-row .t-TreeNav-label {
+  background-color: var(--ds-color-surface-action-mild);
+  color:            var(--ds-color-typography-action);
+  border-left:      3px solid var(--ds-color-border-action-strong);
+  font-weight:      600;
+}
+
+.t-TreeNav .t-TreeNav-item--topLevel > .t-TreeNav-row .t-TreeNav-label {
+  font-size:      var(--ds-typography-size-03);
+  font-weight:    600;
+  color:          var(--ds-color-typography-neutral);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding-top:    var(--ds-space-4x);
+}
+
+.t-TreeNav .t-TreeNav-subItems .t-TreeNav-label {
+  padding-left: var(--ds-space-8x);
+  font-size:    var(--ds-typography-size-04);
+}
+
+.t-TreeNav .t-Icon {
+  color:        var(--ds-color-icon-neutral);
+  margin-right: var(--ds-space-2x);
+  flex-shrink:  0;
+}
+.t-TreeNav .t-TreeNav-item--current .t-Icon {
+  color: var(--ds-color-icon-action);
+}
+
+.t-Header {
+  background-color: var(--ds-color-surface-base);
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  box-shadow:       var(--ds-elevation-navigation);
+}
+
+.t-Header-appName {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-xs);
+  color:          var(--ds-color-typography-base);
+  text-transform: var(--ds-typography-transform-title-xs);
+}
+
+
+/* ================================================================
+   9. ALERTS & MESSAGES
+   ================================================================ */
+
+.t-Alert {
+  display:       flex;
+  align-items:   flex-start;
+  gap:           var(--ds-space-3x);
+  padding:       var(--ds-space-4x) var(--ds-space-5x);
+  border-radius: 2px;
+  border:        1px solid transparent;
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-04);
+  margin-bottom: var(--ds-space-4x);
+}
+
+.t-Alert--success,
+.t-Alert--colorBG.t-Alert--success {
+  background-color: var(--ds-color-surface-positive);
+  border-color:     var(--ds-color-border-positive);
+  color:            var(--ds-color-typography-positive);
+}
+.t-Alert--success .t-Alert-title {
+  color: var(--ds-color-typography-positive);
+  font-weight: 600;
+}
+
+.t-Alert--warning,
+.t-Alert--colorBG.t-Alert--warning {
+  background-color: var(--ds-color-surface-caution);
+  border-color:     var(--ds-color-border-caution);
+  color:            var(--ds-color-typography-caution);
+}
+.t-Alert--warning .t-Alert-title {
+  color: var(--ds-color-typography-caution);
+  font-weight: 600;
+}
+
+.t-Alert--danger,
+.t-Alert--colorBG.t-Alert--danger {
+  background-color: var(--ds-color-surface-critical);
+  border-color:     var(--ds-color-border-critical-strong);
+  color:            var(--ds-color-typography-critical);
+}
+.t-Alert--danger .t-Alert-title {
+  color: var(--ds-color-typography-critical);
+  font-weight: 600;
+}
+
+.t-Alert--info,
+.t-Alert--colorBG.t-Alert--info {
+  background-color: var(--ds-color-surface-info);
+  border-color:     var(--ds-color-border-info);
+  color:            var(--ds-color-typography-info);
+}
+.t-Alert--info .t-Alert-title {
+  color: var(--ds-color-typography-info);
+  font-weight: 600;
+}
+
+.t-Alert--neutral {
+  background-color: var(--ds-color-surface-neutral-mild);
+  border-color:     var(--ds-color-border-neutral);
+  color:            var(--ds-color-typography-base);
+}
+
+.t-Alert--horizontal {
+  border-left-width: 4px;
+  border-radius:     0;
+}
+
+
+/* ================================================================
+   10. INTERACTIVE REPORTS & TABLES
+   ================================================================ */
+
+.a-IRR-table,
+.t-Report-report,
+table[ds-table] {
+  width:                 100%;
+  border-collapse:       collapse;
+  font-family:           var(--ds-typography-family-system);
+  font-size:             var(--ds-typography-size-04);
+  font-feature-settings: var(--ds-font-feature-settings-table);
+  color:                 var(--ds-color-typography-base);
+  background-color:      var(--ds-color-surface-base);
+}
+
+.a-IRR-table th,
+.t-Report-report th {
+  font-family:      var(--ds-typography-family-system);
+  font-size:        var(--ds-typography-size-04);
+  font-weight:      600;
+  color:            var(--ds-color-typography-neutral);
+  background-color: var(--ds-color-surface-base);
+  padding:          var(--ds-space-3x) var(--ds-space-4x);
+  border-bottom:    2px solid var(--ds-color-border-neutral-medium);
+  text-align:       left;
+  white-space:      nowrap;
+}
+
+.a-IRR-table thead th {
+  position:         sticky;
+  top:              0;
+  background-color: var(--ds-color-surface-table-header-sticky);
+  z-index:          1;
+}
+
+.a-IRR-table td,
+.t-Report-report td {
+  padding:        var(--ds-space-3x) var(--ds-space-4x);
+  border-bottom:  1px solid var(--ds-color-border-neutral);
+  color:          var(--ds-color-typography-base);
+  vertical-align: middle;
+}
+
+.a-IRR-table tbody tr:hover td,
+.t-Report-report tbody tr:hover td {
+  background-color: var(--ds-color-surface-neutral-hover);
+}
+
+.a-IRR-table.ds-table--zebra tbody tr:nth-child(even) td,
+.t-Report-report.ds-table--zebra tbody tr:nth-child(even) td {
+  background-color: var(--ds-color-surface-neutral);
+}
+
+.a-IRR-table.ds-table--col-divider td,
+.a-IRR-table.ds-table--col-divider th {
+  border-right: 1px solid var(--ds-color-border-neutral);
+}
+.a-IRR-table.ds-table--col-divider td:last-child,
+.a-IRR-table.ds-table--col-divider th:last-child {
+  border-right: none;
+}
+
+.a-IRR-table.ds-table--outer-divider,
+.t-Report-report.ds-table--outer-divider {
+  border: 1px solid var(--ds-color-border-neutral);
+}
+
+.a-IRR-table.ds-table--slim th,
+.a-IRR-table.ds-table--slim td {
+  padding: var(--ds-space-2x) var(--ds-space-3x);
+}
+
+.a-IRR-sortAscending,
+.a-IRR-sortDescending {
+  color: var(--ds-color-icon-action);
+}
+
+.a-IRR-controlsBar {
+  background-color: var(--ds-color-surface-base);
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  padding:          var(--ds-space-2x) var(--ds-space-4x);
+  display:          flex;
+  align-items:      center;
+  gap:              var(--ds-space-2x);
+}
+
+.a-IRR-button,
+.a-IRR-button--actions {
+  font-family:  var(--ds-typography-family-system);
+  font-size:    var(--ds-typography-size-04);
+  color:        var(--ds-color-typography-action);
+  background:   transparent;
+  border:       1px solid transparent;
+  border-radius: 2px;
+  padding:      var(--ds-space-1x) var(--ds-space-3x);
+  cursor:       pointer;
+  transition:   background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.a-IRR-button:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+  border-color:     var(--ds-color-border-neutral);
+}
+
+.a-IRR-search-field {
+  font-family:      var(--ds-typography-family-system);
+  font-size:        var(--ds-typography-size-04);
+  border:           1px solid var(--ds-color-border-neutral-medium);
+  border-radius:    2px;
+  padding:          var(--ds-space-1x) var(--ds-space-3x);
+  background-color: var(--ds-color-surface-base);
+  color:            var(--ds-color-typography-base);
+}
+
+
+/* ================================================================
+   11. MODALS & DIALOGS
+   ================================================================ */
+
+.ui-widget-overlay,
+.t-Dialog-backdrop {
+  background-color: var(--ds-color-surface-backdrop);
+  transition:       opacity var(--ds-motion-duration-slow) var(--ds-motion-timing-standard);
+}
+
+.t-Dialog-region,
+.ui-dialog {
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral);
+  border-radius:    2px;
+  box-shadow:       var(--ds-elevation-modal);
+  font-family:      var(--ds-typography-family-system);
+}
+
+.ui-dialog-titlebar,
+.t-Dialog-region .t-Region-header {
+  background-color: var(--ds-color-surface-base);
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  padding:          var(--ds-space-4x) var(--ds-space-6x);
+}
+
+.ui-dialog-title,
+.t-Dialog-region .t-Region-title {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-sm);
+  color:          var(--ds-color-typography-base);
+  text-transform: var(--ds-typography-transform-title-sm);
+}
+
+.ui-dialog-content,
+.t-Dialog-region .t-Region-body {
+  padding: var(--ds-space-6x);
+  color:   var(--ds-color-typography-base);
+}
+
+.ui-dialog-buttonpane,
+.t-Dialog-region .t-Region-footer {
+  padding:          var(--ds-space-4x) var(--ds-space-6x);
+  border-top:       1px solid var(--ds-color-border-neutral);
+  background-color: var(--ds-color-surface-base);
+  display:          flex;
+  justify-content:  flex-end;
+  gap:              var(--ds-space-3x);
+}
+
+.ui-dialog-titlebar-close {
+  color:  var(--ds-color-icon-neutral);
+  cursor: pointer;
+  transition: color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.ui-dialog-titlebar-close:hover {
+  color: var(--ds-color-icon-base);
+}
+
+
+/* ================================================================
+   12. BREADCRUMBS
+   ================================================================ */
+
+.t-Breadcrumb {
+  display:       flex;
+  align-items:   center;
+  flex-wrap:     wrap;
+  gap:           var(--ds-space-1x);
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-label);
+  margin-bottom: var(--ds-space-3x);
+}
+
+.t-Breadcrumb-item a {
+  color:           var(--ds-color-typography-action);
+  text-decoration: none;
+  transition:      color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.t-Breadcrumb-item a:hover {
+  color:           var(--ds-color-typography-action-hover);
+  text-decoration: underline;
+}
+
+.t-Breadcrumb-item.is-active span,
+.t-Breadcrumb-item:last-child span {
+  color: var(--ds-color-typography-neutral);
+}
+
+.t-Breadcrumb-separator {
+  color:  var(--ds-color-typography-neutral);
+  margin: 0 var(--ds-space-1x);
+}
+
+
+/* ================================================================
+   13. TABS
+   ================================================================ */
+
+.t-TabsRegion-tabs {
+  display:          flex;
+  gap:              0;
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  background-color: var(--ds-color-surface-base);
+}
+
+.t-TabsRegion-tab {
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-04);
+  color:         var(--ds-color-typography-neutral);
+  padding:       var(--ds-space-3x) var(--ds-space-5x);
+  border:        none;
+  border-bottom: 2px solid transparent;
+  background:    transparent;
+  cursor:        pointer;
+  transition:
+    color            var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    border-color     var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance),
+    background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.t-TabsRegion-tab:hover {
+  color:            var(--ds-color-typography-base);
+  background-color: var(--ds-color-surface-neutral-hover);
+}
+.t-TabsRegion-tab.is-active,
+.t-TabsRegion-tab[aria-selected="true"] {
+  color:         var(--ds-color-typography-action);
+  border-bottom: 2px solid var(--ds-color-border-action-strong);
+  font-weight:   600;
+}
+
+.t-TabsRegion-body {
+  padding:          var(--ds-space-6x);
+  background-color: var(--ds-color-surface-base);
+}
+
+
+/* ================================================================
+   14. TAGS
+   ================================================================ */
+
+.ds-apex-tag {
+  display:       inline-flex;
+  align-items:   center;
+  gap:           var(--ds-space-1x);
+  padding:       var(--ds-space-05x) var(--ds-space-2x);
+  border-radius: 2px;
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-03);
+  font-weight:   600;
+  line-height:   1.4;
+  white-space:   nowrap;
+  border:        1px solid transparent;
+}
+
+.ds-apex-tag--md { font-size: var(--ds-typography-size-03); padding: var(--ds-space-05x) var(--ds-space-2x); }
+.ds-apex-tag--lg { font-size: var(--ds-typography-size-04); padding: var(--ds-space-1x)  var(--ds-space-3x); }
+
+.ds-apex-tag--brand    { background-color: var(--ds-color-surface-action-mild);    color: var(--ds-color-typography-action);   border-color: var(--ds-color-border-action-mild); }
+.ds-apex-tag--neutral  { background-color: var(--ds-color-surface-neutral-mild);   color: var(--ds-color-typography-neutral);  border-color: var(--ds-color-border-neutral); }
+.ds-apex-tag--positive { background-color: var(--ds-color-surface-positive-mild);  color: var(--ds-color-typography-positive); border-color: var(--ds-color-border-positive-mild); }
+.ds-apex-tag--caution  { background-color: var(--ds-color-surface-caution-mild);   color: var(--ds-color-typography-caution);  border-color: var(--ds-color-border-caution-mild); }
+.ds-apex-tag--critical { background-color: var(--ds-color-surface-critical-mild);  color: var(--ds-color-typography-critical); border-color: var(--ds-color-border-critical-mild); }
+.ds-apex-tag--info     { background-color: var(--ds-color-surface-info-mild);      color: var(--ds-color-typography-info);     border-color: var(--ds-color-border-info-mild); }
+
+.ds-apex-tag--disabled {
+  background-color: var(--ds-color-surface-disabled);
+  border-color:     var(--ds-color-border-disabled);
+  color:            var(--ds-color-typography-disabled);
+  cursor:           not-allowed;
+}
+
+.ds-apex-tag--interactive {
+  cursor: pointer;
+  transition: background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.ds-apex-tag--interactive:hover {
+  filter: brightness(0.95);
+}
+
+
+/* ================================================================
+   15. BADGES
+   ================================================================ */
+
+.ds-apex-badge {
+  display:         inline-flex;
+  align-items:     center;
+  justify-content: center;
+  min-width:       var(--ds-space-4x);
+  height:          var(--ds-space-4x);
+  padding:         0 var(--ds-space-1x);
+  border-radius:   999px;
+  font-family:     var(--ds-typography-family-system);
+  font-size:       var(--ds-typography-size-02);
+  font-weight:     700;
+  line-height:     1;
+  white-space:     nowrap;
+  box-shadow:      var(--ds-elevation-notification);
+}
+
+.ds-apex-badge--neutral  { background-color: var(--ds-color-surface-neutral-strong); color: var(--ds-color-typography-invert); }
+.ds-apex-badge--positive { background-color: var(--ds-color-surface-positive-strong); color: var(--ds-color-typography-invert); }
+.ds-apex-badge--caution  { background-color: var(--ds-color-surface-caution-strong);  color: var(--ds-color-typography-base); }
+.ds-apex-badge--critical { background-color: var(--ds-color-surface-critical-strong); color: var(--ds-color-typography-invert); }
+.ds-apex-badge--info     { background-color: var(--ds-color-surface-info-strong);     color: var(--ds-color-typography-invert); }
+
+.ds-apex-badge--dot {
+  min-width: var(--ds-space-2x);
+  height:    var(--ds-space-2x);
+  padding:   0;
+}
+
+.ds-apex-badge-wrapper {
+  position: relative;
+  display:  inline-flex;
+}
+.ds-apex-badge-wrapper .ds-apex-badge {
+  position: absolute;
+  top:      calc(-1 * var(--ds-space-2x));
+  right:    calc(-1 * var(--ds-space-2x));
+}
+
+.ds-apex-badge--disabled {
+  background-color: var(--ds-color-surface-disabled);
+  color:            var(--ds-color-typography-disabled);
+  box-shadow:       none;
+}
+
+
+/* ================================================================
+   16. TOAST NOTIFICATIONS
+   ================================================================ */
+
+.ds-apex-toast-container,
+.t-Messages {
+  position:       fixed;
+  top:            var(--ds-space-6x);
+  right:          var(--ds-space-6x);
+  z-index:        9999;
+  display:        flex;
+  flex-direction: column;
+  gap:            var(--ds-space-3x);
+  max-width:      400px;
+  pointer-events: none;
+}
+
+.ds-apex-toast,
+.t-Message {
+  display:        flex;
+  align-items:    flex-start;
+  gap:            var(--ds-space-3x);
+  padding:        var(--ds-space-4x) var(--ds-space-5x);
+  border-radius:  2px;
+  border:         1px solid transparent;
+  box-shadow:     var(--ds-elevation-notification);
+  font-family:    var(--ds-typography-family-system);
+  font-size:      var(--ds-typography-size-04);
+  pointer-events: all;
+  animation:      ds-toast-in var(--ds-motion-duration-quick) var(--ds-motion-timing-entrance);
+}
+
+@keyframes ds-toast-in {
+  from { opacity: 0; transform: translateX(var(--ds-space-6x)); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+.ds-apex-toast--neutral  { background-color: var(--ds-color-surface-base);          border-color: var(--ds-color-border-neutral); color: var(--ds-color-typography-base); }
+.ds-apex-toast--positive { background-color: var(--ds-color-surface-positive-mild); border-color: var(--ds-color-border-positive); color: var(--ds-color-typography-positive); }
+.ds-apex-toast--caution  { background-color: var(--ds-color-surface-caution-mild);  border-color: var(--ds-color-border-caution); color: var(--ds-color-typography-caution); }
+.ds-apex-toast--critical { background-color: var(--ds-color-surface-critical-mild); border-color: var(--ds-color-border-critical); color: var(--ds-color-typography-critical); }
+.ds-apex-toast--info     { background-color: var(--ds-color-surface-info-mild);     border-color: var(--ds-color-border-info); color: var(--ds-color-typography-info); }
+
+.ds-apex-toast__title {
+  font-weight:   600;
+  margin-bottom: var(--ds-space-1x);
+}
+
+.ds-apex-toast__dismiss {
+  margin-left: auto;
+  background:  none;
+  border:      none;
+  cursor:      pointer;
+  color:       var(--ds-color-icon-neutral);
+  padding:     0;
+  flex-shrink: 0;
+  transition:  color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.ds-apex-toast__dismiss:hover { color: var(--ds-color-icon-base); }
+
+.t-Body-alert .t-Alert {
+  margin:        0;
+  border-radius: 0;
+  border-left:   none;
+  border-right:  none;
+  border-top:    none;
+}
+
+
+/* ================================================================
+   17. DATEPICKER (jQuery UI)
+   ================================================================ */
+
+.ui-datepicker {
+  background:    var(--ds-color-surface-base);
+  border:        1px solid var(--ds-color-border-neutral-medium);
+  border-radius: 2px;
+  box-shadow:    var(--ds-elevation-component);
+  font-family:   var(--ds-typography-family-system);
+  font-size:     var(--ds-typography-size-04);
+  padding:       var(--ds-space-4x);
+  z-index:       9000;
+}
+
+.ui-datepicker-header {
+  background:    var(--ds-color-surface-neutral);
+  border:        none;
+  border-radius: 2px 2px 0 0;
+  color:         var(--ds-color-typography-base);
+  font-weight:   600;
+  padding:       var(--ds-space-2x) var(--ds-space-3x);
+}
+
+.ui-datepicker-title {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-04);
+  font-weight: 600;
+  color:       var(--ds-color-typography-base);
+}
+
+.ui-datepicker table {
+  font-family: var(--ds-typography-family-system);
+  font-size:   var(--ds-typography-size-04);
+  width:       100%;
+}
+
+.ui-datepicker th {
+  color:      var(--ds-color-typography-neutral);
+  font-weight: 600;
+  font-size:   var(--ds-typography-size-03);
+  padding:     var(--ds-space-1x) var(--ds-space-2x);
+  text-align:  center;
+}
+
+.ui-datepicker td a,
+.ui-datepicker td span {
+  color:         var(--ds-color-typography-base);
+  padding:       var(--ds-space-1x) var(--ds-space-2x);
+  border-radius: 2px;
+  text-align:    center;
+  display:       block;
+  transition:    background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.ui-datepicker td a:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+  color:            var(--ds-color-typography-base);
+}
+
+.ui-datepicker .ui-state-active {
+  background-color: var(--ds-color-surface-action-strong);
+  color:            var(--ds-color-typography-invert) !important;
+  border:           none;
+  border-radius:    2px;
+}
+
+.ui-datepicker .ui-state-highlight {
+  background-color: var(--ds-color-surface-action-mild);
+  color:            var(--ds-color-typography-action);
+  border:           1px solid var(--ds-color-border-action);
+  border-radius:    2px;
+}
+
+.ui-datepicker-prev,
+.ui-datepicker-next {
+  cursor: pointer;
+  color:  var(--ds-color-icon-action);
+  top:    var(--ds-space-2x);
+}
+.ui-datepicker-prev:hover,
+.ui-datepicker-next:hover {
+  background-color: var(--ds-color-surface-neutral-hover);
+  border-radius:    2px;
+}
+
+.ui-datepicker .ui-datepicker-other-month .ui-state-default {
+  color: var(--ds-color-typography-disabled);
+}
+
+
+/* ================================================================
+   18. MOTION & TRANSITIONS
+   ================================================================ */
+
+.t-DropdownMenu,
+.a-IRR-filterContainer,
+.a-IRR-dialogBody,
+.ui-autocomplete {
+  transition:
+    opacity   var(--ds-motion-duration-quick) var(--ds-motion-timing-entrance),
+    transform var(--ds-motion-duration-quick) var(--ds-motion-timing-entrance);
+}
+
+.t-Region,
+.t-Dialog-region {
+  transition: box-shadow var(--ds-motion-duration-standard) var(--ds-motion-timing-entrance);
+}
+
+.t-TreeNav .t-TreeNav-row,
+.t-NavigationBar-item,
+.t-TabsRegion-tab {
+  transition:
+    background-color var(--ds-motion-duration-rapid) var(--ds-motion-timing-standard),
+    color            var(--ds-motion-duration-rapid) var(--ds-motion-timing-standard),
+    border-color     var(--ds-motion-duration-rapid) var(--ds-motion-timing-standard);
+}
+
+.ui-widget-overlay,
+.t-Dialog-backdrop {
+  transition: opacity var(--ds-motion-duration-slow) var(--ds-motion-timing-standard);
+}
+
+.t-Region--hideShowRegion .t-Region-body {
+  transition:
+    opacity   var(--ds-motion-duration-standard) var(--ds-motion-timing-entrance),
+    transform var(--ds-motion-duration-standard) var(--ds-motion-timing-entrance);
+}
+
+
+/* ================================================================
+   19. ICONS
+   ================================================================ */
+
+.ds-icon {
+  display:     inline-block;
+  fill:        currentColor;
+  flex-shrink: 0;
+  line-height: 1;
+  width:       var(--ds-icon-size-md);
+  height:      var(--ds-icon-size-md);
+}
+
+.ds-icon--xs { width: var(--ds-icon-size-xs); height: var(--ds-icon-size-xs); }
+.ds-icon--sm { width: var(--ds-icon-size-sm); height: var(--ds-icon-size-sm); }
+.ds-icon--md { width: var(--ds-icon-size-md); height: var(--ds-icon-size-md); }
+.ds-icon--lg { width: var(--ds-icon-size-lg); height: var(--ds-icon-size-lg); }
+
+.ds-icon--tone-base          { color: var(--ds-color-icon-base); }
+.ds-icon--tone-neutral       { color: var(--ds-color-icon-neutral); }
+.ds-icon--tone-action        { color: var(--ds-color-icon-action); }
+.ds-icon--tone-action-hover  { color: var(--ds-color-icon-action-hover); }
+.ds-icon--tone-action-active { color: var(--ds-color-icon-action-active); }
+.ds-icon--tone-disabled      { color: var(--ds-color-icon-disabled); }
+.ds-icon--tone-invert        { color: var(--ds-color-icon-invert); }
+.ds-icon--tone-info          { color: var(--ds-color-icon-info); }
+.ds-icon--tone-positive      { color: var(--ds-color-icon-positive); }
+.ds-icon--tone-caution       { color: var(--ds-color-icon-caution); }
+.ds-icon--tone-critical      { color: var(--ds-color-icon-critical); }
+
+
+/* ================================================================
+   20. UTILITY CLASSES
+   ================================================================ */
+
+.d-flex   { display: flex !important; }
+.d-grid   { display: grid !important; }
+.d-block  { display: block !important; }
+.d-inline { display: inline !important; }
+.d-none   { display: none !important; }
+
+.align-items-center      { align-items: center; }
+.align-items-start       { align-items: flex-start; }
+.align-items-end         { align-items: flex-end; }
+.justify-content-start   { justify-content: flex-start; }
+.justify-content-end     { justify-content: flex-end; }
+.justify-content-center  { justify-content: center; }
+.justify-content-between { justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+.flex-1    { flex: 1; }
+
+.gap-0x  { gap: var(--ds-space-0x); }
+.gap-1x  { gap: var(--ds-space-1x); }
+.gap-2x  { gap: var(--ds-space-2x); }
+.gap-3x  { gap: var(--ds-space-3x); }
+.gap-4x  { gap: var(--ds-space-4x); }
+.gap-5x  { gap: var(--ds-space-5x); }
+.gap-6x  { gap: var(--ds-space-6x); }
+.gap-8x  { gap: var(--ds-space-8x); }
+.gap-10x { gap: var(--ds-space-10x); }
+
+.p-0x  { padding: var(--ds-space-0x) !important; }
+.p-1x  { padding: var(--ds-space-1x) !important; }
+.p-2x  { padding: var(--ds-space-2x) !important; }
+.p-3x  { padding: var(--ds-space-3x) !important; }
+.p-4x  { padding: var(--ds-space-4x) !important; }
+.p-5x  { padding: var(--ds-space-5x) !important; }
+.p-6x  { padding: var(--ds-space-6x) !important; }
+.p-8x  { padding: var(--ds-space-8x) !important; }
+.p-10x { padding: var(--ds-space-10x) !important; }
+
+.pt-1x { padding-top:    var(--ds-space-1x) !important; }
+.pt-2x { padding-top:    var(--ds-space-2x) !important; }
+.pt-4x { padding-top:    var(--ds-space-4x) !important; }
+.pt-6x { padding-top:    var(--ds-space-6x) !important; }
+.pb-1x { padding-bottom: var(--ds-space-1x) !important; }
+.pb-2x { padding-bottom: var(--ds-space-2x) !important; }
+.pb-4x { padding-bottom: var(--ds-space-4x) !important; }
+.pb-6x { padding-bottom: var(--ds-space-6x) !important; }
+.ps-4x { padding-left:   var(--ds-space-4x) !important; }
+.pe-4x { padding-right:  var(--ds-space-4x) !important; }
+.px-4x { padding-left: var(--ds-space-4x) !important; padding-right: var(--ds-space-4x) !important; }
+.px-6x { padding-left: var(--ds-space-6x) !important; padding-right: var(--ds-space-6x) !important; }
+.py-2x { padding-top: var(--ds-space-2x) !important; padding-bottom: var(--ds-space-2x) !important; }
+.py-4x { padding-top: var(--ds-space-4x) !important; padding-bottom: var(--ds-space-4x) !important; }
+
+.m-0x  { margin: var(--ds-space-0x) !important; }
+.m-2x  { margin: var(--ds-space-2x) !important; }
+.m-4x  { margin: var(--ds-space-4x) !important; }
+.m-auto { margin: auto !important; }
+
+.mt-2x { margin-top:    var(--ds-space-2x) !important; }
+.mt-4x { margin-top:    var(--ds-space-4x) !important; }
+.mt-6x { margin-top:    var(--ds-space-6x) !important; }
+.mt-8x { margin-top:    var(--ds-space-8x) !important; }
+.mb-2x { margin-bottom: var(--ds-space-2x) !important; }
+.mb-4x { margin-bottom: var(--ds-space-4x) !important; }
+.mb-6x { margin-bottom: var(--ds-space-6x) !important; }
+.mb-8x { margin-bottom: var(--ds-space-8x) !important; }
+.ms-auto { margin-left:  auto !important; }
+.me-auto { margin-right: auto !important; }
+.mx-auto { margin-left: auto !important; margin-right: auto !important; }
+
+.w-100  { width: 100% !important; }
+.w-auto { width: auto !important; }
+
+.text-start  { text-align: left !important; }
+.text-center { text-align: center !important; }
+.text-end    { text-align: right !important; }
+
+.shadow-none         { box-shadow: var(--ds-elevation-none) !important; }
+.shadow-base         { box-shadow: var(--ds-elevation-base) !important; }
+.shadow-component    { box-shadow: var(--ds-elevation-component) !important; }
+.shadow-temporary    { box-shadow: var(--ds-elevation-temporary) !important; }
+.shadow-navigation   { box-shadow: var(--ds-elevation-navigation) !important; }
+.shadow-notification { box-shadow: var(--ds-elevation-notification) !important; }
+.shadow-modal        { box-shadow: var(--ds-elevation-modal) !important; }
+
+.bg-page            { background-color: var(--ds-color-surface-page) !important; }
+.bg-base            { background-color: var(--ds-color-surface-base) !important; }
+.bg-neutral         { background-color: var(--ds-color-surface-neutral) !important; }
+.bg-neutral-hover   { background-color: var(--ds-color-surface-neutral-hover) !important; }
+.bg-neutral-mild    { background-color: var(--ds-color-surface-neutral-mild) !important; }
+.bg-neutral-strong  { background-color: var(--ds-color-surface-neutral-strong) !important; }
+.bg-action          { background-color: var(--ds-color-surface-action) !important; }
+.bg-action-mild     { background-color: var(--ds-color-surface-action-mild) !important; }
+.bg-action-strong   { background-color: var(--ds-color-surface-action-strong) !important; }
+.bg-signal-positive { background-color: var(--ds-color-surface-positive) !important; }
+.bg-signal-caution  { background-color: var(--ds-color-surface-caution) !important; }
+.bg-signal-critical { background-color: var(--ds-color-surface-critical) !important; }
+.bg-signal-info     { background-color: var(--ds-color-surface-info) !important; }
+.bg-disabled        { background-color: var(--ds-color-surface-disabled) !important; }
+.bg-invert          { background-color: var(--ds-color-surface-invert) !important; }
+.bg-transparent     { background-color: transparent !important; }
+
+.text-base     { color: var(--ds-color-typography-base) !important; }
+.text-neutral  { color: var(--ds-color-typography-neutral) !important; }
+.text-action   { color: var(--ds-color-typography-action) !important; }
+.text-positive { color: var(--ds-color-typography-positive) !important; }
+.text-caution  { color: var(--ds-color-typography-caution) !important; }
+.text-critical { color: var(--ds-color-typography-critical) !important; }
+.text-info     { color: var(--ds-color-typography-info) !important; }
+.text-disabled { color: var(--ds-color-typography-disabled) !important; }
+.text-invert   { color: var(--ds-color-typography-invert) !important; }
+
+.border-base    { border: 1px solid var(--ds-color-border-base) !important; }
+.border-neutral { border: 1px solid var(--ds-color-border-neutral) !important; }
+.border-action  { border: 1px solid var(--ds-color-border-action) !important; }
+.border-none    { border: none !important; }
+
+
+/* ================================================================
+   21. APEX-SPECIFIC OVERRIDES
+   ================================================================ */
+
+.t-Body-title {
+  background-color: var(--ds-color-surface-base);
+  border-bottom:    1px solid var(--ds-color-border-neutral);
+  padding:          var(--ds-space-4x) var(--ds-space-6x);
+}
+
+.t-Region--scrollBody .t-Region-body {
+  overflow-y: auto;
+}
+
+.t-Cards .t-Card {
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral);
+  border-radius:    2px;
+  box-shadow:       var(--ds-elevation-base);
+  transition:       box-shadow var(--ds-motion-duration-rapid) var(--ds-motion-timing-entrance);
+}
+.t-Cards .t-Card:hover {
+  box-shadow: var(--ds-elevation-component);
+}
+.t-Cards .t-Card-title {
+  font-family:    var(--ds-typography-family-brand);
+  font-size:      var(--ds-typography-size-title-xs);
+  color:          var(--ds-color-typography-base);
+  text-transform: var(--ds-typography-transform-title-xs);
+}
+.t-Cards .t-Card-body {
+  color:     var(--ds-color-typography-base);
+  font-size: var(--ds-typography-size-04);
+}
+.t-Cards .t-Card-subTitle {
+  color:     var(--ds-color-typography-neutral);
+  font-size: var(--ds-typography-size-03);
+}
+
+.t-Form-itemHelpButton {
+  color: var(--ds-color-icon-action);
+}
+.t-Form-itemHelpButton:hover {
+  color: var(--ds-color-icon-action-hover);
+}
+
+.t-Alert--page {
+  margin:        0 0 var(--ds-space-4x) 0;
+  border-radius: 2px;
+}
+
+.select2-container--default .select2-selection--single {
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral-medium);
+  border-radius:    2px;
+  height:           auto;
+  padding:          var(--ds-space-2x) var(--ds-space-3x);
+}
+.select2-container--default.select2-container--focus .select2-selection--single {
+  border-color: var(--ds-color-border-action-strong);
+  box-shadow:   0 0 0 1px var(--ds-color-border-action-strong);
+}
+.select2-dropdown {
+  background-color: var(--ds-color-surface-base);
+  border:           1px solid var(--ds-color-border-neutral-medium);
+  border-radius:    2px;
+  box-shadow:       var(--ds-elevation-component);
+}
+.select2-results__option--highlighted {
+  background-color: var(--ds-color-surface-neutral-hover);
+  color:            var(--ds-color-typography-base);
+}
+.select2-results__option[aria-selected="true"] {
+  background-color: var(--ds-color-surface-action-mild);
+  color:            var(--ds-color-typography-action);
+}
+
+.u-Processing,
+.a-ProcessingSpinner {
+  border-top-color: var(--ds-color-border-action-strong);
+}
+
+@media print {
+  .t-Region,
+  .t-Card,
+  .ds-apex-toast-container { box-shadow: none !important; }
+  .t-Body-nav,
+  .t-Header,
+  .a-IRR-controlsBar       { display: none !important; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration:        0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration:       0.01ms !important;
+    scroll-behavior:           auto !important;
+  }
+}
+
+/* ================================================================
+   SECTION 14 — ORACLE JET DATA VISUALIZATION (CHARTS) THEMING
+   ================================================================
+   OJet reads chart series colors from --oj-palette-dvt-rgb-N as
+   bare R,G,B triplets (used via RGB(var(--oj-palette-dvt-rgb-N))).
+   We override all 12 slots with Density primitive palette colors
+   selected for accessibility (WCAG AA contrast on white bg) and
+   brand alignment.
+
+   Density palette mapping:
+     Series 1  → ocean-400    #00aede  → 0,174,222
+     Series 2  → green-500    #3ea359  → 62,163,89
+     Series 3  → yellow-300   #f6c800  → 246,200,0
+     Series 4  → red-500      #ff454a  → 255,69,74
+     Series 5  → blue-600     #0071c5  → 0,113,197
+     Series 6  → red-300      #ffb0b0  → Note: too light; use red-700 #aa0014 → 170,0,20
+     Series 7  → ocean-600    #037493  → 3,116,147
+     Series 8  → green-700    #185f28  → 24,95,40
+     Series 9  → yellow-400   #daaa00  → 218,170,0
+     Series 10 → blue-800     #00396f  → 0,57,111
+     Series 11 → ocean-300    #3ccaff  → 60,202,255
+     Series 12 → green-300    #6de28f  → 109,226,143
+
+   These 12 cover up to 12 simultaneous series.
+   For status/signal colors:
+     Danger  → red-600   #df001a
+     Warning → yellow-400 #daaa00
+     Success → green-600 #2a813f
+
+   OJet chart chrome (axes, labels, grid, tooltips) is aligned
+   to Density typography and border tokens via --oj-* overrides.
+   ================================================================ */
+
+:root {
+  /* ── DVT 12-color series palette (Density-aligned) ─────────── */
+  --oj-palette-dvt-rgb-1:  0,174,222;     /* ocean-400  #00aede */
+  --oj-palette-dvt-rgb-2:  62,163,89;     /* green-500  #3ea359 */
+  --oj-palette-dvt-rgb-3:  246,200,0;     /* yellow-300 #f6c800 */
+  --oj-palette-dvt-rgb-4:  255,69,74;     /* red-500    #ff454a */
+  --oj-palette-dvt-rgb-5:  0,113,197;     /* blue-600   #0071c5 */
+  --oj-palette-dvt-rgb-6:  170,0,20;      /* red-700    #aa0014 */
+  --oj-palette-dvt-rgb-7:  3,116,147;     /* ocean-600  #037493 */
+  --oj-palette-dvt-rgb-8:  24,95,40;      /* green-700  #185f28 */
+  --oj-palette-dvt-rgb-9:  218,170,0;     /* yellow-400 #daaa00 */
+  --oj-palette-dvt-rgb-10: 0,57,111;      /* blue-800   #00396f */
+  --oj-palette-dvt-rgb-11: 60,202,255;    /* ocean-300  #3ccaff */
+  --oj-palette-dvt-rgb-12: 109,226,143;   /* green-300  #6de28f */
+
+  /* ── DVT status/signal colors ───────────────────────────────── */
+  --oj-dvt-danger-color:   var(--ds-color-surface-critical-strong);
+  --oj-dvt-warning-color:  var(--ds-color-surface-caution-strong);
+  --oj-dvt-success-color:  var(--ds-color-surface-positive-strong);
+
+  /* ── OJet chart chrome — align to Density typography tokens ── */
+  --oj-chart-axis-title-text-color:     var(--ds-color-typography-neutral);
+  --oj-chart-axis-tick-label-color:     var(--ds-color-typography-neutral);
+  --oj-core-text-color-primary:         var(--ds-color-typography-base);
+  --oj-core-text-color-secondary:       var(--ds-color-typography-neutral);
+  --oj-core-bg-color-content:           var(--ds-color-surface-base);
+
+  /* ── OJet chart grid / axis lines ──────────────────────────── */
+  --oj-private-dvt-gridline-color:      rgba(193,197,203,0.4); /* border-neutral at 40% */
+
+  /* ── OJet chart tooltip ─────────────────────────────────────── */
+  --oj-tooltip-border-color:            var(--ds-color-border-neutral);
+  --oj-tooltip-bg-color:                var(--ds-color-surface-base);
+  --oj-tooltip-text-color:              var(--ds-color-typography-base);
+
+  /* ── OJet overview / scrollbar area ────────────────────────── */
+  --oj-dvt-overview-bg-color:           var(--ds-color-surface-neutral);
+  --oj-dvt-overview-window-bg-color:    var(--ds-color-surface-base);
+  --oj-dvt-overview-window-border-color: var(--ds-color-border-neutral);
+
+  /* ── OJet reference lines ───────────────────────────────────── */
+  --oj-dvt-reference-object-line-color: rgba(193,197,203,0.8);
+  --oj-dvt-reference-object-area-color: rgba(193,197,203,0.08);
+
+  /* ── OJet selection / marquee ───────────────────────────────── */
+  --oj-dvt-item-border-color-selected:  var(--ds-color-border-action-strong);
+  --oj-dvt-item-contrast-color:         var(--ds-color-surface-base);
+  --oj-dvt-marquee-color:               rgba(0,174,222,0.1);  /* ocean-400 at 10% */
+  --oj-dvt-marquee-border-color:        rgba(0,174,222,0.8);
+  --oj-dvt-contrast-line-color:         rgba(31,35,40,0.7);   /* typography-base at 70% */
+
+  /* ── OJet no-data message ───────────────────────────────────── */
+  /* inherits --oj-core-text-color-secondary already set above */
+}
+
+/* ── Dark mode: DVT palette stays same hues, boost brightness ── */
+body.ds-dark {
+  /* In dark mode the series palette shifts to lighter tints for legibility on dark bg */
+  --oj-palette-dvt-rgb-1:  60,202,255;    /* ocean-300  #3ccaff  (lighter) */
+  --oj-palette-dvt-rgb-2:  109,226,143;   /* green-300  #6de28f  (lighter) */
+  --oj-palette-dvt-rgb-3:  248,202,0;     /* yellow-200 #ffe38e approx */
+  --oj-palette-dvt-rgb-4:  255,132,133;   /* red-400    #ff8485  (lighter) */
+  --oj-palette-dvt-rgb-5:  98,172,255;    /* blue-400   #62acff  (lighter) */
+  --oj-palette-dvt-rgb-6:  255,176,176;   /* red-300    #ffb0b0  (lighter) */
+  --oj-palette-dvt-rgb-7:  0,174,222;     /* ocean-400  #00aede */
+  --oj-palette-dvt-rgb-8:  62,163,89;     /* green-500  #3ea359 */
+  --oj-palette-dvt-rgb-9:  246,200,0;     /* yellow-300 #f6c800 */
+  --oj-palette-dvt-rgb-10: 0,143,240;     /* blue-500   #008ff0 */
+  --oj-palette-dvt-rgb-11: 168,223,255;   /* ocean-200  #a8dfff (lightest) */
+  --oj-palette-dvt-rgb-12: 159,247,183;   /* green-200  #9ff7b7 (lightest) */
+
+  /* Dark mode chart chrome */
+  --oj-dvt-overview-bg-color:            var(--ds-color-surface-neutral);
+  --oj-dvt-overview-window-bg-color:     var(--ds-color-surface-base);
+  --oj-dvt-overview-window-border-color: var(--ds-color-border-neutral);
+  --oj-private-dvt-gridline-color:       rgba(85,90,98,0.5);
+  --oj-dvt-reference-object-line-color:  rgba(85,90,98,0.8);
+  --oj-dvt-reference-object-area-color:  rgba(85,90,98,0.1);
+  --oj-dvt-contrast-line-color:          rgba(242,243,244,0.7); /* cool-grey-100 at 70% */
+}
