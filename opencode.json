@@ -259,6 +259,27 @@
           }
         },
 
+        "gpt-5:global": {
+          "name": "gpt-5:global",
+          "attachment": true,
+          "modalities": {
+            "input": ["text", "image"],
+            "output": ["text"]
+          },
+          "options": {
+            "reasoningEffort": "medium"
+          },
+          "cost": {
+            "input": 1.2,
+            "cache_read": 0.1,
+            "output": 10.0
+          },
+          "limit": {
+            "context": 400000,
+            "output": 128000
+          }
+        },
+
         "gpt-5-mini": {
           "name": "gpt-5-mini",
           "attachment": true,

@@ -83,6 +83,10 @@ Custom agents MUST only use `llm-api` or `ollama` as the model provider.
 
 **Allowed model values in agent frontmatter:**
 
+> **Catalogue note:** The BMW LLM API `/v1/models` endpoint returns vendor-prefixed IDs like
+> `openai/gpt-5:global` and `anthropic/claude-sonnet-4-6`. In this repo and in OpenCode agent
+> frontmatter you must use `llm-api/<model-id>` (same suffix, vendor prefix removed).
+
 > Vision support means the model can receive image attachments (jpeg/png/webp/gif via base64 data URLs).
 > All models support: tool_calls, streaming, structured_outputs (except claude-sonnet-4).
 > Embeddings, audio I/O, and image generation are NOT available via the BMW LLM API `/v1/models` endpoint
